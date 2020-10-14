@@ -19,7 +19,11 @@
 
     <fragment
         android:id="@+id/navigation_aboutus"
-        android:name="ir.hamedanmelk.hamedanmelk.ui.aboutus.AboutUsFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.aboutus.AboutUsPreferenceFragment"
         android:label="@string/title_aboutus"
         tools:layout="@layout/fragment_aboutus" />
+    <fragment
+        android:id="@+id/notificationSettingsFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.aboutus.NotificationSettingsFragment"
+        android:label="NotificationSettingsFragment" />
 </navigation>

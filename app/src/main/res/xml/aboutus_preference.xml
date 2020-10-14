@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <Preference
+            android:title="@string/notification_setting_title"
+            android:summary="@string/notification_setting_vibrate"
+            app:icon="@drawable/ic_notifications_red_24"
+            app:key="aboutus_notification">
+        </Preference>
+        <Preference
+            android:title="@string/aboutus_bookmarks_title"
+            android:summary="@string/aboutus_bookmarks_summary"
+            android:icon="@drawable/ic_bookmarks_red_24"
+            android:key="aboutus_bookmarks"
+            >
+        </Preference>
+        <Preference
+            android:title="@string/aboutus_recent_posts_title"
+            android:summary="@string/aboutus_recent_posts_summary"
+            android:icon="@drawable/ic_history_red_24"
+            android:key="aboutus_recent_posts"
+            >
+        </Preference>
+
+        <Preference
+            android:title="@string/aboutus_aboutus_title"
+            android:summary="@string/aboutus_aboutus_summary"
+            android:key="aboutus_aboutus"
+            android:icon="@drawable/ic_info_red_24"
+            app:allowDividerAbove="true"
+
+            >
+        </Preference>
+
+</PreferenceScreen>
