@@ -16,12 +16,21 @@ public class AboutUsPreferenceFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.aboutus_preference, rootKey);
-        Preference notification_button = findPreference("aboutus_notification");
-        notification_button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        Preference notification_button = findPreference("myhamedanmelk_notification");
+        Preference aboutpreference= findPreference("myhamedanmelk_aboutus_items");
+        final NavController controller=Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
+
+        Objects.requireNonNull(notification_button).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                NavController controller=Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
-                controller.navigate(R.id.appInfoFragment);
+                return false;
+            }
+        });
+
+        Objects.requireNonNull(aboutpreference).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                controller.navigate(R.id.HelpFragment);
                 return false;
             }
         });

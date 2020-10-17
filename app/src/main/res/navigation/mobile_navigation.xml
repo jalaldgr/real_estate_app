@@ -25,20 +25,24 @@
     <fragment
         android:id="@+id/notificationSettingsFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.aboutus.NotificationSettingsFragment"
-        android:label="NotificationSettingsFragment" />
+        android:label="@string/notification_setting_title" />
     <fragment
         android:id="@+id/FAQFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.aboutus.FAQFragment"
-        android:label="fragment_f_a_q"
+        android:label="@string/myhamedanmelk_faq_title"
         tools:layout="@layout/fragment_f_a_q" />
     <fragment
         android:id="@+id/aboutUsFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.aboutus.AboutUsFragment"
-        android:label="fragment_about_us"
+        android:label="@string/aboutus_aboutus_title"
         tools:layout="@layout/fragment_about_us" />
     <fragment
         android:id="@+id/appInfoFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.aboutus.AppInfoFragment"
-        android:label="fragment_app_info"
+        android:label="@string/myhamedan_melk_appinfo_title"
         tools:layout="@layout/fragment_app_info" />
+    <fragment
+        android:id="@+id/HelpFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.HelpFragment"
+        android:label="@string/myhamedanmelk_help" />
 </navigation>
