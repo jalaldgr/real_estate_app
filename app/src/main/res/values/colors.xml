@@ -2,6 +2,9 @@
 <resources>
     <color name="colorPrimary">#e03030</color>
     <color name="colorPrimaryDark">#D13636</color>
+    <color name="colorBorderAboutApp">#BA3131</color>
+
     <color name="colorAccent">#5bb85d</color>
     <color name="ic_luancher_background">#00000000</color>
+    <color name="black_overlay">#66000000</color>
 </resources>

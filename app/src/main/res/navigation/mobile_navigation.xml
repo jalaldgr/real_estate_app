@@ -26,4 +26,19 @@
         android:id="@+id/notificationSettingsFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.aboutus.NotificationSettingsFragment"
         android:label="NotificationSettingsFragment" />
+    <fragment
+        android:id="@+id/FAQFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.aboutus.FAQFragment"
+        android:label="fragment_f_a_q"
+        tools:layout="@layout/fragment_f_a_q" />
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.aboutus.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/appInfoFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.aboutus.AppInfoFragment"
+        android:label="fragment_app_info"
+        tools:layout="@layout/fragment_app_info" />
 </navigation>

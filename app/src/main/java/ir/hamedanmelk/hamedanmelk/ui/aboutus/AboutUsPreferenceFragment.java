@@ -21,7 +21,7 @@ public class AboutUsPreferenceFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 NavController controller=Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
-                controller.navigate(R.id.notificationSettingsFragment);
+                controller.navigate(R.id.appInfoFragment);
                 return false;
             }
         });
