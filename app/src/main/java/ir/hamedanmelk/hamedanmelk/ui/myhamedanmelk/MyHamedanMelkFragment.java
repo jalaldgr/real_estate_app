@@ -1,4 +1,4 @@
-package ir.hamedanmelk.hamedanmelk.ui.aboutus;
+package ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk;
 
 import android.os.Bundle;
 
@@ -11,11 +11,11 @@ import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
 
-public class AboutUsPreferenceFragment extends PreferenceFragmentCompat {
+public class MyHamedanMelkFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        setPreferencesFromResource(R.xml.aboutus_preference, rootKey);
+        setPreferencesFromResource(R.xml.my_hamedan_melk_preference, rootKey);
         Preference notification_button = findPreference("myhamedanmelk_notification");
         Preference aboutpreference= findPreference("myhamedanmelk_aboutus_items");
         final NavController controller=Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);

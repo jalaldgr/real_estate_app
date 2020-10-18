@@ -1,4 +1,4 @@
-package ir.hamedanmelk.hamedanmelk.ui.aboutus;
+package ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk;
 
 import android.os.Bundle;
 

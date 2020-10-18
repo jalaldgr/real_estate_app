@@ -2,15 +2,15 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <Preference
-        android:title="@string/myhamedanmelk_faq_title"
+        android:title="@string/my_hamedanmelk_faq_title"
         android:icon="@drawable/ic_faq_red_24"
         android:key="myhamedanmelk_faq">
     </Preference>
-    <Preference app:title="@string/aboutus_aboutus_title"
+    <Preference app:title="@string/my_hamedan_melk_aboutus_title"
         android:icon="@drawable/ic_aboutus_red_24"
         android:key="myhamedanmelk_aboutus">
     </Preference>
-    <Preference android:title="@string/myhamedan_melk_appinfo_title"
+    <Preference android:title="@string/my_hamedan_melk_appinfo_title"
         android:icon="@drawable/ic_info_red_24"
         android:key="myhamedanmelk_appinfo">
     </Preference>

@@ -1,4 +1,4 @@
-package ir.hamedanmelk.hamedanmelk.ui.aboutus;
+package ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk.help;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
 
 import ir.hamedanmelk.hamedanmelk.R;
 

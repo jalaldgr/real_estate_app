@@ -1,4 +1,4 @@
-package ir.hamedanmelk.hamedanmelk.ui.aboutus;
+package ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk.help;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -71,7 +71,7 @@ public class AppInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_app_info, container, false);
-        version = getResources().getString(R.string.aboutus_app_info_version)+" ";
+        version = getResources().getString(R.string.my_hamedan_melk_app_info_version)+" ";
         try {
             PackageInfo pInfo = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
             version += pInfo.versionName;

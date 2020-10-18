@@ -5,19 +5,19 @@
     <string name="title_aboutus">ملک من</string>
 
 
-    <string name="notification_setting_vibrate">لرزش</string>
-    <string name="notification_setting_title">اعلان ها</string>
-    <string name="aboutus_bookmarks_title">نشان شده ها</string>
-    <string name="aboutus_recent_posts_title">بازدید های اخیر</string>
-    <string name="aboutus_aboutus_title">درباره ما</string>
-    <string name="myhamedanmelk_help">راهنما</string>
-    <string name="myhamedanmelk_faq_title">پشتیبانی و قوانین</string>
-    <string name="myhamedan_melk_appinfo_title">اطلاعات نرم افزار</string>
-    <string name="aboutus_notification_setting_summary">لرزش، اعلان ها</string>
-    <string name="aboutus_bookmarks_summary">لیست آگهی های نشان شده</string>
-    <string name="aboutus_recent_posts_summary">لیست پست هایی که اخیرا مشاهده نموده اید</string>
-    <string name="aboutus_aboutus_summary">درباره همدان ملک،، قوانین و پشتیبانی، اطلعات نرم افزار</string>
-    <string name="aboutus_app_info_version">ورژن</string>
+    <string name="my_hamedan_melk_notification_setting_vibrate">لرزش</string>
+    <string name="my_hamedan_melk_notification_setting_title">اعلان ها</string>
+    <string name="my_hamedan_melk_bookmarks_title">نشان شده ها</string>
+    <string name="my_hamedan_melk_recent_posts_title">بازدید های اخیر</string>
+    <string name="my_hamedan_melk_aboutus_title">درباره ما</string>
+    <string name="my_hamedanmelk_help">راهنما</string>
+    <string name="my_hamedanmelk_faq_title">پشتیبانی و قوانین</string>
+    <string name="my_hamedan_melk_appinfo_title">اطلاعات نرم افزار</string>
+    <string name="my_hamedan_melk_notification_setting_summary">لرزش، اعلان ها</string>
+    <string name="my_hamedan_melk_bookmarks_summary">لیست آگهی های نشان شده</string>
+    <string name="my_hamedan_melk_recent_posts_summary">لیست پست هایی که اخیرا مشاهده نموده اید</string>
+    <string name="my_hamedan_melk_aboutus_summary">درباره همدان ملک،، قوانین و پشتیبانی، اطلعات نرم افزار</string>
+    <string name="my_hamedan_melk_app_info_version">ورژن</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

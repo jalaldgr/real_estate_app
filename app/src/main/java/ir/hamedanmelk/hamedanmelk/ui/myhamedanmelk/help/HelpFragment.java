@@ -1,4 +1,4 @@
-package ir.hamedanmelk.hamedanmelk;
+package ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk.help;
 
 import android.os.Bundle;
 
@@ -8,6 +8,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import java.util.Objects;
+
+import ir.hamedanmelk.hamedanmelk.R;
 
 public class HelpFragment extends PreferenceFragmentCompat {
 
