@@ -45,4 +45,9 @@
         android:id="@+id/HelpFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk.help.HelpFragment"
         android:label="@string/my_hamedanmelk_help" />
+    <fragment
+        android:id="@+id/appInfoFullscreenFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk.help.AppInfoFullscreenFragment"
+        android:label="fragment_app_info_fullscreen"
+        tools:layout="@layout/fragment_app_info_fullscreen" />
 </navigation>

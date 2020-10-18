@@ -38,7 +38,7 @@ public class HelpFragment extends PreferenceFragmentCompat {
         Objects.requireNonNull(appinfopreference).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                navController.navigate(R.id.appInfoFragment);
+                navController.navigate(R.id.appInfoFullscreenFragment);
                 return false;
             }
         });
