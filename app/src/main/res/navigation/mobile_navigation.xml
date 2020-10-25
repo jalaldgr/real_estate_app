@@ -21,7 +21,7 @@
         android:id="@+id/navigation_aboutus"
         android:name="ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk.MyHamedanMelkFragment"
         android:label="@string/title_aboutus"
-        tools:layout="@layout/fragment_aboutus" />
+         />
     <fragment
         android:id="@+id/notificationSettingsFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk.NotificationSettingsFragment"
@@ -38,9 +38,9 @@
         tools:layout="@layout/fragment_about_us" />
     <fragment
         android:id="@+id/appInfoFragment"
-        android:name="ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk.help.AppInfoFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk.help.AppInfoFullscreenFragment"
         android:label="@string/my_hamedan_melk_appinfo_title"
-        tools:layout="@layout/fragment_app_info" />
+        tools:layout="@layout/fragment_app_info_fullscreen" />
     <fragment
         android:id="@+id/HelpFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk.help.HelpFragment"
@@ -50,4 +50,10 @@
         android:name="ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk.help.AppInfoFullscreenFragment"
         android:label="fragment_app_info_fullscreen"
         tools:layout="@layout/fragment_app_info_fullscreen" />
+    <fragment
+        android:id="@+id/noInternetErrorFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.NoInternetErrorFragment"
+        android:label="fragment_no_internet_error"
+        tools:layout="@layout/fragment_no_internet_error" />
+
 </navigation>

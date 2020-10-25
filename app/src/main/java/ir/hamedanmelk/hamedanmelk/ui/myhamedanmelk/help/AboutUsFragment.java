@@ -83,6 +83,7 @@ public class AboutUsFragment extends Fragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
+                //todo https://developer.android.com/guide/webapps/webview#BindingJavaScript
                 mwebview.loadUrl("javascript:(function() { " +
                         "document.getElementsByClassName('other_pages')[0].style.display='none'; " +
                         "document.getElementsByClassName('search_form')[0].style.display='none'; " +
@@ -92,8 +93,6 @@ public class AboutUsFragment extends Fragment {
             }
         });
         mwebview.loadUrl("https://hamedanmelk.ir/AboutUs");
-
-
         return v;
     }
 }

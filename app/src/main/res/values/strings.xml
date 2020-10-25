@@ -18,7 +18,9 @@
     <string name="my_hamedan_melk_recent_posts_summary">لیست پست هایی که اخیرا مشاهده نموده اید</string>
     <string name="my_hamedan_melk_aboutus_summary">درباره همدان ملک،، قوانین و پشتیبانی، اطلعات نرم افزار</string>
     <string name="my_hamedan_melk_app_info_version">ورژن</string>
-
+    <string name="no_internet_error_title">اینترنت وصل نیست</string>
+    <string name="no_internet_error_description">لطفا اتصال اینترنت را چک نموده و دوباره تلاش کنید</string>
+    <string name="no_internet_error_retry">تلاش دوباره</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
@@ -35,5 +37,7 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
