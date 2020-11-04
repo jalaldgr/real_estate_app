@@ -49,7 +49,13 @@
         android:id="@+id/appInfoFullscreenFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk.help.AppInfoFullscreenFragment"
         android:label="fragment_app_info_fullscreen"
-        tools:layout="@layout/fragment_app_info_fullscreen" />
+        tools:layout="@layout/fragment_app_info_fullscreen" >
+        <argument
+            android:name="hidenavigation"
+            app:argType="boolean"
+            android:defaultValue="true"
+            app:nullable="false"/>
+    </fragment>
     <fragment
         android:id="@+id/noInternetErrorFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.NoInternetErrorFragment"
