@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.17"
+        android:background="#00ffffff"
+        android:text="ورود" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_weight="0.66"
+        android:background="#FFFFFF"
+        android:drawableRight="@drawable/ic_baseline_search_24"
+        android:text="جست و جو"
+        android:textColor="#B45C5555" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.17"
+        android:background="#00FFFFFF"
+        android:drawableRight="@drawable/ic_baseline_keyboard_arrow_down_24"
+        android:text="همدان" />
+
+
+</LinearLayout>
+

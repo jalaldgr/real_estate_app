@@ -1,6 +1,9 @@
 package ir.hamedanmelk.hamedanmelk;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -9,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavAction;
 import androidx.navigation.NavController;
@@ -48,6 +52,18 @@ public class MainActivity extends AppCompatActivity {
                     navView.setVisibility(View.VISIBLE);
                 }
 
+                if(destination.getId() == R.id.navigation_home){
+                    ActionBar actionBar=getSupportActionBar();
+                    actionBar.setDisplayHomeAsUpEnabled(false);
+                    actionBar.setDisplayShowTitleEnabled(false);
+
+                }
+                else {
+                    ActionBar actionBar=getSupportActionBar();
+                    actionBar.setDisplayHomeAsUpEnabled(true);
+                    actionBar.setDisplayShowTitleEnabled(true);
+                }
+
 
             }
         });
@@ -57,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     @Override
@@ -68,4 +86,11 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+        return true;
+    }
+
 }

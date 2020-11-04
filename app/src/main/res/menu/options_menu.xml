@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        app:actionLayout="@layout/login_action_bar"
+        app:showAsAction="always"
+        />
+
+<!--    <item-->
+<!--        app:actionLayout="@layout/search_action_bar"-->
+<!--        app:showAsAction="always"-->
+<!--        />-->
+
+<!--    <item android:id="@+id/cities_action_bar"-->
+<!--        app:actionLayout="@layout/cities_list_action_bar"-->
+<!--        app:showAsAction="always"-->
+<!--        />-->
+</menu>
+
