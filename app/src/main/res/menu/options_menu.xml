@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/shearchactionmenu"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:layoutDirection="rtl"
+        android:title="جستجو"
+        android:visibility="visible"
         app:actionLayout="@layout/login_action_bar"
         app:showAsAction="always"
-        />
+        tools:visibility="visible" />
+    <item android:title="Item" />
 
-<!--    <item-->
+
+    <!--    <item-->
 <!--        app:actionLayout="@layout/search_action_bar"-->
 <!--        app:showAsAction="always"-->
 <!--        />-->

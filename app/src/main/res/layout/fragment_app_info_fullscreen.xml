@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background_shape"
     tools:actionBarNavMode="tabs"
-    tools:context=".ui.myhamedanmelk.help.AppInfoFragment"
     android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
     <LinearLayout
