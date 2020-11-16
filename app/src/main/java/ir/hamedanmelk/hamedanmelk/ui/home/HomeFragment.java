@@ -1,12 +1,10 @@
 package ir.hamedanmelk.hamedanmelk.ui.home;
 
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -20,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.hamedanmelk.hamedanmelk.R;
-import ir.hamedanmelk.hamedanmelk.ViewPagerAdapter;
+import ir.hamedanmelk.hamedanmelk.tools.ViewPagerAdapter;
 import ir.hamedanmelk.hamedanmelk.models.Estate;
 import ir.hamedanmelk.hamedanmelk.tools.home_frgmnt_horizontal_recycler_adaptor;
 
@@ -59,10 +57,10 @@ public class HomeFragment extends Fragment {
         myRecycle.setLayoutManager(laymngr);
         myRecycle.setAdapter(RHZAdaptor);
 
-//          ViewPager viewPager;
-//        viewPager = (ViewPager) root.findViewById(R.id.viewpager);
-//        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getContext());
-//        viewPager.setAdapter(viewPagerAdapter);
+          ViewPager viewPager;
+        viewPager = (ViewPager) root.findViewById(R.id.viewpager);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getContext());
+        viewPager.setAdapter(viewPagerAdapter);
         return root;
     }
 }

@@ -7,8 +7,6 @@
     <string name="title_createnewad">ثبت آگهی</string>
 
 
-
-
     <string name="my_hamedan_melk_notification_setting_vibrate">لرزش</string>
     <string name="my_hamedan_melk_notification_setting_title">اعلان ها</string>
     <string name="my_hamedan_melk_bookmarks_title">نشان شده ها</string>
@@ -30,7 +28,7 @@
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
-
+    <string name="splash_ads_skip_button">رد کردن</string>
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
     <string name="reply_title">Default reply action</string>

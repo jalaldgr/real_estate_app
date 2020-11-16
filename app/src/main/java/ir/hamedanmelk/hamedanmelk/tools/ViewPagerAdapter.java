@@ -1,4 +1,4 @@
-package ir.hamedanmelk.hamedanmelk;
+package ir.hamedanmelk.hamedanmelk.tools;
 
 
 import android.content.Context;
@@ -11,6 +11,8 @@ import android.widget.ImageView;
 
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import ir.hamedanmelk.hamedanmelk.R;
 
 public class ViewPagerAdapter extends PagerAdapter {
 

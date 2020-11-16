@@ -7,4 +7,5 @@
     <color name="colorAccent">#5bb85d</color>
     <color name="ic_luancher_background">#00000000</color>
     <color name="black_overlay">#66000000</color>
+    <color name="splashAdStatusbar">#3e32d1</color>
 </resources>
