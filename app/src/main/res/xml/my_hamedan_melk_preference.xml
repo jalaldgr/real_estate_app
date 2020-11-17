@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <Preference
-            android:title="@string/my_hamedan_melk_notification_setting_title"
             android:summary="@string/my_hamedan_melk_notification_setting_vibrate"
-            android:icon="@drawable/ic_notifications_red_24"
-            app:key="myhamedanmelk_notification">
-        </Preference>
+            android:title="@string/my_hamedan_melk_notification_setting_title"
+            app:key="myhamedanmelk_notification"></Preference>
+
         <Preference
             android:title="@string/my_hamedan_melk_bookmarks_title"
             android:summary="@string/my_hamedan_melk_bookmarks_summary"

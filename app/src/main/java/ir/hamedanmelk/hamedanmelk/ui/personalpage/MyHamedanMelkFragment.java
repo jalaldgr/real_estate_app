@@ -1,4 +1,4 @@
-package ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk;
+package ir.hamedanmelk.hamedanmelk.ui.personalpage;
 
 import android.os.Bundle;
 

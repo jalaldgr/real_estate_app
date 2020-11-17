@@ -1,4 +1,4 @@
-package ir.hamedanmelk.hamedanmelk.ui.myhamedanmelk.help;
+package ir.hamedanmelk.hamedanmelk.ui.personalpage.help;
 import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

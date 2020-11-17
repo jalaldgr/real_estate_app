@@ -16,36 +16,5 @@
     android:paddingTop="5dp"
     android:paddingEnd="5dp"
     android:paddingRight="5dp"
-    android:paddingBottom="5dp">
-
-    <!--    <Button-->
-    <!--        android:id="@+id/button3"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_weight="0.17"-->
-    <!--        android:background="#00ffffff"-->
-    <!--        android:text="ورود" />-->
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0"
-        android:background="#FFFFFF"
-        android:drawableRight="@drawable/ic_baseline_search_24"
-        android:layoutDirection="rtl"
-        android:text="جست و جو"
-        android:textColor="#B45C5555" />
-
-    <!--    <Button-->
-    <!--        android:id="@+id/button2"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_weight="0.17"-->
-    <!--        android:background="#00FFFFFF"-->
-    <!--        android:drawableRight="@drawable/ic_baseline_keyboard_arrow_down_24"-->
-    <!--        android:text="همدان" />-->
-
-
-</LinearLayout>
+    android:paddingBottom="5dp"/>
 

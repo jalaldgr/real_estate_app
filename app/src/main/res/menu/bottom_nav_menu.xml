@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@mipmap/ic_launcher_logo_foreground"
+        android:icon="@mipmap/ic_launcher_logo"
         android:title="@string/title_home" />
 
     <item
@@ -12,7 +12,7 @@
         android:title="@string/title_createnewad" />
 
     <item
-        android:id="@+id/navigation_aboutus"
+        android:id="@+id/personalPage"
         android:icon="@drawable/ic_person_black_24"
         android:title="@string/title_personalpage" />
 

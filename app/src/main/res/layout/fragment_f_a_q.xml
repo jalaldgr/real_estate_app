@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.myhamedanmelk.help.FAQFragment">
+    tools:context=".ui.personalpage.help.FAQFragment">
 
     <WebView
         android:id="@+id/webview_f_a_q"
