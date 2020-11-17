@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="ir.hamedanmelk.hamedanmelk.ui.home.HomeFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.PersonalPage"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
@@ -76,5 +76,55 @@
         android:name="ir.hamedanmelk.hamedanmelk.ui.user.UserRegister"
         android:label="@string/user_register"
         tools:layout="@layout/fragment_user_register" />
+    <fragment
+        android:id="@+id/saleFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.SaleFragment"
+        android:label="@string/sale_category"
+        tools:layout="@layout/fragment_sale" />
+    <fragment
+        android:id="@+id/resaleFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.ResaleFragment"
+        android:label="@string/resale_category"
+        tools:layout="@layout/fragment_resale" />
+    <fragment
+        android:id="@+id/rentFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.RentFragment"
+        android:label="@string/rent_category"
+        tools:layout="@layout/fragment_rent" />
+    <fragment
+        android:id="@+id/assingmentFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.AssingmentFragment"
+        android:label="@string/assingment_category"
+        tools:layout="@layout/fragment_assingment" />
+    <fragment
+        android:id="@+id/agentFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.AgentFragment"
+        android:label="@string/agent_category"
+        tools:layout="@layout/fragment_agent" />
+    <fragment
+        android:id="@+id/exchangeFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.ExchangeFragment"
+        android:label="@string/exchange_category"
+        tools:layout="@layout/fragment_exchange" />
+    <fragment
+        android:id="@+id/inquiryFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.InquiryFragment"
+        android:label="@string/inquiry_category"
+        tools:layout="@layout/fragment_inquiry" />
+    <fragment
+        android:id="@+id/servicesFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.ServicesFragment"
+        android:label="@string/services_category"
+        tools:layout="@layout/fragment_services" />
+    <fragment
+        android:id="@+id/moreFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.MoreFragment"
+        android:label="@string/more_category"
+        tools:layout="@layout/fragment_more" />
+    <fragment
+        android:id="@+id/lawInstiuteFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.LawInstiuteFragment"
+        android:label="@string/law_instiute_category"
+        tools:layout="@layout/fragment_law_instiute" />
 
 </navigation>

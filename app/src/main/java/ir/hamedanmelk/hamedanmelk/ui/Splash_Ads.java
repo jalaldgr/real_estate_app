@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import ir.hamedanmelk.hamedanmelk.MainActivity;
+import ir.hamedanmelk.hamedanmelk.ui.category.MainActivity;
 import ir.hamedanmelk.hamedanmelk.R;
 
 public class Splash_Ads extends AppCompatActivity {

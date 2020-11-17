@@ -1,4 +1,4 @@
-package ir.hamedanmelk.hamedanmelk;
+package ir.hamedanmelk.hamedanmelk.ui.category;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -22,6 +22,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import java.util.Objects;
+
+import ir.hamedanmelk.hamedanmelk.R;
 
 public class MainActivity extends AppCompatActivity {
 

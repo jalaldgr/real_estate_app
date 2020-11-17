@@ -43,7 +43,7 @@
                         android:orientation="vertical">
 
                         <Button
-                            android:id="@+id/button15"
+                            android:id="@+id/HomeFragmentExchangeButton"
                             android:layout_width="57dp"
                             android:layout_height="57dp"
                             android:layout_gravity="center"
@@ -67,7 +67,7 @@
                         android:orientation="vertical">
 
                         <Button
-                            android:id="@+id/button23"
+                            android:id="@+id/HomeFragmentResaleButton"
                             android:layout_width="57dp"
                             android:layout_height="57dp"
                             android:layout_gravity="center"
@@ -91,7 +91,7 @@
                         android:orientation="vertical">
 
                         <Button
-                            android:id="@+id/button24"
+                            android:id="@+id/HomeFragmentAssignmentButton"
                             android:layout_width="57dp"
                             android:layout_height="57dp"
                             android:layout_gravity="center"
@@ -115,7 +115,7 @@
                         android:orientation="vertical">
 
                         <Button
-                            android:id="@+id/button16"
+                            android:id="@+id/HomeFragmentRentButton"
                             android:layout_width="57dp"
                             android:layout_height="57dp"
                             android:layout_gravity="center"
@@ -139,7 +139,7 @@
                         android:orientation="vertical">
 
                         <Button
-                            android:id="@+id/button17"
+                            android:id="@+id/HomeFragmentSaleButton"
                             android:layout_width="57dp"
                             android:layout_height="57dp"
                             android:layout_gravity="center"
@@ -171,7 +171,7 @@
                         android:orientation="vertical">
 
                         <Button
-                            android:id="@+id/button18"
+                            android:id="@+id/HomeFragmentMoreButton"
                             android:layout_width="57dp"
                             android:layout_height="57dp"
                             android:layout_gravity="center"
@@ -196,7 +196,7 @@
                         android:orientation="vertical">
 
                         <Button
-                            android:id="@+id/button19"
+                            android:id="@+id/HomeFragmentInquiryButton"
                             android:layout_width="57dp"
                             android:layout_height="57dp"
                             android:layout_gravity="center"
@@ -221,7 +221,7 @@
                         android:orientation="vertical">
 
                         <Button
-                            android:id="@+id/button20"
+                            android:id="@+id/HomeFragmentLawInstiuteButton"
                             android:layout_width="57dp"
                             android:layout_height="57dp"
                             android:layout_gravity="center"
@@ -245,7 +245,7 @@
                         android:orientation="vertical">
 
                         <Button
-                            android:id="@+id/button21"
+                            android:id="@+id/HomeFragmentServicesButton"
                             android:layout_width="57dp"
                             android:layout_height="57dp"
                             android:layout_gravity="center"
@@ -269,7 +269,7 @@
                         android:orientation="vertical">
 
                         <Button
-                            android:id="@+id/button22"
+                            android:id="@+id/HomeFragmentAgentButton"
                             android:layout_width="57dp"
                             android:layout_height="57dp"
                             android:layout_gravity="center"
