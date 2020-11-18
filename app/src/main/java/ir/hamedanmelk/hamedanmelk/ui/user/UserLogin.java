@@ -1,5 +1,6 @@
 package ir.hamedanmelk.hamedanmelk.ui.user;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.models.UserModel;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,16 +65,21 @@ public class UserLogin extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Define shared preference __user_model_pref for storing current user
+        SharedPreferences.Editor editor =getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE).edit();
+
+        editor.apply();
         final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
         View v=inflater.inflate(R.layout.fragment_user_login, container, false);
         TextView register = (TextView)v.findViewById(R.id.UserLoginRegisterText);
         Button login = (Button)v.findViewById(R.id.UserLoginFragmentLoginButton);
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
