@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import ir.hamedanmelk.hamedanmelk.ui.category.MainActivity;
 import ir.hamedanmelk.hamedanmelk.R;
 
 public class Splash_Ads extends AppCompatActivity {
@@ -63,6 +62,6 @@ public class Splash_Ads extends AppCompatActivity {
                 finish();
                 if(!clicked)handler.removeCallbacksAndMessages(null); // TODO this not work
             }
-        },4000);
+        },100);
     }
 }

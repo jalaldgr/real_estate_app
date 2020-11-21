@@ -34,14 +34,14 @@
                 android:paddingBottom="32dp">
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/PersonalPageNametxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/user_register_name"
                     android:textColor="#FFFFFF" />
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/PersonalPagePhonetxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/user_register_phone"

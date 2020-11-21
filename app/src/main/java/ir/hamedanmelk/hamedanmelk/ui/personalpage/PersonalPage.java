@@ -1,19 +1,26 @@
 package ir.hamedanmelk.hamedanmelk.ui.personalpage;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.preference.PreferenceManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.tools.Constants;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,6 +67,7 @@ public class PersonalPage extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -67,13 +75,24 @@ public class PersonalPage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_personal_page, container, false);
-        Button exit = (Button)v.findViewById(R.id.PersoanlPageExitButton);
+        SharedPreferences user_pref = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
         final NavController controller=Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
+        String[] user_model_fields = Constants.USER_MODEL_FIELDS;
 
-        exit.setOnClickListener(new View.OnClickListener() {
+        Button exitbtn = (Button)v.findViewById(R.id.PersoanlPageExitButton);
+        TextView nametxt=(TextView)v.findViewById(R.id.PersonalPageNametxt);
+        TextView phonetxt=(TextView)v.findViewById(R.id.PersonalPagePhonetxt);
+        String fullnamestr=user_pref.getString(user_model_fields[2],"")+" "+user_pref.getString(user_model_fields[3],"");
+        String phonestr=user_pref.getString(user_model_fields[1],"");
+        nametxt.setText(fullnamestr);
+        phonetxt.setText(phonestr);
+        exitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences.Editor editor = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE).edit();
+                editor.clear().apply();
                 controller.navigate(R.id.userLogin);
+
             }
         });
         return v;

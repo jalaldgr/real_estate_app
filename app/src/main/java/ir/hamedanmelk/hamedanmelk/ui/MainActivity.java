@@ -1,7 +1,8 @@
-package ir.hamedanmelk.hamedanmelk.ui.category;
+package ir.hamedanmelk.hamedanmelk.ui;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
