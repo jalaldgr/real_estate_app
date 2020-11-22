@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.user.UserRegister">
+    tools:context=".ui.user.PublicUserRegister">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -27,7 +27,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/UserRegistereditTextName"
+            android:id="@+id/PublicUserRegistereFirstNametxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -35,7 +35,7 @@
             android:text="@string/user_register_name" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/PublicUserRegistereLastNametxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -43,7 +43,7 @@
             android:text="@string/user_register_family" />
 
         <EditText
-            android:id="@+id/UserRegistereditTextPhone"
+            android:id="@+id/PublicUserRegisterePhonetxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -51,19 +51,20 @@
             android:text="@string/user_register_phone" />
 
         <RadioGroup
+            android:id="@+id/PublicUserRegisterGenderTypeRadioGrp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layoutDirection="rtl">
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/PublicUserRegisterGenderTypeMaleRadioBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/user_register_male"
                 android:textDirection="rtl" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/PublicUserRegisterGenderTypeFemaleRadioBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/user_register_female"
@@ -71,7 +72,7 @@
         </RadioGroup>
 
         <Button
-            android:id="@+id/UserRegisterRegisterationButton"
+            android:id="@+id/PublicUserRegisterRegisterationBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"

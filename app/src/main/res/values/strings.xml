@@ -52,7 +52,7 @@
     <string name="user_password">کلمه عبور</string>
     <string name="user_register_name">نام</string>
     <string name="user_register_family">نام خانوادگی</string>
-    <string name="user_register_phone">تلفن همراه</string>
+    <string name="user_register_phone">09187051660</string>
     <string name="user_register_sex">جنسیت</string>
     <string name="user_register_male">آقا</string>
     <string name="user_register_female">خانم</string>
@@ -75,7 +75,15 @@
     <string name="loading_message">دریافت اطلاعات…</string>
     <string name="username_input_error_msg">لطفا نام کاربری را وارد نمایید</string>
     <string name="password_input_error_msg">لطفا گذرواژه خود را وارد نمایید</string>
-<!--    Authentication Method Fields-->
+    <string name="firstname_input_error_msg">لطفا نام را وارد نمایید</string>
+    <string name="lastname_input_error_msg">لطفا نام خانوادگی را وارد نمایید</string>
+    <string name="gendertype_input_error_msg">لطفا جنسیت را انتخاب نمایید</string>
+    <string name="phone_input_error_msg">لطفا شماره همراه را وارد نمایید</string>
+    <string name="duplicate_username_error_msg">کاربری تلفن همراه مورد نظر، در سیستم قبلا ایجاد شده است</string>
+    <string name="register_public_user_sucess_msg">نام کاربری و رمز عبور ارسال شد</string>
+
+
+    <!--    Authentication Method Fields-->
     <string name="authentication_username">Username</string>
     <string name="authentication_password">Password</string>
 <!--        User model in Shared Preference-->

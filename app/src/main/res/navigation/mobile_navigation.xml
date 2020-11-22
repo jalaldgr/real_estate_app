@@ -73,7 +73,7 @@
         tools:layout="@layout/fragment_user_login" />
     <fragment
         android:id="@+id/userRegister"
-        android:name="ir.hamedanmelk.hamedanmelk.ui.user.UserRegister"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.user.PublicUserRegister"
         android:label="@string/user_register"
         tools:layout="@layout/fragment_user_register" />
     <fragment
