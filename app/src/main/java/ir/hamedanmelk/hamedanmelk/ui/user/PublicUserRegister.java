@@ -40,7 +40,7 @@ public class PublicUserRegister extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static final String TAG = "PublicUserRegisterFragment";
+    private static final String TAG = "PublicUserRegister";
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -126,14 +126,14 @@ public class PublicUserRegister extends Fragment {
                 final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
                 try {
                     JSONObject reader = new JSONObject(s);
-                    if(reader.getInt("State")==0){
-                        if(reader.getString("Data").contains("قبلا"))
+                    if(reader.getInt(Constants.JSON_RESPONSE_STATE)==0){
+                        if(reader.getString(Constants.JSON_RESPONSE_DATA).contains("قبلا"))
                             Toast.makeText(context,getResources().getString(R.string.duplicate_username_error_msg),Toast.LENGTH_LONG).show();
                     }
                     else if(reader.getInt("State")==1){
                         Toast.makeText(context,getResources().getString(R.string.register_public_user_sucess_msg),Toast.LENGTH_LONG).show();
                         controller.navigate(R.id.userLogin);
-                        Log.d(TAG, "onPostExecute: "+reader.getString("Data"));
+                        Log.d(TAG, "onPostExecute: "+reader.getString(Constants.JSON_RESPONSE_DATA));
                     }
 
 
