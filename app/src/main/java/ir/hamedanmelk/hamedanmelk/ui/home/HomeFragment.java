@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment {
         resalebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.navigate(R.id.resaleFragment);
+                controller.navigate(R.id.presaleFragment);
             }
         });
         exchangebtn.setOnClickListener(new View.OnClickListener() {

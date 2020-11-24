@@ -82,10 +82,10 @@
         android:label="@string/sale_category"
         tools:layout="@layout/fragment_sale" />
     <fragment
-        android:id="@+id/resaleFragment"
-        android:name="ir.hamedanmelk.hamedanmelk.ui.category.ResaleFragment"
-        android:label="@string/resale_category"
-        tools:layout="@layout/fragment_resale" />
+        android:id="@+id/presaleFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.PreSaleFragment"
+        android:label="@string/presale_category"
+        tools:layout="@layout/fragment_presale" />
     <fragment
         android:id="@+id/rentFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.category.RentFragment"

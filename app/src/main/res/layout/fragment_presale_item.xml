@@ -5,14 +5,14 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/home_item_number"
+        android:id="@+id/presale_item_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
-        android:id="@+id/home_content"
+        android:id="@+id/presale_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
