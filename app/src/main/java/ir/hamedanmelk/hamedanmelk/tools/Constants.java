@@ -63,4 +63,20 @@ public class Constants {
     public static final String PRE_SALE_MODEL_FIRST_NAME="first_name";
     public static final String PRE_SALE_MODEL_LAST_NAME="last_name";
     public static final String[] PRE_SALE_MODEL_FIELDS={"id","Title","land_state_id","created_at","land_situation_id","View","LandStateTitle","LandSituationTitle","LandSituationColor","first_name","last_name"};
+
+
+    //Sale model
+    public static final String SALE_MODEL_ID="id";
+    public static final String SALE_MODEL_TITLE="Title";
+    public static final String SALE_MODEL_LAND_STATE_ID="land_state_id";
+    public static final String SALE_MODEL_CREATED_AT="created_at";
+    public static final String SALE_MODEL_LAND_SITUATION_ID="land_situation_id";
+    public static final String SALE_MODEL_VIEW="View";
+    public static final String SALE_MODEL_LANDSTATETITLE="LandStateTitle";
+    public static final String SALE_MODEL_LAND_SITUATIONTITLE="LandSituationTitle";
+    public static final String SALE_MODEL_LANDSITUATIONCOLOR="LandSituationColor";
+    public static final String SALE_MODEL_FIRST_NAME="first_name";
+    public static final String SALE_MODEL_LAST_NAME="last_name";
+    public static final String[] SALE_MODEL_FIELDS={"id","Title","land_state_id","created_at","land_situation_id","View","LandStateTitle","LandSituationTitle","LandSituationColor","first_name","last_name"};
+
 }
