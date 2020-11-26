@@ -16,12 +16,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.HashMap;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
+import saman.zamani.persiandate.PersianDate;
+import saman.zamani.persiandate.PersianDateFormat;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,6 +50,8 @@ public class SinglePreSaleFragment extends Fragment {
     TextView spaceFoundationTxt ;
     TextView saleTotalPriceTxt  ;
     TextView userDescriptionTxt ;
+    TextView deliveryDateTxt;
+    PersianDate persianDate;
     public SinglePreSaleFragment() {
         // Required empty public constructor
     }
@@ -92,6 +97,7 @@ public class SinglePreSaleFragment extends Fragment {
          spaceFoundationTxt = (TextView)view.findViewById(R.id.SinglePreSaleFoundationSpaceTxt);
          saleTotalPriceTxt = (TextView)view.findViewById(R.id.SinglePreSaleSaleTotalPriceTxt);
          userDescriptionTxt =(TextView)view.findViewById(R.id.SinglePreSaleUserDescriptionMultiTxt);
+         deliveryDateTxt = (TextView)view.findViewById(R.id.SinglePreSaleDeliveryDateTxt);
         GetLandInfoRequest(getContext());
         return view;
     }
@@ -123,6 +129,14 @@ public class SinglePreSaleFragment extends Fragment {
                         unitInFloorTxt.setText(responseData.getString(Constants.LAND_INFO_UNIT_IN_FLOOR));
                         saleTotalPriceTxt.setText(responseData.getString(Constants.LAND_INFO_SALE_TOTAL_PRICE));
                         userDescriptionTxt.setText(responseData.getString(Constants.LAND_INFO_USER_DESCRIPTION));
+                        try {
+                            PersianDateFormat persianDateFormat=new PersianDateFormat("yyyy-MM-dd");
+                            persianDate = persianDateFormat.parseGrg(responseData.get(Constants.LAND_INFO_DELIVERY_DATE).toString(), "yyyy-MM-dd");
+                            deliveryDateTxt.setText(persianDate.toString());
+                        }catch (ParseException e){
+                            e.printStackTrace();
+                        }
+
 
                     }
 
