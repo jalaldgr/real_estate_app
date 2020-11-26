@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.single.SingleLandFragment">
+        tools:context=".ui.single.SingleRentFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:src="@android:drawable/ic_menu_manage" />
 
         <TextView
-            android:id="@+id/SingleSaleTitleTxt"
+            android:id="@+id/SingleRentTitleTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -35,7 +35,7 @@
             android:paddingBottom="16dp">
 
             <TextView
-                android:id="@+id/SingleSaleDistrictTxt"
+                android:id="@+id/SingleRentDistrictTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -58,7 +58,7 @@
                 android:text="@string/land_info_land_type" />
 
             <TextView
-                android:id="@+id/SingleSaleLandTypeTxt"
+                android:id="@+id/SingleRentLandTypeTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -79,7 +79,7 @@
                 android:text="@string/land_info_units_in_floor" />
 
             <TextView
-                android:id="@+id/SingleLandUnitInFloorTxt"
+                android:id="@+id/SingleRentUnitInFloorTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -100,7 +100,7 @@
                 android:text="@string/land_info_foundation_space" />
 
             <TextView
-                android:id="@+id/SingleSaleFoundationSpaceTxt"
+                android:id="@+id/SingleRentFoundationSpaceTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -117,10 +117,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/land_info_mortgage" />
+                android:text="@string/land_info_total_price" />
 
             <TextView
-                android:id="@+id/SingleSaleTotalPriceTxt"
+                android:id="@+id/SingleRentMortgageTotalPriceTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -138,23 +138,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/land_info_rent_total_price" />
+                android:text="@string/land_info_space_price" />
 
             <TextView
-                android:id="@+id/SingleSaleSpacePriceTxt"
+                android:id="@+id/SingleRentTotalPriceTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/border_linear_layout"
             android:orientation="horizontal"
             android:padding="10dp">
 
             <EditText
-                android:id="@+id/SingleSaleUserDescriptionMultiTxt"
+                android:id="@+id/SingleRentUserDescriptionMultiTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:editable="false"

@@ -133,7 +133,7 @@ public class RentFragment extends Fragment {
                         }
                         rentModels=renttemp;
                         Log.d(TAG, "onPostExecute rentModels: "+rentModels.toString());
-                        recyclerView.setAdapter(new RentRecyclerViewAdapter(rentModels));
+                        recyclerView.setAdapter(new RentRecyclerViewAdapter(rentModels,getActivity()));
 
                     }
                 } catch (JSONException e) {
