@@ -11,9 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.RentModel;
+import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
+import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 import java.util.List;
 import java.util.Objects;
@@ -45,6 +48,7 @@ public class RentRecyclerViewAdapter extends RecyclerView.Adapter<RentRecyclerVi
         RentModel rentModel = rentModels.get(position);
         holder.mIdView.setText(rentModel.getId());
         holder.mContentView.setText(rentModel.getTitle());
+        new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+rentModel.getImages());
         holder.mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,11 +69,13 @@ public class RentRecyclerViewAdapter extends RecyclerView.Adapter<RentRecyclerVi
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mIdView;
         public final TextView mContentView;
+        public final ImageView thumbnailImg;
 
         public ViewHolder(View view) {
             super(view);
             mIdView = (TextView) view.findViewById(R.id.item_number);
             mContentView = (TextView) view.findViewById(R.id.content);
+            thumbnailImg = (ImageView)view.findViewById(R.id.RentThumbnailImg);
         }
 
         @Override

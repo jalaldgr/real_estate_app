@@ -30,6 +30,7 @@ public class Constants {
     public static final String RENT_MODEL_LAND_STATE_ID="land_state_id";
     public static final String RENT_MODEL_LAND_SITUATION_ID="land_situation_id";
     public static final String RENT_MODEL_VIEW="View";
+    public static final String RENT_MODEL_IMAGES="View";
     public static final String RENT_MODEL_LAND_STATE_TITLE="LandStateTitle";
     public static final String RENT_MODEL_LAND_SITUATION_TITLE="LandSituationTitle";
     public static final String RENT_MODEL_LAND_SITUATION_COLOR="LandSituationColor";
@@ -43,6 +44,7 @@ public class Constants {
     public static final String LAND_MODEL_CREATED_AT="created_at";
     public static final String LAND_MODEL_LAND_SITUATION_ID="land_situation_id";
     public static final String LAND_MODEL_VIEW="View";
+    public static final String LAND_MODEL_IMAGES="Images";
     public static final String LAND_MODEL_LANDSTATETITLE="LandStateTitle";
     public static final String LAND_MODEL_LANDSITUATIONTITLE="LandSituationTitle";
     public static final String LAND_MODEL_LANDSITUATIONCOLOR="LandSituationColor";

@@ -165,12 +165,14 @@ public class HomeFragment extends Fragment {
                     JSONObject ResponseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
                     JSONArray LandList = new JSONArray(ResponseData.getString("data"));
                     JSONObject LandItem;
+                    JSONArray imagesArray;
                     if (reader.getInt(Constants.JSON_RESPONSE_STATE)==1)
                     {
                         ArrayList<LandModel> landtemp=new ArrayList<LandModel>();
                         for(int i=0; i < LandList.length();i++)
                         {
                             LandItem = LandList.getJSONObject(i);
+                            imagesArray =new JSONArray( LandItem.getString(Constants.SALE_MODEL_IMAGES));
                             LandModel landModel = new LandModel(
                                     LandItem.getString(Constants.LAND_MODEL_ID),
                                     LandItem.getString(Constants.LAND_MODEL_TITLE),
@@ -178,6 +180,7 @@ public class HomeFragment extends Fragment {
                                     LandItem.getString(Constants.LAND_MODEL_CREATED_AT),
                                     LandItem.getString(Constants.LAND_MODEL_LAND_SITUATION_ID),
                                     LandItem.getString(Constants.LAND_MODEL_VIEW),
+                                    imagesArray.get(0).toString(),
                                     LandItem.getString(Constants.LAND_MODEL_LANDSTATETITLE),
                                     LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONTITLE),
                                     LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONCOLOR),
@@ -190,7 +193,7 @@ public class HomeFragment extends Fragment {
                         }
                         landModels=landtemp;
                         Log.d(TAG, "onPostExecute rentModels: "+landModels.toString());
-                        recyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels));
+                        recyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
 
                     }
                 } catch (JSONException e) {

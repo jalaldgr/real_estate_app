@@ -20,9 +20,11 @@ public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
     protected Bitmap doInBackground(String... urls) {
         String urlDisplay = urls[0];
         Bitmap mIcon11 = null;
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.RGB_565;// fix memory error: Failed to allocate...
         try {
             InputStream in = new java.net.URL(urlDisplay).openStream();
-            mIcon11 = BitmapFactory.decodeStream(in);
+            mIcon11 = BitmapFactory.decodeStream(in,null,options);
         } catch (Exception e) {
             Log.e(TAG, e.toString());
             e.printStackTrace();

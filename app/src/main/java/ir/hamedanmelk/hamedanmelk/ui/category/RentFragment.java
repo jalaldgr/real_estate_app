@@ -110,18 +110,21 @@ public class RentFragment extends Fragment {
                     JSONObject ResponseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
                     JSONArray RentList = new JSONArray(ResponseData.getString("data"));
                     JSONObject RentItem;
+                    JSONArray imagesArray;
                     if (reader.getInt(Constants.JSON_RESPONSE_STATE)==1)
                     {
                         ArrayList<RentModel> renttemp=new ArrayList<RentModel>();
                         for(int i=0; i < RentList.length();i++)
                         {
                             RentItem = RentList.getJSONObject(i);
+                            imagesArray =new JSONArray( RentItem.getString(Constants.SALE_MODEL_IMAGES));
                             RentModel rentModel = new RentModel(
                                     RentItem.getString(Constants.RENT_MODEL_ID),
                                     RentItem.getString(Constants.RENT_MODEL_TITLE),
                                     RentItem.getString(Constants.RENT_MODEL_LAND_STATE_ID),
                                     RentItem.getString(Constants.RENT_MODEL_LAND_SITUATION_ID),
                                     RentItem.getString(Constants.RENT_MODEL_VIEW),
+                                    imagesArray.get(0).toString(),
                                     RentItem.getString(Constants.RENT_MODEL_LAND_STATE_TITLE),
                                     RentItem.getString(Constants.RENT_MODEL_LAND_SITUATION_TITLE),
                                     RentItem.getString(Constants.RENT_MODEL_LAND_SITUATION_COLOR),
