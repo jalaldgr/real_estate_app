@@ -82,14 +82,22 @@
     <string name="duplicate_username_error_msg">کاربری تلفن همراه مورد نظر، در سیستم قبلا ایجاد شده است</string>
     <string name="register_public_user_sucess_msg">نام کاربری و رمز عبور ارسال شد</string>
 
+<!--    Single Land-->
+    <string name="land_info_land_type">نوع ملک</string>
+    <string name="land_info_land_age">سن بنا</string>
+    <string name="land_info_room_count">تعداد اتاق</string>
+    <string name="land_info_floor_count">تعداد طبقات</string>
+    <string name="land_info_units_in_floor">تعداد واحد در طبقه</string>
+    <string name="land_info_foundation_space">متراژ زیربنا</string>
+    <string name="land_info_space_price">قیمت هر متر</string>
+    <string name="land_info_total_price">قیمت کل</string>
+    <string name="land_info_description">توضیحات</string>
 
     <!--    Authentication Method Fields-->
     <string name="authentication_username">Username</string>
     <string name="authentication_password">Password</string>
-<!--        User model in Shared Preference-->
+    <!--        User model in Shared Preference-->
     <string name="user_shared_preference">user_model_pref</string>
-
-
 
 
 </resources>

@@ -126,5 +126,15 @@
         android:name="ir.hamedanmelk.hamedanmelk.ui.category.LawInstiuteFragment"
         android:label="@string/law_instiute_category"
         tools:layout="@layout/fragment_law_instiute" />
+    <fragment
+        android:id="@+id/singleLandFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleLandFragment"
+        android:label="fragment_single_land"
+        tools:layout="@layout/fragment_single_land" />
+    <fragment
+        android:id="@+id/singleRentFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleRentFragment"
+        android:label="fragment_single_rent"
+        tools:layout="@layout/fragment_single_rent" />
 
 </navigation>

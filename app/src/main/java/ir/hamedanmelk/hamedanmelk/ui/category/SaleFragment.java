@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +22,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.SaleModel;
@@ -86,70 +89,72 @@ public class SaleFragment extends Fragment {
             recyclerView = (RecyclerView)view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
         }
+
+
         return view;
     }
-    public void SaleRequest(final Context context){
-        class SaleRequestAsync extends AsyncTask<Void, Void, String>{
-            private final ProgressDialog progressDialog = new ProgressDialog(context);
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.setMessage(getResources().getString(R.string.loading_message));
-                progressDialog.show();
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                try {
-                    JSONObject reader = new JSONObject(s);
-                    if(reader.getInt(Constants.JSON_RESPONSE_STATE)==1){
-                        JSONObject responseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
-                        JSONArray responseList = new JSONArray(responseData.getString("data"));
-                        ArrayList<SaleModel>tempSaleModels = new ArrayList<SaleModel>();
-                        JSONObject SaleItem;
-                        for(int i=0; i<responseList.length();i++){
-                            SaleItem = responseList.getJSONObject(i);
-                            SaleModel SaleModel = new SaleModel(
-                                    SaleItem.getString(Constants.SALE_MODEL_ID),
-                                    SaleItem.getString(Constants.SALE_MODEL_TITLE),
-                                    SaleItem.getString(Constants.SALE_MODEL_LAND_STATE_ID),
-                                    SaleItem.getString(Constants.SALE_MODEL_CREATED_AT),
-                                    SaleItem.getString(Constants.SALE_MODEL_LAND_SITUATION_ID),
-                                    SaleItem.getString(Constants.SALE_MODEL_VIEW),
-                                    SaleItem.getString(Constants.SALE_MODEL_LANDSTATETITLE),
-                                    SaleItem.getString(Constants.SALE_MODEL_LAND_SITUATIONTITLE),
-                                    SaleItem.getString(Constants.SALE_MODEL_LANDSITUATIONCOLOR),
-                                    SaleItem.getString(Constants.SALE_MODEL_FIRST_NAME),
-                                    SaleItem.getString(Constants.SALE_MODEL_LAST_NAME)
-                            );
-                            tempSaleModels.add(SaleModel);
-                        }
-                        SaleModels=tempSaleModels;
-                        Log.d(TAG, "onPostExecute Sales: "+SaleModels.toString());
-                        recyclerView.setAdapter(new SaleRecyclerViewAdapter(SaleModels));
-
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Log.d(TAG, "onPostExecute exception:"+e.toString());
+        public void SaleRequest(final Context context){
+            class SaleRequestAsync extends AsyncTask<Void, Void, String>{
+                private final ProgressDialog progressDialog = new ProgressDialog(context);
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    progressDialog.setCanceledOnTouchOutside(false);
+                    progressDialog.setMessage(getResources().getString(R.string.loading_message));
+                    progressDialog.show();
                 }
 
-                if (progressDialog.isShowing())progressDialog.dismiss();
-            }
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    try {
+                        JSONObject reader = new JSONObject(s);
+                        if(reader.getInt(Constants.JSON_RESPONSE_STATE)==1){
+                            JSONObject responseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
+                            JSONArray responseList = new JSONArray(responseData.getString("data"));
+                            ArrayList<SaleModel>tempSaleModels = new ArrayList<SaleModel>();
+                            JSONObject SaleItem;
+                            for(int i=0; i<responseList.length();i++){
+                                SaleItem = responseList.getJSONObject(i);
+                                SaleModel SaleModel = new SaleModel(
+                                        SaleItem.getString(Constants.SALE_MODEL_ID),
+                                        SaleItem.getString(Constants.SALE_MODEL_TITLE),
+                                        SaleItem.getString(Constants.SALE_MODEL_LAND_STATE_ID),
+                                        SaleItem.getString(Constants.SALE_MODEL_CREATED_AT),
+                                        SaleItem.getString(Constants.SALE_MODEL_LAND_SITUATION_ID),
+                                        SaleItem.getString(Constants.SALE_MODEL_VIEW),
+                                        SaleItem.getString(Constants.SALE_MODEL_LANDSTATETITLE),
+                                        SaleItem.getString(Constants.SALE_MODEL_LAND_SITUATIONTITLE),
+                                        SaleItem.getString(Constants.SALE_MODEL_LANDSITUATIONCOLOR),
+                                        SaleItem.getString(Constants.SALE_MODEL_FIRST_NAME),
+                                        SaleItem.getString(Constants.SALE_MODEL_LAST_NAME)
+                                );
+                                tempSaleModels.add(SaleModel);
+                            }
+                            SaleModels=tempSaleModels;
+                            Log.d(TAG, "onPostExecute Sales: "+SaleModels.toString());
+                            recyclerView.setAdapter(new SaleRecyclerViewAdapter(SaleModels,getActivity()));
 
-            @Override
-            protected String doInBackground(Void... voids) {
-                HTTPRequestHandlre httpRequestHandlre = new HTTPRequestHandlre();
-                HashMap<String, String>params = new HashMap<>();
-                params.put(Constants.CONTENT_TYPE,Constants.APPLICATION_JSON);
-                return httpRequestHandlre.sendGetRequest(Urls.getBaseURL()+Urls.getTotalSaleLands(),params);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Log.d(TAG, "onPostExecute exception:"+e.toString());
+                    }
+
+                    if (progressDialog.isShowing())progressDialog.dismiss();
+                }
+
+                @Override
+                protected String doInBackground(Void... voids) {
+                    HTTPRequestHandlre httpRequestHandlre = new HTTPRequestHandlre();
+                    HashMap<String, String>params = new HashMap<>();
+                    params.put(Constants.CONTENT_TYPE,Constants.APPLICATION_JSON);
+                    return httpRequestHandlre.sendGetRequest(Urls.getBaseURL()+Urls.getTotalSaleLands(),params);
+                }
             }
+            SaleRequestAsync SaleRequestAsync = new SaleRequestAsync();
+            SaleRequestAsync.execute();
+
         }
-        SaleRequestAsync SaleRequestAsync = new SaleRequestAsync();
-        SaleRequestAsync.execute();
-
-    }
 }
