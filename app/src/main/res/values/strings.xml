@@ -95,6 +95,7 @@
     <string name="land_info_mortgage">رهن</string>
     <string name="land_info_rent_total_price">اجاره</string>
     <string name="land_info_resident_owner">مالک ساکن است؟</string>
+    <string name="land_info_delivery_date">تاریخ تحویل</string>
     <!--    Authentication Method Fields-->
     <string name="authentication_username">Username</string>
     <string name="authentication_password">Password</string>

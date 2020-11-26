@@ -136,5 +136,10 @@
         android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleRentFragment"
         android:label="fragment_single_rent"
         tools:layout="@layout/fragment_single_rent" />
+    <fragment
+        android:id="@+id/singlePreSaleFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.single.SinglePreSaleFragment"
+        android:label="fragment_single_presale"
+        tools:layout="@layout/fragment_single_presale" />
 
 </navigation>

@@ -1,14 +1,17 @@
 package ir.hamedanmelk.hamedanmelk.ui.category;
-
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
+import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.PreSaleModel;
@@ -20,8 +23,9 @@ import ir.hamedanmelk.hamedanmelk.models.PreSaleModel;
 public class PreSaleRecyclerViewAdapter extends RecyclerView.Adapter<PreSaleRecyclerViewAdapter.ViewHolder> {
 
     private final List<PreSaleModel> preSaleModels;
-
-    public PreSaleRecyclerViewAdapter(List<PreSaleModel> items) {
+    Activity act;
+    public PreSaleRecyclerViewAdapter(List<PreSaleModel> items, Activity activity) {
+        act=activity;
         preSaleModels= items;
     }
 
@@ -34,10 +38,20 @@ public class PreSaleRecyclerViewAdapter extends RecyclerView.Adapter<PreSaleRecy
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder,final int position) {
         PreSaleModel preSaleModel = preSaleModels.get(position);
         holder.mIdView.setText(preSaleModel.getId());
         holder.mContentView.setText(preSaleModel.getTitle());
+        holder.mContentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final NavController controller= Navigation.findNavController(Objects.requireNonNull(act),R.id.nav_host_fragment);
+                Bundle args=new Bundle();
+                args.putString("id",preSaleModels.get(position).getId());
+                controller.navigate(R.id.singlePreSaleFragment,args);
+                Log.d("hhh", "onClick from adapter: "+ Integer.toString(position));
+            }
+        });
     }
 
     @Override

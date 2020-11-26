@@ -128,7 +128,7 @@ public class PreSaleFragment extends Fragment {
                         }
                         preSaleModels=tempPreSaleModels;
                         Log.d(TAG, "onPostExecute preSales: "+preSaleModels.toString());
-                        recyclerView.setAdapter(new PreSaleRecyclerViewAdapter(preSaleModels));
+                        recyclerView.setAdapter(new PreSaleRecyclerViewAdapter(preSaleModels,getActivity()));
 
                     }
 
