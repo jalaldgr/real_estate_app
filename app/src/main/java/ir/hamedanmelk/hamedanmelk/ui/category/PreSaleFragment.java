@@ -118,6 +118,7 @@ public class PreSaleFragment extends Fragment {
                                     preSaleItem.getString(Constants.PRE_SALE_MODEL_CREATED_AT),
                                     preSaleItem.getString(Constants.PRE_SALE_MODEL_LAND_SITUATION_ID),
                                     preSaleItem.getString(Constants.PRE_SALE_MODEL_VIEW),
+                                    preSaleItem.getString(Constants.PRE_SALE_MODEL_IMAGES),
                                     preSaleItem.getString(Constants.PRE_SALE_MODEL_LANDSTATETITLE),
                                     preSaleItem.getString(Constants.PRE_SALE_MODEL_LAND_SITUATIONTITLE),
                                     preSaleItem.getString(Constants.PRE_SALE_MODEL_LANDSITUATIONCOLOR),

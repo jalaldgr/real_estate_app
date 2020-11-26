@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -15,6 +16,8 @@ import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.PreSaleModel;
+import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
+import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link PreSaleModel}.
@@ -42,6 +45,9 @@ public class PreSaleRecyclerViewAdapter extends RecyclerView.Adapter<PreSaleRecy
         PreSaleModel preSaleModel = preSaleModels.get(position);
         holder.mIdView.setText(preSaleModel.getId());
         holder.mContentView.setText(preSaleModel.getTitle());
+
+            new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+preSaleModel.getImages());
+
         holder.mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,11 +68,13 @@ public class PreSaleRecyclerViewAdapter extends RecyclerView.Adapter<PreSaleRecy
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mIdView;
         public final TextView mContentView;
+        public final ImageView thumbnailImg;
 
         public ViewHolder(View view) {
             super(view);
             mIdView = (TextView) view.findViewById(R.id.presale_item_number);
             mContentView = (TextView) view.findViewById(R.id.presale_content);
+            thumbnailImg = (ImageView)view.findViewById(R.id.PreSaleThumbnailImg);
         }
 
         @Override

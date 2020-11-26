@@ -13,8 +13,13 @@ public class Urls {
     private static final String GetNewsLists                            = "/AppRequests/GetNewsLists";//خبر ها
     private static final String RegisterPublicUser                      = "/AppRequests/RegisterPublicUser";//ثبت نام کاربر
     private static final String GetLandInfo                             = "/AppRequests/GetLandInfo";
+    private static final String NoImage                                 = "/assets/no-image.png";
     public static String getBaseURL() {
         return BaseURL;
+    }
+
+    public static String getNoImage() {
+        return NoImage;
     }
 
     public static String getLoginURL() {
