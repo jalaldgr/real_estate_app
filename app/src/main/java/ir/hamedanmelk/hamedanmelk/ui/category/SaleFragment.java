@@ -114,15 +114,19 @@ public class SaleFragment extends Fragment {
                             JSONArray responseList = new JSONArray(responseData.getString("data"));
                             ArrayList<SaleModel>tempSaleModels = new ArrayList<SaleModel>();
                             JSONObject SaleItem;
+                            JSONArray imagesArray;
                             for(int i=0; i<responseList.length();i++){
                                 SaleItem = responseList.getJSONObject(i);
-                                SaleModel SaleModel = new SaleModel(
+                                imagesArray =new JSONArray( SaleItem.getString(Constants.SALE_MODEL_IMAGES));
+
+                                        SaleModel SaleModel = new SaleModel(
                                         SaleItem.getString(Constants.SALE_MODEL_ID),
                                         SaleItem.getString(Constants.SALE_MODEL_TITLE),
                                         SaleItem.getString(Constants.SALE_MODEL_LAND_STATE_ID),
                                         SaleItem.getString(Constants.SALE_MODEL_CREATED_AT),
                                         SaleItem.getString(Constants.SALE_MODEL_LAND_SITUATION_ID),
                                         SaleItem.getString(Constants.SALE_MODEL_VIEW),
+                                        imagesArray.get(0).toString(),
                                         SaleItem.getString(Constants.SALE_MODEL_LANDSTATETITLE),
                                         SaleItem.getString(Constants.SALE_MODEL_LAND_SITUATIONTITLE),
                                         SaleItem.getString(Constants.SALE_MODEL_LANDSITUATIONCOLOR),

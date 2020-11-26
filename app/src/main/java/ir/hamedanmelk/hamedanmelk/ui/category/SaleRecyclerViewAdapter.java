@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,8 @@ import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.SaleModel;
+import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
+import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link SaleModel}.
@@ -44,6 +47,8 @@ public class SaleRecyclerViewAdapter extends RecyclerView.Adapter<SaleRecyclerVi
         SaleModel SaleModel = SaleModels.get(position);
         holder.mIdView.setText(SaleModel.getId());
         holder.mContentView.setText(SaleModel.getTitle());
+        Log.d("hhh", "onBindViewHolder: "+SaleModel.getImages());
+        new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+SaleModel.getImages());
         holder.mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,11 +69,14 @@ public class SaleRecyclerViewAdapter extends RecyclerView.Adapter<SaleRecyclerVi
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mIdView;
         public final TextView mContentView;
+        public final ImageView thumbnailImg;
 
         public ViewHolder(View view) {
             super(view);
             mIdView = (TextView) view.findViewById(R.id.sale_item_number);
             mContentView = (TextView) view.findViewById(R.id.sale_content);
+            thumbnailImg = (ImageView)view.findViewById(R.id.SaleThumbnailImg);
+
         }
 
         @Override

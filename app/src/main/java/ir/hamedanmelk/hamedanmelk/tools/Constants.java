@@ -73,6 +73,7 @@ public class Constants {
     public static final String SALE_MODEL_CREATED_AT="created_at";
     public static final String SALE_MODEL_LAND_SITUATION_ID="land_situation_id";
     public static final String SALE_MODEL_VIEW="View";
+    public static final String SALE_MODEL_IMAGES="Images";
     public static final String SALE_MODEL_LANDSTATETITLE="LandStateTitle";
     public static final String SALE_MODEL_LAND_SITUATIONTITLE="LandSituationTitle";
     public static final String SALE_MODEL_LANDSITUATIONCOLOR="LandSituationColor";

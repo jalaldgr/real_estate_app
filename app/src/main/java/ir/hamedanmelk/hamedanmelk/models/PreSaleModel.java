@@ -23,7 +23,7 @@ public class PreSaleModel {
         this.created_at = created_at;
         this.land_situation_id = land_situation_id;
         View = view;
-        Images=(images==null)?images : Urls.getNoImage();
+        Images=(images!=null)?images : Urls.getNoImage();
         LandStateTitle = landStateTitle;
         LandSituationTitle = landSituationTitle;
         LandSituationColor = landSituationColor;

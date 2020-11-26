@@ -1,5 +1,7 @@
 package ir.hamedanmelk.hamedanmelk.models;
 
+import ir.hamedanmelk.hamedanmelk.tools.Urls;
+
 public class SaleModel {
     private String id;
     private String Title;
@@ -7,19 +9,21 @@ public class SaleModel {
     private String created_at;
     private String land_situation_id;
     private String View;
+    private String Images;
     private String LandStateTitle;
     private String LandSituationTitle;
     private String LandSituationColor;
     private String first_name;
     private String last_name;
 
-    public SaleModel(String id, String title, String land_state_id, String created_at, String land_situation_id, String view, String landStateTitle, String landSituationTitle, String landSituationColor, String first_name, String last_name) {
+    public SaleModel(String id, String title, String land_state_id, String created_at, String land_situation_id, String view,String images, String landStateTitle, String landSituationTitle, String landSituationColor, String first_name, String last_name) {
         this.id = id;
         Title = title;
         this.land_state_id = land_state_id;
         this.created_at = created_at;
         this.land_situation_id = land_situation_id;
         View = view;
+        Images=(images!=null)?images : Urls.getNoImage();
         LandStateTitle = landStateTitle;
         LandSituationTitle = landSituationTitle;
         LandSituationColor = landSituationColor;
@@ -115,6 +119,14 @@ public class SaleModel {
         this.last_name = last_name;
     }
 
+    public void setImages(String images) {
+        Images = images;
+    }
+
+    public String getImages() {
+        return Images;
+    }
+
     @Override
     public String toString() {
         return "PreSaleModel{" +
@@ -124,6 +136,7 @@ public class SaleModel {
                 ", created_at='" + created_at + '\'' +
                 ", land_situation_id='" + land_situation_id + '\'' +
                 ", View='" + View + '\'' +
+                ", Images='" + Images + '\'' +
                 ", LandStateTitle='" + LandStateTitle + '\'' +
                 ", LandSituationTitle='" + LandSituationTitle + '\'' +
                 ", LandSituationColor='" + LandSituationColor + '\'' +
