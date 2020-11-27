@@ -1,14 +1,14 @@
-package ir.hamedanmelk.hamedanmelk.ui.dashboard;
+package ir.hamedanmelk.hamedanmelk.ui.newland;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+public class NewLandViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public DashboardViewModel() {
+    public NewLandViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("ثبت آگهی جدید");
     }

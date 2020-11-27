@@ -9,16 +9,20 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
+import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
+import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -75,17 +79,23 @@ public class PersonalPage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_personal_page, container, false);
-        SharedPreferences user_pref = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
+        SharedPreferences user_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
         final NavController controller=Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
+        if(!user_pref.contains("id")){
+            controller.navigate(R.id.userLogin);
+        }
         String[] user_model_fields = Constants.USER_MODEL_FIELDS;
 
         Button exitbtn = (Button)v.findViewById(R.id.PersoanlPageExitButton);
         TextView nametxt=(TextView)v.findViewById(R.id.PersonalPageNametxt);
         TextView phonetxt=(TextView)v.findViewById(R.id.PersonalPagePhonetxt);
+        ImageView avatarImg = (ImageView)v.findViewById(R.id.PersonalPageAvatarImg);
         String fullnamestr=user_pref.getString(user_model_fields[2],"")+" "+user_pref.getString(user_model_fields[3],"");
+        Log.d("hhh", "onCreateView: "+user_pref.getString(user_model_fields[4],""));
         String phonestr=user_pref.getString(user_model_fields[1],"");
         nametxt.setText(fullnamestr);
         phonetxt.setText(phonestr);
+        new DownloadImage(avatarImg).execute(Urls.getBaseURL()+"/"+user_pref.getString(user_model_fields[4], Urls.getNoImage()));
         exitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

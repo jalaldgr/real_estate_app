@@ -1,5 +1,7 @@
 package ir.hamedanmelk.hamedanmelk.models;
 
+import ir.hamedanmelk.hamedanmelk.tools.Urls;
+
 public class UserModel {
     private String id;
     private String email;
@@ -12,7 +14,7 @@ public class UserModel {
         this.email = email;
         this.first_name = first_name;
         this.last_name = last_name;
-        Image = image;
+        Image=(image!=null)?image : Urls.getNoImage();
     }
 
     public String getId() {
