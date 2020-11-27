@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list"
-    android:name="ir.hamedanmelk.hamedanmelk.ui.category.ExchangeFragment"
+    android:name="ir.hamedanmelk.hamedanmelk.ui.category.AssignmentFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.category.ExchangeFragment"
-    tools:listitem="@layout/fragment_rent_item" />
+    tools:context=".ui.category.AssignmentFragment"
+    tools:listitem="@layout/fragment_assignment_item" />

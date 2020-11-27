@@ -93,9 +93,9 @@
         tools:layout="@layout/fragment_rent" />
     <fragment
         android:id="@+id/assingmentFragment"
-        android:name="ir.hamedanmelk.hamedanmelk.ui.category.AssingmentFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.AssignmentFragment"
         android:label="@string/assingment_category"
-        tools:layout="@layout/fragment_assingment" />
+        tools:layout="@layout/fragment_assignment" />
     <fragment
         android:id="@+id/agentFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.category.AgentFragment"
@@ -141,5 +141,15 @@
         android:name="ir.hamedanmelk.hamedanmelk.ui.single.SinglePreSaleFragment"
         android:label="fragment_single_presale"
         tools:layout="@layout/fragment_single_presale" />
+    <fragment
+        android:id="@+id/singleExchangeFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleExchangeFragment"
+        android:label="fragment_single_exchange"
+        tools:layout="@layout/fragment_single_exchange" />
+    <fragment
+        android:id="@+id/singleAssignmentFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleAssignmentFragment"
+        android:label="fragment_single_assignment"
+        tools:layout="@layout/fragment_single_assignment" />
 
 </navigation>

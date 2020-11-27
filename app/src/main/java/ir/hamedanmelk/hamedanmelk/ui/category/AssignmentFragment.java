@@ -22,29 +22,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import ir.hamedanmelk.hamedanmelk.R;
-import ir.hamedanmelk.hamedanmelk.models.ExchangeModel;
+import ir.hamedanmelk.hamedanmelk.models.AssignmentModel;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ExchangeFragment#newInstance} factory method to
+ * Use the {@link AssignmentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ExchangeFragment extends Fragment {
+public class AssignmentFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static final String TAG = "ExchangeFragment";
-    ArrayList<ExchangeModel> exchangeModels;
+    private static final String TAG = "AssignmentFragment";
+    ArrayList<AssignmentModel> assignmentModels;
     RecyclerView recyclerView;
     private String mParam1;
     private String mParam2;
 
-    public ExchangeFragment() {
+    public AssignmentFragment() {
         // Required empty public constructor
     }
 
@@ -54,11 +54,11 @@ public class ExchangeFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ExchangeFragment.
+     * @return A new instance of fragment AssignmentFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ExchangeFragment newInstance(String param1, String param2) {
-        ExchangeFragment fragment = new ExchangeFragment();
+    public static AssignmentFragment newInstance(String param1, String param2) {
+        AssignmentFragment fragment = new AssignmentFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -79,8 +79,8 @@ public class ExchangeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        TotalExchangeRequest(getContext());
-        View view =  inflater.inflate(R.layout.fragment_exchange, container, false);
+        TotalAssignmentRequest(getContext());
+        View view =  inflater.inflate(R.layout.fragment_assignment, container, false);
         if(view instanceof RecyclerView){
             Context context = getContext();
             recyclerView = (RecyclerView)view;
@@ -89,8 +89,8 @@ public class ExchangeFragment extends Fragment {
         return view;
     }
 
-    public void TotalExchangeRequest(final Context context){
-        class TotalExchangeRequestAsync extends AsyncTask<Void ,Void, String> {
+    public void TotalAssignmentRequest(final Context context){
+        class TotalAssignmentRequestAsync extends AsyncTask<Void ,Void, String> {
             private final ProgressDialog progressDialog=new ProgressDialog(context);
             @Override
             protected void onPreExecute() {
@@ -107,38 +107,39 @@ public class ExchangeFragment extends Fragment {
                 try {
                     JSONObject reader = new JSONObject(s);
                     JSONObject ResponseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
-                    JSONArray exchangeList = new JSONArray(ResponseData.getString("data"));
-                    JSONObject exchangeItem;
+                    JSONArray assignmentList = new JSONArray(ResponseData.getString("data"));
+                    JSONObject assignmentItem;
                     JSONArray imagesArray;
                     if (reader.getInt(Constants.JSON_RESPONSE_STATE)==1)
                     {
-                        ArrayList<ExchangeModel> exchangeTemp=new ArrayList<ExchangeModel>();
-                        for(int i=0; i < exchangeList.length();i++)
+                        Log.d(TAG, "onPostExecute: "+assignmentList.toString());
+                        ArrayList<AssignmentModel> assignmentTemp=new ArrayList<AssignmentModel>();
+                        for(int i=0; i < assignmentList.length();i++)
                         {
-                            exchangeItem = exchangeList.getJSONObject(i);
-                            imagesArray =new JSONArray( exchangeItem.getString(Constants.EXCHANGE_MODEL_IMAGES));
-                            ExchangeModel exchangeModel = new ExchangeModel(
-                                    exchangeItem.getString(Constants.EXCHANGE_MODEL_ID),
-                                    exchangeItem.getString(Constants.EXCHANGE_MODEL_TITLE),
-                                    exchangeItem.getString(Constants.EXCHANGE_MODEL_LAND_STATE_ID),
-                                    exchangeItem.getString(Constants.EXCHANGE_MODEL_CREATED_AT),
-                                    exchangeItem.getString(Constants.EXCHANGE_MODEL_LAND_SITUATION_ID),
-                                    exchangeItem.getString(Constants.EXCHANGE_MODEL_VIEW),
+                            assignmentItem = assignmentList.getJSONObject(i);
+                            imagesArray =new JSONArray( assignmentItem.getString(Constants.ASSIGNMENT_MODEL_IMAGES));
+                            AssignmentModel assignmentModel = new AssignmentModel(
+                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_ID),
+                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_TITLE),
+                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_LAND_STATE_ID),
+                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_CREATED_AT),
+                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_LAND_SITUATION_ID),
+                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_VIEW),
                                     imagesArray.get(0).toString(),
-                                    exchangeItem.getString(Constants.EXCHANGE_MODEL_LAND_STATE_TITLE),
-                                    exchangeItem.getString(Constants.EXCHANGE_MODEL_LAND_SITUATION_TITLE),
-                                    exchangeItem.getString(Constants.EXCHANGE_MODEL_LAND_SITUATION_COLOR),
-                                    exchangeItem.getString(Constants.EXCHANGE_MODEL_FIRST_NAME),
-                                    exchangeItem.getString(Constants.EXCHANGE_MODEL_LAST_NAME)
+                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_LAND_STATE_TITLE),
+                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_LAND_SITUATION_TITLE),
+                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_LAND_SITUATION_COLOR),
+                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_FIRST_NAME),
+                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_LAST_NAME)
                             );
 
-                            exchangeTemp.add(exchangeModel);
+                            assignmentTemp.add(assignmentModel);
                         }
-                        exchangeModels=exchangeTemp;
-                        Log.d(TAG, "onPostExecute: kkk"+exchangeTemp.toString());
+                        assignmentModels=assignmentTemp;
+                        Log.d(TAG, "onPostExecute: kkk"+assignmentTemp.toString());
 
-                        Log.d(TAG, "onPostExecute: jjj"+ exchangeModels.toString());
-                        recyclerView.setAdapter(new ExchangeRecyclerViewAdapter(exchangeModels,getActivity()));
+                        Log.d(TAG, "onPostExecute: jjj"+ assignmentModels.toString());
+                        recyclerView.setAdapter(new AssignmentRecyclerViewAdapter(assignmentModels,getActivity()));
 
                     }
                 } catch (JSONException e) {
@@ -153,10 +154,10 @@ public class ExchangeFragment extends Fragment {
                 HTTPRequestHandlre httpRequestHandlre = new HTTPRequestHandlre();
                 HashMap<String,String> params = new HashMap<>();
                 params.put(Constants.CONTENT_TYPE,Constants.APPLICATION_JSON);
-                return httpRequestHandlre.sendGetRequest(Urls.getBaseURL()+Urls.getTotalExchangeLands(),params);
+                return httpRequestHandlre.sendGetRequest(Urls.getBaseURL()+Urls.getTotalParticipationLands(),params);
             }
         }
-        TotalExchangeRequestAsync totalExchangeRequestAsync = new TotalExchangeRequestAsync();
-        totalExchangeRequestAsync.execute();
+        TotalAssignmentRequestAsync totalAssignmentRequestAsync = new TotalAssignmentRequestAsync();
+        totalAssignmentRequestAsync.execute();
     }
 }

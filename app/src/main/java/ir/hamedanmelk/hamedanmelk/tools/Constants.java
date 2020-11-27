@@ -30,7 +30,7 @@ public class Constants {
     public static final String RENT_MODEL_LAND_STATE_ID="land_state_id";
     public static final String RENT_MODEL_LAND_SITUATION_ID="land_situation_id";
     public static final String RENT_MODEL_VIEW="View";
-    public static final String RENT_MODEL_IMAGES="View";
+    public static final String RENT_MODEL_IMAGES="Images";
     public static final String RENT_MODEL_LAND_STATE_TITLE="LandStateTitle";
     public static final String RENT_MODEL_LAND_SITUATION_TITLE="LandSituationTitle";
     public static final String RENT_MODEL_LAND_SITUATION_COLOR="LandSituationColor";
@@ -82,6 +82,38 @@ public class Constants {
     public static final String SALE_MODEL_FIRST_NAME="first_name";
     public static final String SALE_MODEL_LAST_NAME="last_name";
     public static final String[] SALE_MODEL_FIELDS={"id","Title","land_state_id","created_at","land_situation_id","View","LandStateTitle","LandSituationTitle","LandSituationColor","first_name","last_name"};
+
+
+    //Exchange Model
+    public static final String EXCHANGE_MODEL_ID="id";
+    public static final String EXCHANGE_MODEL_TITLE="Title";
+    public static final String EXCHANGE_MODEL_LAND_STATE_ID="land_state_id";
+    public static final String EXCHANGE_MODEL_CREATED_AT="created_at";
+    public static final String EXCHANGE_MODEL_LAND_SITUATION_ID="land_situation_id";
+    public static final String EXCHANGE_MODEL_VIEW="View";
+    public static final String EXCHANGE_MODEL_IMAGES="Images";
+    public static final String EXCHANGE_MODEL_LAND_STATE_TITLE="LandStateTitle";
+    public static final String EXCHANGE_MODEL_LAND_SITUATION_TITLE="LandSituationTitle";
+    public static final String EXCHANGE_MODEL_LAND_SITUATION_COLOR="LandSituationColor";
+    public static final String EXCHANGE_MODEL_FIRST_NAME="first_name";
+    public static final String EXCHANGE_MODEL_LAST_NAME="last_name";
+    public static final String[] EXCHANGE_MODEL_FIELDS={"ID","Title","land_state_id","created_at","land_situation_id","View","LandStateTitle","LandSituationTitle","LandSituationColor","first_name","last_name"};
+
+    //Assignment Model
+
+    public static final String ASSIGNMENT_MODEL_ID="id";
+    public static final String ASSIGNMENT_MODEL_TITLE="Title";
+    public static final String ASSIGNMENT_MODEL_LAND_STATE_ID="land_state_id";
+    public static final String ASSIGNMENT_MODEL_CREATED_AT="created_at";
+    public static final String ASSIGNMENT_MODEL_LAND_SITUATION_ID="land_situation_id";
+    public static final String ASSIGNMENT_MODEL_VIEW="View";
+    public static final String ASSIGNMENT_MODEL_IMAGES="Images";
+    public static final String ASSIGNMENT_MODEL_LAND_STATE_TITLE="LandStateTitle";
+    public static final String ASSIGNMENT_MODEL_LAND_SITUATION_TITLE="LandSituationTitle";
+    public static final String ASSIGNMENT_MODEL_LAND_SITUATION_COLOR="LandSituationColor";
+    public static final String ASSIGNMENT_MODEL_FIRST_NAME="first_name";
+    public static final String ASSIGNMENT_MODEL_LAST_NAME="last_name";    public static final String[] ASSIGNMENT_MODEL_FIELDS={"ID","Title","land_state_id","created_at","land_situation_id","View","LandStateTitle","LandSituationTitle","LandSituationColor","first_name","last_name"};
+
 
     //Land Info
     public static final String LAND_INFO_ID="id";
@@ -145,4 +177,6 @@ public class Constants {
     public static final String LAND_INFO_LAST_NAME="last_name";
     public static final String LAND_INFO_USER_DESCRIPTION="UserDescription";
     public static final String[] LAND_INFO_FIELDS={"id","Title","Address","Map","Images","Videos","province_id","city_id","area_id","district_id","land_type_id","building_condition_id","BuildingYear","land_state_id","SaleTotalPrice","SaleTotalPriceUnit","DebtTotalPrice","DebtTotalPriceUnit","MortgageTotalPrice","MortgageTotalPriceUnit","RentTotalPrice","RentTotalPriceUnit","PrePayPrice","PrePayPriceUnit","DeliveryDate","rental_preference_id","ResidentOwner","voucher_type_id","Dong","density_id","Space","space_unit_id","FoundationSpace","foundation_space_unit_id","SpacePrice","direction_id","land_view_id","floor_covering_id","kitchen_service_id","RoomCount","FloorCount","UnitInFloor","Floor","land_case_id","loan_type_id","land_situation_id","user_id","land_owner_id","View","created_at","updated_at","LandTypeTitle","LandStateTitle","ProvinceTitle","CityTitle","AreaTitle","DistrictTitle","first_name","last_name","UserDescription"};
+
+
 }
