@@ -10,58 +10,70 @@
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:background="#757575"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/PersonalPageAvatarImg"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="0.4"
-            tools:src="@drawable/ic_action_camera" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="#757575"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/PersonalPageNametxt"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:text="@string/user_register_name"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:id="@+id/PersonalPagePhonetxt"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:text="@string/user_register_phone"
-                android:textColor="#FFFFFF" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:orientation="horizontal"
-            android:paddingBottom="32dp">
-
-            <Button
-                android:id="@+id/PersoanlPageExitButton"
-                android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/PersonalPageAvatarImg"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_margin="8dp"
+                android:layout_weight="0.4"
+                tools:src="@drawable/ic_action_camera" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.3"
-                android:text="@string/personal_page_exit" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/PersonalPageNametxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/user_register_name"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/PersonalPagePhonetxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/user_register_phone"
+                    android:textColor="#FFFFFF" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:orientation="horizontal"
+                android:paddingBottom="32dp">
+
+                <Button
+                    android:id="@+id/PersoanlPageExitButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="0.3"
+                    android:text="@string/personal_page_exit" />
+            </LinearLayout>
+
         </LinearLayout>
 
+        <Button
+            android:id="@+id/PersonalPageMyListBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="آگهی های من" />
     </LinearLayout>
 
 </FrameLayout>

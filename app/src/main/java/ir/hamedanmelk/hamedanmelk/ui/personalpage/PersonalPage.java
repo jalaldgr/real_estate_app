@@ -79,19 +79,20 @@ public class PersonalPage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_personal_page, container, false);
-        SharedPreferences user_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
+        final SharedPreferences user_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
         final NavController controller=Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
         if(!user_pref.contains("id")){
             controller.navigate(R.id.userLogin);
         }
-        String[] user_model_fields = Constants.USER_MODEL_FIELDS;
+        final String[] user_model_fields = Constants.USER_MODEL_FIELDS;
 
         Button exitbtn = (Button)v.findViewById(R.id.PersoanlPageExitButton);
         TextView nametxt=(TextView)v.findViewById(R.id.PersonalPageNametxt);
         TextView phonetxt=(TextView)v.findViewById(R.id.PersonalPagePhonetxt);
         ImageView avatarImg = (ImageView)v.findViewById(R.id.PersonalPageAvatarImg);
+        Button mylist = (Button)v.findViewById(R.id.PersonalPageMyListBtn);
         String fullnamestr=user_pref.getString(user_model_fields[2],"")+" "+user_pref.getString(user_model_fields[3],"");
-        Log.d("hhh", "onCreateView: "+user_pref.getString(user_model_fields[4],""));
+        Log.d("hhh", "onCreateView: "+user_pref.toString());
         String phonestr=user_pref.getString(user_model_fields[1],"");
         nametxt.setText(fullnamestr);
         phonetxt.setText(phonestr);
@@ -101,10 +102,25 @@ public class PersonalPage extends Fragment {
             public void onClick(View view) {
                 SharedPreferences.Editor editor = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE).edit();
                 editor.clear().apply();
+
                 controller.navigate(R.id.userLogin);
+
+            }
+        });
+        mylist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle args=new Bundle();
+                args.putString("id",user_pref.getString("id","8"));
+                controller.navigate(R.id.userLandFragment,args);
 
             }
         });
         return v;
     }
 }
+
+
+
+
+

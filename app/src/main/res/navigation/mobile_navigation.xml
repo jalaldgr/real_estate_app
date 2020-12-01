@@ -152,4 +152,15 @@
         android:label="fragment_single_assignment"
         tools:layout="@layout/fragment_single_assignment" />
 
+    <fragment
+        android:id="@+id/singleUserLandFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleUserLandFragment"
+        android:label="fragment_single_user_land"
+        tools:layout="@layout/fragment_single_user_land" />
+    <fragment
+        android:id="@+id/userLandFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.UserLandFragment"
+        android:label="fragment_user_land"
+        tools:layout="@layout/fragment_user_land" />
+
 </navigation>
