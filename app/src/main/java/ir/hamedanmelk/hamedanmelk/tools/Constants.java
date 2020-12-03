@@ -26,6 +26,8 @@ public class Constants {
 
     //Rent model
     public static final String RENT_MODEL_ID="id";
+    public static final String RENT_MODEL_TOTAL_MORTGAGE_PRICE="MortgageTotalPrice";
+    public static final String RENT_MODEL_TOTAL_RENT_PRICE="RentTotalPrice";
     public static final String RENT_MODEL_TITLE="Title";
     public static final String RENT_MODEL_LAND_STATE_ID="land_state_id";
     public static final String RENT_MODEL_LAND_SITUATION_ID="land_situation_id";
@@ -39,6 +41,9 @@ public class Constants {
     public static final String[] RENT_MODEL_FIELDS={"id","Title","land_state_id","land_situation_id","View","LandStateTitle","LandSituationTitle","LandSituationColor","first_name","last_name"};
     //Lands model
     public static final String LAND_MODEL_ID="id";
+    public static final String LAND_MODEL_TOTAL_PRICE="SaleTotalPrice";
+    public static final String LAND_MODEL_TOTAL_MORTGAGE_PRICE="MortgageTotalPrice";
+    public static final String LAND_MODEL_TOTAL_RENT_PRICE="RentTotalPrice";
     public static final String LAND_MODEL_TITLE="Title";
     public static final String LAND_MODEL_LAND_STATE_ID="land_state_id";
     public static final String LAND_MODEL_CREATED_AT="created_at";
@@ -54,6 +59,7 @@ public class Constants {
 
     // PreSale model
     public static final String PRE_SALE_MODEL_ID="id";
+    public static final String PRE_SALE_MODEL_TOTAL_SALE_PRICE="SaleTotalPrice";
     public static final String PRE_SALE_MODEL_TITLE="Title";
     public static final String PRE_SALE_MODEL_LAND_STATE_ID="land_state_id";
     public static final String PRE_SALE_MODEL_CREATED_AT="created_at";

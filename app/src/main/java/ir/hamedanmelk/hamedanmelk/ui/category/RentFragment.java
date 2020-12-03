@@ -120,6 +120,8 @@ public class RentFragment extends Fragment {
                             imagesArray =new JSONArray( RentItem.getString(Constants.SALE_MODEL_IMAGES));
                             RentModel rentModel = new RentModel(
                                     RentItem.getString(Constants.RENT_MODEL_ID),
+                                    RentItem.getString(Constants.RENT_MODEL_TOTAL_MORTGAGE_PRICE),
+                                    RentItem.getString(Constants.RENT_MODEL_TOTAL_RENT_PRICE),
                                     RentItem.getString(Constants.RENT_MODEL_TITLE),
                                     RentItem.getString(Constants.RENT_MODEL_LAND_STATE_ID),
                                     RentItem.getString(Constants.RENT_MODEL_LAND_SITUATION_ID),

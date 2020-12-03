@@ -27,6 +27,7 @@ public class PreSaleRecyclerViewAdapter extends RecyclerView.Adapter<PreSaleRecy
 
     private final List<PreSaleModel> preSaleModels;
     Activity act;
+    private static final String TAG = "PreSaleFragment";
     public PreSaleRecyclerViewAdapter(List<PreSaleModel> items, Activity activity) {
         act=activity;
         preSaleModels= items;
@@ -43,12 +44,13 @@ public class PreSaleRecyclerViewAdapter extends RecyclerView.Adapter<PreSaleRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder,final int position) {
         PreSaleModel preSaleModel = preSaleModels.get(position);
-        holder.mIdView.setText(preSaleModel.getId());
-        holder.mContentView.setText(preSaleModel.getTitle());
+        holder.titleTxt.setText(preSaleModel.getTitle());
+        holder.totalSaleTxt.setText(preSaleModel.getSaleTotalPrice());
+//        holder.districtTxt.setText(preSaleModel.getDistrict());
+        new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+preSaleModel.getImages());
+        Log.d(TAG, "onBindViewHolder: "+preSaleModel.getTitle() +"   >>>   "+ preSaleModel.getImages());
 
-            new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+preSaleModel.getImages());
-
-        holder.mContentView.setOnClickListener(new View.OnClickListener() {
+        holder.titleTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final NavController controller= Navigation.findNavController(Objects.requireNonNull(act),R.id.nav_host_fragment);
@@ -66,20 +68,19 @@ public class PreSaleRecyclerViewAdapter extends RecyclerView.Adapter<PreSaleRecy
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView titleTxt;
+        public final TextView totalSaleTxt;
+        public final TextView districtTxt;
         public final ImageView thumbnailImg;
 
         public ViewHolder(View view) {
             super(view);
-            mIdView = (TextView) view.findViewById(R.id.presale_item_number);
-            mContentView = (TextView) view.findViewById(R.id.presale_content);
-            thumbnailImg = (ImageView)view.findViewById(R.id.PreSaleThumbnailImg);
+            titleTxt = (TextView) view.findViewById(R.id.PreSaleFragmentTitleTxt);
+            totalSaleTxt = (TextView) view.findViewById(R.id.PreSaleFragmentTotalSaleTxt);
+            districtTxt = (TextView)view.findViewById(R.id.PreSaleFragmentDistrictTxt);
+            thumbnailImg = (ImageView)view.findViewById(R.id.PreSaleFragmentThumbnailImg);
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
+
     }
 }

@@ -46,10 +46,12 @@ public class RentRecyclerViewAdapter extends RecyclerView.Adapter<RentRecyclerVi
     @Override
     public void onBindViewHolder(final ViewHolder holder,final int position) {
         RentModel rentModel = rentModels.get(position);
-        holder.mIdView.setText(rentModel.getId());
-        holder.mContentView.setText(rentModel.getTitle());
+        holder.titleTxt.setText(rentModel.getTitle());
+        holder.totalMotgagePriceTxt.setText(rentModel.getMortgageTotalPrice());
+        holder.totalRentPriceTxt.setText(rentModel.getRentTotalPrice());
+
         new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+rentModel.getImages());
-        holder.mContentView.setOnClickListener(new View.OnClickListener() {
+        holder.titleTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final NavController controller= Navigation.findNavController(Objects.requireNonNull(act),R.id.nav_host_fragment);
@@ -67,20 +69,20 @@ public class RentRecyclerViewAdapter extends RecyclerView.Adapter<RentRecyclerVi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView titleTxt;
+        public final TextView totalMotgagePriceTxt;
+        public final TextView totalRentPriceTxt;
+        public final TextView districtTxt;
         public final ImageView thumbnailImg;
 
         public ViewHolder(View view) {
             super(view);
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
-            thumbnailImg = (ImageView)view.findViewById(R.id.RentThumbnailImg);
+            titleTxt = (TextView) view.findViewById(R.id.RentFragmentTitleTxt);
+            totalMotgagePriceTxt = (TextView) view.findViewById(R.id.RentFragmentHomelMortgageTxt);
+            thumbnailImg = (ImageView)view.findViewById(R.id.RentFragmentThumbnailImg);
+            totalRentPriceTxt = (TextView)view.findViewById(R.id.RentFragmentTotalRentTxt);
+            districtTxt       = (TextView)view.findViewById(R.id.RentFragmentDistrictTxt);
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
     }
 }

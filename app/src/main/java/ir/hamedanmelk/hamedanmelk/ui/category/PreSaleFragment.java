@@ -107,18 +107,22 @@ public class PreSaleFragment extends Fragment {
                     if(reader.getInt(Constants.JSON_RESPONSE_STATE)==1){
                         JSONObject responseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
                         JSONArray responseList = new JSONArray(responseData.getString("data"));
+                        JSONArray imagesArray;
                         ArrayList<PreSaleModel>tempPreSaleModels = new ArrayList<PreSaleModel>();
                         JSONObject preSaleItem;
                         for(int i=0; i<responseList.length();i++){
                             preSaleItem = responseList.getJSONObject(i);
+                            imagesArray =new JSONArray( preSaleItem.getString(Constants.SALE_MODEL_IMAGES));
+
                             PreSaleModel preSaleModel = new PreSaleModel(
                                     preSaleItem.getString(Constants.PRE_SALE_MODEL_ID),
+                                    preSaleItem.getString(Constants.PRE_SALE_MODEL_TOTAL_SALE_PRICE),
                                     preSaleItem.getString(Constants.PRE_SALE_MODEL_TITLE),
                                     preSaleItem.getString(Constants.PRE_SALE_MODEL_LAND_STATE_ID),
                                     preSaleItem.getString(Constants.PRE_SALE_MODEL_CREATED_AT),
                                     preSaleItem.getString(Constants.PRE_SALE_MODEL_LAND_SITUATION_ID),
                                     preSaleItem.getString(Constants.PRE_SALE_MODEL_VIEW),
-                                    preSaleItem.getString(Constants.PRE_SALE_MODEL_IMAGES),
+                                    imagesArray.get(0).toString(),
                                     preSaleItem.getString(Constants.PRE_SALE_MODEL_LANDSTATETITLE),
                                     preSaleItem.getString(Constants.PRE_SALE_MODEL_LAND_SITUATIONTITLE),
                                     preSaleItem.getString(Constants.PRE_SALE_MODEL_LANDSITUATIONCOLOR),

@@ -55,10 +55,10 @@ public class home_frgmnt_horizontal_recycler_adaptor extends RecyclerView.Adapte
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            img             = itemView.findViewById(R.id.home_frgmnt_horizontal_recycler_layout_pic_imageview);
-            TitleTxt        = itemView.findViewById(R.id.home_frgmnt_horizontal_recycler_layout_info_titletxt);
-            AddressTxt      = itemView.findViewById(R.id.home_frgmnt_horizontal_recycler_layout_info_addresstxt);
-            PriceTxt        = itemView.findViewById(R.id.home_frgmnt_horizontal_recycler_layout_info_pricetxt);
+            img             = itemView.findViewById(R.id.HomeFragmentThumbnailImg);
+            TitleTxt        = itemView.findViewById(R.id.HomeFragmentTitleTxt);
+            AddressTxt      = itemView.findViewById(R.id.HomeFragmentDistrictTxt);
+            PriceTxt        = itemView.findViewById(R.id.HomeFragmentTotalSaleTxt);
         }
     }
 }

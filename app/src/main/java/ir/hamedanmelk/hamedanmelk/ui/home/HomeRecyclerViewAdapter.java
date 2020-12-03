@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,10 +47,24 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     @Override
     public void onBindViewHolder(final ViewHolder holder,final int position) {
         final LandModel landModel = landModels.get(position);
-        holder.mIdView.setText(landModel.getId());
-        holder.mContentView.setText(landModel.getTitle());
+        holder.titleTxt.setText(landModel.getTitle());
         new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+landModel.getImages());
-        holder.mContentView.setOnClickListener(new View.OnClickListener() {
+        switch (landModels.get(position).getLand_state_id()) {
+            case "1" :
+                holder.totalSaleLayout.setVisibility(View.VISIBLE);
+                holder.totalSalePriceTxt.setText(landModel.getSaleTotalPrice());
+                break;
+            case "2":
+                holder.totalMortgageLayout.setVisibility(View.VISIBLE);
+                holder.totalRentLayout.setVisibility(View.VISIBLE);
+                holder.totalMortgagePriceTxt.setText(landModel.getMortgageTotalPrice());
+                holder.totalRentPriceTxt.setText(landModel.getRentTotalPrice());
+                break;
+            case "3":
+                holder.totalSaleLayout.setVisibility(View.VISIBLE);
+                holder.totalSalePriceTxt.setText(landModel.getSaleTotalPrice());
+        }
+            holder.titleTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final NavController controller= Navigation.findNavController(Objects.requireNonNull(act),R.id.nav_host_fragment);
@@ -77,21 +92,28 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView titleTxt;
+        public final TextView totalSalePriceTxt;
         public final ImageView thumbnailImg;
+        public final TextView  totalMortgagePriceTxt;
+        public final TextView totalRentPriceTxt;
+        public final LinearLayout totalSaleLayout;
+        public final LinearLayout totalMortgageLayout;
+        public final LinearLayout totalRentLayout;
 
         public ViewHolder(View view) {
             super(view);
-            mIdView = (TextView) view.findViewById(R.id.home_frgmnt_horizontal_recycler_layout_info_titletxt);
-            mContentView = (TextView) view.findViewById(R.id.home_frgmnt_horizontal_recycler_layout_info_addresstxt);
-            thumbnailImg = (ImageView)view.findViewById(R.id.home_frgmnt_horizontal_recycler_layout_pic_imageview);
+            titleTxt = (TextView) view.findViewById(R.id.HomeFragmentTitleTxt);
+            totalSalePriceTxt = (TextView) view.findViewById(R.id.HomeFragmentTotalSaleTxt);
+            thumbnailImg = (ImageView)view.findViewById(R.id.HomeFragmentThumbnailImg);
+            totalMortgagePriceTxt = (TextView)view.findViewById(R.id.HomeFragmentHomelMortgageTxt);
+            totalRentPriceTxt = (TextView)view.findViewById(R.id.HomeFragmentTotalRentTxt);
+            totalSaleLayout   =(LinearLayout)view.findViewById(R.id.HomeFragmentTotalSalePriceLayout);
+            totalMortgageLayout = (LinearLayout)view.findViewById(R.id.HomeFragmentTotalMortgagePriceLayout);
+            totalRentLayout     =(LinearLayout)view.findViewById(R.id.HomeFragmentTotalRentPriceLayout);
+
 
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
     }
 }

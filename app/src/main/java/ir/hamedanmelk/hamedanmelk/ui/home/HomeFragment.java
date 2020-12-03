@@ -175,6 +175,9 @@ public class HomeFragment extends Fragment {
                             imagesArray =new JSONArray( LandItem.getString(Constants.SALE_MODEL_IMAGES));
                             LandModel landModel = new LandModel(
                                     LandItem.getString(Constants.LAND_MODEL_ID),
+                                    LandItem.getString(Constants.LAND_MODEL_TOTAL_PRICE),
+                                    LandItem.getString(Constants.LAND_MODEL_TOTAL_MORTGAGE_PRICE),
+                                    LandItem.getString(Constants.LAND_MODEL_TOTAL_RENT_PRICE),
                                     LandItem.getString(Constants.LAND_MODEL_TITLE),
                                     LandItem.getString(Constants.LAND_MODEL_LAND_STATE_ID),
                                     LandItem.getString(Constants.LAND_MODEL_CREATED_AT),

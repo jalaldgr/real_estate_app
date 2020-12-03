@@ -75,8 +75,8 @@ public class UserLandRecyclerViewAdapter extends RecyclerView.Adapter<UserLandRe
 
         public ViewHolder(View view) {
             super(view);
-            mIdView = (TextView) view.findViewById(R.id.presale_item_number);
-            mContentView = (TextView) view.findViewById(R.id.presale_content);
+            mIdView = (TextView) view.findViewById(R.id.UserLand_item_number);
+            mContentView = (TextView) view.findViewById(R.id.UserLand_content);
             thumbnailImg = (ImageView)view.findViewById(R.id.UserLandThumbnailImg);
         }
 
