@@ -1,7 +1,6 @@
 package ir.hamedanmelk.hamedanmelk.ui.category;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +29,7 @@ import ir.hamedanmelk.hamedanmelk.tools.Urls;
 public class SaleRecyclerViewAdapter extends RecyclerView.Adapter<SaleRecyclerViewAdapter.ViewHolder> {
     private final List<SaleModel> SaleModels;
     Activity act;
+    String TAG = "SaleRecyclerView";
     public SaleRecyclerViewAdapter(List<SaleModel> items, Activity activity) {
         SaleModels= items;act=activity;
     }
@@ -45,11 +45,13 @@ public class SaleRecyclerViewAdapter extends RecyclerView.Adapter<SaleRecyclerVi
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         SaleModel SaleModel = SaleModels.get(position);
-        holder.mIdView.setText(SaleModel.getId());
-        holder.mContentView.setText(SaleModel.getTitle());
-        Log.d("hhh", "onBindViewHolder: "+SaleModel.getImages());
+        holder.titleTxt.setText(SaleModel.getTitle());
+        holder.totalSaleTxt.setText(SaleModel.getSaleTotalPrice());
+//        holder.districtTxt.setText(SaleModel.getDistrict());
+
         new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+SaleModel.getImages());
-        holder.mContentView.setOnClickListener(new View.OnClickListener() {
+        Log.d(TAG, "onBindViewHolder: "+SaleModel.getTitle() +"   >>>   "+ SaleModel.getImages());
+        holder.totalSaleTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final NavController controller= Navigation.findNavController(Objects.requireNonNull(act),R.id.nav_host_fragment);
@@ -67,21 +69,19 @@ public class SaleRecyclerViewAdapter extends RecyclerView.Adapter<SaleRecyclerVi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView titleTxt;
+        public final TextView totalSaleTxt;
+        public final TextView districtTxt;
         public final ImageView thumbnailImg;
 
         public ViewHolder(View view) {
             super(view);
-            mIdView = (TextView) view.findViewById(R.id.sale_item_number);
-            mContentView = (TextView) view.findViewById(R.id.sale_content);
-            thumbnailImg = (ImageView)view.findViewById(R.id.SaleThumbnailImg);
+            titleTxt = (TextView) view.findViewById(R.id.SaleFragmentTitleTxt);
+            totalSaleTxt = (TextView) view.findViewById(R.id.SaleFragmentTotalSaleTxt);
+            thumbnailImg = (ImageView)view.findViewById(R.id.SaleFragmentThumbnailImg);
+            districtTxt  = (TextView)view.findViewById(R.id.SaleFragmentDistrictTxt);
 
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
     }
 }

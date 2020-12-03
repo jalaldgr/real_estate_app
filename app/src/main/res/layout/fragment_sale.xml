@@ -6,8 +6,5 @@
     android:name="ir.hamedanmelk.hamedanmelk.ui.category.SaleFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
     tools:context=".ui.category.SaleFragment"
     tools:listitem="@layout/fragment_sale_item" />

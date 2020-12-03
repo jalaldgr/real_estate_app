@@ -4,6 +4,7 @@ import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 public class SaleModel {
     private String id;
+    private String SaleTotalPrice;
     private String Title;
     private String land_state_id;
     private String created_at;
@@ -16,14 +17,23 @@ public class SaleModel {
     private String first_name;
     private String last_name;
 
-    public SaleModel(String id, String title, String land_state_id, String created_at, String land_situation_id, String view,String images, String landStateTitle, String landSituationTitle, String landSituationColor, String first_name, String last_name) {
+    public String getSaleTotalPrice() {
+        return SaleTotalPrice;
+    }
+
+    public void setSaleTotalPrice(String saleTotalPrice) {
+        SaleTotalPrice = saleTotalPrice;
+    }
+
+    public SaleModel(String id, String saleTotalPrice, String title, String land_state_id, String created_at, String land_situation_id, String view, String images, String landStateTitle, String landSituationTitle, String landSituationColor, String first_name, String last_name) {
         this.id = id;
+        SaleTotalPrice = saleTotalPrice;
         Title = title;
         this.land_state_id = land_state_id;
         this.created_at = created_at;
         this.land_situation_id = land_situation_id;
         View = view;
-        Images=(images!=null)?images : Urls.getNoImage();
+        Images = images;
         LandStateTitle = landStateTitle;
         LandSituationTitle = landSituationTitle;
         LandSituationColor = landSituationColor;

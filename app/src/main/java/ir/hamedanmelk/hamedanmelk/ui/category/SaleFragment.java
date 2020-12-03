@@ -121,6 +121,7 @@ public class SaleFragment extends Fragment {
 
                                         SaleModel SaleModel = new SaleModel(
                                         SaleItem.getString(Constants.SALE_MODEL_ID),
+                                        SaleItem.getString(Constants.SALE_MODEL_TOTAL_PRICE),
                                         SaleItem.getString(Constants.SALE_MODEL_TITLE),
                                         SaleItem.getString(Constants.SALE_MODEL_LAND_STATE_ID),
                                         SaleItem.getString(Constants.SALE_MODEL_CREATED_AT),
