@@ -7,7 +7,7 @@ public class UserLandModel {
     private String created_at;
     private String land_situation_id;
     private String View;
-    private String Images;
+    private static String Images;
     private String LandStateTitle;
     private String LandSituationTitle;
     private String LandSituationColor;
@@ -77,7 +77,7 @@ public class UserLandModel {
         View = view;
     }
 
-    public String getImages() {
+    public static String getImages() {
         return Images;
     }
 

@@ -104,6 +104,7 @@ public class UserLandFragment extends Fragment {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
+                if (progressDialog.isShowing())progressDialog.dismiss();
                 try {
                     JSONObject reader = new JSONObject(s);
                     Log.d(TAG, "onPostExecute: "+s.toString());
@@ -113,8 +114,11 @@ public class UserLandFragment extends Fragment {
                         JSONArray responseList = new JSONArray(responseData.getString("data"));
                         ArrayList<UserLandModel>tempUserLandModels = new ArrayList<UserLandModel>();
                         JSONObject userLandItem;
+                        JSONArray imagesArray;
                         for(int i=0; i<responseList.length();i++){
                             userLandItem = responseList.getJSONObject(i);
+                            //imagesArray =new JSONArray( userLandItem.getString(Constants.SALE_MODEL_IMAGES));
+
                             UserLandModel userLandModel = new UserLandModel(
                                     userLandItem.getString(Constants.USER_LAND_MODEL_ID),
                                     userLandItem.getString(Constants.USER_LAND_MODEL_TITLE),
@@ -122,7 +126,7 @@ public class UserLandFragment extends Fragment {
                                     userLandItem.getString(Constants.USER_LAND_MODEL_CREATED_AT),
                                     userLandItem.getString(Constants.USER_LAND_MODEL_LAND_SITUATION_ID),
                                     userLandItem.getString(Constants.USER_LAND_MODEL_VIEW),
-                                    userLandItem.getString(Constants.USER_LAND_MODEL_IMAGES),
+                                    "/assets/no-image.png",
                                     userLandItem.getString(Constants.USER_LAND_MODEL_LANDSTATETITLE),
                                     userLandItem.getString(Constants.USER_LAND_MODEL_LAND_SITUATIONTITLE),
                                     userLandItem.getString(Constants.USER_LAND_MODEL_LANDSITUATIONCOLOR),
@@ -142,7 +146,6 @@ public class UserLandFragment extends Fragment {
                     Log.d(TAG, "onPostExecute exception:"+e.toString());
                 }
 
-                if (progressDialog.isShowing())progressDialog.dismiss();
             }
 
             @Override
@@ -153,7 +156,7 @@ public class UserLandFragment extends Fragment {
                 HashMap<String, String>params = new HashMap<>();
                 params.put(Constants.CONTENT_TYPE,Constants.APPLICATION_JSON);
                 params.put("UID",user_pref.getString("id","8"));
-                Log.d(TAG, "doInBackground: "+user_pref.getString("id","8z"));
+                Log.d(TAG, "doInBackground: "+user_pref.getString("id","0"));
                 return httpRequestHandlre.sendPostRequest(Urls.getBaseURL()+Urls.getUserLandLists(),params);
             }
         }

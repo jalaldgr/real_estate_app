@@ -102,6 +102,8 @@ public class PreSaleFragment extends Fragment {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
+                if (progressDialog.isShowing())progressDialog.dismiss();
+
                 try {
                     JSONObject reader = new JSONObject(s);
                     if(reader.getInt(Constants.JSON_RESPONSE_STATE)==1){
@@ -142,7 +144,6 @@ public class PreSaleFragment extends Fragment {
                     Log.d(TAG, "onPostExecute exception:"+e.toString());
                 }
 
-                if (progressDialog.isShowing())progressDialog.dismiss();
             }
 
             @Override

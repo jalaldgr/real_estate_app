@@ -46,12 +46,11 @@ public class UserLandRecyclerViewAdapter extends RecyclerView.Adapter<UserLandRe
     @Override
     public void onBindViewHolder(final ViewHolder holder,final int position) {
         UserLandModel userLandModel = userLandModels.get(position);
-        holder.mIdView.setText(userLandModel.getId());
-        holder.mContentView.setText(userLandModel.getTitle());
+        holder.titleTxt.setText(userLandModel.getTitle());
 
         new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+userLandModel.getImages());
 
-        holder.mContentView.setOnClickListener(new View.OnClickListener() {
+        holder.titleTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final NavController controller= Navigation.findNavController(Objects.requireNonNull(act),R.id.nav_host_fragment);
@@ -69,20 +68,16 @@ public class UserLandRecyclerViewAdapter extends RecyclerView.Adapter<UserLandRe
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView titleTxt;
         public final ImageView thumbnailImg;
 
         public ViewHolder(View view) {
             super(view);
-            mIdView = (TextView) view.findViewById(R.id.UserLand_item_number);
-            mContentView = (TextView) view.findViewById(R.id.UserLand_content);
-            thumbnailImg = (ImageView)view.findViewById(R.id.UserLandThumbnailImg);
+            titleTxt = (TextView) view.findViewById(R.id.UserLandFragmentTitleTxt);
+            thumbnailImg = (ImageView)view.findViewById(R.id.UserLandFragmentThumbnailImg);
+            new DownloadImage(thumbnailImg).execute(Urls.getBaseURL()+UserLandModel.getImages());
+
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
     }
 }
