@@ -14,6 +14,17 @@ public class Urls {
     private static final String RegisterPublicUser                      = "/AppRequests/RegisterPublicUser";//ثبت نام کاربر
     private static final String GetLandInfo                             = "/AppRequests/GetLandInfo";
     private static final String NoImage                                 = "/assets/no-image.png";
+    private static final String GetProvinces                            = "/AppRequests/GetProvinces";
+    private static final String GetDistricts                            = "/AppRequests/GetDistricts";
+
+    public static String getGetDistricts() {
+        return GetDistricts;
+    }
+
+    public static String getGetProvinces() {
+        return GetProvinces;
+    }
+
     public static String getBaseURL() {
         return BaseURL;
     }

@@ -1,6 +1,11 @@
 package ir.hamedanmelk.hamedanmelk.ui;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -22,12 +27,24 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.tools.Constants;
+import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
+import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
+import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final String TAG = "MainActivity";
+    MYSQlDBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +56,11 @@ public class MainActivity extends AppCompatActivity {
         final AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder()
                 .build();
         final NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        dbHelper = new MYSQlDBHelper(getApplicationContext());
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+        GetProvinceRequest(getApplicationContext());
+        dbHelper.GetProvinceByID("2");
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
@@ -54,20 +74,16 @@ public class MainActivity extends AppCompatActivity {
                 {
                     navView.setVisibility(View.VISIBLE);
                 }
-
                 if(destination.getId() == R.id.navigation_home){
                     ActionBar actionBar=getSupportActionBar();
                     actionBar.setDisplayHomeAsUpEnabled(false);
                     actionBar.setDisplayShowTitleEnabled(false);
-
                 }
                 else {
                     ActionBar actionBar=getSupportActionBar();
                     actionBar.setDisplayHomeAsUpEnabled(true);
                     actionBar.setDisplayShowTitleEnabled(true);
                 }
-
-
             }
         });
         navController.removeOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
@@ -94,6 +110,46 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_menu, menu);
         return true;
+    }
+
+
+
+    public void GetProvinceRequest (Context context) {
+
+        class GetProvinceRequestAsync extends AsyncTask<Void, Void, String> {
+            @Override
+            protected String doInBackground(Void... voids) {
+                HTTPRequestHandlre requestHandler = new HTTPRequestHandlre();
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                return requestHandler.sendGetRequest(Urls.getBaseURL()+Urls.getGetProvinces(), params);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try {
+                    JSONObject rawResult = new JSONObject(s);
+                    if (rawResult.getInt("State")>0) {
+                        JSONArray dataResult = rawResult.getJSONArray("Data");
+                        String[] provinceFields = Constants.PROVINCE_MODEL_FIELDS;
+                        dbHelper.DeleteProvinces();
+                        for(int i=0; i<dataResult.length(); i++){
+                            JSONObject rowItem = dataResult.getJSONObject(i);
+                            ContentValues itemCV=new ContentValues();
+                            for (String columnItem : provinceFields) {
+                                itemCV.put(columnItem, rowItem.getString(columnItem));
+                            }
+                            dbHelper.InsertProvinces(itemCV);
+                        }
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "onPostExecute: "+e.toString());
+                }
+            }
+        }
+        GetProvinceRequestAsync getProvinceRequestAsync = new GetProvinceRequestAsync();
+        getProvinceRequestAsync.execute();
     }
 
 }
