@@ -19,7 +19,9 @@ import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.SaleModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.DistrictModel;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
+import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 /**
@@ -29,6 +31,7 @@ import ir.hamedanmelk.hamedanmelk.tools.Urls;
 public class SaleRecyclerViewAdapter extends RecyclerView.Adapter<SaleRecyclerViewAdapter.ViewHolder> {
     private final List<SaleModel> SaleModels;
     Activity act;
+    MYSQlDBHelper dbHelper;
     String TAG = "SaleRecyclerView";
     public SaleRecyclerViewAdapter(List<SaleModel> items, Activity activity) {
         SaleModels= items;act=activity;
@@ -45,10 +48,11 @@ public class SaleRecyclerViewAdapter extends RecyclerView.Adapter<SaleRecyclerVi
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         SaleModel SaleModel = SaleModels.get(position);
+        dbHelper = new MYSQlDBHelper(act.getApplicationContext());
         holder.titleTxt.setText(SaleModel.getTitle());
         holder.totalSaleTxt.setText(SaleModel.getSaleTotalPrice());
-//        holder.districtTxt.setText(SaleModel.getDistrict());
-
+        DistrictModel districtModel = dbHelper.GetDistrictByID(SaleModel.getDistrict_id());
+        holder.districtTxt.setText(districtModel.getTitle());
         new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+SaleModel.getImages());
         Log.d(TAG, "onBindViewHolder: "+SaleModel.getTitle() +"   >>>   "+ SaleModel.getImages());
         holder.totalSaleTxt.setOnClickListener(new View.OnClickListener() {

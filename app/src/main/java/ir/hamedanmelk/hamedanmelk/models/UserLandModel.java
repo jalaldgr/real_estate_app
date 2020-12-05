@@ -7,14 +7,15 @@ public class UserLandModel {
     private String created_at;
     private String land_situation_id;
     private String View;
-    private static String Images;
+    private String Images;
     private String LandStateTitle;
+    private String district_id;
     private String LandSituationTitle;
     private String LandSituationColor;
     private String first_name;
     private String last_name;
 
-    public UserLandModel(String id, String title, String land_state_id, String created_at, String land_situation_id, String view, String images, String landStateTitle, String landSituationTitle, String landSituationColor, String first_name, String last_name) {
+    public UserLandModel(String id, String title, String land_state_id, String created_at, String land_situation_id, String view, String images, String landStateTitle, String district_id, String landSituationTitle, String landSituationColor, String first_name, String last_name) {
         this.id = id;
         Title = title;
         this.land_state_id = land_state_id;
@@ -23,10 +24,19 @@ public class UserLandModel {
         View = view;
         Images = images;
         LandStateTitle = landStateTitle;
+        this.district_id = district_id;
         LandSituationTitle = landSituationTitle;
         LandSituationColor = landSituationColor;
         this.first_name = first_name;
         this.last_name = last_name;
+    }
+
+    public String getDistrict_id() {
+        return district_id;
+    }
+
+    public void setDistrict_id(String district_id) {
+        this.district_id = district_id;
     }
 
     public String getId() {
@@ -77,7 +87,7 @@ public class UserLandModel {
         View = view;
     }
 
-    public static String getImages() {
+    public  String getImages() {
         return Images;
     }
 

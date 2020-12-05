@@ -15,7 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.RentModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.DistrictModel;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
+import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 import java.util.List;
@@ -29,7 +31,7 @@ public class RentRecyclerViewAdapter extends RecyclerView.Adapter<RentRecyclerVi
 
     private final List<RentModel> rentModels;
     Activity act;
-
+    MYSQlDBHelper dbHelper;
     public RentRecyclerViewAdapter(List<RentModel> items,Activity activity) {
         rentModels= items;
         act=activity;
@@ -45,11 +47,13 @@ public class RentRecyclerViewAdapter extends RecyclerView.Adapter<RentRecyclerVi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder,final int position) {
+        dbHelper = new MYSQlDBHelper(act.getApplicationContext());
         RentModel rentModel = rentModels.get(position);
         holder.titleTxt.setText(rentModel.getTitle());
         holder.totalMotgagePriceTxt.setText(rentModel.getMortgageTotalPrice());
         holder.totalRentPriceTxt.setText(rentModel.getRentTotalPrice());
-
+        DistrictModel districtModel = dbHelper.GetDistrictByID(rentModel.getDistrict_id());
+        holder.districtTxt.setText(districtModel.getTitle());
         new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+rentModel.getImages());
         holder.titleTxt.setOnClickListener(new View.OnClickListener() {
             @Override

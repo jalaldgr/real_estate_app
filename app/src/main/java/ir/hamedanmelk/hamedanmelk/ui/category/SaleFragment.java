@@ -130,6 +130,7 @@ public class SaleFragment extends Fragment {
                                         SaleItem.getString(Constants.SALE_MODEL_VIEW),
                                         imagesArray.get(0).toString(),
                                         SaleItem.getString(Constants.SALE_MODEL_LANDSTATETITLE),
+                                        SaleItem.getString(Constants.SALE_MODEL_DISTRICT_ID),
                                         SaleItem.getString(Constants.SALE_MODEL_LAND_SITUATIONTITLE),
                                         SaleItem.getString(Constants.SALE_MODEL_LANDSITUATIONCOLOR),
                                         SaleItem.getString(Constants.SALE_MODEL_FIRST_NAME),

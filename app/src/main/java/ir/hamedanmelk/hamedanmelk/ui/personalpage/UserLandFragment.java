@@ -117,7 +117,7 @@ public class UserLandFragment extends Fragment {
                         JSONArray imagesArray;
                         for(int i=0; i<responseList.length();i++){
                             userLandItem = responseList.getJSONObject(i);
-                            //imagesArray =new JSONArray( userLandItem.getString(Constants.SALE_MODEL_IMAGES));
+                            imagesArray =new JSONArray( userLandItem.getString(Constants.SALE_MODEL_IMAGES));
 
                             UserLandModel userLandModel = new UserLandModel(
                                     userLandItem.getString(Constants.USER_LAND_MODEL_ID),
@@ -126,8 +126,9 @@ public class UserLandFragment extends Fragment {
                                     userLandItem.getString(Constants.USER_LAND_MODEL_CREATED_AT),
                                     userLandItem.getString(Constants.USER_LAND_MODEL_LAND_SITUATION_ID),
                                     userLandItem.getString(Constants.USER_LAND_MODEL_VIEW),
-                                    "/assets/no-image.png",
+                                    imagesArray.get(0).toString(),
                                     userLandItem.getString(Constants.USER_LAND_MODEL_LANDSTATETITLE),
+                                    userLandItem.getString(Constants.USER_LAND_MODEL_DISTRICT_ID),
                                     userLandItem.getString(Constants.USER_LAND_MODEL_LAND_SITUATIONTITLE),
                                     userLandItem.getString(Constants.USER_LAND_MODEL_LANDSITUATIONCOLOR),
                                     userLandItem.getString(Constants.USER_LAND_MODEL_FIRST_NAME),

@@ -59,8 +59,9 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = new MYSQlDBHelper(getApplicationContext());
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
         GetProvinceRequest(getApplicationContext());
-        dbHelper.GetProvinceByID("2");
+        GetDistrictRequest(getApplicationContext());
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
@@ -151,5 +152,44 @@ public class MainActivity extends AppCompatActivity {
         GetProvinceRequestAsync getProvinceRequestAsync = new GetProvinceRequestAsync();
         getProvinceRequestAsync.execute();
     }
+
+    public void GetDistrictRequest (Context context) {
+
+        class GetDistrictRequestAsync extends AsyncTask<Void, Void, String> {
+            @Override
+            protected String doInBackground(Void... voids) {
+                HTTPRequestHandlre requestHandler = new HTTPRequestHandlre();
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                return requestHandler.sendGetRequest(Urls.getBaseURL()+Urls.getGetDistricts(), params);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try {
+                    JSONObject rawResult = new JSONObject(s);
+                    if (rawResult.getInt("State")>0) {
+                        JSONArray dataResult = rawResult.getJSONArray("Data");
+                        String[] modelFields = Constants.DISTRICT_MODEL_FIELDS;
+                        dbHelper.DeleteDistrict();
+                        for(int i=0; i<dataResult.length(); i++){
+                            JSONObject rowItem = dataResult.getJSONObject(i);
+                            ContentValues itemCV=new ContentValues();
+                            for (String columnItem : modelFields) {
+                                itemCV.put(columnItem, rowItem.getString(columnItem));
+                            }
+                            dbHelper.InsertDistrict(itemCV);
+                        }
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "onPostExecute: "+e.toString());
+                }
+            }
+        }
+        GetDistrictRequestAsync getDistrictRequestAsync = new GetDistrictRequestAsync();
+        getDistrictRequestAsync.execute();
+    }
+
 
 }

@@ -128,6 +128,7 @@ public class RentFragment extends Fragment {
                                     RentItem.getString(Constants.RENT_MODEL_VIEW),
                                     imagesArray.get(0).toString(),
                                     RentItem.getString(Constants.RENT_MODEL_LAND_STATE_TITLE),
+                                    RentItem.getString(Constants.RENT_MODEL_DISTRICT_ID),
                                     RentItem.getString(Constants.RENT_MODEL_LAND_SITUATION_TITLE),
                                     RentItem.getString(Constants.RENT_MODEL_LAND_SITUATION_COLOR),
                                     RentItem.getString(Constants.RENT_MODEL_FIRST_NAME),

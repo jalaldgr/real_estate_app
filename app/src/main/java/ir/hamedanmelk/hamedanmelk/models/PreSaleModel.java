@@ -12,12 +12,13 @@ public class PreSaleModel {
     private String View;
     private String Images;
     private String LandStateTitle;
+    private String district_id;
     private String LandSituationTitle;
     private String LandSituationColor;
     private String first_name;
     private String last_name;
 
-    public PreSaleModel(String id, String saleTotalPrice, String title, String land_state_id, String created_at, String land_situation_id, String view, String images, String landStateTitle, String landSituationTitle, String landSituationColor, String first_name, String last_name) {
+    public PreSaleModel(String id, String saleTotalPrice, String title, String land_state_id, String created_at, String land_situation_id, String view, String images, String landStateTitle, String district_id, String landSituationTitle, String landSituationColor, String first_name, String last_name) {
         this.id = id;
         SaleTotalPrice = saleTotalPrice;
         Title = title;
@@ -27,10 +28,19 @@ public class PreSaleModel {
         View = view;
         Images = images;
         LandStateTitle = landStateTitle;
+        this.district_id = district_id;
         LandSituationTitle = landSituationTitle;
         LandSituationColor = landSituationColor;
         this.first_name = first_name;
         this.last_name = last_name;
+    }
+
+    public String getDistrict_id() {
+        return district_id;
+    }
+
+    public void setDistrict_id(String district_id) {
+        this.district_id = district_id;
     }
 
     public String getSaleTotalPrice() {
@@ -141,6 +151,7 @@ public class PreSaleModel {
     public String toString() {
         return "PreSaleModel{" +
                 "id='" + id + '\'' +
+                ", SaleTotalPrice='" + SaleTotalPrice + '\'' +
                 ", Title='" + Title + '\'' +
                 ", land_state_id='" + land_state_id + '\'' +
                 ", created_at='" + created_at + '\'' +
@@ -148,6 +159,7 @@ public class PreSaleModel {
                 ", View='" + View + '\'' +
                 ", Images='" + Images + '\'' +
                 ", LandStateTitle='" + LandStateTitle + '\'' +
+                ", district_id='" + district_id + '\'' +
                 ", LandSituationTitle='" + LandSituationTitle + '\'' +
                 ", LandSituationColor='" + LandSituationColor + '\'' +
                 ", first_name='" + first_name + '\'' +

@@ -185,6 +185,7 @@ public class HomeFragment extends Fragment {
                                     LandItem.getString(Constants.LAND_MODEL_VIEW),
                                     imagesArray.get(0).toString(),
                                     LandItem.getString(Constants.LAND_MODEL_LANDSTATETITLE),
+                                    LandItem.getString(Constants.USER_LAND_MODEL_DISTRICT_ID),
                                     LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONTITLE),
                                     LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONCOLOR),
                                     LandItem.getString(Constants.LAND_MODEL_FIRST_NAME),

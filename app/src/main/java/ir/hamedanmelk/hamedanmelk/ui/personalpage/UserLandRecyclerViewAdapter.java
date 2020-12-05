@@ -75,7 +75,6 @@ public class UserLandRecyclerViewAdapter extends RecyclerView.Adapter<UserLandRe
             super(view);
             titleTxt = (TextView) view.findViewById(R.id.UserLandFragmentTitleTxt);
             thumbnailImg = (ImageView)view.findViewById(R.id.UserLandFragmentThumbnailImg);
-            new DownloadImage(thumbnailImg).execute(Urls.getBaseURL()+UserLandModel.getImages());
 
         }
 

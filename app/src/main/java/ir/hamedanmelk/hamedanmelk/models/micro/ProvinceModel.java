@@ -1,4 +1,4 @@
-package ir.hamedanmelk.hamedanmelk.models;
+package ir.hamedanmelk.hamedanmelk.models.micro;
 
 public class ProvinceModel {
     private String id;

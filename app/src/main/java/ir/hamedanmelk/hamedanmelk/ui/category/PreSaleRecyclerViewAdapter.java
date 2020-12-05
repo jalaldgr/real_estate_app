@@ -16,7 +16,9 @@ import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.PreSaleModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.DistrictModel;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
+import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 /**
@@ -28,6 +30,7 @@ public class PreSaleRecyclerViewAdapter extends RecyclerView.Adapter<PreSaleRecy
     private final List<PreSaleModel> preSaleModels;
     Activity act;
     private static final String TAG = "PreSaleFragment";
+    MYSQlDBHelper dbHelper;
     public PreSaleRecyclerViewAdapter(List<PreSaleModel> items, Activity activity) {
         act=activity;
         preSaleModels= items;
@@ -43,10 +46,12 @@ public class PreSaleRecyclerViewAdapter extends RecyclerView.Adapter<PreSaleRecy
 
     @Override
     public void onBindViewHolder(final ViewHolder holder,final int position) {
+        dbHelper = new MYSQlDBHelper(act.getApplicationContext());
         PreSaleModel preSaleModel = preSaleModels.get(position);
         holder.titleTxt.setText(preSaleModel.getTitle());
         holder.totalSaleTxt.setText(preSaleModel.getSaleTotalPrice());
-//        holder.districtTxt.setText(preSaleModel.getDistrict());
+        DistrictModel districtModel = dbHelper.GetDistrictByID(preSaleModel.getDistrict_id());
+        holder.districtTxt.setText(districtModel.getTitle());
         new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+preSaleModel.getImages());
         Log.d(TAG, "onBindViewHolder: "+preSaleModel.getTitle() +"   >>>   "+ preSaleModel.getImages());
 

@@ -20,7 +20,9 @@ import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.LandModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.DistrictModel;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
+import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 /**
@@ -31,6 +33,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
 
     private final List<LandModel> landModels;
     Activity act;
+    MYSQlDBHelper dbHelper;
     public HomeRecyclerViewAdapter(List<LandModel> items,Activity activity) {
         landModels = items;
         act = activity;
@@ -47,8 +50,11 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     @Override
     public void onBindViewHolder(final ViewHolder holder,final int position) {
         final LandModel landModel = landModels.get(position);
+        dbHelper = new MYSQlDBHelper(act.getApplicationContext());
         holder.titleTxt.setText(landModel.getTitle());
         new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+landModel.getImages());
+        DistrictModel districtModel = dbHelper.GetDistrictByID(landModel.getDistrict_id());
+        holder.districtTxt.setText(districtModel.getTitle());
         switch (landModels.get(position).getLand_state_id()) {
             case "1" :
                 holder.totalSaleLayout.setVisibility(View.VISIBLE);
@@ -100,6 +106,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         public final LinearLayout totalSaleLayout;
         public final LinearLayout totalMortgageLayout;
         public final LinearLayout totalRentLayout;
+        public final TextView districtTxt;
 
         public ViewHolder(View view) {
             super(view);
@@ -111,6 +118,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             totalSaleLayout   =(LinearLayout)view.findViewById(R.id.HomeFragmentTotalSalePriceLayout);
             totalMortgageLayout = (LinearLayout)view.findViewById(R.id.HomeFragmentTotalMortgagePriceLayout);
             totalRentLayout     =(LinearLayout)view.findViewById(R.id.HomeFragmentTotalRentPriceLayout);
+            districtTxt         = (TextView)view.findViewById(R.id.HomeFragmentDistrictTxt);
 
 
         }
