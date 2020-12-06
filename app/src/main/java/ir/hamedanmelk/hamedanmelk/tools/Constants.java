@@ -216,13 +216,13 @@ public class Constants {
 //    public static final String PROVINCE_MODEL_DISABLED="Disabled";
 
     //GetCitiesModelFields
-    public static final String[] PREF_GET_CITIES_FIELDS = {"id","Title","province_id"};
+    public static final String[] CITIES_MODEL_FIELDS = {"id","Title","province_id"};
 //    public static final String PREF_GET_CITIES_ID="id";
 //    public static final String PREF_GET_CITIES_TITLE="Title";
 //    public static final String PREF_GET_CITIES_PROVINCE_ID="province_id";
 
     //GetAreasModelFields
-    public static final String[] PREF_GET_AREAS_FIELDS = {"id","Title","city_id"};
+    public static final String[] AREAS_MODEL_FIELDS = {"id","Title","city_id"};
 //    public static final String PREF_GET_AREAS_ID="id";
 //    public static final String PREF_GET_AREAS_TITLE="Title";
 //    public static final String PREF_GET_AREAS_CITY_ID="city_id";
@@ -235,74 +235,74 @@ public class Constants {
 
     //GetLandTypeModelFields
 //    public static final String PREF_GET_LAND_TYPE_NAME = "PREF_GET_LAND_TYPE";
-    public static final String[] PREF_GET_LAND_TYPE_FIELDS = {"id","Title"};
+    public static final String[] LAND_TYPE_MODEL_FIELDS = {"id","Title"};
 //    public static final String PREF_GET_LAND_TYPE_ID="id";
 //    public static final String PREF_GETLAND_TYPE_TITLE="Title";
 
     //GetBuildingConditionsModelFields
 //    public static final String PREF_GET_BUILDING_CONDITIONS_NAME = "PREF_GET_BUILDING_CONDITIONS";
-    public static final String[] PREF_GET_BUILDING_CONDITIONS_FIELDS = {"id","Title"};
+    public static final String[] BUILDING_CONDITIONS_MODEL_FIELDS = {"id","Title"};
 //    public static final String PREF_GET_BUILDING_CONDITIONS_ID="id";
 //    public static final String PREF_GET_BUILDING_CONDITIONS_Title="Title";
 
     //GetLandStatesModelFields
 //    public static final String PREF_GET_LAND_STATES_NAME = "PREF_GET_LAND_STATES";
-    public static final String[] PREF_GET_LAND_STATES_FIELDS = {"id","Title"};
+    public static final String[] LAND_STATES_MODEL_FIELDS = {"id","Title"};
 //    public static final String PREF_GET_LAND_STATES_ID="id";
 //    public static final String PREF_GET_LAND_STATES_TITLE="Title";
 
     //GetRentalPreferencesModelFields
 //    public static final String PREF_GET_RENTAL_PREFERENCES_NAME = "PREF_GET_RENTAL_PREFERENCES";
-    public static final String[] PREF_GET_RENTAL_PREFERENCES_FIELDS = {"id","Title"};
+    public static final String[] RENTAL_PREFERENCES_MODEL_FIELDS = {"id","Title"};
 //    public static final String PREF_GET_RENTAL_PREFERENCES_ID = "id";
 //    public static final String PREF_GET_RENTAL_PREFERENCES_TITLE = "Title";
 
     //GetDensityTypesModelFields
 //    public static final String PREF_GET_DENSITY_TYPES_NAME = "PREF_GET_DENSITY_TYPES";
-    public static final String[] PREF_GET_DENSITY_TYPES_FIELDS = {"id","Title"};
+    public static final String[] DENSITY_TYPES_MODEL_FIELDS = {"id","Title"};
 //    public static final String PREF_GET_DENSITY_TYPES_ID = "id";
 //    public static final String PREF_GET_DENSITY_TYPE_TITLE = "Title";
 
     //GetFloorCoveringsModelFields
 //    public static final String PREF_GET_FLOOR_COVERINGS_NAME = "PREF_GET_FLOOR_COVERINGS";
-    public static final String[]PREF_GET_FLOOR_COVERINGS_FIELDS = {"id","Title"};
+    public static final String[]FLOOR_COVERINGS_MODEL_FIELDS = {"id","Title"};
 //    public static final String PREF_GET_FLOOR_COVERINGS_ID = "id";
 //    public static final String PREF_GET_FLOOR_COVERINGS_TITLE = "Title";
 
     //GetKitchenServices
 //    public static final String PREF_GET_KITCHEN_SERVICES_NAME = "PREF_GET_KITCHEN_SERVICES";
-    public static final String[] PREF_GET_KITCHEN_SERVICES_FIELDS = {"id","Title"};
+    public static final String[] KITCHEN_SERVICES_MODEL_FIELDS = {"id","Title"};
 //    public static final String PREF_GET_KITCHEN_SERVICES_ID = "id";
 //    public static final String PREF_GET_KITCHEN_SERVICES_TITLE = "Title";
 
     //GetLandCasesModelFields
 //    public static final String PREF_GET_LAND_CASE_NAME = "PREF_GET_LAND_CASE";
-    public static final String[] PREF_GET_LAND_CASE_FIELDS =  {"id","Title"};
+    public static final String[] LAND_CASE_MODEL_FIELDS =  {"id","Title"};
 //    public static final String PREF_GET_LAND_CASE_ID = "id";
 //    public static final String PREF_GET_LAND_CASE_TITLE = "Title";
 
     //GetLoanTypesModelFields
 //    public static final String PREF_GET_LOAN_TYPES_NAME = "PREF_GET_LOAN_TYPES";
-    public static final String[] PREF_GET_LOAN_TYPES_FIELDS = {"id","Title"};
+    public static final String[] LOAN_TYPES_MODEL_FIELDS = {"id","Title"};
 //    public static final String PREF_GET_LOAN_TYPES_ID = "id";
 //    public static final String PREF_GET_LOAN_TYPES_TITLE = "Title";
 
     //GetLandSituationsModelFields
 //    public static final String PREF_GET_LAND_SITUATIONS_NAME = "PREF_GET_LAND_SITUATIONS";
-    public static final String[] PREF_GET_LAND_SITUATIONS_FIELDS = {"id","Title","Color"};
+    public static final String[] LAND_SITUATIONS_MODEL_FIELDS = {"id","Title","Color"};
 //    public static final String PREF_GET_LAND_SITUATIONS_ID = "id";
 //    public static final String PREF_GET_LAND_SITUATIONS_TITLE = "Title";
 //    public static final String PREF_GET_LAND_SITUATIONS_COLOR = "Color";
 
     //GetLandViewsModelFields
 //    public static final String PREF_GET_LAND_VIEWS_NAME = "PREF_GET_LAND_VIEWS";
-    public static final String[] PREF_GET_LAND_VIEWS_FIELDS = {"id","Title"};
+    public static final String[] LAND_VIEWS_MODEL_FIELDS = {"id","Title"};
 //    public static final String PREF_GET_LAND_VIEWS_ID = "id";
 //    public static final String PREF_GET_LAND_VIEWS_TITLE = "Title";
 
     //GetLandDirectionsModelFields
 //    public static final String PREF_GET_LAND_DIRECTIONS_NAME = "PREF_GET_LAND_DIRECTIONS";
-    public static final String[] PREF_GET_LAND_DIRECTIONS_FIELDS = {"id","Title"};
+    public static final String[] LAND_DIRECTIONS_MODEL_FIELDS = {"id","Title"};
 //    public static final String PREF_GET_LAND_DIRECTIONS_ID = "id";
 //    public static final String PREF_GET_LAND_DIRECTIONS_TITLE = "Title";
 }
