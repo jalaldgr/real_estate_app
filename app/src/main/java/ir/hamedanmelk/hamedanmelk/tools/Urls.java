@@ -16,6 +16,76 @@ public class Urls {
     private static final String NoImage                                 = "/assets/no-image.png";
     private static final String GetProvinces                            = "/AppRequests/GetProvinces";
     private static final String GetDistricts                            = "/AppRequests/GetDistricts";
+    private static final String GetCities                               = "/AppRequests/GetCities";
+    private static final String GetAreas                                = "/AppRequests/GetAreas";
+    private static final String GetLandTypes                            = "/AppRequests/GetLandTypes";
+    private static final String GetBuildingConditions                   = "/AppRequests/GetBuildingConditions";
+    private static final String GetLandStates                           = "/AppRequests/GetLandStates";
+    private static final String GetRentalPreferences                    = "/AppRequests/GetRentalPreferences";
+    private static final String GetDensityTypes                         = "/AppRequests/GetDensityTypes";
+    private static final String GetFloorCoverings                       = "/AppRequests/GetFloorCoverings";
+    private static final String GetKitchenServices                      = "/AppRequests/GetKitchenServices";
+    private static final String GetLandCases                            = "/AppRequests/GetLandCases";
+    private static final String GetLoanTypes                            = "/AppRequests/GetLoanTypes";
+    private static final String GetLandSituations                       = "/AppRequests/GetLandSituations";
+    private static final String GetLandViews                            = "/AppRequests/GetLandViews";
+    private static final String GetLandDirections                       = "/AppRequests/GetLandDirections";
+
+    public static String getGetCities() {
+        return GetCities;
+    }
+
+    public static String getGetAreas() {
+        return GetAreas;
+    }
+
+    public static String getGetLandTypes() {
+        return GetLandTypes;
+    }
+
+    public static String getGetBuildingConditions() {
+        return GetBuildingConditions;
+    }
+
+    public static String getGetLandStates() {
+        return GetLandStates;
+    }
+
+    public static String getGetRentalPreferences() {
+        return GetRentalPreferences;
+    }
+
+    public static String getGetDensityTypes() {
+        return GetDensityTypes;
+    }
+
+    public static String getGetFloorCoverings() {
+        return GetFloorCoverings;
+    }
+
+    public static String getGetKitchenServices() {
+        return GetKitchenServices;
+    }
+
+    public static String getGetLandCases() {
+        return GetLandCases;
+    }
+
+    public static String getGetLoanTypes() {
+        return GetLoanTypes;
+    }
+
+    public static String getGetLandSituations() {
+        return GetLandSituations;
+    }
+
+    public static String getGetLandViews() {
+        return GetLandViews;
+    }
+
+    public static String getGetLandDirections() {
+        return GetLandDirections;
+    }
 
     public static String getGetDistricts() {
         return GetDistricts;
