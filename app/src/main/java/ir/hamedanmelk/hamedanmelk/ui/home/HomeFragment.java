@@ -58,12 +58,12 @@ public class HomeFragment extends Fragment {
         rentbtn=(Button)root.findViewById(R.id.HomeFragmentRentButton);
         assignmentbtn=(Button)root.findViewById(R.id.HomeFragmentAssignmentButton);
         resalebtn=(Button)root.findViewById(R.id.HomeFragmentResaleButton);
-        exchangebtn=(Button)root.findViewById(R.id.HomeFragmentExchangeButton);
+//        exchangebtn=(Button)root.findViewById(R.id.HomeFragmentExchangeButton);
         agentbtn=(Button)root.findViewById(R.id.HomeFragmentAgentButton);
         servicesbtn=(Button)root.findViewById(R.id.HomeFragmentServicesButton);
         lawinstiutebtn=(Button)root.findViewById(R.id.HomeFragmentLawInstiuteButton);
         inquirybtn=(Button)root.findViewById(R.id.HomeFragmentInquiryButton);
-        morebtn=(Button)root.findViewById(R.id.HomeFragmentMoreButton);
+//        morebtn=(Button)root.findViewById(R.id.HomeFragmentMoreButton);
 
         salebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,12 +89,12 @@ public class HomeFragment extends Fragment {
                 controller.navigate(R.id.presaleFragment);
             }
         });
-        exchangebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.navigate(R.id.exchangeFragment);
-            }
-        });
+//        exchangebtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                controller.navigate(R.id.exchangeFragment);
+//            }
+//        });
         agentbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,12 +119,12 @@ public class HomeFragment extends Fragment {
                 controller.navigate(R.id.inquiryFragment);
             }
         });
-        morebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.navigate(R.id.moreFragment);
-            }
-        });
+//        morebtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                controller.navigate(R.id.moreFragment);
+//            }
+//        });
 
         recyclerView = (RecyclerView) root.findViewById(R.id.HomeFrgmntHrzntlRcyclVw);
 //        RHZAdaptor = new home_frgmnt_horizontal_recycler_adaptor(mylist, this.getContext());
