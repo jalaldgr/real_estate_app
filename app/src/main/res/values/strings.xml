@@ -96,6 +96,15 @@
     <string name="land_info_rent_total_price">اجاره</string>
     <string name="land_info_resident_owner">مالک ساکن است؟</string>
     <string name="land_info_delivery_date">تاریخ تحویل</string>
+    <string name="land_info_address">آدرس</string>
+    <string name="land_info_created_at">تاریخ ثبت</string>
+    <string name="land_info_price_unit">تومان</string>
+    <string name="land_info_meter">متر</string>
+    <string name="land_info_name">نام</string>
+    <string name="land_info_phone">تلفن</string>
+    <string name="land_info_user_more_info">اطلاعات بیشتر</string>
+    <string name="land_info_start_chat">شروع چت</string>
+
     <!--    Authentication Method Fields-->
     <string name="authentication_username">Username</string>
     <string name="authentication_password">Password</string>
@@ -110,6 +119,11 @@
     <string name="vocabulary_luxury">لاکچری</string>
     <string name="vocabulary_mortgage_price">رهن</string>
     <string name="vocabulary_rent_price">اجاره</string>
+    <string name="vocabulary_room_count">تعداد اتاق</string>
+    <string name="vocabulary_building_year">سال ساخت</string>
+    <string name="vocabulary_land_state">وضعیت ملک</string>
+    <string name="vocabulary_land_case_type">نوع کاربری</string>
+    <string name="vocabulary_"></string>
 
 
 

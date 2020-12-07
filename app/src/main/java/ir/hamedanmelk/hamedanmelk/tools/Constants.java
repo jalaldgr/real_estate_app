@@ -7,7 +7,9 @@ public class Constants {
     //HttpRequestHandler
     public static final String APPLICATION_JSON = "application/json";
     public static final String CONTENT_TYPE = "Content-Type";
-
+    // Default Map Location
+    public static final double MAP_EYDAN_LAT = 34.798315;
+    public static final double MAP_MEYDAN_LNG= 48.514898;
     //JSON Response Fields
     public static final String JSON_RESPONSE_DATA = "Data";
     public static final String JSON_RESPONSE_STATE = "State";
@@ -157,7 +159,7 @@ public class Constants {
     public static final String LAND_INFO_DISTRICT_ID="district_id";
     public static final String LAND_INFO_LAND_TYPE_ID="land_type_id";
     public static final String LAND_INFO_BUILDING_CONDITION_ID="building_condition_id";
-    public static final String LAND_INFO_BUILDINGYEAR="BuildingYear";
+    public static final String LAND_INFO_BUILDING_YEAR="BuildingYear";
     public static final String LAND_INFO_LAND_STATE_ID="land_state_id";
     public static final String LAND_INFO_SALE_TOTAL_PRICE="SaleTotalPrice";
     public static final String LAND_INFO_SALE_TOTAL_PRICE_UNIT="SaleTotalPriceUnit";
@@ -170,6 +172,7 @@ public class Constants {
     public static final String LAND_INFO_PRE_PAY_PRICE="PrePayPrice";
     public static final String LAND_INFO_PRE_PAY_PRICE_UNIT="PrePayPriceUnit";
     public static final String LAND_INFO_DELIVERY_DATE="DeliveryDate";
+    public static final String LAND_INFO_DESCRIPTION = "Description";
     public static final String LAND_INFO_RENTAL_PREFERENCE_ID="rental_preference_id";
     public static final String LAND_INFO_RESIDENT_OWNER="ResidentOwner";
     public static final String LAND_INFO_VOUCHER_TYPE_ID="voucher_type_id";
@@ -205,7 +208,9 @@ public class Constants {
     public static final String LAND_INFO_FIRST_NAME="first_name";
     public static final String LAND_INFO_LAST_NAME="last_name";
     public static final String LAND_INFO_USER_DESCRIPTION="UserDescription";
-    public static final String[] LAND_INFO_FIELDS={"id","Title","Address","Map","Images","Videos","province_id","city_id","area_id","district_id","land_type_id","building_condition_id","BuildingYear","land_state_id","SaleTotalPrice","SaleTotalPriceUnit","DebtTotalPrice","DebtTotalPriceUnit","MortgageTotalPrice","MortgageTotalPriceUnit","RentTotalPrice","RentTotalPriceUnit","PrePayPrice","PrePayPriceUnit","DeliveryDate","rental_preference_id","ResidentOwner","voucher_type_id","Dong","density_id","Space","space_unit_id","FoundationSpace","foundation_space_unit_id","SpacePrice","direction_id","land_view_id","floor_covering_id","kitchen_service_id","RoomCount","FloorCount","UnitInFloor","Floor","land_case_id","loan_type_id","land_situation_id","user_id","land_owner_id","View","created_at","updated_at","LandTypeTitle","LandStateTitle","ProvinceTitle","CityTitle","AreaTitle","DistrictTitle","first_name","last_name","UserDescription"};
+    public static final String LAND_INFO_USER_PHONE = "Mobile";
+    public static final String LAND_INFO_USER_IMAGE = "Image";
+//    public static final String[] LAND_INFO_FIELDS={"id","Title","Address","Map","Images","Videos","province_id","city_id","area_id","district_id","land_type_id","building_condition_id","BuildingYear","land_state_id","SaleTotalPrice","SaleTotalPriceUnit","DebtTotalPrice","DebtTotalPriceUnit","MortgageTotalPrice","MortgageTotalPriceUnit","RentTotalPrice","RentTotalPriceUnit","PrePayPrice","PrePayPriceUnit","DeliveryDate","rental_preference_id","ResidentOwner","voucher_type_id","Dong","density_id","Space","space_unit_id","FoundationSpace","foundation_space_unit_id","SpacePrice","direction_id","land_view_id","floor_covering_id","kitchen_service_id","RoomCount","FloorCount","UnitInFloor","Floor","land_case_id","loan_type_id","land_situation_id","user_id","land_owner_id","View","created_at","updated_at","LandTypeTitle","LandStateTitle","ProvinceTitle","CityTitle","AreaTitle","DistrictTitle","first_name","last_name","UserDescription"};
 
 
     //GetProvinceModelFields
