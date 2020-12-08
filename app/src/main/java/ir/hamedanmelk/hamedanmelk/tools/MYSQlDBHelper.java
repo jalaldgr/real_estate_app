@@ -14,6 +14,7 @@ import ir.hamedanmelk.hamedanmelk.models.micro.BuildingConditionModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.CityModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.DensityTypeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.DistrictModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.FloorCoveringModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.KitchenServiceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
@@ -48,6 +49,7 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String LAND_SITUATIONS_TABLE_NAME ="LandSituations";
     private static final String LAND_VIEWS_TABLE_NAME ="LandViews";
     private static final String LAND_DIRECTIONS_TABLE_NAME ="LandDirections";
+    private static final String LAND_EQUIPMENTS_TABLE_NAME="Equipments";
 
     private static final String PROVINCE_TABLE_COLUMN_ID="id";
     private static final String PROVINCE_TABLE_COLUMN_TITLE="Title";
@@ -102,6 +104,10 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
 
     private static final String LAND_DIRECTIONS_TABLE_COLUMN_ID     ="id";
     private static final String LAND_DIRECTIONS_TABLE_COLUMN_TITLE  ="Title";
+
+    private static final String LAND_EQUIPMENTS_TABLE_COLUMN_ID     ="id";
+    private static final String LAND_EQUIPMENTS_TABLE_COLUMN_TITLE  ="Title";
+    private static final String LAND_EQUIPMENTS_TABLE_COLUMN_LOGO   ="Logo";
 
     private static final String CREATE_PROVINCE_TABLE= "CREATE TABLE "+PROVINCE_TABLE_NAME+"("
             + PROVINCE_TABLE_COLUMN_ID + " TEXT,"
@@ -189,6 +195,11 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
             + LAND_DIRECTIONS_TABLE_COLUMN_TITLE+ " TEXT"
             +")";
 
+    private static final String CREATE_LAND_EQUIPMENTS_TABLE="CREATE TABLE "+LAND_EQUIPMENTS_TABLE_NAME+"("
+            + LAND_EQUIPMENTS_TABLE_COLUMN_ID+ " TEXT,"
+            + LAND_EQUIPMENTS_TABLE_COLUMN_TITLE + " TEXT,"
+            +LAND_EQUIPMENTS_TABLE_COLUMN_LOGO +" TEXT"
+            +")";
 //////////////////////////////////////Provinces methods////////////////////////////////////////////////
     public void InsertProvinces(ContentValues cv){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -1140,7 +1151,32 @@ public void InsertDistrict(ContentValues cv){
         return landDirectionModels;
     }
 
-
+    ////////////////////////////////////////Land Equipments////////////////////////////////////////////////
+    public ArrayList<EquipmentModel> GetLandEquipmentsListByLandID(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<EquipmentModel> equipmentModels = new ArrayList<EquipmentModel>();
+        EquipmentModel equipmentModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM "+LAND_EQUIPMENTS_TABLE_NAME, null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do{
+                equipmentModel = new EquipmentModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2));
+                equipmentModels.add(equipmentModel);
+                counter++;
+            }while (c.moveToNext());
+            c.close();
+        }catch (Exception e){
+            Log.d("GetEquipmentsList Says:", e.toString());}
+        db.close();
+        return equipmentModels;
+    }
 
     //----------------------------------------------------------------------------------------------
 
@@ -1173,6 +1209,8 @@ public void InsertDistrict(ContentValues cv){
         sqLiteDatabase.execSQL(CREATE_LAND_SITUATION_TABLE);
         sqLiteDatabase.execSQL(CREATE_LAND_VIEWS_TABLE);
         sqLiteDatabase.execSQL(CREATE_LAND_DIRECTIONS_TABLE);
+        sqLiteDatabase.execSQL(CREATE_LAND_EQUIPMENTS_TABLE);
+
 
 
 
@@ -1196,9 +1234,6 @@ public void InsertDistrict(ContentValues cv){
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+LAND_SITUATIONS_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+LAND_VIEWS_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+LAND_DIRECTIONS_TABLE_NAME);
-
-
-
-
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+LAND_EQUIPMENTS_TABLE_NAME);
     }
 }

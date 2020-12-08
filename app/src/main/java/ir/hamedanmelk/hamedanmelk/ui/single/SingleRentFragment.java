@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,10 +32,13 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
@@ -83,6 +87,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
     TextView userPhoneTxt;
     EditText descriptionTxt;
     ImageView userAvatarImg;
+    GridView equipmentsGridView;
     public SingleRentFragment() {
         // Required empty public constructor
     }
@@ -141,7 +146,9 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
         userPhoneTxt = (TextView)view.findViewById(R.id.SingleRentUserPhone);
         descriptionTxt = (EditText)view.findViewById(R.id.SingleRentDescriptionTxt);
         userAvatarImg = (ImageView)view.findViewById(R.id.SingleRentUserAvatarImg);
+        equipmentsGridView = (GridView)view.findViewById(R.id.SingleRentLandEquipmentsGridView);
         GetLandInfoRequest(getContext());
+        GetLandEquipmentsRequest(getContext(),landId);
         return view;
     }
 
@@ -217,6 +224,56 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
         getLandInfoRequestAsync.execute();
 
     }
+
+    public void GetLandEquipmentsRequest(final Context context, final String landId){
+        class GetEquipmentsRequestAsync extends AsyncTask<Void, Void, String> {
+
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                ArrayList<EquipmentModel> equipmentModels = new ArrayList<EquipmentModel>() ;
+                try {
+                    JSONObject reader = new JSONObject(s);
+                    Log.d(TAG, "onPostExecute: response: "+s.toString());
+                    if(reader.getInt(Constants.JSON_RESPONSE_STATE)==1){
+                        JSONArray responseList = new JSONArray(reader.getString(Constants.JSON_RESPONSE_DATA));
+                        EquipmentModel equipmentModel ;
+                        JSONObject responseItem;
+                        for(int i =0; i<responseList.length();i++){
+                            responseItem = responseList.getJSONObject(i);
+                            equipmentModel = new EquipmentModel(
+                                    responseItem.getString(Constants.LAND_EQUIPMENTS_ID),
+                                    responseItem.getString(Constants.LAND_EQUIPMENTS_TITLE),
+                                    responseItem.getString(Constants.LAND_EQUIPMENTS_LOGO)
+                            );
+                            equipmentModels.add(equipmentModel);
+                        }
+                     }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.d(TAG, "onPostExecute exception:"+e.toString());
+                }
+                LandEquipmentsAdapter equipmentsAdapter = new LandEquipmentsAdapter(equipmentModels,context);
+                equipmentsGridView.setAdapter(equipmentsAdapter);
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                HTTPRequestHandlre httpRequestHandlre = new HTTPRequestHandlre();
+                HashMap<String, String> params = new HashMap<>();
+                params.put(Constants.CONTENT_TYPE,Constants.APPLICATION_JSON);
+                params.put("LID",landId);
+                return httpRequestHandlre.sendPostRequest(Urls.getBaseURL()+Urls.getGetLandEquipments(),params);
+            }
+        }
+        GetEquipmentsRequestAsync getEquipmentsRequestAsync = new GetEquipmentsRequestAsync();
+        getEquipmentsRequestAsync.execute();
+
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view,  Bundle savedInstanceState) {

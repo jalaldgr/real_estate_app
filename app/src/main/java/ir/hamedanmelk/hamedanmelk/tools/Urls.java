@@ -30,6 +30,11 @@ public class Urls {
     private static final String GetLandSituations                       = "/AppRequests/GetLandSituations";
     private static final String GetLandViews                            = "/AppRequests/GetLandViews";
     private static final String GetLandDirections                       = "/AppRequests/GetLandDirections";
+    private static final String GetLandEquipments                       = "/AppRequests/GetLandEquipments";
+
+    public static String getGetLandEquipments() {
+        return GetLandEquipments;
+    }
 
     public static String getGetCities() {
         return GetCities;

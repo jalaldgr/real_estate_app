@@ -213,6 +213,11 @@ public class Constants {
 //    public static final String[] LAND_INFO_FIELDS={"id","Title","Address","Map","Images","Videos","province_id","city_id","area_id","district_id","land_type_id","building_condition_id","BuildingYear","land_state_id","SaleTotalPrice","SaleTotalPriceUnit","DebtTotalPrice","DebtTotalPriceUnit","MortgageTotalPrice","MortgageTotalPriceUnit","RentTotalPrice","RentTotalPriceUnit","PrePayPrice","PrePayPriceUnit","DeliveryDate","rental_preference_id","ResidentOwner","voucher_type_id","Dong","density_id","Space","space_unit_id","FoundationSpace","foundation_space_unit_id","SpacePrice","direction_id","land_view_id","floor_covering_id","kitchen_service_id","RoomCount","FloorCount","UnitInFloor","Floor","land_case_id","loan_type_id","land_situation_id","user_id","land_owner_id","View","created_at","updated_at","LandTypeTitle","LandStateTitle","ProvinceTitle","CityTitle","AreaTitle","DistrictTitle","first_name","last_name","UserDescription"};
 
 
+    /////////////////////////////Land Equipments//////////////////////////////
+    public static final String LAND_EQUIPMENTS_ID = "id";
+    public static final String LAND_EQUIPMENTS_TITLE = "Title";
+    public static final String LAND_EQUIPMENTS_LOGO = "Logo";
+
     //GetProvinceModelFields
     public static final String[] PROVINCE_MODEL_FIELDS = {"id","Title","TelegramChannelName","Disabled"};
 //    public static final String PROVINCE_MODEL_ID="id";
