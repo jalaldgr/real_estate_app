@@ -116,7 +116,7 @@ public class HomeFragment extends Fragment {
         inquirybtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.navigate(R.id.inquiryFragment);
+                controller.navigate(R.id.linksFragment);
             }
         });
 //        morebtn.setOnClickListener(new View.OnClickListener() {

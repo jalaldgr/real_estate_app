@@ -117,10 +117,10 @@
         android:label="@string/services_category"
         tools:layout="@layout/fragment_services" />
     <fragment
-        android:id="@+id/moreFragment"
-        android:name="ir.hamedanmelk.hamedanmelk.ui.category.MoreFragment"
+        android:id="@+id/linksFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.LinksFragment"
         android:label="@string/more_category"
-        tools:layout="@layout/fragment_more" />
+        tools:layout="@layout/fragment_links" />
     <fragment
         android:id="@+id/lawInstiuteFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.category.LawInstiuteFragment"

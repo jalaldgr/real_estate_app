@@ -218,6 +218,14 @@ public class Constants {
     public static final String LAND_EQUIPMENTS_TITLE = "Title";
     public static final String LAND_EQUIPMENTS_LOGO = "Logo";
 
+    ////////////////////////////////Links//////////////////////////////////////
+    public static final String LINKS_ID = "id";
+    public static final String LINKS_TITLE = "Title";
+    public static final String LINKS_lINK  = "Link";
+    public static final String LINKS_LOGO = "Logo";
+    public static final String LINKS_ORDER = "Order";
+    public static final String LINKS_DISABLED = "Disabled";
+
     //GetProvinceModelFields
     public static final String[] PROVINCE_MODEL_FIELDS = {"id","Title","TelegramChannelName","Disabled"};
 //    public static final String PROVINCE_MODEL_ID="id";
