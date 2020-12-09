@@ -233,6 +233,18 @@ public class Constants {
     public static final String COMPANY_TYPES_ORDER = "Order";
     public static final String COMPANY_TYPES_PARENT_ID = "parent_id";
 
+    public static final String[] COMPANY_FIELDS ={"id","Title","Manager","Phone","Address","company_type_id","user_id","Disabled","Logo","created_at"};
+    public static final String COMPANY_ID= "id";
+    public static final String COMPANY_TITLE = "Title";
+    public static final String COMPANY_MANAGER="Manager";
+    public static final String COMPANY_PHONE="Phone";
+    public static final String COMPANY_ADDRESS= "Address";
+    public static final String COMPANY_COMPANY_TYPE_ID = "company_type_id";
+    public static final String COMPANY_USER_ID ="user_id";
+    public static final String COMPANY_DISABLED = "Disabled";
+    public static final String COMPANY_LOGO ="Logo";
+    public static final String COMPANY_CREATED_AT= "created_at";
+    public static final String COMPANY_CID = "CID";
     //GetProvinceModelFields
     public static final String[] PROVINCE_MODEL_FIELDS = {"id","Title","TelegramChannelName","Disabled"};
 //    public static final String PROVINCE_MODEL_ID="id";

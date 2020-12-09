@@ -82,7 +82,7 @@
     <string name="duplicate_username_error_msg">کاربری تلفن همراه مورد نظر، در سیستم قبلا ایجاد شده است</string>
     <string name="register_public_user_sucess_msg">نام کاربری و رمز عبور ارسال شد</string>
 
-<!--    Single Land-->
+    <!--    Single Land-->
     <string name="land_info_land_type">نوع ملک</string>
     <string name="land_info_land_age">سن بنا</string>
     <string name="land_info_room_count">تعداد اتاق</string>
@@ -106,7 +106,7 @@
     <string name="land_info_start_chat">شروع چت</string>
 
 
-<!--Company Types-->
+    <!--Company Types-->
     <string name="company_type_building">ساختمانی</string>
     <string name="company_type_structural">تاسیساتی</string>
     <string name="company_type_decoration">دکوراسیون</string>
@@ -130,8 +130,7 @@
     <string name="vocabulary_building_year">سال ساخت</string>
     <string name="vocabulary_land_state">وضعیت ملک</string>
     <string name="vocabulary_land_case_type">نوع کاربری</string>
-    <string name="vocabulary_"></string>
-
+    <string name="vocabulary_manager">با مدیریت</string>
 
 
 </resources>

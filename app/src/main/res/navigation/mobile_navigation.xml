@@ -113,7 +113,7 @@
         tools:layout="@layout/fragment_inquiry" />
     <fragment
         android:id="@+id/servicesFragment"
-        android:name="ir.hamedanmelk.hamedanmelk.ui.category.ServicesFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.company.ServicesFragment"
         android:label="@string/services_category"
         tools:layout="@layout/fragment_services" />
     <fragment
@@ -162,5 +162,10 @@
         android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.UserLandFragment"
         android:label="fragment_user_land"
         tools:layout="@layout/fragment_user_land" />
+    <fragment
+        android:id="@+id/companyFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.company.CompanyFragment"
+        android:label="fragment_company"
+        tools:layout="@layout/fragment_company" />
 
 </navigation>

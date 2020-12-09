@@ -1,10 +1,9 @@
-package ir.hamedanmelk.hamedanmelk.ui.category;
+package ir.hamedanmelk.hamedanmelk.ui.company;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import androidx.constraintlayout.widget.Constraints;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -23,11 +22,9 @@ import java.util.HashMap;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.CompanyTypeModel;
-import ir.hamedanmelk.hamedanmelk.models.micro.LinksModel;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
-import ir.hamedanmelk.hamedanmelk.ui.category.LinksItemAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -134,7 +131,7 @@ public class ServicesFragment extends Fragment {
                     Log.d(TAG, "onPostExecute exception:"+e.toString());
                 }
 //                Log.d(TAG, "onPostExecute: "+companyTypeModels.get(0).getTitle());
-                ServicesItemAdapter servicesAllItemAdapter = new ServicesItemAdapter(allCompanyByparent_idType,getContext());
+                ServicesItemAdapter servicesAllItemAdapter = new ServicesItemAdapter(allCompanyByparent_idType,getContext(),getActivity());
                 allServicesGridView.setAdapter(servicesAllItemAdapter);
 
             }

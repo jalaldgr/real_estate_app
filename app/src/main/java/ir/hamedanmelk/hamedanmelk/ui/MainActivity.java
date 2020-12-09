@@ -1,11 +1,7 @@
 package ir.hamedanmelk.hamedanmelk.ui;
 
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,8 +9,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ShareActionProvider;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -22,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavAction;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -33,19 +26,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 
 import ir.hamedanmelk.hamedanmelk.R;
-import ir.hamedanmelk.hamedanmelk.models.micro.CompanyTypeModel;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
-import ir.hamedanmelk.hamedanmelk.ui.category.ServicesItemAdapter;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {

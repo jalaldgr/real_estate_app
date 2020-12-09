@@ -33,6 +33,11 @@ public class Urls {
     private static final String GetLandEquipments                       = "/AppRequests/GetLandEquipments";
     private static final String GetLinks                                ="/AppRequests/GetLinks";
     private static final String CompanyTypes                            ="/AppRequests/GetCompanyTypes";
+    private static final String Companies                               ="/AppRequests/GetCompanies";
+
+    public static String getCompanies() {
+        return Companies;
+    }
 
     public static String getCompanyTypes() {
         return CompanyTypes;

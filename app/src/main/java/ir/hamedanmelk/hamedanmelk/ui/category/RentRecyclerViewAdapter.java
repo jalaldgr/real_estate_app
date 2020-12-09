@@ -81,10 +81,10 @@ public class RentRecyclerViewAdapter extends RecyclerView.Adapter<RentRecyclerVi
 
         public ViewHolder(View view) {
             super(view);
-            titleTxt = (TextView) view.findViewById(R.id.RentFragmentTitleTxt);
-            totalMotgagePriceTxt = (TextView) view.findViewById(R.id.RentFragmentHomelMortgageTxt);
+            titleTxt = (TextView) view.findViewById(R.id.CompanieItemAdapterTitleTxt);
+            totalMotgagePriceTxt = (TextView) view.findViewById(R.id.CompanieItemAdapterManagerTxt);
             thumbnailImg = (ImageView)view.findViewById(R.id.RentFragmentThumbnailImg);
-            totalRentPriceTxt = (TextView)view.findViewById(R.id.RentFragmentTotalRentTxt);
+            totalRentPriceTxt = (TextView)view.findViewById(R.id.CompanieItemAdapterAddressTxt);
             districtTxt       = (TextView)view.findViewById(R.id.RentFragmentDistrictTxt);
         }
 
