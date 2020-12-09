@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -34,17 +35,18 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
+import ir.hamedanmelk.hamedanmelk.recyclers.GalleryRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
+import ir.hamedanmelk.hamedanmelk.tools.ViewPagerAdapter;
 import saman.zamani.persiandate.PersianDate;
 import saman.zamani.persiandate.PersianDateFormat;
 
@@ -63,6 +65,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
     MYSQlDBHelper qlDBHelper;
     GoogleMap mgoogleMap;
     MapView mapView;
+    private JSONArray galleryImageArrayList;
     private Marker _marker;
     private LatLng mapLatLng = new LatLng(Constants.MAP_EYDAN_LAT,Constants.MAP_MEYDAN_LNG);
     // TODO: Rename and change types of parameters
@@ -88,6 +91,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
     EditText descriptionTxt;
     ImageView userAvatarImg;
     GridView equipmentsGridView;
+    ViewPager viewPager;
     public SingleRentFragment() {
         // Required empty public constructor
     }
@@ -147,8 +151,12 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
         descriptionTxt = (EditText)view.findViewById(R.id.SingleRentDescriptionTxt);
         userAvatarImg = (ImageView)view.findViewById(R.id.SingleRentUserAvatarImg);
         equipmentsGridView = (GridView)view.findViewById(R.id.SingleRentLandEquipmentsGridView);
+        viewPager = (ViewPager) view.findViewById(R.id.SingleRentGalleryViewpager);
+
         GetLandInfoRequest(getContext());
         GetLandEquipmentsRequest(getContext(),landId);
+
+
         return view;
     }
 
@@ -173,6 +181,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                     if(reader.getInt(Constants.JSON_RESPONSE_STATE)==1){
                         JSONObject responseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
                         JSONArray images = new JSONArray(responseData.getString(Constants.LAND_INFO_IMAGES));
+                        galleryImageArrayList = images;
                         String[] mapStr = responseData.getString(Constants.LAND_INFO_MAP).split(",");
                         mapLatLng = new LatLng(Double.parseDouble(mapStr[0]),Double.parseDouble(mapStr[1]));
                         loadMap();
@@ -202,7 +211,10 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                                 " "+responseData.getString(Constants.LAND_INFO_LAST_NAME));
                         userPhoneTxt.setText(responseData.getString(Constants.LAND_INFO_USER_PHONE));
                         userDescriptionTxt.setText(Html.fromHtml(responseData.getString(Constants.LAND_INFO_USER_DESCRIPTION)));
+                        GalleryRecyclerViewAdapter galleryRecyclerViewAdapter = new GalleryRecyclerViewAdapter(getContext(),images);
+                        viewPager.setAdapter(galleryRecyclerViewAdapter);
                         new DownloadImage(userAvatarImg).execute(Urls.getBaseURL()+"/"+responseData.getString(Constants.LAND_INFO_USER_IMAGE));
+
                     }
 
                 } catch (JSONException e) {

@@ -1,4 +1,4 @@
-package ir.hamedanmelk.hamedanmelk.tools;
+package ir.hamedanmelk.hamedanmelk.recyclers;
 
 
 import android.content.Context;
@@ -11,21 +11,28 @@ import android.widget.ImageView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
+import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
-public class ViewPagerAdapter extends PagerAdapter {
-
+public class GalleryRecyclerViewAdapter extends PagerAdapter {
+    private JSONArray galleryImages;
     private Context context;
     private LayoutInflater layoutInflater;
-    private Integer [] images = {R.mipmap.ic_banner_ad_test,R.mipmap.ic_banner_ad_test};
 
-    public ViewPagerAdapter(Context context) {
+
+    public GalleryRecyclerViewAdapter(Context context, JSONArray images) {
         this.context = context;
+        galleryImages = images;
+
     }
 
     @Override
     public int getCount() {
-        return images.length;
+        return galleryImages.length();
     }
 
     @Override
@@ -37,9 +44,15 @@ public class ViewPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, final int position) {
 
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.image_banners_layout, null);
+        View view = layoutInflater.inflate(R.layout.image_gallery_layout, null);
         ImageView imageView = (ImageView) view.findViewById(R.id.GalleryAdapterImg);
-        imageView.setImageResource(images[position]);
+
+
+        try {
+            new DownloadImage(imageView).execute(Urls.getBaseURL()+"/"+galleryImages.getString(position));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         ViewPager vp = (ViewPager) container;
         vp.addView(view, 0);

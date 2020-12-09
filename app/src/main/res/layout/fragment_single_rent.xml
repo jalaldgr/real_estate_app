@@ -14,11 +14,10 @@
         android:orientation="vertical"
         android:textDirection="rtl">
 
-        <ImageView
-            android:id="@+id/imageView4"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/SingleRentGalleryViewpager"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:src="@android:drawable/ic_menu_manage" />
+            android:layout_height="330dp" />
 
 
         <LinearLayout
