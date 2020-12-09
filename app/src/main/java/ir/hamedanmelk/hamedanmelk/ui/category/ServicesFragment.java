@@ -1,66 +1,152 @@
 package ir.hamedanmelk.hamedanmelk.ui.category;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.Constraints;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.GridView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.models.micro.CompanyTypeModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.LinksModel;
+import ir.hamedanmelk.hamedanmelk.tools.Constants;
+import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
+import ir.hamedanmelk.hamedanmelk.tools.Urls;
+import ir.hamedanmelk.hamedanmelk.ui.category.LinksItemAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ServicesFragment#newInstance} factory method to
- * create an instance of this fragment.
  */
 public class ServicesFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private static final String TAG = "ServicesFragment";
+    GridView servicesGridView;
+    GridView allServicesGridView;
+    Button buildingBtn;
+    Button decorationBtn;
+    Button structuralBtn;
+    Button servicesBtn;
     public ServicesFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ServicesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ServicesFragment newInstance(String param1, String param2) {
-        ServicesFragment fragment = new ServicesFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_services, container, false);
+        Log.d(TAG, "onCreateView: enter");
+        View view = inflater.inflate(R.layout.fragment_services, container, false);
+
+        allServicesGridView = (GridView)view.findViewById(R.id.ServicesFragmentAllGridView);
+        buildingBtn = (Button)view.findViewById(R.id.ServicesFragmentBuildingBtn);
+        decorationBtn=(Button)view.findViewById(R.id.ServicesFragmentDecorationBtn);
+        structuralBtn=(Button)view.findViewById(R.id.ServicesFragmentStructurallBtn);
+        servicesBtn = (Button)view.findViewById(R.id.ServicesFragmentServicesBtn);
+        buildingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GetCompanyTypesRequest(getContext(),"10");
+            }
+        });
+        decorationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GetCompanyTypesRequest(getContext(),"12");
+
+            }
+        });
+        structuralBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GetCompanyTypesRequest(getContext(),"11");
+
+            }
+        });
+        servicesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GetCompanyTypesRequest(getContext(),"50");
+
+            }
+        });
+
+        return view;
+    }
+
+    public void GetCompanyTypesRequest(final Context context, final String parent_id){
+        class GetcompanyTypesRequestAsync extends AsyncTask<Void, Void, String> {
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                Log.d(TAG, "onPostExecute: "+s.toString());
+                ArrayList<CompanyTypeModel> companyTypeModels = new ArrayList<CompanyTypeModel>() ;
+                ArrayList<CompanyTypeModel> allCompanyByparent_idType = new ArrayList<CompanyTypeModel>();
+
+                try {
+                    JSONObject reader = new JSONObject(s);
+                    Log.d(TAG, "onPostExecute response: "+s.toString());
+                    if(reader.getInt(Constants.JSON_RESPONSE_STATE)==1){
+                        JSONArray responseList = new JSONArray(reader.getString(Constants.JSON_RESPONSE_DATA));
+                        CompanyTypeModel companyTypeModel ;
+                        JSONObject responseItem;
+                        for(int i =0; i<responseList.length();i++){
+                            responseItem = responseList.getJSONObject(i);
+                            companyTypeModel = new CompanyTypeModel(
+                                    responseItem.getString(Constants.COMPANY_TYPES_ID),
+                                    responseItem.getString(Constants.COMPANY_TYPES_TITLE),
+                                    responseItem.getString(Constants.COMPANY_TYPES_ORDER),
+                                    responseItem.getString(Constants.COMPANY_TYPES_PARENT_ID)
+                            );
+                            if (companyTypeModel.getParent_id().equals("null")) {
+                                companyTypeModels.add(companyTypeModel);
+                            }
+                            if (companyTypeModel.getParent_id().equals(parent_id)){
+                                allCompanyByparent_idType.add(companyTypeModel);
+                            }
+                        }
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.d(TAG, "onPostExecute exception:"+e.toString());
+                }
+//                Log.d(TAG, "onPostExecute: "+companyTypeModels.get(0).getTitle());
+                ServicesItemAdapter servicesAllItemAdapter = new ServicesItemAdapter(allCompanyByparent_idType,getContext());
+                allServicesGridView.setAdapter(servicesAllItemAdapter);
+
+            }
+            @Override
+            protected String doInBackground(Void... voids) {
+                HTTPRequestHandlre httpRequestHandlre = new HTTPRequestHandlre();
+                HashMap<String, String> params = new HashMap<>();
+                params.put(Constants.CONTENT_TYPE,Constants.APPLICATION_JSON);
+                return httpRequestHandlre.sendGetRequest(Urls.getBaseURL()+Urls.getCompanyTypes(),params);
+            }
+        }
+        GetcompanyTypesRequestAsync getcompanyTypesRequestAsync = new GetcompanyTypesRequestAsync();
+        getcompanyTypesRequestAsync.execute();
     }
 }

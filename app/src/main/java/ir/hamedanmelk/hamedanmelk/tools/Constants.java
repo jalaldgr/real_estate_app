@@ -226,6 +226,13 @@ public class Constants {
     public static final String LINKS_ORDER = "Order";
     public static final String LINKS_DISABLED = "Disabled";
 
+    //////////////////////////////CompanyTypes//////////////////////////////////////
+    public static final String[] COMPANY_TYPES_MODEL_FIELDS = {"id","Title","CTOrder","parent_id"};
+    public static final String COMPANY_TYPES_ID = "id";
+    public static final String COMPANY_TYPES_TITLE = "Title";
+    public static final String COMPANY_TYPES_ORDER = "Order";
+    public static final String COMPANY_TYPES_PARENT_ID = "parent_id";
+
     //GetProvinceModelFields
     public static final String[] PROVINCE_MODEL_FIELDS = {"id","Title","TelegramChannelName","Disabled"};
 //    public static final String PROVINCE_MODEL_ID="id";

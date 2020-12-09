@@ -33,16 +33,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.models.micro.CompanyTypeModel;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
+import ir.hamedanmelk.hamedanmelk.ui.category.ServicesItemAdapter;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
@@ -66,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         GetProvinceRequest(getApplicationContext());
         GetDistrictRequest(getApplicationContext());
+//        GetCompanyTypesRequest(getApplicationContext());
         GetCitiesRequest(getApplicationContext());
         GetAreasRequest(getApplicationContext());
         GetLandTypeRequest(getApplicationContext());
@@ -742,4 +746,47 @@ public class MainActivity extends AppCompatActivity {
         GetLandDirectionsRequestAsync getLandDirectionsRequestAsync = new GetLandDirectionsRequestAsync();
         getLandDirectionsRequestAsync.execute();
     }
+
+    public void GetCompanyTypesRequest(final Context context){
+        class GetCompanyTypesRequestAsync extends AsyncTask<Void, Void, String> {
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+
+                try {
+                    JSONObject reader = new JSONObject(s);
+                    Log.d(TAG, "onPostExecute response: "+s.toString());
+                    if (reader.getInt("State") > 0) {
+                        JSONArray dataResult = reader.getJSONArray("Data");
+                        String[] modelFields = Constants.COMPANY_TYPES_MODEL_FIELDS;
+                        dbHelper.DeleteCompanyTypes();
+                        for (int i = 0; i < dataResult.length(); i++) {
+                            JSONObject rowItem = dataResult.getJSONObject(i);
+                            ContentValues itemCV = new ContentValues();
+                            for (String columnItem : modelFields) {
+                                itemCV.put(columnItem, rowItem.getString(columnItem));
+                            }
+                            dbHelper.InsertCompanyTypes(itemCV);
+                        }
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.d(TAG, "onPostExecute exception:"+e.toString());
+                }
+            }
+            @Override
+            protected String doInBackground(Void... voids) {
+                HTTPRequestHandlre httpRequestHandlre = new HTTPRequestHandlre();
+                HashMap<String, String> params = new HashMap<>();
+                params.put(Constants.CONTENT_TYPE,Constants.APPLICATION_JSON);
+                return httpRequestHandlre.sendGetRequest(Urls.getBaseURL()+Urls.getCompanyTypes(),params);
+            }
+        }
+        GetCompanyTypesRequestAsync getcompanyTypesRequestAsync = new GetCompanyTypesRequestAsync();
+        getcompanyTypesRequestAsync.execute();
+    }
+
 }

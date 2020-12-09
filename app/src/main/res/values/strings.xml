@@ -105,6 +105,13 @@
     <string name="land_info_user_more_info">اطلاعات بیشتر</string>
     <string name="land_info_start_chat">شروع چت</string>
 
+
+<!--Company Types-->
+    <string name="company_type_building">ساختمانی</string>
+    <string name="company_type_structural">تاسیساتی</string>
+    <string name="company_type_decoration">دکوراسیون</string>
+    <string name="company_type_services">خدماتی</string>
+
     <!--    Authentication Method Fields-->
     <string name="authentication_username">Username</string>
     <string name="authentication_password">Password</string>

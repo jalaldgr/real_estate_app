@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import ir.hamedanmelk.hamedanmelk.models.micro.AreaModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.BuildingConditionModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.CityModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.CompanyTypeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.DensityTypeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.DistrictModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
@@ -50,6 +51,7 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String LAND_VIEWS_TABLE_NAME ="LandViews";
     private static final String LAND_DIRECTIONS_TABLE_NAME ="LandDirections";
     private static final String LAND_EQUIPMENTS_TABLE_NAME="Equipments";
+    private static final String COMPANY_TYPES_TABLE_NAME = "CompanyTypes";
 
     private static final String PROVINCE_TABLE_COLUMN_ID="id";
     private static final String PROVINCE_TABLE_COLUMN_TITLE="Title";
@@ -108,6 +110,13 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String LAND_EQUIPMENTS_TABLE_COLUMN_ID     ="id";
     private static final String LAND_EQUIPMENTS_TABLE_COLUMN_TITLE  ="Title";
     private static final String LAND_EQUIPMENTS_TABLE_COLUMN_LOGO   ="Logo";
+
+    private static final String COMPANY_TYPES_TABLE_COLUMN_ID       ="id";
+    private static final String COMPANY_TYPES_TABLE_COLUMN_TITLE    ="Title";
+    private static final String COMPANY_TYPES_TABLE_COLUMN_ORDER    ="CTOrder";
+    private static final String COMPANY_TYPES_TABLE_COLUMN_PARENT_ID="parent_id";
+
+
 
     private static final String CREATE_PROVINCE_TABLE= "CREATE TABLE "+PROVINCE_TABLE_NAME+"("
             + PROVINCE_TABLE_COLUMN_ID + " TEXT,"
@@ -199,6 +208,13 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
             + LAND_EQUIPMENTS_TABLE_COLUMN_ID+ " TEXT,"
             + LAND_EQUIPMENTS_TABLE_COLUMN_TITLE + " TEXT,"
             +LAND_EQUIPMENTS_TABLE_COLUMN_LOGO +" TEXT"
+            +")";
+
+    private static final String CREATE_COMPANY_TYPES_TABLE="CREATE TABLE "+COMPANY_TYPES_TABLE_NAME+"("
+            + COMPANY_TYPES_TABLE_COLUMN_ID + " TEXT,"
+            + COMPANY_TYPES_TABLE_COLUMN_TITLE + " TEXT,"
+            + COMPANY_TYPES_TABLE_COLUMN_ORDER + " TEXT,"
+            + COMPANY_TYPES_TABLE_COLUMN_PARENT_ID + " TEXT"
             +")";
 //////////////////////////////////////Provinces methods////////////////////////////////////////////////
     public void InsertProvinces(ContentValues cv){
@@ -1152,13 +1168,24 @@ public void InsertDistrict(ContentValues cv){
     }
 
     ////////////////////////////////////////Land Equipments////////////////////////////////////////////////
-    public ArrayList<EquipmentModel> GetLandEquipmentsListByLandID(){
+    public void InsertLandEquipments(ContentValues cv){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(LAND_EQUIPMENTS_TABLE_NAME, null, cv);
+        db.close();
+    }
+
+    public void DeleteLandEquipments(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+LAND_EQUIPMENTS_TABLE_NAME);
+        db.close();
+    }
+    public ArrayList<EquipmentModel> GetLandEquipmentsListByLandID(String id){
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<EquipmentModel> equipmentModels = new ArrayList<EquipmentModel>();
         EquipmentModel equipmentModel;
         Cursor c;
         try {
-            c = db.rawQuery("SELECT * FROM "+LAND_EQUIPMENTS_TABLE_NAME, null);
+            c = db.rawQuery("SELECT * FROM "+LAND_EQUIPMENTS_TABLE_NAME+" WHERE id = "+id, null);
             if (c == null)
                 return null;
             int counter = 0;
@@ -1178,6 +1205,72 @@ public void InsertDistrict(ContentValues cv){
         return equipmentModels;
     }
 
+
+    //////////////////////////////////CompanyTypes/////////////////////////////////////////
+    public void InsertCompanyTypes(ContentValues cv){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(COMPANY_TYPES_TABLE_NAME, null, cv);
+        db.close();
+    }
+
+    public void DeleteCompanyTypes(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+COMPANY_TYPES_TABLE_NAME);
+        db.close();
+    }
+    public ArrayList<CompanyTypeModel> GetCompanyTypesByParentID(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<CompanyTypeModel> companyTypeModels = new ArrayList<CompanyTypeModel>();
+        CompanyTypeModel  companyTypeModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM "+COMPANY_TYPES_TABLE_NAME+" WHERE id = "+id, null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do{
+                companyTypeModel = new CompanyTypeModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3));
+                companyTypeModels.add(companyTypeModel);
+                counter++;
+            }while (c.moveToNext());
+            c.close();
+        }catch (Exception e){
+            Log.d("GetCompanyTypes Says:", e.toString());}
+        db.close();
+        return companyTypeModels;
+    }
+
+    public ArrayList<CompanyTypeModel> GetParentCompanyTypes(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<CompanyTypeModel> companyTypeModels = new ArrayList<CompanyTypeModel>();
+        CompanyTypeModel  companyTypeModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM "+COMPANY_TYPES_TABLE_NAME+" WHERE parent_id = null", null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do{
+                companyTypeModel = new CompanyTypeModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3));
+                companyTypeModels.add(companyTypeModel);
+                counter++;
+            }while (c.moveToNext());
+            c.close();
+        }catch (Exception e){
+            Log.d("GetCompanyTypes Says:", e.toString());}
+        db.close();
+        return companyTypeModels;
+    }
     //----------------------------------------------------------------------------------------------
 
     public MYSQlDBHelper( Context context) {
@@ -1210,6 +1303,7 @@ public void InsertDistrict(ContentValues cv){
         sqLiteDatabase.execSQL(CREATE_LAND_VIEWS_TABLE);
         sqLiteDatabase.execSQL(CREATE_LAND_DIRECTIONS_TABLE);
         sqLiteDatabase.execSQL(CREATE_LAND_EQUIPMENTS_TABLE);
+        sqLiteDatabase.execSQL(CREATE_COMPANY_TYPES_TABLE);
 
 
 
@@ -1235,5 +1329,6 @@ public void InsertDistrict(ContentValues cv){
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+LAND_VIEWS_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+LAND_DIRECTIONS_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+LAND_EQUIPMENTS_TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+COMPANY_TYPES_TABLE_NAME);
     }
 }
