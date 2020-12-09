@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/cardview_default_radius"
+    android:theme="@style/Widget.MaterialComponents.CardView"
+    android:elevation="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/UserFavoriteFragmentThumbnailImg"
+                android:layout_width="136dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center|center_horizontal|center_vertical"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/ic_action_camera" />
+
+            <TextView
+                android:id="@+id/UserFavoriteFragmentDistrictTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/vocabulary_district" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/UserFavoriteFragmentTitleTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:paddingStart="8dp"
+                android:text="@string/vocabulary_title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/UserFavoriteFragmentStarImg"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:adjustViewBounds="true"
+                android:cropToPadding="true"
+                android:scaleType="fitXY"
+                android:visibility="gone"
+                app:srcCompat="@android:drawable/star_big_on" />
+
+            <LinearLayout
+                android:id="@+id/UserFavoriteFragmentTotalSalePriceLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:text="@string/vocabulary_total_price" />
+
+                <TextView
+                    android:id="@+id/UserFavoriteFragmentTotalSaleTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingStart="8dp"
+                    android:text="@string/vocabulary_total_price" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/UserFavoriteFragmentTotalMortgagePriceLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:text="@string/vocabulary_mortgage_price" />
+
+                <TextView
+                    android:id="@+id/UserFavoriteFragmentHomelMortgageTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingStart="8dp"
+                    android:text="@string/vocabulary_mortgage_price" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/UserFavoriteFragmentTotalRentPriceLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:text="@string/vocabulary_rent_price" />
+
+                <TextView
+                    android:id="@+id/UserFavoriteFragmentTotalRentTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:text="@string/vocabulary_rent_price" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

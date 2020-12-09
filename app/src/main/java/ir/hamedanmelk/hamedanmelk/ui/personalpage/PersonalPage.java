@@ -91,6 +91,7 @@ public class PersonalPage extends Fragment {
         TextView phonetxt=(TextView)v.findViewById(R.id.PersonalPagePhonetxt);
         ImageView avatarImg = (ImageView)v.findViewById(R.id.PersonalPageAvatarImg);
         Button mylist = (Button)v.findViewById(R.id.PersonalPageMyListBtn);
+        Button myFavorites= (Button)v.findViewById(R.id.PersonalPageFavoritesBtn);
         String fullnamestr=user_pref.getString(user_model_fields[2],"")+" "+user_pref.getString(user_model_fields[3],"");
         Log.d("hhh", "onCreateView: "+user_pref.toString());
         String phonestr=user_pref.getString(user_model_fields[1],"");
@@ -114,6 +115,14 @@ public class PersonalPage extends Fragment {
                 args.putString("id",user_pref.getString("id","8"));
                 controller.navigate(R.id.userLandFragment,args);
 
+            }
+        });
+        myFavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle args=new Bundle();
+                args.putString("id",user_pref.getString("id","8"));
+                controller.navigate(R.id.userFavoritesFragment,args);
             }
         });
         return v;

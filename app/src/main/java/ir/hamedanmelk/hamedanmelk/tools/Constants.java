@@ -20,6 +20,8 @@ public class Constants {
     public static final String USER_MODEL_LAST_NAME= "last_name";
     public static final String USER_MODEL_IMAGE= "Image";
     public static final String[] USER_MODEL_FIELDS={"id","email","first_name","last_name","Image"};
+    /////////////////Bookmarks/////////////////////////
+    public static final String BOOKMARK_ID ="id";
 
     //RegisterPublicUser
     public static final String REGISTER_PUBLIC_USER_FIRST_NAME="FirstName";
@@ -245,6 +247,9 @@ public class Constants {
     public static final String COMPANY_LOGO ="Logo";
     public static final String COMPANY_CREATED_AT= "created_at";
     public static final String COMPANY_CID = "CID";
+    public static final String LAND_INFO_LID = "LID";
+    public static final String LAND_INFO_UID = "UID";
+
     //GetProvinceModelFields
     public static final String[] PROVINCE_MODEL_FIELDS = {"id","Title","TelegramChannelName","Disabled"};
 //    public static final String PROVINCE_MODEL_ID="id";

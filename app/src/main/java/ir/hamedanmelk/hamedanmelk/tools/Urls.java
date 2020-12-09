@@ -34,6 +34,21 @@ public class Urls {
     private static final String GetLinks                                ="/AppRequests/GetLinks";
     private static final String CompanyTypes                            ="/AppRequests/GetCompanyTypes";
     private static final String Companies                               ="/AppRequests/GetCompanies";
+    private static final String UserFavorites                           ="/AppRequests/GetUserLandFavorites";
+    private static final String UserLandFavoriteRemove                  ="/AppRequests/UserLandFavoriteRemove";
+    private static final String UserLandFavoriteSubmit                  ="/AppRequests/UserLandFavoriteSubmit";
+
+    public static String getUserLandFavoriteRemove() {
+        return UserLandFavoriteRemove;
+    }
+
+    public static String getUserLandFavoriteSubmit() {
+        return UserLandFavoriteSubmit;
+    }
+
+    public static String getUserFavorites() {
+        return UserFavorites;
+    }
 
     public static String getCompanies() {
         return Companies;

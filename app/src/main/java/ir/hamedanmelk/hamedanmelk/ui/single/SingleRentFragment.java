@@ -2,6 +2,7 @@ package ir.hamedanmelk.hamedanmelk.ui.single;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -9,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -38,6 +41,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.models.RentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.GalleryRecyclerViewAdapter;
@@ -92,6 +96,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
     ImageView userAvatarImg;
     GridView equipmentsGridView;
     ViewPager viewPager;
+    CheckBox bookmarkChckbx;
     public SingleRentFragment() {
         // Required empty public constructor
     }
@@ -152,6 +157,24 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
         userAvatarImg = (ImageView)view.findViewById(R.id.SingleRentUserAvatarImg);
         equipmentsGridView = (GridView)view.findViewById(R.id.SingleRentLandEquipmentsGridView);
         viewPager = (ViewPager) view.findViewById(R.id.SingleRentGalleryViewpager);
+        bookmarkChckbx = (CheckBox)view.findViewById(R.id.SingleRentFragmentBookmarkChckbx);
+        bookmarkChckbx.setChecked(qlDBHelper.isBookmarkedByLandID(landId));
+        
+        bookmarkChckbx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    AddFavoriteRequest(getContext());
+                    qlDBHelper.InsertBookmark(landId);
+
+                }
+                else {
+                    RemoveFavoriteRequest(getContext());
+                    qlDBHelper.DeleteBookmarkByLandID(landId);
+                }
+            }
+        });
+        
 
         GetLandInfoRequest(getContext());
         GetLandEquipmentsRequest(getContext(),landId);
@@ -284,6 +307,74 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
         GetEquipmentsRequestAsync getEquipmentsRequestAsync = new GetEquipmentsRequestAsync();
         getEquipmentsRequestAsync.execute();
 
+    }
+
+    public void AddFavoriteRequest(final Context context){
+        class AddFavoriteRequestAsync extends AsyncTask<Void ,Void, String> {
+            @Override
+            protected void onPostExecute(String s) {
+                Log.d(TAG, "onPostExecute: "+s.toString());
+                super.onPostExecute(s);
+                try {
+                    JSONObject reader = new JSONObject(s);
+                    JSONObject ResponseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
+                    if (reader.getInt(Constants.JSON_RESPONSE_STATE)==1)
+                    {
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.d(TAG, "onPostExecute exception: "+e.toString());
+                }
+
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                SharedPreferences user_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
+                HTTPRequestHandlre httpRequestHandlre = new HTTPRequestHandlre();
+                HashMap<String,String> params = new HashMap<>();
+                params.put(Constants.CONTENT_TYPE,Constants.APPLICATION_JSON);
+                params.put(Constants.LAND_INFO_LID,landId);
+                params.put(Constants.LAND_INFO_UID,user_pref.getString("id","8"));
+                return httpRequestHandlre.sendPostRequest(Urls.getBaseURL()+Urls.getUserLandFavoriteSubmit(),params);
+            }
+        }
+        AddFavoriteRequestAsync AddFavoriteRequestAsync = new AddFavoriteRequestAsync();
+        AddFavoriteRequestAsync.execute();
+    }
+
+    public void RemoveFavoriteRequest(final Context context){
+        class AddFavoriteRequestAsync extends AsyncTask<Void ,Void, String> {
+            @Override
+            protected void onPostExecute(String s) {
+                Log.d(TAG, "onPostExecute: "+s.toString());
+                super.onPostExecute(s);
+                try {
+                    JSONObject reader = new JSONObject(s);
+                    JSONObject ResponseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
+                    if (reader.getInt(Constants.JSON_RESPONSE_STATE)==1)
+                    {
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.d(TAG, "onPostExecute exception: "+e.toString());
+                }
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                SharedPreferences user_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
+                HTTPRequestHandlre httpRequestHandlre = new HTTPRequestHandlre();
+                HashMap<String,String> params = new HashMap<>();
+                params.put(Constants.CONTENT_TYPE,Constants.APPLICATION_JSON);
+                params.put(Constants.LAND_INFO_LID,landId);
+                params.put(Constants.LAND_INFO_UID,user_pref.getString("id","8"));
+                return httpRequestHandlre.sendPostRequest(Urls.getBaseURL()+Urls.getUserLandFavoriteRemove(),params);
+            }
+        }
+        AddFavoriteRequestAsync AddFavoriteRequestAsync = new AddFavoriteRequestAsync();
+        AddFavoriteRequestAsync.execute();
     }
 
 

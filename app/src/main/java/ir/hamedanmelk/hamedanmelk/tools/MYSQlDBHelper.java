@@ -52,6 +52,7 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String LAND_DIRECTIONS_TABLE_NAME ="LandDirections";
     private static final String LAND_EQUIPMENTS_TABLE_NAME="Equipments";
     private static final String COMPANY_TYPES_TABLE_NAME = "CompanyTypes";
+    private static final String BOOKMARK_TABLE_NAME = "Bookmarks";
 
     private static final String PROVINCE_TABLE_COLUMN_ID="id";
     private static final String PROVINCE_TABLE_COLUMN_TITLE="Title";
@@ -116,6 +117,7 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String COMPANY_TYPES_TABLE_COLUMN_ORDER    ="CTOrder";
     private static final String COMPANY_TYPES_TABLE_COLUMN_PARENT_ID="parent_id";
 
+    private static final String BOOKMARK_TABLE_COLUMN_ID            ="id";
 
 
     private static final String CREATE_PROVINCE_TABLE= "CREATE TABLE "+PROVINCE_TABLE_NAME+"("
@@ -215,6 +217,10 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
             + COMPANY_TYPES_TABLE_COLUMN_TITLE + " TEXT,"
             + COMPANY_TYPES_TABLE_COLUMN_ORDER + " TEXT,"
             + COMPANY_TYPES_TABLE_COLUMN_PARENT_ID + " TEXT"
+            +")";
+
+    private static final String CREATE_BOOKMARK_TABLE="CREATE TABLE "+BOOKMARK_TABLE_NAME+"("
+            + COMPANY_TYPES_TABLE_COLUMN_ID + " TEXT"
             +")";
 //////////////////////////////////////Provinces methods////////////////////////////////////////////////
     public void InsertProvinces(ContentValues cv){
@@ -322,7 +328,6 @@ public void InsertDistrict(ContentValues cv){
             if (cursor==null) return null;
 
             cursor.moveToFirst();
-            Log.d(TAG, "GetDistrictByID: "+cursor.toString());
             districtModel = new DistrictModel(
                     cursor.getString(0),
                     cursor.getString(1),
@@ -1271,6 +1276,47 @@ public void InsertDistrict(ContentValues cv){
         db.close();
         return companyTypeModels;
     }
+
+    //////////////Bookmarks Method/////////////
+    public void InsertBookmark(String landID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(Constants.BOOKMARK_ID,landID);
+        db.insert(BOOKMARK_TABLE_NAME, null, cv);
+        Log.d(TAG, "InsertBookmark: "+landID);
+        db.close();
+    }
+
+
+    public void DeleteBookmarks(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+BOOKMARK_TABLE_NAME);
+        db.close();
+    }
+
+
+    public void DeleteBookmarkByLandID(String landid){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(BOOKMARK_TABLE_NAME, Constants.BOOKMARK_ID + "=" + landid, null);
+        db.close();
+    }
+
+    public Boolean isBookmarkedByLandID(String landid){
+        SQLiteDatabase db = this.getWritableDatabase();
+        boolean landExist=false;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM "+BOOKMARK_TABLE_NAME+" WHERE id = "+landid, null);
+            if(c.getCount()>0)landExist=true;
+            c.close();
+        }catch (Exception e){
+            Log.d(TAG, "isBookmarkedBayLandID: "+e.toString());
+        }
+        db.close();
+
+        return landExist;
+    }
+
     //----------------------------------------------------------------------------------------------
 
     public MYSQlDBHelper( Context context) {
@@ -1304,10 +1350,7 @@ public void InsertDistrict(ContentValues cv){
         sqLiteDatabase.execSQL(CREATE_LAND_DIRECTIONS_TABLE);
         sqLiteDatabase.execSQL(CREATE_LAND_EQUIPMENTS_TABLE);
         sqLiteDatabase.execSQL(CREATE_COMPANY_TYPES_TABLE);
-
-
-
-
+        sqLiteDatabase.execSQL(CREATE_BOOKMARK_TABLE);
     }
 
     @Override
@@ -1330,5 +1373,6 @@ public void InsertDistrict(ContentValues cv){
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+LAND_DIRECTIONS_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+LAND_EQUIPMENTS_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+COMPANY_TYPES_TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+BOOKMARK_TABLE_NAME);
     }
 }

@@ -74,6 +74,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="آگهی های من" />
+
+        <Button
+            android:id="@+id/PersonalPageFavoritesBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  مورد علاقه" />
     </LinearLayout>
 
 </FrameLayout>

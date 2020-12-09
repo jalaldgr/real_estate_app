@@ -167,5 +167,10 @@
         android:name="ir.hamedanmelk.hamedanmelk.ui.company.CompanyFragment"
         android:label="fragment_company"
         tools:layout="@layout/fragment_company" />
+    <fragment
+        android:id="@+id/userFavoritesFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.UserFavoritesFragment"
+        android:label="fragment_user_favorites"
+        tools:layout="@layout/fragment_user_favorites" />
 
 </navigation>
