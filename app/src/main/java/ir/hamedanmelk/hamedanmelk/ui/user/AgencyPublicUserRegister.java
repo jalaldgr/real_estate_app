@@ -4,11 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +12,10 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,10 +30,10 @@ import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link PublicUserRegister#newInstance} factory method to
+ * Use the {@link AgencyPublicUserRegister#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PublicUserRegister extends Fragment {
+public class AgencyPublicUserRegister extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,7 +44,7 @@ public class PublicUserRegister extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public PublicUserRegister() {
+    public AgencyPublicUserRegister() {
         // Required empty public constructor
     }
 
@@ -58,8 +57,8 @@ public class PublicUserRegister extends Fragment {
      * @return A new instance of fragment UserRegister.
      */
     // TODO: Rename and change types and number of parameters
-    public static PublicUserRegister newInstance(String param1, String param2) {
-        PublicUserRegister fragment = new PublicUserRegister();
+    public static AgencyPublicUserRegister newInstance(String param1, String param2) {
+        AgencyPublicUserRegister fragment = new AgencyPublicUserRegister();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -77,47 +76,37 @@ public class PublicUserRegister extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
-        View v = inflater.inflate(R.layout.fragment_user_register, container, false);
-        Button registerbtn = (Button)v.findViewById(R.id.PublicUserRegisterRegisterationBtn);
-        final TextView firstnametxt = (TextView)v.findViewById(R.id.PublicUserRegistereFirstNametxt);
-        final TextView lastnametxt = (TextView)v.findViewById(R.id.PublicUserRegistereLastNametxt);
-        final TextView phonetxt = (TextView)v.findViewById(R.id.PublicUserRegisterePhonetxt);
-        final RadioGroup gendertypegrp= (RadioGroup)v.findViewById(R.id.PublicUserRegisterGenderTypeRadioGrp);
-        final TextView registerAgencyTxt = (TextView)v.findViewById(R.id.PublicUserRegistereAgencyRegistertxt);
+        View v = inflater.inflate(R.layout.fragment_agency_user_register, container, false);
+        Button registerBtn = (Button)v.findViewById(R.id.AgencyPublicUserRegisterRegisterationBtn);
+        final TextView firstNameTxt = (TextView)v.findViewById(R.id.AgencyPublicUserRegisterFirstNametxt);
+        final TextView lastNameTxt = (TextView)v.findViewById(R.id.AgencyPublicUserRegisterLastNametxt);
+        final TextView agencyName = (TextView)v.findViewById(R.id.AgencyPublicUserRegistereAgencyNamext);
+        final TextView managerName = (TextView)v.findViewById(R.id.AgencyPublicUserRegistereManagerNametxt);
+        final TextView agencyPhone = (TextView)v.findViewById(R.id.AgencyPublicUserRegistereAgencyPhonetxt);
+        final TextView mobileTxt = (TextView)v.findViewById(R.id.AgencyPublicUserRegistereMobiletxt);
 
-
-        registerbtn.setOnClickListener(new View.OnClickListener() {
+        registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            String selectedgender="";
-            if(gendertypegrp.getCheckedRadioButtonId()==R.id.PublicUserRegisterGenderTypeMaleRadioBtn)selectedgender="1";
-            else if(gendertypegrp.getCheckedRadioButtonId()==R.id.PublicUserRegisterGenderTypeFemaleRadioBtn)selectedgender="2";
-            final String finalselectedgender=selectedgender;
-            PublicUserRegisterRequest(
-                    firstnametxt.getText().toString(),
-                    lastnametxt.getText().toString(),
-                    finalselectedgender,
-                    phonetxt.getText().toString(),
-                    getContext()
-            );
-            }
-        });
-
-        registerAgencyTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.navigate(R.id.agencyPublicUserRegister);
+                PublicAgencyUserRegisterRequest(
+                firstNameTxt.getText().toString(),
+                lastNameTxt.getText().toString(),
+                agencyName.getText().toString(),
+                managerName.getText().toString(),
+                agencyPhone.getText().toString(),
+                mobileTxt.getText().toString(),
+                getContext() ) ;
             }
         });
         return v;
     }
 
-    public void PublicUserRegisterRequest(final String firstname, final String lastname, final String gendertype ,final String phone , final Context context){
-        class PublicUserRegisteraAsync extends AsyncTask<Void,Void,String>{
+    public void PublicAgencyUserRegisterRequest(final String firsName, final String lastName, final String agencyName ,final String agencyManager ,final String agencyPhone,final String mobile, final Context context){
+        class PublicUserAgencyRegisterAsync extends AsyncTask<Void,Void,String>{
             private final ProgressDialog progressDialog = new ProgressDialog(context);
             @Override
             protected void onPreExecute() {
@@ -159,14 +148,17 @@ public class PublicUserRegister extends Fragment {
                 HTTPRequestHandlre httpRequestHandlre = new HTTPRequestHandlre();
                 HashMap<String,String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
-                params.put(Constants.REGISTER_PUBLIC_USER_FIRST_NAME,firstname);
-                params.put(Constants.REGISTER_PUBLIC_USER_LAST_NAME,lastname);
-                params.put(Constants.REGISTER_PUBLIC_USER_GENDER_TYPE,gendertype);
-                params.put(Constants.REGISTER_PUBLIC_USER_MOBILE,phone);
+                params.put(Constants.REGISTER_AGENCY_PUBLIC_USER_FIRST_NAME,firsName);
+                params.put(Constants.REGISTER_AGENCY_PUBLIC_USER_LAST_NAME,lastName);
+                params.put(Constants.REGISTER_AGENCY_PUBLIC_USER_AGENCY_NAME,agencyName);
+                params.put(Constants.REGISTER_AGENCY_PUBLIC_USER_MANAGER_NAME,agencyName);
+                params.put(Constants.REGISTER_AGENCY_PUBLIC_USER_PHONE,agencyPhone);
+                params.put(Constants.REGISTER_AGENCY_PUBLIC_USER_MOBILE,mobile);
+                Log.d(TAG, "doInBackground: "+params.toString());
                 return httpRequestHandlre.sendPostRequest(Urls.getBaseURL()+Urls.getRegisterPublicUser(),params);
             }
         }
-        PublicUserRegisteraAsync publicUserRegisteraAsync=new PublicUserRegisteraAsync();
-        publicUserRegisteraAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
+        PublicUserAgencyRegisterAsync publicUserAgencyRegisterAsync=new PublicUserAgencyRegisterAsync();
+        publicUserAgencyRegisterAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 }

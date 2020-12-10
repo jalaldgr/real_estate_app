@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.user.PublicUserRegister">
+    tools:context=".ui.user.AgencyPublicUserRegister">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -20,7 +20,7 @@
             android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/PublicUserRegistereFirstNametxt"
+            android:id="@+id/AgencyPublicUserRegisterFirstNametxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -28,7 +28,7 @@
             android:text="@string/user_register_name" />
 
         <EditText
-            android:id="@+id/PublicUserRegistereLastNametxt"
+            android:id="@+id/AgencyPublicUserRegisterLastNametxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -36,50 +36,43 @@
             android:text="@string/user_register_family" />
 
         <EditText
-            android:id="@+id/PublicUserRegisterePhonetxt"
+            android:id="@+id/AgencyPublicUserRegistereAgencyNamext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
+        <EditText
+            android:id="@+id/AgencyPublicUserRegistereManagerNametxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
+        <EditText
+            android:id="@+id/AgencyPublicUserRegistereMobiletxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="phone"
             android:text="@string/user_register_phone" />
 
-        <RadioGroup
-            android:id="@+id/PublicUserRegisterGenderTypeRadioGrp"
+        <EditText
+            android:id="@+id/AgencyPublicUserRegistereAgencyPhonetxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layoutDirection="rtl">
-
-            <RadioButton
-                android:id="@+id/PublicUserRegisterGenderTypeMaleRadioBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/user_register_male"
-                android:textDirection="rtl" />
-
-            <RadioButton
-                android:id="@+id/PublicUserRegisterGenderTypeFemaleRadioBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/user_register_female"
-                android:textDirection="rtl" />
-        </RadioGroup>
+            android:ems="10"
+            android:inputType="phone" />
 
         <Button
-            android:id="@+id/PublicUserRegisterRegisterationBtn"
+            android:id="@+id/AgencyPublicUserRegisterRegisterationBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:text="@string/user_register"
             android:textColor="#FFFFFF" />
-
-        <TextView
-            android:id="@+id/PublicUserRegistereAgencyRegistertxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:text="ثبت نام مشاور املاک"
-            android:textAlignment="center"
-            android:textColor="#1663B5" />
 
     </LinearLayout>
 

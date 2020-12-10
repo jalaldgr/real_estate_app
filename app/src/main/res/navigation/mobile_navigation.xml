@@ -172,5 +172,10 @@
         android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.UserFavoritesFragment"
         android:label="fragment_user_favorites"
         tools:layout="@layout/fragment_user_favorites" />
+    <fragment
+        android:id="@+id/agencyPublicUserRegister"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.user.AgencyPublicUserRegister"
+        android:label="fragment_agency_user_register"
+        tools:layout="@layout/fragment_agency_user_register" />
 
 </navigation>

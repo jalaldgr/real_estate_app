@@ -30,6 +30,15 @@ public class Constants {
     public static final String REGISTER_PUBLIC_USER_MOBILE="Mobile";
     public static final String[] REGISTER_PUBLIC_USER_MODEL_FIELDS={"FirstName","LastName","GenderType","Mobile"};
 
+    //RegisterAgencyPublicUser
+    public static final String REGISTER_AGENCY_PUBLIC_USER_FIRST_NAME="FirstName";
+    public static final String REGISTER_AGENCY_PUBLIC_USER_LAST_NAME="LastName";
+    public static final String REGISTER_AGENCY_PUBLIC_USER_AGENCY_NAME="AgencyName";
+    public static final String REGISTER_AGENCY_PUBLIC_USER_MANAGER_NAME="ManagerName";
+    public static final String REGISTER_AGENCY_PUBLIC_USER_PHONE ="AgencyPhone";
+    public static final String REGISTER_AGENCY_PUBLIC_USER_MOBILE="Mobile";
+    public static final String[] REGISTER_AGENCY_PUBLIC_USER_MODEL_FIELDS={"FirstName","LastName","AgencyName","ManagerName","AgencyPhone","Mobile"};
+
     //Rent model
     public static final String RENT_MODEL_ID="id";
     public static final String RENT_MODEL_TOTAL_MORTGAGE_PRICE="MortgageTotalPrice";
