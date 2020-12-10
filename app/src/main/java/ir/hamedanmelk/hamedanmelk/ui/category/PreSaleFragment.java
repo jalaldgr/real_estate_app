@@ -156,7 +156,7 @@ public class PreSaleFragment extends Fragment {
             }
         }
         PreSaleRequestAsync preSaleRequestAsync = new PreSaleRequestAsync();
-        preSaleRequestAsync.execute();
+        preSaleRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
 
     }
 }

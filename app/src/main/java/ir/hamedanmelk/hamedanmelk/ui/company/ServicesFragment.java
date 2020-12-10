@@ -137,13 +137,18 @@ public class ServicesFragment extends Fragment {
             }
             @Override
             protected String doInBackground(Void... voids) {
+                Log.d(TAG, "doInBackground: started");
+
                 HTTPRequestHandlre httpRequestHandlre = new HTTPRequestHandlre();
                 HashMap<String, String> params = new HashMap<>();
                 params.put(Constants.CONTENT_TYPE,Constants.APPLICATION_JSON);
+
                 return httpRequestHandlre.sendGetRequest(Urls.getBaseURL()+Urls.getCompanyTypes(),params);
             }
         }
         GetcompanyTypesRequestAsync getcompanyTypesRequestAsync = new GetcompanyTypesRequestAsync();
-        getcompanyTypesRequestAsync.execute();
+        getcompanyTypesRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
+
+
     }
 }

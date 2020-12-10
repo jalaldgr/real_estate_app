@@ -158,6 +158,6 @@ public class RentFragment extends Fragment {
             }
         }
         TotalRentRequestAsync totalRentRequestAsync = new TotalRentRequestAsync();
-        totalRentRequestAsync.execute();
+        totalRentRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 }

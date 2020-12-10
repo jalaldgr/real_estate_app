@@ -6,6 +6,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,7 +55,7 @@ public class RentRecyclerViewAdapter extends RecyclerView.Adapter<RentRecyclerVi
         holder.totalRentPriceTxt.setText(rentModel.getRentTotalPrice());
         DistrictModel districtModel = dbHelper.GetDistrictByID(rentModel.getDistrict_id());
         holder.districtTxt.setText(districtModel.getTitle());
-        new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+rentModel.getImages());
+        new DownloadImage(holder.thumbnailImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+rentModel.getImages());
         holder.titleTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

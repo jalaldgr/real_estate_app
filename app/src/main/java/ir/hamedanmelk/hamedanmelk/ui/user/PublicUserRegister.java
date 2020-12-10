@@ -159,6 +159,6 @@ public class PublicUserRegister extends Fragment {
             }
         }
         PublicUserRegisteraAsync publicUserRegisteraAsync=new PublicUserRegisteraAsync();
-        publicUserRegisteraAsync.execute();
+        publicUserRegisteraAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 }

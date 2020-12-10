@@ -157,6 +157,6 @@ public class ExchangeFragment extends Fragment {
             }
         }
         TotalExchangeRequestAsync totalExchangeRequestAsync = new TotalExchangeRequestAsync();
-        totalExchangeRequestAsync.execute();
+        totalExchangeRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 }

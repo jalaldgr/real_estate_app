@@ -158,6 +158,6 @@ public class AssignmentFragment extends Fragment {
             }
         }
         TotalAssignmentRequestAsync totalAssignmentRequestAsync = new TotalAssignmentRequestAsync();
-        totalAssignmentRequestAsync.execute();
+        totalAssignmentRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 }

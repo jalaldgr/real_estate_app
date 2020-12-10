@@ -1,6 +1,7 @@
 package ir.hamedanmelk.hamedanmelk.ui.personalpage;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,7 +49,7 @@ public class UserLandRecyclerViewAdapter extends RecyclerView.Adapter<UserLandRe
         UserLandModel userLandModel = userLandModels.get(position);
         holder.titleTxt.setText(userLandModel.getTitle());
 
-        new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+userLandModel.getImages());
+        new DownloadImage(holder.thumbnailImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+userLandModel.getImages());
 
         holder.titleTxt.setOnClickListener(new View.OnClickListener() {
             @Override

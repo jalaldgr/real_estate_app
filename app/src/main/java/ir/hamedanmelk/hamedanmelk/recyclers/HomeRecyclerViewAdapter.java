@@ -1,6 +1,7 @@
 package ir.hamedanmelk.hamedanmelk.recyclers;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +52,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         final LandModel landModel = landModels.get(position);
         dbHelper = new MYSQlDBHelper(act.getApplicationContext());
         holder.titleTxt.setText(landModel.getTitle());
-        new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+landModel.getImages());
+        new DownloadImage(holder.thumbnailImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+landModel.getImages());
         DistrictModel districtModel = dbHelper.GetDistrictByID(landModel.getDistrict_id());
         holder.districtTxt.setText(districtModel.getTitle());
         switch (landModels.get(position).getLand_state_id()) {

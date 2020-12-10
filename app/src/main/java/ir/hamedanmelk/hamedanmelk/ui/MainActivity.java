@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetProvinceRequestAsync getProvinceRequestAsync = new GetProvinceRequestAsync();
-        getProvinceRequestAsync.execute();
+        getProvinceRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetDistrictRequest(Context context) {
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetDistrictRequestAsync getDistrictRequestAsync = new GetDistrictRequestAsync();
-        getDistrictRequestAsync.execute();
+        getDistrictRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetCitiesRequest(Context context) {
@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetCitiesRequestAsync getCitiesRequestAsync = new GetCitiesRequestAsync();
-        getCitiesRequestAsync.execute();
+        getCitiesRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetAreasRequest(Context context) {
@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetAreasRequestAsync getAreasRequestAsync = new GetAreasRequestAsync();
-        getAreasRequestAsync.execute();
+        getAreasRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetLandTypeRequest(Context context) {
@@ -313,7 +313,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetLandTypeRequestAsync getLandTypeRequestAsync = new GetLandTypeRequestAsync();
-        getLandTypeRequestAsync.execute();
+        getLandTypeRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetBuildingConditionsRequest(Context context) {
@@ -351,7 +351,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetBuildingConditionsRequestAsync getBuildingConditionsRequestAsync = new GetBuildingConditionsRequestAsync();
-        getBuildingConditionsRequestAsync.execute();
+        getBuildingConditionsRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetLandStatesRequest(Context context) {
@@ -389,7 +389,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetLandStateRequestAsync getLandStateRequestAsync = new GetLandStateRequestAsync();
-        getLandStateRequestAsync.execute();
+        getLandStateRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetRentalPreferenceRequest(Context context) {
@@ -427,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetRentalPreferenceRequestAsync getRentalPreferenceRequestAsync = new GetRentalPreferenceRequestAsync();
-        getRentalPreferenceRequestAsync.execute();
+        getRentalPreferenceRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetDensityTypesRequest(Context context) {
@@ -465,7 +465,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetDensityTypeRequestAsync getDensityTypeRequestAsync = new GetDensityTypeRequestAsync();
-        getDensityTypeRequestAsync.execute();
+        getDensityTypeRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetFloorCoveringsRequest(Context context) {
@@ -503,7 +503,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetFloorCoveringRequestAsync getDistrictRequestAsync = new GetFloorCoveringRequestAsync();
-        getDistrictRequestAsync.execute();
+        getDistrictRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetKitchenServicesRequest(Context context) {
@@ -541,7 +541,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetKitchenServicesRequestAsync getDistrictRequestAsync = new GetKitchenServicesRequestAsync();
-        getDistrictRequestAsync.execute();
+        getDistrictRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetLandCaseRequest(Context context) {
@@ -579,7 +579,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetLandCaseRequestAsync getLandCaseRequestAsync = new GetLandCaseRequestAsync();
-        getLandCaseRequestAsync.execute();
+        getLandCaseRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetLoanTypesRequest(Context context) {
@@ -617,7 +617,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetLoanTypesRequestAsync getDistrictRequestAsync = new GetLoanTypesRequestAsync();
-        getDistrictRequestAsync.execute();
+        getDistrictRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetLandSituationsRequest(Context context) {
@@ -655,7 +655,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetLandSituationsRequestAsync getLandSituationsRequestAsync = new GetLandSituationsRequestAsync();
-        getLandSituationsRequestAsync.execute();
+        getLandSituationsRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetLandViewsRequest(Context context) {
@@ -693,7 +693,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetLandViewsRequestAsync getDistrictRequestAsync = new GetLandViewsRequestAsync();
-        getDistrictRequestAsync.execute();
+        getDistrictRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetLandDirectionsRequest(Context context) {
@@ -731,7 +731,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetLandDirectionsRequestAsync getLandDirectionsRequestAsync = new GetLandDirectionsRequestAsync();
-        getLandDirectionsRequestAsync.execute();
+        getLandDirectionsRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetCompanyTypesRequest(final Context context){
@@ -773,7 +773,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         GetCompanyTypesRequestAsync getcompanyTypesRequestAsync = new GetCompanyTypesRequestAsync();
-        getcompanyTypesRequestAsync.execute();
+        getcompanyTypesRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
 }

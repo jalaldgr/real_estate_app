@@ -160,7 +160,7 @@ public class SaleFragment extends Fragment {
                 }
             }
             SaleRequestAsync SaleRequestAsync = new SaleRequestAsync();
-            SaleRequestAsync.execute();
+            SaleRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
 
         }
 }

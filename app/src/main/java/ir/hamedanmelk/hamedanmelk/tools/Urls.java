@@ -37,7 +37,9 @@ public class Urls {
     private static final String UserFavorites                           ="/AppRequests/GetUserLandFavorites";
     private static final String UserLandFavoriteRemove                  ="/AppRequests/UserLandFavoriteRemove";
     private static final String UserLandFavoriteSubmit                  ="/AppRequests/UserLandFavoriteSubmit";
-
+    private static final String RegisterAgencyPublicUser                ="/AppRequests/UserLandFavoriteSubmit";
+    private static final String CompanyAdd                              = "/AppRequests/CompanyAdd";
+    private static final String StartUserChat                           ="/AppRequests/StartUserChat";
     public static String getUserLandFavoriteRemove() {
         return UserLandFavoriteRemove;
     }

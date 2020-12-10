@@ -157,7 +157,7 @@ public class SingleUserLandFragment extends Fragment {
             }
         }
         GetLandInfoRequestAsync getLandInfoRequestAsync = new GetLandInfoRequestAsync();
-        getLandInfoRequestAsync.execute();
+        getLandInfoRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
 
     }
 

@@ -3,6 +3,7 @@ package ir.hamedanmelk.hamedanmelk.ui.company;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,7 +60,7 @@ public class CompaniesRecyclerViewAdapter extends RecyclerView.Adapter<Companies
         holder.managerTxt.setText(companyModel.getManager());
         holder.addressTxt.setText(companyModel.getAddress());
         holder.phoneTxt.setText(companyModel.getPhone());
-        new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+"/"+companyModel.getLogo());
+        new DownloadImage(holder.thumbnailImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+"/"+companyModel.getLogo());
         holder.phoneTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

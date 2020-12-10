@@ -162,7 +162,7 @@ public class UserLandFragment extends Fragment {
             }
         }
         UserLandRequestAsync userLandRequestAsync = new UserLandRequestAsync();
-        userLandRequestAsync.execute();
+        userLandRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
 
     }
 }

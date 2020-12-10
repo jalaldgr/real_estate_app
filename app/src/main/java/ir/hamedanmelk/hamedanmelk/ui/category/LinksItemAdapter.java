@@ -2,6 +2,7 @@ package ir.hamedanmelk.hamedanmelk.ui.category;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class LinksItemAdapter extends BaseAdapter {
         ImageView logoImg = (ImageView)view.findViewById(R.id.LinksFragmentLogoImg);
         TextView  titleTxt= (TextView)view.findViewById(R.id.LinksFragmentTitleTxt);
         titleTxt.setText(linksModels.get(position).getTitle());
-        new DownloadImage(logoImg).execute(Urls.getBaseURL()+"/"+linksModels.get(position).getLogo());
+        new DownloadImage(logoImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+"/"+linksModels.get(position).getLogo());
         logoImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

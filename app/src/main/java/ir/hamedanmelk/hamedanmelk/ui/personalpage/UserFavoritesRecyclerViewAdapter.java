@@ -1,6 +1,7 @@
 package ir.hamedanmelk.hamedanmelk.ui.personalpage;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,7 +50,7 @@ public class UserFavoritesRecyclerViewAdapter extends RecyclerView.Adapter<UserF
         final UserFavoriteModel userFavoriteModel = userFavoriteModels.get(position);
         holder.titleTxt.setText(userFavoriteModel.getTitle());
 
-        new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+userFavoriteModel.getImages());
+        new DownloadImage(holder.thumbnailImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+userFavoriteModel.getImages());
 
         holder.titleTxt.setOnClickListener(new View.OnClickListener() {
             @Override

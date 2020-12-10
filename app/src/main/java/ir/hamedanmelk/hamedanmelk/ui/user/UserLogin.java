@@ -173,7 +173,7 @@ public class UserLogin extends Fragment {
             }
         }
         UserLoginRequestAsync userLoginRequestAsync = new UserLoginRequestAsync();
-        userLoginRequestAsync.execute();
+        userLoginRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
 

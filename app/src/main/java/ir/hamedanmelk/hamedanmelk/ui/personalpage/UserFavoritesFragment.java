@@ -160,7 +160,7 @@ public class UserFavoritesFragment extends Fragment {
             }
         }
         GetUserFavoritesRequestAsync getUserFavoritesRequestAsync = new GetUserFavoritesRequestAsync();
-        getUserFavoritesRequestAsync.execute();
+        getUserFavoritesRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
 
     }
 }

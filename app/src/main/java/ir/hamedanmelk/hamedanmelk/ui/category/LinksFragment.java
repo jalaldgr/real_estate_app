@@ -100,6 +100,6 @@ GridView linksGridView;
             }
         }
         GetLinksRequestAsync getLinksRequestAsync = new GetLinksRequestAsync();
-        getLinksRequestAsync.execute();
+        getLinksRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 }

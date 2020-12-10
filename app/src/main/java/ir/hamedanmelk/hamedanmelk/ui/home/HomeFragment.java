@@ -217,7 +217,7 @@ public class HomeFragment extends Fragment {
             }
         }
         TotalLandRequestAsync totalRentRequestAsync = new TotalLandRequestAsync();
-        totalRentRequestAsync.execute();
+        totalRentRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
 }

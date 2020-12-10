@@ -1,6 +1,7 @@
 package ir.hamedanmelk.hamedanmelk.ui.category;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,7 +50,7 @@ public class ExchangeRecyclerViewAdapter extends RecyclerView.Adapter<ExchangeRe
         ExchangeModel exchangeModel = exchangeModels.get(position);
         holder.mIdView.setText(exchangeModel.getId());
         holder.mContentView.setText(exchangeModel.getTitle());
-        new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+exchangeModel.getImages());
+        new DownloadImage(holder.thumbnailImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+exchangeModel.getImages());
         holder.mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

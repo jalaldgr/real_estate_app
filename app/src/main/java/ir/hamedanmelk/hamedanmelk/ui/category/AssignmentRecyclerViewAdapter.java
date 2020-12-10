@@ -1,6 +1,7 @@
 package ir.hamedanmelk.hamedanmelk.ui.category;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,7 +50,7 @@ public class AssignmentRecyclerViewAdapter extends RecyclerView.Adapter<Assignme
         AssignmentModel assignmentModel = assignmentModels.get(position);
         holder.mIdView.setText(assignmentModel.getId());
         holder.mContentView.setText(assignmentModel.getTitle());
-        new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+assignmentModel.getImages());
+        new DownloadImage(holder.thumbnailImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+assignmentModel.getImages());
         holder.mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

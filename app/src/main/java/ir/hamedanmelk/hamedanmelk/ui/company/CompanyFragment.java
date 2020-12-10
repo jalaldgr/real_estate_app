@@ -91,7 +91,7 @@ public class CompanyFragment extends Fragment {
             recyclerView = (RecyclerView)view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
         }
-        GetCompaniesRequest(getContext());
+         GetCompaniesRequest(getContext());
 
         return view;
     }
@@ -136,7 +136,7 @@ public class CompanyFragment extends Fragment {
 
                             companyModels.add(companyModel);
                         }
-                        Log.d(TAG, "onPostExecute: "+companyModels.get(0).getTitle());
+//                        Log.d(TAG, "onPostExecute: "+companyModels.get(0).getTitle());
                         recyclerView.setAdapter(new CompaniesRecyclerViewAdapter(companyModels,getActivity()));
                     }
                 } catch (JSONException e) {
@@ -156,7 +156,7 @@ public class CompanyFragment extends Fragment {
             }
         }
         GetCompaniesRequestAsync getCompaniesRequestAsync = new GetCompaniesRequestAsync();
-        getCompaniesRequestAsync.execute();
+        getCompaniesRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
 }

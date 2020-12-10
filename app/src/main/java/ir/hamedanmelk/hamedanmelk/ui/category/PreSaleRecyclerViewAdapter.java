@@ -1,5 +1,6 @@
 package ir.hamedanmelk.hamedanmelk.ui.category;
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,7 +53,7 @@ public class PreSaleRecyclerViewAdapter extends RecyclerView.Adapter<PreSaleRecy
         holder.totalSaleTxt.setText(preSaleModel.getSaleTotalPrice());
         DistrictModel districtModel = dbHelper.GetDistrictByID(preSaleModel.getDistrict_id());
         holder.districtTxt.setText(districtModel.getTitle());
-        new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+preSaleModel.getImages());
+        new DownloadImage(holder.thumbnailImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+preSaleModel.getImages());
         Log.d(TAG, "onBindViewHolder: "+preSaleModel.getTitle() +"   >>>   "+ preSaleModel.getImages());
 
         holder.titleTxt.setOnClickListener(new View.OnClickListener() {

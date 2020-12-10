@@ -256,7 +256,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
             }
         }
         GetLandInfoRequestAsync getLandInfoRequestAsync = new GetLandInfoRequestAsync();
-        getLandInfoRequestAsync.execute();
+        getLandInfoRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
 
     }
 
@@ -305,7 +305,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
             }
         }
         GetEquipmentsRequestAsync getEquipmentsRequestAsync = new GetEquipmentsRequestAsync();
-        getEquipmentsRequestAsync.execute();
+        getEquipmentsRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
 
     }
 
@@ -341,7 +341,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
             }
         }
         AddFavoriteRequestAsync AddFavoriteRequestAsync = new AddFavoriteRequestAsync();
-        AddFavoriteRequestAsync.execute();
+        AddFavoriteRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void RemoveFavoriteRequest(final Context context){
@@ -374,7 +374,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
             }
         }
         AddFavoriteRequestAsync AddFavoriteRequestAsync = new AddFavoriteRequestAsync();
-        AddFavoriteRequestAsync.execute();
+        AddFavoriteRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
 
