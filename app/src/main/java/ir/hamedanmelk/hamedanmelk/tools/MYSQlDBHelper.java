@@ -1256,7 +1256,7 @@ public void InsertDistrict(ContentValues cv){
         CompanyTypeModel  companyTypeModel;
         Cursor c;
         try {
-            c = db.rawQuery("SELECT * FROM "+COMPANY_TYPES_TABLE_NAME+" WHERE parent_id = null", null);
+            c = db.rawQuery("SELECT * FROM "+COMPANY_TYPES_TABLE_NAME+" WHERE parent_id = 'null'", null);
             if (c == null)
                 return null;
             int counter = 0;
