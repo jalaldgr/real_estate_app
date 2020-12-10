@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         GetProvinceRequest(getApplicationContext());
         GetDistrictRequest(getApplicationContext());
-//        GetCompanyTypesRequest(getApplicationContext());
+        GetCompanyTypesRequest(getApplicationContext());
         GetCitiesRequest(getApplicationContext());
         GetAreasRequest(getApplicationContext());
         GetLandTypeRequest(getApplicationContext());
@@ -751,9 +751,10 @@ public class MainActivity extends AppCompatActivity {
                         for (int i = 0; i < dataResult.length(); i++) {
                             JSONObject rowItem = dataResult.getJSONObject(i);
                             ContentValues itemCV = new ContentValues();
-                            for (String columnItem : modelFields) {
-                                itemCV.put(columnItem, rowItem.getString(columnItem));
-                            }
+                            itemCV.put(Constants.COMPANY_TYPES_ID,rowItem.getString(Constants.COMPANY_TYPES_ID));
+                            itemCV.put(Constants.COMPANY_TYPES_TITLE,rowItem.getString(Constants.COMPANY_TYPES_TITLE));
+                            itemCV.put(Constants.COMPANY_TYPES_ID,rowItem.getString("Order"));
+                            itemCV.put(Constants.COMPANY_TYPES_PARENT_ID,rowItem.getString(Constants.COMPANY_TYPES_PARENT_ID));
                             dbHelper.InsertCompanyTypes(itemCV);
                         }
                     }
