@@ -52,19 +52,19 @@
             android:text="Name" />
 
         <EditText
+            android:id="@+id/AgencyPublicUserRegistereAgencyPhonetxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="phone" />
+
+        <EditText
             android:id="@+id/AgencyPublicUserRegistereMobiletxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="phone"
             android:text="@string/user_register_phone" />
-
-        <EditText
-            android:id="@+id/AgencyPublicUserRegistereAgencyPhonetxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone" />
 
         <Button
             android:id="@+id/AgencyPublicUserRegisterRegisterationBtn"

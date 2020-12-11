@@ -39,7 +39,7 @@ public class AgencyPublicUserRegister extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static final String TAG = "PublicUserRegister";
+    private static final String TAG = "AgencyPublicUserRegister";
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -147,7 +147,6 @@ public class AgencyPublicUserRegister extends Fragment {
             protected String doInBackground(Void... voids) {
                 HTTPRequestHandlre httpRequestHandlre = new HTTPRequestHandlre();
                 HashMap<String,String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
                 params.put(Constants.REGISTER_AGENCY_PUBLIC_USER_FIRST_NAME,firsName);
                 params.put(Constants.REGISTER_AGENCY_PUBLIC_USER_LAST_NAME,lastName);
                 params.put(Constants.REGISTER_AGENCY_PUBLIC_USER_AGENCY_NAME,agencyName);
@@ -155,7 +154,7 @@ public class AgencyPublicUserRegister extends Fragment {
                 params.put(Constants.REGISTER_AGENCY_PUBLIC_USER_PHONE,agencyPhone);
                 params.put(Constants.REGISTER_AGENCY_PUBLIC_USER_MOBILE,mobile);
                 Log.d(TAG, "doInBackground: "+params.toString());
-                return httpRequestHandlre.sendPostRequest(Urls.getBaseURL()+Urls.getRegisterPublicUser(),params);
+                return httpRequestHandlre.sendPostRequest(Urls.getBaseURL()+Urls.getRegisterAgencyPublicUser(),params);
             }
         }
         PublicUserAgencyRegisterAsync publicUserAgencyRegisterAsync=new PublicUserAgencyRegisterAsync();
