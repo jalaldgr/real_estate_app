@@ -1229,11 +1229,12 @@ public void InsertDistrict(ContentValues cv){
         CompanyTypeModel  companyTypeModel;
         Cursor c;
         try {
-            c = db.rawQuery("SELECT * FROM "+COMPANY_TYPES_TABLE_NAME+" WHERE id = "+id, null);
+            c = db.rawQuery("SELECT * FROM "+COMPANY_TYPES_TABLE_NAME+" WHERE parent_id = "+id, null);
             if (c == null)
                 return null;
             int counter = 0;
             c.moveToFirst();
+            Log.d(TAG, "GetCompanyTypesByParentID: "+c.getCount());
             do{
                 companyTypeModel = new CompanyTypeModel(
                         c.getString(0),
