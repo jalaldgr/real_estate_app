@@ -86,21 +86,21 @@ public class PublicUserRegister extends Fragment {
         final TextView firstnametxt = (TextView)v.findViewById(R.id.PublicUserRegistereFirstNametxt);
         final TextView lastnametxt = (TextView)v.findViewById(R.id.PublicUserRegistereLastNametxt);
         final TextView phonetxt = (TextView)v.findViewById(R.id.PublicUserRegisterePhonetxt);
-        final RadioGroup gendertypegrp= (RadioGroup)v.findViewById(R.id.PublicUserRegisterGenderTypeRadioGrp);
+//        final RadioGroup gendertypegrp= (RadioGroup)v.findViewById(R.id.PublicUserRegisterGenderTypeRadioGrp);
         final TextView registerAgencyTxt = (TextView)v.findViewById(R.id.PublicUserRegistereAgencyRegistertxt);
 
 
         registerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            String selectedgender="";
-            if(gendertypegrp.getCheckedRadioButtonId()==R.id.PublicUserRegisterGenderTypeMaleRadioBtn)selectedgender="1";
-            else if(gendertypegrp.getCheckedRadioButtonId()==R.id.PublicUserRegisterGenderTypeFemaleRadioBtn)selectedgender="2";
-            final String finalselectedgender=selectedgender;
+//            String selectedgender="";
+//            if(gendertypegrp.getCheckedRadioButtonId()==R.id.PublicUserRegisterGenderTypeMaleRadioBtn)selectedgender="1";
+//            else if(gendertypegrp.getCheckedRadioButtonId()==R.id.PublicUserRegisterGenderTypeFemaleRadioBtn)selectedgender="2";
+//            final String finalselectedgender=selectedgender;
             PublicUserRegisterRequest(
                     firstnametxt.getText().toString(),
                     lastnametxt.getText().toString(),
-                    finalselectedgender,
+                    "1",
                     phonetxt.getText().toString(),
                     getContext()
             );

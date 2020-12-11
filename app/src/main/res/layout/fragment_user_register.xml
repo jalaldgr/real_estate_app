@@ -43,27 +43,6 @@
             android:inputType="phone"
             android:text="@string/user_register_phone" />
 
-        <RadioGroup
-            android:id="@+id/PublicUserRegisterGenderTypeRadioGrp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layoutDirection="rtl">
-
-            <RadioButton
-                android:id="@+id/PublicUserRegisterGenderTypeMaleRadioBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/user_register_male"
-                android:textDirection="rtl" />
-
-            <RadioButton
-                android:id="@+id/PublicUserRegisterGenderTypeFemaleRadioBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/user_register_female"
-                android:textDirection="rtl" />
-        </RadioGroup>
-
         <Button
             android:id="@+id/PublicUserRegisterRegisterationBtn"
             android:layout_width="match_parent"
