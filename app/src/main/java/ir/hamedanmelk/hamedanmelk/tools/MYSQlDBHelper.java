@@ -1224,6 +1224,7 @@ public void InsertDistrict(ContentValues cv){
         db.close();
     }
     public ArrayList<CompanyTypeModel> GetCompanyTypesByParentID(String id){
+        Log.d(TAG, "GetCompanyTypesByParentID: is "+id);
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<CompanyTypeModel> companyTypeModels = new ArrayList<CompanyTypeModel>();
         CompanyTypeModel  companyTypeModel;

@@ -131,6 +131,10 @@
     <string name="vocabulary_land_state">وضعیت ملک</string>
     <string name="vocabulary_land_case_type">نوع کاربری</string>
     <string name="vocabulary_manager">با مدیریت</string>
+    <string name="vocabulary_submit_company">ثبت شرکت</string>
+    <string name="vocabulary_select_image">انتخاب عکس</string>
+    <string name="vocabulary_remove_image">حذف عکس</string>
+
 
 
 </resources>

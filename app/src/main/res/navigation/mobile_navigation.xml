@@ -177,5 +177,14 @@
         android:name="ir.hamedanmelk.hamedanmelk.ui.user.AgencyPublicUserRegister"
         android:label="fragment_agency_user_register"
         tools:layout="@layout/fragment_agency_user_register" />
+    <fragment
+        android:id="@+id/newCompanyFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.single.NewCompanyFragment"
+        android:label="fragment_new_company"
+        tools:layout="@layout/fragment_new_company" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.ChatFragment"
+        android:label="ChatFragment" />
 
 </navigation>

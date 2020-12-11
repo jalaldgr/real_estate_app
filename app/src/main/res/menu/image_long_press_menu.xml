@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/select_image"
+        android:title="@string/vocabulary_select_image" />
+    <item
+        android:id="@+id/remove_image"
+        android:title="@string/vocabulary_remove_image" />
+</menu>

@@ -1,5 +1,5 @@
 package ir.hamedanmelk.hamedanmelk.tools;
-////// Constanst Json URLs Class
+////// Constant Json URLs Class
 public class Urls {
     private static final String BaseURL                                 = "https://hamedanmelk.ir";
     private static final String LoginURL                                = "/AppRequests/Authentication";
@@ -37,9 +37,22 @@ public class Urls {
     private static final String UserFavorites                           ="/AppRequests/GetUserLandFavorites";
     private static final String UserLandFavoriteRemove                  ="/AppRequests/UserLandFavoriteRemove";
     private static final String UserLandFavoriteSubmit                  ="/AppRequests/UserLandFavoriteSubmit";
-    private static final String RegisterAgencyPublicUser                ="/AppRequests/UserLandFavoriteSubmit";
+    private static final String RegisterAgencyPublicUser                ="/AppRequests/RegisterAgencyPublicUser";
     private static final String CompanyAdd                              = "/AppRequests/CompanyAdd";
     private static final String StartUserChat                           ="/AppRequests/StartUserChat";
+
+    public static String getRegisterAgencyPublicUser() {
+        return RegisterAgencyPublicUser;
+    }
+
+    public static String getCompanyAdd() {
+        return CompanyAdd;
+    }
+
+    public static String getStartUserChat() {
+        return StartUserChat;
+    }
+
     public static String getUserLandFavoriteRemove() {
         return UserLandFavoriteRemove;
     }

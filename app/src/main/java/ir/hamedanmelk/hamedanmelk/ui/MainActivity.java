@@ -753,7 +753,7 @@ public class MainActivity extends AppCompatActivity {
                             ContentValues itemCV = new ContentValues();
                             itemCV.put(Constants.COMPANY_TYPES_ID,rowItem.getString(Constants.COMPANY_TYPES_ID));
                             itemCV.put(Constants.COMPANY_TYPES_TITLE,rowItem.getString(Constants.COMPANY_TYPES_TITLE));
-                            itemCV.put(Constants.COMPANY_TYPES_ID,rowItem.getString("Order"));
+                            itemCV.put(Constants.COMPANY_TYPES_ORDER,rowItem.getString("Order"));
                             itemCV.put(Constants.COMPANY_TYPES_PARENT_ID,rowItem.getString(Constants.COMPANY_TYPES_PARENT_ID));
                             dbHelper.InsertCompanyTypes(itemCV);
                         }

@@ -92,6 +92,7 @@ public class PersonalPage extends Fragment {
         ImageView avatarImg = (ImageView)v.findViewById(R.id.PersonalPageAvatarImg);
         Button mylist = (Button)v.findViewById(R.id.PersonalPageMyListBtn);
         Button myFavorites= (Button)v.findViewById(R.id.PersonalPageFavoritesBtn);
+        Button newCompanyBtn = (Button)v.findViewById(R.id.PersonalPageNewCompanyBtn);
         String fullnamestr=user_pref.getString(user_model_fields[2],"")+" "+user_pref.getString(user_model_fields[3],"");
         Log.d("hhh", "onCreateView: "+user_pref.toString());
         String phonestr=user_pref.getString(user_model_fields[1],"");
@@ -123,6 +124,12 @@ public class PersonalPage extends Fragment {
                 Bundle args=new Bundle();
                 args.putString("id",user_pref.getString("id","8"));
                 controller.navigate(R.id.userFavoritesFragment,args);
+            }
+        });
+        newCompanyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controller.navigate(R.id.newCompanyFragment);
             }
         });
         return v;

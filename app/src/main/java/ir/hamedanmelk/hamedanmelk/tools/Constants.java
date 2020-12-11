@@ -241,8 +241,18 @@ public class Constants {
     public static final String[] COMPANY_TYPES_MODEL_FIELDS = {"id","Title","CTOrder","parent_id"};
     public static final String COMPANY_TYPES_ID = "id";
     public static final String COMPANY_TYPES_TITLE = "Title";
-    public static final String COMPANY_TYPES_ORDER = "Order";
+    public static final String COMPANY_TYPES_ORDER = "CTOrder";
     public static final String COMPANY_TYPES_PARENT_ID = "parent_id";
+
+    ///////////////////Add Company//////////////////////////////
+    public static final String[] ADD_COMPANY_TEXT_FIELDS ={"UID","Title","Address","Phone","SubCompanyTypeID"};
+    public static final String ADD_COMPANY_UID = "UID";
+    public static final String ADD_COMPANY_TITLE = "Title";
+    public static final String ADD_COMPANY_ADDRESS ="Address";
+    public static final String ADD_COMPANY_PHONE="Phone";
+    public static final String ADD_COMPANY_SUB_COMPANY_TYPE_ID = "SubCompanyTypeID";
+    public static final String ADD_COMPANY_MANAGER = "Manager";
+    public static final String ADD_COMPANY_LOGO = "Logo";
 
     public static final String[] COMPANY_FIELDS ={"id","Title","Manager","Phone","Address","company_type_id","user_id","Disabled","Logo","created_at"};
     public static final String COMPANY_ID= "id";
@@ -259,6 +269,11 @@ public class Constants {
     public static final String LAND_INFO_LID = "LID";
     public static final String LAND_INFO_UID = "UID";
 
+    public static final String COMPANY_ADD_UID = "UID";
+    public static final String COMPANY_ADD_TITLE = "Address";
+    public static final String COMPANY_ADD_PHONE = "Phone";
+    public static final String COMPANY_ADD_SUB_COMPANY_TYPE_ID="SubCompanyTypeID";
+    public static final String COMPANY_ADD_LOGO = "Logo";
     //GetProvinceModelFields
     public static final String[] PROVINCE_MODEL_FIELDS = {"id","Title","TelegramChannelName","Disabled"};
 //    public static final String PROVINCE_MODEL_ID="id";
@@ -356,4 +371,7 @@ public class Constants {
     public static final String[] LAND_DIRECTIONS_MODEL_FIELDS = {"id","Title"};
 //    public static final String PREF_GET_LAND_DIRECTIONS_ID = "id";
 //    public static final String PREF_GET_LAND_DIRECTIONS_TITLE = "Title";
+
+    public static final String START_CHAT_UID = "UID";
+    public static final String START_CHAT_TO = "To";
 }

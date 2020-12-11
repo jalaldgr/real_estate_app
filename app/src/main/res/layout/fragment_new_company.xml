@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    tools:context=".ui.single.NewCompanyFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/NewCompanyFragmentTitleEtxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layoutDirection="rtl" />
+
+        <EditText
+            android:id="@+id/NewCompanyFragmenAddresstEtxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:ems="10"
+            android:inputType="textPostalAddress"
+            android:layoutDirection="rtl" />
+
+        <EditText
+            android:id="@+id/NewCompanyFragmenManagerEtxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:ems="10"
+            android:inputType="textPostalAddress"
+            android:layoutDirection="rtl" />
+
+        <EditText
+            android:id="@+id/NewCompanyFragmentPhoneEtxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:ems="10"
+            android:inputType="phone"
+            android:layoutDirection="rtl" />
+
+        <Spinner
+            android:id="@+id/NewCompanyFragmentParentCompanyTypesSpnr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:fadingEdge="vertical"
+            android:padding="8dp"
+            android:spinnerMode="dropdown"
+            android:textAlignment="center" />
+
+        <Spinner
+            android:id="@+id/NewCompanyFragmentCompanyTypesSpnr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:fadingEdge="vertical"
+            android:padding="8dp"
+            android:spinnerMode="dropdown"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/NewCompanyFragmentLogoImg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_home_black_24dp" />
+
+        <Button
+            android:id="@+id/NewCompanyFragmentSubmitBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/vocabulary_submit_company" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
