@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -41,7 +44,6 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
-import ir.hamedanmelk.hamedanmelk.models.RentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.GalleryRecyclerViewAdapter;
@@ -50,9 +52,10 @@ import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
-import ir.hamedanmelk.hamedanmelk.tools.ViewPagerAdapter;
 import saman.zamani.persiandate.PersianDate;
 import saman.zamani.persiandate.PersianDateFormat;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,6 +79,8 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
     private String mParam1;
     private String mParam2;
     private String landId;
+    String  landUserID;
+    String  UID;
     TextView titleTxt ;
     TextView roomCountTxt;
     TextView landTypeTxt ;
@@ -97,19 +102,11 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
     GridView equipmentsGridView;
     ViewPager viewPager;
     CheckBox bookmarkChckbx;
+    Button  startChatBtn;
     public SingleRentFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SingleLandFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static SingleRentFragment newInstance(String param1, String param2) {
         SingleRentFragment fragment = new SingleRentFragment();
         Bundle args = new Bundle();
@@ -127,7 +124,8 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
             mParam2 = getArguments().getString(ARG_PARAM2);
             landId  = getArguments().getString(Constants.LAND_INFO_ID);
         }
-
+        final SharedPreferences user_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
+        UID = user_pref.getString(Constants.USER_MODEL_ID,"0");
     }
 
     @Override
@@ -152,21 +150,21 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
         buildingYearTxt = (TextView)view.findViewById(R.id.SingleRentBuildingYearTxt);
         createAtTxt = (TextView)view.findViewById(R.id.SingleRentCreatedAtTxt);
         userNameTxt = (TextView)view.findViewById(R.id.SingleRentUserNameTxt);
-        userPhoneTxt = (TextView)view.findViewById(R.id.SingleRentUserPhone);
+        userPhoneTxt = (TextView)view.findViewById(R.id.SingleRentUserPhoneTxt);
         descriptionTxt = (EditText)view.findViewById(R.id.SingleRentDescriptionTxt);
         userAvatarImg = (ImageView)view.findViewById(R.id.SingleRentUserAvatarImg);
         equipmentsGridView = (GridView)view.findViewById(R.id.SingleRentLandEquipmentsGridView);
         viewPager = (ViewPager) view.findViewById(R.id.SingleRentGalleryViewpager);
         bookmarkChckbx = (CheckBox)view.findViewById(R.id.SingleRentFragmentBookmarkChckbx);
+        startChatBtn = (Button)view.findViewById(R.id.SingleRentStartChatBtn);
+
         bookmarkChckbx.setChecked(qlDBHelper.isBookmarkedByLandID(landId));
-        
         bookmarkChckbx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     AddFavoriteRequest(getContext());
                     qlDBHelper.InsertBookmark(landId);
-
                 }
                 else {
                     RemoveFavoriteRequest(getContext());
@@ -174,7 +172,17 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                 }
             }
         });
-        
+
+        startChatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
+                Bundle args=new Bundle();
+                args.putString(Constants.START_CHAT_UID,UID);
+                args.putString(Constants.START_CHAT_TO,landUserID);
+                controller.navigate(R.id.chatFragment,args);
+            }
+        });
 
         GetLandInfoRequest(getContext());
         GetLandEquipmentsRequest(getContext(),landId);
@@ -207,6 +215,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                         galleryImageArrayList = images;
                         String[] mapStr = responseData.getString(Constants.LAND_INFO_MAP).split(",");
                         mapLatLng = new LatLng(Double.parseDouble(mapStr[0]),Double.parseDouble(mapStr[1]));
+                        landUserID=responseData.getString(Constants.LAND_INFO_USER_ID);
                         loadMap();
                         landStateTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_STATE_TITLE));
                         buildingYearTxt.setText(responseData.getString(Constants.LAND_INFO_BUILDING_YEAR));
@@ -377,11 +386,11 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
         AddFavoriteRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+
     void loadMap(){
         if(mapView!=null){
             mapView.onCreate(null);

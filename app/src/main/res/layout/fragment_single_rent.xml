@@ -368,10 +368,16 @@
                 android:text="@string/land_info_name" />
 
             <TextView
-                android:id="@+id/SingleRentUserPhone"
+                android:id="@+id/SingleRentUserPhoneTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/land_info_phone" />
+
+            <Button
+                android:id="@+id/SingleRentStartChatBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/land_info_start_chat" />
 
             <EditText
                 android:id="@+id/SingleRentUserDescriptionMultiTxt"
