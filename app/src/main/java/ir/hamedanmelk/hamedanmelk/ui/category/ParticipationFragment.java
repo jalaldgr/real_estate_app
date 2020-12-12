@@ -29,10 +29,10 @@ import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AssignmentFragment#newInstance} factory method to
+ * Use the {@link ParticipationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AssignmentFragment extends Fragment {
+public class ParticipationFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,7 +44,7 @@ public class AssignmentFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AssignmentFragment() {
+    public ParticipationFragment() {
         // Required empty public constructor
     }
 
@@ -57,8 +57,8 @@ public class AssignmentFragment extends Fragment {
      * @return A new instance of fragment AssignmentFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AssignmentFragment newInstance(String param1, String param2) {
-        AssignmentFragment fragment = new AssignmentFragment();
+    public static ParticipationFragment newInstance(String param1, String param2) {
+        ParticipationFragment fragment = new ParticipationFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -80,7 +80,7 @@ public class AssignmentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         TotalAssignmentRequest(getContext());
-        View view =  inflater.inflate(R.layout.fragment_assignment, container, false);
+        View view =  inflater.inflate(R.layout.fragment_participation, container, false);
         if(view instanceof RecyclerView){
             Context context = getContext();
             recyclerView = (RecyclerView)view;
@@ -139,7 +139,7 @@ public class AssignmentFragment extends Fragment {
                         Log.d(TAG, "onPostExecute: kkk"+assignmentTemp.toString());
 
                         Log.d(TAG, "onPostExecute: jjj"+ assignmentModels.toString());
-                        recyclerView.setAdapter(new AssignmentRecyclerViewAdapter(assignmentModels,getActivity()));
+                        recyclerView.setAdapter(new ParticipationRecyclerViewAdapter(assignmentModels,getActivity()));
 
                     }
                 } catch (JSONException e) {
@@ -154,7 +154,7 @@ public class AssignmentFragment extends Fragment {
                 HTTPRequestHandlre httpRequestHandlre = new HTTPRequestHandlre();
                 HashMap<String,String> params = new HashMap<>();
                 params.put(Constants.CONTENT_TYPE,Constants.APPLICATION_JSON);
-                return httpRequestHandlre.sendGetRequest(Urls.getBaseURL()+Urls.getTotalParticipationLands(),params);
+                return httpRequestHandlre.sendGetRequest(Urls.getBaseURL()+Urls.getTotalLands(),params);
             }
         }
         TotalAssignmentRequestAsync totalAssignmentRequestAsync = new TotalAssignmentRequestAsync();

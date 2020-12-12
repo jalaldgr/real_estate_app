@@ -78,7 +78,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
                 args.putString("id",landModels.get(position).getId());
                 switch (landModels.get(position).getLand_state_id()){
                     case "1" :
-                        controller.navigate(R.id.singleLandFragment,args);
+                        controller.navigate(R.id.singleSaleFragment,args);
                         break;
                     case  "2":
                         controller.navigate(R.id.singleRentFragment,args);

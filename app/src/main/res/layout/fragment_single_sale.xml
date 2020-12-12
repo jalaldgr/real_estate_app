@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="60dp"
-    tools:context=".ui.single.SinglePreSaleFragment">
+    tools:context=".ui.single.SingleSaleFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,13 +15,13 @@
         android:textDirection="rtl">
 
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/SinglePreSaleGalleryViewpager"
+            android:id="@+id/SingleSaleGalleryViewpager"
             android:layout_width="match_parent"
             android:layout_height="330dp" />
 
 
         <CheckBox
-            android:id="@+id/SinglePreSaleFragmentBookmarkChckbx"
+            android:id="@+id/SingleSaleFragmentBookmarkChckbx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_bookmarks_red_24"
@@ -51,7 +51,7 @@
                     android:text="@string/vocabulary_land_state" />
 
                 <TextView
-                    android:id="@+id/SinglePreSaleLandStateTxt"
+                    android:id="@+id/SingleSaleLandStateTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.33"
@@ -72,7 +72,7 @@
                     android:text="@string/vocabulary_building_year" />
 
                 <TextView
-                    android:id="@+id/SinglePreSaleBuildingYearTxt"
+                    android:id="@+id/SingleSaleBuildingYearTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.33"
@@ -93,7 +93,7 @@
                     android:text="@string/land_info_room_count" />
 
                 <TextView
-                    android:id="@+id/SinglePreSaleRoomCountTxt"
+                    android:id="@+id/SingleSaleRoomCountTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.33"
@@ -104,7 +104,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/SinglePreSaleTitleTxt"
+            android:id="@+id/SingleSaleTitleTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/vocabulary_title"
@@ -125,7 +125,7 @@
                 android:text="@string/land_info_land_type" />
 
             <TextView
-                android:id="@+id/SinglePreSaleLandTypeTxt"
+                android:id="@+id/SingleSaleLandTypeTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/land_info_land_type" />
@@ -145,7 +145,7 @@
                 android:text="@string/land_info_foundation_space" />
 
             <TextView
-                android:id="@+id/SinglePreSaleFoundationSpaceTxt"
+                android:id="@+id/SingleSaleFoundationSpaceTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="@string/land_info_foundation_space" />
@@ -156,31 +156,35 @@
                 android:layout_height="wrap_content"
                 android:text="@string/land_info_meter" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/border_linear_layout"
             android:orientation="horizontal"
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/textView29"
+                android:id="@+id/textView28"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/land_info_mortgage" />
+
+            <TextView
+                android:id="@+id/SingleSaleTotalPriceTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
                 android:text="@string/land_info_total_price" />
 
             <TextView
-                android:id="@+id/SinglePreSaleTotalPriceTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/land_info_total_price" />
-
-            <TextView
-                android:id="@+id/textView34"
+                android:id="@+id/textView27"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/land_info_price_unit" />
+
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -196,7 +200,7 @@
                 android:text="@string/vocabulary_land_case_type" />
 
             <TextView
-                android:id="@+id/SinglePreSaleLandCaseTxt"
+                android:id="@+id/SingleSaleLandCaseTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/vocabulary_land_case_type" />
@@ -215,7 +219,7 @@
                 android:text="@string/vocabulary_district" />
 
             <TextView
-                android:id="@+id/SinglePreSaleDistrictTxtTxt"
+                android:id="@+id/SingleSaleDistrictTxtTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -234,7 +238,7 @@
                 android:text="@string/land_info_address" />
 
             <TextView
-                android:id="@+id/SinglePreSaleAddressTxt"
+                android:id="@+id/SingleSaleAddressTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -253,7 +257,7 @@
                 android:text="@string/land_info_floor_count" />
 
             <TextView
-                android:id="@+id/SinglePreSaleFloorCountTxt"
+                android:id="@+id/SingleSaleFloorCountTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -272,7 +276,7 @@
                 android:text="@string/land_info_created_at" />
 
             <TextView
-                android:id="@+id/SinglePreSaleCreatedAtTxt"
+                android:id="@+id/SingleSaleCreatedAtTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -285,7 +289,7 @@
             android:orientation="horizontal">
 
             <GridView
-                android:id="@+id/SinglePreSaleLandEquipmentsGridView"
+                android:id="@+id/SingleSaleLandEquipmentsGridView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:numColumns="3"
@@ -297,7 +301,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/SinglePreSaleDescriptionTxt"
+                android:id="@+id/SingleSaleDescriptionTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -326,31 +330,31 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/SinglePreSaleUserAvatarImg"
+                android:id="@+id/SingleSaleUserAvatarImg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_action_camera" />
 
             <TextView
-                android:id="@+id/SinglePreSaleUserNameTxt"
+                android:id="@+id/SingleSaleUserNameTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/land_info_name" />
 
             <TextView
-                android:id="@+id/SinglePreSaleUserPhoneTxt"
+                android:id="@+id/SingleSaleUserPhoneTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/land_info_phone" />
 
             <Button
-                android:id="@+id/SinglePreSaleStartChatBtn"
+                android:id="@+id/SingleSaleStartChatBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/land_info_start_chat" />
 
             <EditText
-                android:id="@+id/SinglePreSaleUserDescriptionMultiTxt"
+                android:id="@+id/SingleSaleUserDescriptionMultiTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"

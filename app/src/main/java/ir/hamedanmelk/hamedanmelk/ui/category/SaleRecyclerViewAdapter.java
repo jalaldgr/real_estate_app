@@ -62,7 +62,7 @@ public class SaleRecyclerViewAdapter extends RecyclerView.Adapter<SaleRecyclerVi
                 final NavController controller= Navigation.findNavController(Objects.requireNonNull(act),R.id.nav_host_fragment);
                 Bundle args=new Bundle();
                 args.putString("id",SaleModels.get(position).getId());
-                controller.navigate(R.id.singleLandFragment,args);
+                controller.navigate(R.id.singleSaleFragment,args);
                 Log.d("hhh", "onClick from adapter: "+ Integer.toString(position));
             }
         });

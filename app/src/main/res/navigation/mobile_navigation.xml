@@ -93,9 +93,9 @@
         tools:layout="@layout/fragment_rent" />
     <fragment
         android:id="@+id/assingmentFragment"
-        android:name="ir.hamedanmelk.hamedanmelk.ui.category.AssignmentFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.ParticipationFragment"
         android:label="@string/assingment_category"
-        tools:layout="@layout/fragment_assignment" />
+        tools:layout="@layout/fragment_participation" />
     <fragment
         android:id="@+id/agentFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.category.AgentFragment"
@@ -106,11 +106,7 @@
         android:name="ir.hamedanmelk.hamedanmelk.ui.category.ExchangeFragment"
         android:label="@string/exchange_category"
         tools:layout="@layout/fragment_exchange" />
-    <fragment
-        android:id="@+id/inquiryFragment"
-        android:name="ir.hamedanmelk.hamedanmelk.ui.category.InquiryFragment"
-        android:label="@string/inquiry_category"
-        tools:layout="@layout/fragment_inquiry" />
+
     <fragment
         android:id="@+id/servicesFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.company.ServicesFragment"
@@ -127,10 +123,10 @@
         android:label="@string/law_instiute_category"
         tools:layout="@layout/fragment_law_instiute" />
     <fragment
-        android:id="@+id/singleLandFragment"
-        android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleLandFragment"
+        android:id="@+id/singleSaleFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleSaleFragment"
         android:label="fragment_single_land"
-        tools:layout="@layout/fragment_single_land" />
+        tools:layout="@layout/fragment_single_sale" />
     <fragment
         android:id="@+id/singleRentFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleRentFragment"
@@ -147,10 +143,10 @@
         android:label="fragment_single_exchange"
         tools:layout="@layout/fragment_single_exchange" />
     <fragment
-        android:id="@+id/singleAssignmentFragment"
-        android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleAssignmentFragment"
+        android:id="@+id/singleParticipationFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleParticipationFragment"
         android:label="fragment_single_assignment"
-        tools:layout="@layout/fragment_single_assignment" />
+        tools:layout="@layout/fragment_single_participation" />
 
     <fragment
         android:id="@+id/singleUserLandFragment"

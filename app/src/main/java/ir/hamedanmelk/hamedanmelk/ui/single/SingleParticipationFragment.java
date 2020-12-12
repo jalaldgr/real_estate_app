@@ -57,16 +57,16 @@ import saman.zamani.persiandate.PersianDateFormat;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SinglePreSaleFragment#newInstance} factory method to
+ * Use the {@link SingleParticipationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallback {
+public class SingleParticipationFragment extends Fragment implements OnMapReadyCallback {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static final String TAG        = "SinglePreSaleFragment";
+    private static final String TAG        = "SingleParticipationFragment";
     MYSQlDBHelper qlDBHelper;
     GoogleMap mgoogleMap;
     MapView mapView;
@@ -84,7 +84,7 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
     TextView landTypeTxt ;
     TextView floorCountTxt ;
     TextView spaceFoundationTxt ;
-    TextView preSaleTotalPriceTxt;
+    TextView totalPriceTxt;
     TextView landCaseTxt;
     TextView userDescriptionTxt ;
     TextView landStateTxt;
@@ -100,12 +100,12 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
     ViewPager viewPager;
     CheckBox bookmarkChckbx;
     Button  startChatBtn;
-    public SinglePreSaleFragment() {
+    public SingleParticipationFragment() {
         // Required empty public constructor
     }
 
-    public static SinglePreSaleFragment newInstance(String param1, String param2) {
-        SinglePreSaleFragment fragment = new SinglePreSaleFragment();
+    public static SingleParticipationFragment newInstance(String param1, String param2) {
+        SingleParticipationFragment fragment = new SingleParticipationFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -129,30 +129,30 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_single_presale, container, false);
+        View view = inflater.inflate(R.layout.fragment_single_participation, container, false);
         mapView = (MapView) view.findViewById(R.id.mapView);
         qlDBHelper = new MYSQlDBHelper(getContext());
-        titleTxt = (TextView)view.findViewById(R.id.SinglePreSaleTitleTxt);
-        landTypeTxt = (TextView)view.findViewById(R.id.SinglePreSaleLandTypeTxt);
-        roomCountTxt = (TextView)view.findViewById(R.id.SinglePreSaleRoomCountTxt);
-        spaceFoundationTxt = (TextView)view.findViewById(R.id.SinglePreSaleFoundationSpaceTxt);
-        districtTxt =(TextView)view.findViewById(R.id.SinglePreSaleDistrictTxtTxt);
-        preSaleTotalPriceTxt = (TextView)view.findViewById(R.id.SinglePreSaleTotalPriceTxt);
-        addressTxt = (TextView)view.findViewById(R.id.SinglePreSaleAddressTxt);
-        floorCountTxt = (TextView)view.findViewById(R.id.SinglePreSaleFloorCountTxt);
-        landCaseTxt = (TextView)view.findViewById(R.id.SinglePreSaleLandCaseTxt);
-        userDescriptionTxt =(TextView)view.findViewById(R.id.SinglePreSaleUserDescriptionMultiTxt);
-        landStateTxt = (TextView)view.findViewById(R.id.SinglePreSaleLandStateTxt);
-        buildingYearTxt = (TextView)view.findViewById(R.id.SinglePreSaleBuildingYearTxt);
-        createAtTxt = (TextView)view.findViewById(R.id.SinglePreSaleCreatedAtTxt);
-        userNameTxt = (TextView)view.findViewById(R.id.SinglePreSaleUserNameTxt);
-        userPhoneTxt = (TextView)view.findViewById(R.id.SinglePreSaleUserPhoneTxt);
-        descriptionTxt = (EditText)view.findViewById(R.id.SinglePreSaleDescriptionTxt);
-        userAvatarImg = (ImageView)view.findViewById(R.id.SinglePreSaleUserAvatarImg);
-        equipmentsGridView = (GridView)view.findViewById(R.id.SinglePreSaleLandEquipmentsGridView);
-        viewPager = (ViewPager) view.findViewById(R.id.SinglePreSaleGalleryViewpager);
-        bookmarkChckbx = (CheckBox)view.findViewById(R.id.SinglePreSaleFragmentBookmarkChckbx);
-        startChatBtn = (Button)view.findViewById(R.id.SinglePreSaleStartChatBtn);
+        titleTxt = (TextView)view.findViewById(R.id.SingleParticipationTitleTxt);
+        landTypeTxt = (TextView)view.findViewById(R.id.SingleParticipationLandTypeTxt);
+        roomCountTxt = (TextView)view.findViewById(R.id.SingleParticipationRoomCountTxt);
+        spaceFoundationTxt = (TextView)view.findViewById(R.id.SingleParticipationFoundationSpaceTxt);
+        totalPriceTxt = (TextView)view.findViewById(R.id.SingleParticipationTotalPriceTxt);
+        districtTxt =(TextView)view.findViewById(R.id.SingleParticipationDistrictTxtTxt);
+        addressTxt = (TextView)view.findViewById(R.id.SingleParticipationAddressTxt);
+        floorCountTxt = (TextView)view.findViewById(R.id.SingleParticipationFloorCountTxt);
+        landCaseTxt = (TextView)view.findViewById(R.id.SingleParticipationLandCaseTxt);
+        userDescriptionTxt =(TextView)view.findViewById(R.id.SingleParticipationUserDescriptionMultiTxt);
+        landStateTxt = (TextView)view.findViewById(R.id.SingleParticipationLandStateTxt);
+        buildingYearTxt = (TextView)view.findViewById(R.id.SingleParticipationBuildingYearTxt);
+        createAtTxt = (TextView)view.findViewById(R.id.SingleParticipationCreatedAtTxt);
+        userNameTxt = (TextView)view.findViewById(R.id.SingleParticipationUserNameTxt);
+        userPhoneTxt = (TextView)view.findViewById(R.id.SingleParticipationUserPhoneTxt);
+        descriptionTxt = (EditText)view.findViewById(R.id.SingleParticipationDescriptionTxt);
+        userAvatarImg = (ImageView)view.findViewById(R.id.SingleParticipationUserAvatarImg);
+        equipmentsGridView = (GridView)view.findViewById(R.id.SingleParticipationLandEquipmentsGridView);
+        viewPager = (ViewPager) view.findViewById(R.id.SingleParticipationGalleryViewpager);
+        bookmarkChckbx = (CheckBox)view.findViewById(R.id.SingleParticipationFragmentBookmarkChckbx);
+        startChatBtn = (Button)view.findViewById(R.id.SingleParticipationStartChatBtn);
 
         bookmarkChckbx.setChecked(qlDBHelper.isBookmarkedByLandID(landId));
         bookmarkChckbx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -220,7 +220,7 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
                         landTypeTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_TYPE_TITLE));
                         floorCountTxt.setText(responseData.getString(Constants.LAND_INFO_FLOOR_COUNT));
                         spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE));
-                        preSaleTotalPriceTxt.setText(new DecimalFormat("###,###,###").format(Integer.parseInt(responseData.getString(Constants.LAND_INFO_SALE_TOTAL_PRICE))));
+                        totalPriceTxt.setText(new DecimalFormat("###,###,###").format(Integer.parseInt(responseData.getString(Constants.LAND_INFO_MORTGAGE_TOTAL_PRICE))));
                         LandCaseTypeModel landCaseTypeModel = qlDBHelper.GetLandCaseTypeByID(responseData.getString(Constants.LAND_INFO_LAND_CASE_ID));
                         landCaseTxt.setText(landCaseTypeModel.getTitle());
                         districtTxt.setText(responseData.getString(Constants.LAND_INFO_DISTRICT_TITLE));

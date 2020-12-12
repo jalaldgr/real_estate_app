@@ -57,9 +57,18 @@ public class UserLandRecyclerViewAdapter extends RecyclerView.Adapter<UserLandRe
                 final NavController controller= Navigation.findNavController(Objects.requireNonNull(act),R.id.nav_host_fragment);
                 Bundle args=new Bundle();
                 args.putString("id",userLandModels.get(position).getId());
-                controller.navigate(R.id.singleUserLandFragment,args);
-                Log.d("hhh", "onClick from adapter: "+ Integer.toString(position));
-            }
+
+                switch (userLandModels.get(position).getLand_state_id()){
+                    case "1" :
+                        controller.navigate(R.id.singleSaleFragment,args);
+                        break;
+                    case  "2":
+                        controller.navigate(R.id.singleRentFragment,args);
+                        break;
+                    case "3" :
+                        controller.navigate(R.id.singlePreSaleFragment,args);
+
+                }            }
         });
     }
 

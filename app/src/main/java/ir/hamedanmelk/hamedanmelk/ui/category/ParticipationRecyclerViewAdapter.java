@@ -27,12 +27,12 @@ import ir.hamedanmelk.hamedanmelk.tools.Urls;
  * {@link RecyclerView.Adapter} that can display a {@link AssignmentModel}.
  *
  */
-public class AssignmentRecyclerViewAdapter extends RecyclerView.Adapter<AssignmentRecyclerViewAdapter.ViewHolder> {
+public class ParticipationRecyclerViewAdapter extends RecyclerView.Adapter<ParticipationRecyclerViewAdapter.ViewHolder> {
 
     private final List<AssignmentModel> assignmentModels;
     Activity act;
 
-    public AssignmentRecyclerViewAdapter(List<AssignmentModel> items, Activity activity) {
+    public ParticipationRecyclerViewAdapter(List<AssignmentModel> items, Activity activity) {
         assignmentModels= items;
         act=activity;
     }
@@ -41,7 +41,7 @@ public class AssignmentRecyclerViewAdapter extends RecyclerView.Adapter<Assignme
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_assignment_item, parent, false);
+                .inflate(R.layout.fragment_participation_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -57,7 +57,7 @@ public class AssignmentRecyclerViewAdapter extends RecyclerView.Adapter<Assignme
                 final NavController controller= Navigation.findNavController(Objects.requireNonNull(act),R.id.nav_host_fragment);
                 Bundle args=new Bundle();
                 args.putString("id",assignmentModels.get(position).getId());
-                controller.navigate(R.id.singleExchangeFragment,args);
+                controller.navigate(R.id.singleParticipationFragment,args);
                 Log.d("hhh", "onClick from adapter: "+ Integer.toString(position));
             }
         });
