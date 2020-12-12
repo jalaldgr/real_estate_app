@@ -42,17 +42,14 @@ public class HomeFragment extends Fragment {
     Button rentbtn;
     Button assignmentbtn;
     Button resalebtn;
-    Button exchangebtn;
     Button agentbtn;
     Button servicesbtn;
     Button lawinstiutebtn;
     Button inquirybtn;
-    Button morebtn;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TotalLandRequest(getContext());
 
     }
 
@@ -61,7 +58,7 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
-
+        TotalLandRequest(getContext());
         salebtn = (Button)root.findViewById(R.id.HomeFragmentSaleButton);
         rentbtn=(Button)root.findViewById(R.id.HomeFragmentRentButton);
         assignmentbtn=(Button)root.findViewById(R.id.HomeFragmentAssignmentButton);
@@ -135,20 +132,13 @@ public class HomeFragment extends Fragment {
 //        });
 
         recyclerView = (RecyclerView) root.findViewById(R.id.HomeFrgmntHrzntlRcyclVw);
-//        RHZAdaptor = new home_frgmnt_horizontal_recycler_adaptor(mylist, this.getContext());
-//        mylist.add(new Estate("خانه کلنگی","همدان خضر","32000000"));
-//        mylist.add(new Estate("زمین کشاورزی","قهاوند","2500000000"));
-//        mylist.add(new Estate("خانه دربستی","خواجه رشید","56000000"));
-//        mylist.add(new Estate("آپارتمان","سعیدیه","245000000"));
-//        mylist.add(new Estate("اجاره ویلا","حیدره پشت کوه","250000"));
-//        mylist.add(new Estate("آپارتمان نقلی","پل گیشا","366000000"));
-//        mylist.add(new Estate("مغازه 73 متری","کوی جنت","5600000000"));
         RecyclerView.LayoutManager laymngr =  new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(laymngr);
         ViewPager viewPager;
         viewPager = (ViewPager) root.findViewById(R.id.viewpager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getContext());
         viewPager.setAdapter(viewPagerAdapter);
+
         return root;
     }
 

@@ -37,7 +37,7 @@ public class CompaniesRecyclerViewAdapter extends RecyclerView.Adapter<Companies
 
     private final List<CompanyModel> companyModels;
     Activity activity;
-    private static final String TAG = "PreSaleFragment";
+    private static final String TAG = "CompaniesRecycler";
     MYSQlDBHelper dbHelper;
     public CompaniesRecyclerViewAdapter(List<CompanyModel> items, Activity act) {
 

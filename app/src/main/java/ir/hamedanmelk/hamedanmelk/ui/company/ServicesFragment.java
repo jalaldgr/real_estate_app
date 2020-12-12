@@ -113,7 +113,7 @@ public class ServicesFragment extends Fragment {
                             companyTypeModel = new CompanyTypeModel(
                                     responseItem.getString(Constants.COMPANY_TYPES_ID),
                                     responseItem.getString(Constants.COMPANY_TYPES_TITLE),
-                                    responseItem.getString(Constants.COMPANY_TYPES_ORDER),
+                                    responseItem.getString("Order"),
                                     responseItem.getString(Constants.COMPANY_TYPES_PARENT_ID)
                             );
                             if (companyTypeModel.getParent_id().equals("null")) {

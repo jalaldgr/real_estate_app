@@ -113,6 +113,8 @@ public class CompanyFragment extends Fragment {
                 if (progressDialog.isShowing())progressDialog.dismiss();
                 try {
                     JSONObject reader = new JSONObject(s);
+                    Log.d(TAG, s.toString());
+
                     JSONArray companiesList = new JSONArray(reader.getString(Constants.JSON_RESPONSE_DATA));
                     JSONObject companyItem;
                     if (reader.getInt(Constants.JSON_RESPONSE_STATE)==1)
@@ -136,12 +138,10 @@ public class CompanyFragment extends Fragment {
 
                             companyModels.add(companyModel);
                         }
-//                        Log.d(TAG, "onPostExecute: "+companyModels.get(0).getTitle());
                         recyclerView.setAdapter(new CompaniesRecyclerViewAdapter(companyModels,getActivity()));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.d(TAG, "onPostExecute exception: "+e.toString());
                 }
 
             }
