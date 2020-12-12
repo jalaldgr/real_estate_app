@@ -1,4 +1,4 @@
-package ir.hamedanmelk.hamedanmelk.ui.single;
+package ir.hamedanmelk.hamedanmelk.ui.company;
 
 import android.Manifest;
 import android.app.Activity;
@@ -33,9 +33,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomnavigation.LabelVisibilityMode;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -51,7 +48,6 @@ import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.CompanyTypeModel;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.FilePath;
-import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.MultipartUtility;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;

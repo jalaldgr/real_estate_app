@@ -374,4 +374,59 @@ public class Constants {
 
     public static final String START_CHAT_UID = "UID";
     public static final String START_CHAT_TO = "To";
+
+
+
+    public static final String NEW_LAND_LATITIUDE="Latitude";
+    public static final String NEW_LAND_LONGITUDE="Longitude";
+    public static final String NEW_LAND_TITLE="Title";
+    public static final String NEW_LAND_IMAGE_FILE="ImageFile";
+    public static final String NEW_LAND_USE_TYPE_ID="UseTypeID";
+    public static final String NEW_LAND_EQUIPMENT="Equipment";
+    public static final String NEW_LAND_LAND_STATE_ID="LandStateID";
+    public static final String NEW_LAND_CHK_EXCHANGED="ChkExchanged";
+    public static final String NEW_LAND_DONG="Dong";
+    public static final String NEW_LAND_UID="UID";
+    public static final String NEW_LAND_VOUCHER_TYPE_ID="VoucherTypeID";
+    public static final String NEW_LAND_SALE_TOTAL_PRICE="SaleTotalPrice";
+    public static final String NEW_LAND_PRE_DONG="PreDong";
+    public static final String NEW_LAND_PRE_VOUCHER_TYPE_ID="PreVoucherTypeID";
+    public static final String NEW_LAND_DELIVERY_DATE="DeliveryDate";
+    public static final String NEW_LAND_PRE_SALE_TOTAL_PRICE="PreSaleTotalPrice";
+    public static final String NEW_LAND_EX_DONG="ExDong";
+    public static final String NEW_LAND_EX_VOUCHER_TYPE_ID="ExVoucherTypeID";
+    public static final String NEW_LAND_DESCRIPTION="Description";
+    public static final String NEW_LAND_ADDRESS="Address";
+    public static final String NEW_LAND_PROVINCE_ID="ProvinceID";
+    public static final String NEW_LAND_CITY_ID="CityID";
+    public static final String NEW_LAND_AREA_ID="AreaID";
+    public static final String NEW_LAND_DISTRICT_ID="DistrictID";
+    public static final String NEW_LAND_LAND_TYPE_ID="LandTypeID";
+    public static final String NEW_LAND_BUILDING_CONDITION_ID="BuildingConditionID";
+    public static final String NEW_LAND_BUILDING_YEAR="BuildingYear";
+    public static final String NEW_LAND_DEBT_TOTAL_PRICE="DebtTotalPrice";
+    public static final String NEW_LAND_MORTGAGE_TOTAL_PRICE="MortgageTotalPrice";
+    public static final String NEW_LAND_RENTAL_TOTAL_PRICE="RentTotalPrice";
+    public static final String NEW_LAND_PRE_PAY="PrePayPrice";
+    public static final String NEW_LAND_RENTAL_PREFERENCE="RentalPreferenceID";
+    public static final String NEW_LAND_RESIDENT_OWNER="ResidentOwner";
+    public static final String NEW_LAND_FOUNDATION_SPACE="FoundationSpace";
+    public static final String NEW_LAND_DIRECTION_ID="DirectionID";
+    public static final String NEW_LAND_LAND_VIEW_ID="LandViewID";
+    public static final String NEW_LAND_FLOOR_COVERING_ID="FloorCoveringID";
+    public static final String NEW_LAND_KITCHEN_SERVICES="KitchenServiceID";
+    public static final String NEW_LAND_ROOM_COUNT="RoomCount";
+    public static final String NEW_LAND_FLOOR_COUNT="FloorCount";
+    public static final String NEW_LAND_UNIT_IN_FLOOR="UnitInFloor";
+    public static final String NEW_LAND_FLOOR="Floor";
+    public static final String NEW_LAND_LAND_CASE_ID="LandCaseID";
+    public static final String NEW_LAND_LOAN_TYPE_ID="LoanTypeID";
+    public static final String NEW_LAND_WATER="Water";
+    public static final String NEW_LAND_GAS="Gas";
+    public static final String NEW_LAND_ELECTRICITY="Electricy";
+    public static final String NEW_LAND_PHONE="Phone";
+
+
+
+
 }

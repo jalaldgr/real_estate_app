@@ -117,9 +117,8 @@
     <string name="authentication_password">Password</string>
     <!--        User model in Shared Preference-->
     <string name="user_shared_preference">user_model_pref</string>
-
     <string name="vocabulary_title">عنوان</string>
-    <string name="vocabulary_district">منطقه</string>
+    <string name="vocabulary_district">محله</string>
     <string name="vocabulary_total_price">قیمت کل</string>
     <string name="vocabulary_occasion">اکازیون</string>
     <string name="vocabulary_featured">ویژه</string>
@@ -128,12 +127,97 @@
     <string name="vocabulary_rent_price">اجاره</string>
     <string name="vocabulary_room_count">تعداد اتاق</string>
     <string name="vocabulary_building_year">سال ساخت</string>
-    <string name="vocabulary_land_state">وضعیت ملک</string>
+    <string name="vocabulary_land_building_condition">وضعیت بنا</string>
     <string name="vocabulary_land_case_type">نوع کاربری</string>
     <string name="vocabulary_manager">با مدیریت</string>
     <string name="vocabulary_submit_company">ثبت شرکت</string>
     <string name="vocabulary_select_image">انتخاب عکس</string>
     <string name="vocabulary_remove_image">حذف عکس</string>
+    <string name="vocabulary_land_state"> نوع آگهی</string>
+
+
+    <string name="new_land_use_types">نوع کاربری</string>
+    <string name="new_land_is_exchange">قابل معاوضه</string>
+    <string name="new_land_pre_sale">تعداد دانگ</string>
+    <string name="new_land_voucher_type">نوع سند</string>
+    <string name="new_land_area">منطفه</string>
+    <string name="new_land_rental_preference">ارجیت اجاره</string>
+    <string name="new_land_resident_owner">مالک ساکن است؟</string>
+    <string name="new_land_direction">جهت</string>
+    <string name="new_land_view">نما</string>
+    <string name="new_land_floor_covering">کفپوش</string>
+    <string name="new_land_kitchen_services">سرویس آشپزخانه</string>
+    <string name="new_land_land_case">نوع آگهی</string>
+    <string name="new_land_loan_type">نوع وام</string>
+    <string name="new_land_water">آب</string>
+    <string name="new_land_electricity">برق</string>
+    <string name="new_land_gas">گاز</string>
+    <string name="new_land_phone">تلفن</string>
+    <string name="new_land_submit">ثبت آگهی</string>
+    <array name="new_land_water_electricity">
+        <item>نا مشخص</item>
+        <item>مستقل</item>
+        <item>مشترک</item>
+        <item>ندارد</item>
+    </array>
+
+    <array name="new_land_floor">
+        <item>همکف</item>
+        <item>اول</item>
+        <item>دوم</item>
+        <item>سوم</item>
+        <item>چهارم</item>
+        <item>پنجم</item>
+        <item>ششم</item>
+        <item>هفتم</item>
+        <item>هشتم</item>
+        <item>نهم</item>
+        <item>دهم یا بالاتر</item>
+    </array>
+
+
+    <array name="new_land_room_count">
+        <item>ندارد</item>
+        <item>یک</item>
+        <item>دوم</item>
+        <item>سه</item>
+        <item>چهار</item>
+        <item>پنج</item>
+        <item>شش</item>
+        <item>هفت</item>
+        <item>هشت</item>
+        <item>نه</item>
+        <item>ده تا بیشتر</item>
+    </array>
+
+    <array name="new_land_floor_count">
+        <item>صفر</item>
+        <item>یک</item>
+        <item>دوم</item>
+        <item>سه</item>
+        <item>چهار</item>
+        <item>پنج</item>
+        <item>شش</item>
+        <item>هفت</item>
+        <item>هشت</item>
+        <item>نه</item>
+        <item>ده تا بیشتر</item>
+    </array>
+
+
+    <array name="new_land_unit_in_floor">
+        <item>صفر</item>
+        <item>یک</item>
+        <item>دوم</item>
+        <item>سه</item>
+        <item>چهار</item>
+        <item>پنج</item>
+        <item>شش</item>
+        <item>هفت</item>
+        <item>هشت</item>
+        <item>نه</item>
+        <item>ده تا بیشتر</item>
+    </array>
 
 
 

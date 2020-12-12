@@ -31,15 +31,21 @@ public class Urls {
     private static final String GetLandViews                            = "/AppRequests/GetLandViews";
     private static final String GetLandDirections                       = "/AppRequests/GetLandDirections";
     private static final String GetLandEquipments                       = "/AppRequests/GetLandEquipments";
-    private static final String GetLinks                                ="/AppRequests/GetLinks";
-    private static final String CompanyTypes                            ="/AppRequests/GetCompanyTypes";
-    private static final String Companies                               ="/AppRequests/GetCompanies";
-    private static final String UserFavorites                           ="/AppRequests/GetUserLandFavorites";
-    private static final String UserLandFavoriteRemove                  ="/AppRequests/UserLandFavoriteRemove";
-    private static final String UserLandFavoriteSubmit                  ="/AppRequests/UserLandFavoriteSubmit";
-    private static final String RegisterAgencyPublicUser                ="/AppRequests/RegisterAgencyPublicUser";
+    private static final String GetLinks                                = "/AppRequests/GetLinks";
+    private static final String CompanyTypes                            = "/AppRequests/GetCompanyTypes";
+    private static final String Companies                               = "/AppRequests/GetCompanies";
+    private static final String UserFavorites                           = "/AppRequests/GetUserLandFavorites";
+    private static final String UserLandFavoriteRemove                  = "/AppRequests/UserLandFavoriteRemove";
+    private static final String UserLandFavoriteSubmit                  = "/AppRequests/UserLandFavoriteSubmit";
+    private static final String RegisterAgencyPublicUser                = "/AppRequests/RegisterAgencyPublicUser";
     private static final String CompanyAdd                              = "/AppRequests/CompanyAdd";
-    private static final String StartUserChat                           ="/AppRequests/StartUserChat";
+    private static final String StartUserChat                           = "/AppRequests/StartUserChat";
+    private static final String RegisterLand                            = "/AppRequests/RegisterLand";
+
+
+    public static String getRegisterLand() {
+        return RegisterLand;
+    }
 
     public static String getRegisterAgencyPublicUser() {
         return RegisterAgencyPublicUser;

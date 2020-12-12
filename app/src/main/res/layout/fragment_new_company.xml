@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="rtl"
-    tools:context=".ui.single.NewCompanyFragment">
+    tools:context=".ui.company.NewCompanyFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
