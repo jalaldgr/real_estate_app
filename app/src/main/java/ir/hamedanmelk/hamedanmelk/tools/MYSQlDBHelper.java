@@ -9,6 +9,9 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import ir.hamedanmelk.hamedanmelk.models.AgencyModel;
+import ir.hamedanmelk.hamedanmelk.models.AgentUserModel;
+import ir.hamedanmelk.hamedanmelk.models.LawyerModel;
 import ir.hamedanmelk.hamedanmelk.models.OfficeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.AreaModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.BuildingConditionModel;
@@ -55,6 +58,8 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String COMPANY_TYPES_TABLE_NAME = "CompanyTypes";
     private static final String BOOKMARK_TABLE_NAME = "Bookmarks";
     private static final String OFFICE_TABLE_NAME = "Office";
+    private static final String LAWYER_TABLE_NAME = "Lawyer";
+    private static final String AGENCY_TABLE_NAME = "Agency";
 
     private static final String PROVINCE_TABLE_COLUMN_ID="id";
     private static final String PROVINCE_TABLE_COLUMN_TITLE="Title";
@@ -119,10 +124,12 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String COMPANY_TYPES_TABLE_COLUMN_ORDER    ="CTOrder";
     private static final String COMPANY_TYPES_TABLE_COLUMN_PARENT_ID="parent_id";
 
+    private static final String BOOKMARK_TABLE_COLUMN_ID            ="id";
+
     private static final String OFFICE_TABLE_COLUMN_ID = "id";
     private static final String OFFICE_TABLE_COLUMN_TITLE = "Title";
     private static final String OFFICE_TABLE_COLUMN_MANAGER="Manager";
-    private static final String OFFICE_TABLE_COLUMN_NO = "No";
+    private static final String OFFICE_TABLE_COLUMN_OFFICE_NO = "OfficeNo";
     private static final String OFFICE_TABLE_COLUMN_ADDRESS = "Address";
     private static final String OFFICE_TABLE_COLUMN_LOGO = "Logo";
     private static final String OFFICE_TABLE_COLUMN_PHONE = "Phone";
@@ -136,7 +143,30 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String OFFICE_TABLE_COLUMN_CREATED_AT = "created_at";
 
 
-    private static final String BOOKMARK_TABLE_COLUMN_ID            ="id";
+    private static final String LAWYER_TABLE_COLUMN_ID ="id";
+    private static final String LAWYER_TABLE_COLUMN_FULL_NAME ="FullName";
+    private static final String LAWYER_TABLE_COLUMN_IMAGE = "Image";
+    private static final String LAWYER_TABLE_COLUMN_DESCRIPTION = "Description";
+    private static final String LAWYER_TABLE_COLUMN_DISABLED = "Disabled";
+    private static final String LAWYER_TABLE_COLUMN_PHONE = "Phone";
+    private static final String LAWYER_TABLE_COLUMN_USER_ID ="user_id";
+    private static final String LAWYER_TABLE_COLUMN_CREATED_ID = "created_at";
+
+    private static final String AGENCY_TABLE_COLUMN_ID = "id";
+    private static final String AGENCY_TABLE_COLUMN_TITLE = "Title";
+    private static final String AGENCY_TABLE_COLUMN_OWNER = "Owner";
+    private static final String AGENCY_TABLE_COLUMN_MANAGER="Manager";
+    private static final String AGENCY_TABLE_COLUMN_ADDRESS = "Address";
+    private static final String AGENCY_TABLE_COLUMN_PROVINE_ID = "province_id";
+    private static final String AGENCY_TABLE_COLUMN_CITY_ID = "city_id";
+    private static final String AGENCY_TABLE_COLUMN_AREA_ID= "area_id";
+    private static final String AGENCY_TABLE_COLUMN_DISTRICT_ID = "district_id";
+    private static final String AGENCY_TABLE_COLUMN_USER_ID = "user_id";
+    private static final String AGENCY_TABLE_COLUMN_MOBILE = "Mobile";
+    private static final String AGENCY_TABLE_COLUMN_PHONE = "Phone";
+    private static final String AGENCY_TABLE_COLUMN_LOGO = "Logo";
+    private static final String AGENCY_TABLE_COLUMN_DISABLED = "Disabled";
+    private static final String AGENCY_TABLE_COLUMN_CREATED_AT = "created_at";
 
 
     private static final String CREATE_PROVINCE_TABLE= "CREATE TABLE "+PROVINCE_TABLE_NAME+"("
@@ -247,7 +277,7 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
             + OFFICE_TABLE_COLUMN_ID + " TEXT,"
             + OFFICE_TABLE_COLUMN_TITLE + " TEXT,"
             + OFFICE_TABLE_COLUMN_MANAGER + " TEXT,"
-            + OFFICE_TABLE_COLUMN_NO + " TEXT,"
+            + OFFICE_TABLE_COLUMN_OFFICE_NO + " TEXT,"
             + OFFICE_TABLE_COLUMN_ADDRESS + " TEXT,"
             + OFFICE_TABLE_COLUMN_LOGO + " TEXT,"
             + OFFICE_TABLE_COLUMN_PHONE + " TEXT,"
@@ -260,6 +290,37 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
             + OFFICE_TABLE_COLUMN_USER_ID + " TEXT,"
             + OFFICE_TABLE_COLUMN_CREATED_AT + " TEXT"
             +")";
+
+    private static final String CREATE_LAWYER_TABLE="CREATE TABLE "+LAWYER_TABLE_NAME+"("
+            + LAWYER_TABLE_COLUMN_ID + " TEXT,"
+            + LAWYER_TABLE_COLUMN_FULL_NAME + " TEXT,"
+            + LAWYER_TABLE_COLUMN_IMAGE + " TEXT,"
+            + LAWYER_TABLE_COLUMN_DESCRIPTION + " TEXT,"
+            + LAWYER_TABLE_COLUMN_DISABLED + " TEXT,"
+            + LAWYER_TABLE_COLUMN_PHONE + " TEXT,"
+            + LAWYER_TABLE_COLUMN_USER_ID + " TEXT,"
+            + LAWYER_TABLE_COLUMN_CREATED_ID + " TEXT"
+            +")";
+
+
+    private static final String CREATE_AGENCY_TABLE="CREATE TABLE "+AGENCY_TABLE_NAME+"("
+            + AGENCY_TABLE_COLUMN_ID + " TEXT,"
+            + AGENCY_TABLE_COLUMN_TITLE + " TEXT,"
+            + AGENCY_TABLE_COLUMN_OWNER + " TEXT,"
+            + AGENCY_TABLE_COLUMN_MANAGER + " TEXT,"
+            + AGENCY_TABLE_COLUMN_ADDRESS + " TEXT,"
+            + AGENCY_TABLE_COLUMN_PROVINE_ID + " TEXT,"
+            + AGENCY_TABLE_COLUMN_CITY_ID + " TEXT,"
+            + AGENCY_TABLE_COLUMN_AREA_ID + " TEXT,"
+            + AGENCY_TABLE_COLUMN_DISTRICT_ID + " TEXT,"
+            + AGENCY_TABLE_COLUMN_USER_ID + " TEXT,"
+            + AGENCY_TABLE_COLUMN_MOBILE + " TEXT,"
+            + AGENCY_TABLE_COLUMN_PHONE + " TEXT,"
+            + AGENCY_TABLE_COLUMN_LOGO + " TEXT,"
+            + AGENCY_TABLE_COLUMN_DISABLED + " TEXT,"
+            + AGENCY_TABLE_COLUMN_CREATED_AT + " TEXT"
+            +")";
+
 //////////////////////////////////////Provinces methods////////////////////////////////////////////////
     public void InsertProvinces(ContentValues cv){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -1528,8 +1589,271 @@ public void InsertDistrict(ContentValues cv){
         return officeModels;
     }
 
+///////////////////////// Lawyer Methods //////////////////////////////
+public void InsertLawyer(ContentValues cv){
+    SQLiteDatabase db = this.getWritableDatabase();
+    db.insert(LAWYER_TABLE_NAME, null, cv);
+    db.close();
+}
 
-    //----------------------------------------------------------------------------------------------
+public void DeleteLawyers(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+LAWYER_TABLE_NAME);
+        db.close();
+    }
+
+public ArrayList<LawyerModel> GetLawyers() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<LawyerModel> lawyerModels = new ArrayList<LawyerModel>();
+        LawyerModel lawyerModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM " + LAWYER_TABLE_NAME , null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do {
+                lawyerModel = new LawyerModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7)
+                );
+                lawyerModels.add(lawyerModel);
+                counter++;
+            } while (c.moveToNext());
+            c.close();
+        } catch (Exception e) {
+            Log.d(TAG, "GetLawyers: "+e.toString());
+        }
+        db.close();
+        return lawyerModels;
+    }
+
+    ///////////////////////// Lawyer Agency //////////////////////////////
+    public void InsertAgency(ContentValues cv){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(AGENCY_TABLE_NAME, null, cv);
+        db.close();
+    }
+
+    public void DeleteAgency(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+AGENCY_TABLE_NAME);
+        db.close();
+    }
+
+    public ArrayList<AgencyModel> GetAgencies() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<AgencyModel> agencyModels = new ArrayList<AgencyModel>();
+        AgencyModel agencyModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM " + AGENCY_TABLE_NAME , null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do {
+                agencyModel = new AgencyModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        c.getString(8),
+                        c.getString(9),
+                        c.getString(10),
+                        c.getString(11),
+                        c.getString(12),
+                        c.getString(13),
+                        c.getString(14),
+                        c.getString(15)
+                );
+                agencyModels.add(agencyModel);
+                counter++;
+            } while (c.moveToNext());
+            c.close();
+        } catch (Exception e) {
+            Log.d(TAG, "GetAgencies: "+e.toString());
+        }
+        db.close();
+        return agencyModels;
+    }
+
+    public ArrayList<AgencyModel> GetAgenciesByProvinceID(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<AgencyModel> agencyModels = new ArrayList<AgencyModel>();
+        AgencyModel agencyModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM " + AGENCY_TABLE_NAME + " WHERE province_id = " + id, null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do {
+                agencyModel = new AgencyModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        c.getString(8),
+                        c.getString(9),
+                        c.getString(10),
+                        c.getString(11),
+                        c.getString(12),
+                        c.getString(13),
+                        c.getString(14),
+                        c.getString(15)
+                );
+                agencyModels.add(agencyModel);
+                counter++;
+            } while (c.moveToNext());
+            c.close();
+        } catch (Exception e) {
+            Log.d(TAG, "GetAgenciesByProvinceID: "+e.toString());
+        }
+        db.close();
+        return agencyModels;
+    }
+
+    public ArrayList<AgencyModel> GetAgenciesByCityID(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<AgencyModel> agencyModels = new ArrayList<AgencyModel>();
+        AgencyModel agencyModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM " + AGENCY_TABLE_NAME + " WHERE city_id = " + id, null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do {
+                agencyModel = new AgencyModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        c.getString(8),
+                        c.getString(9),
+                        c.getString(10),
+                        c.getString(11),
+                        c.getString(12),
+                        c.getString(13),
+                        c.getString(14),
+                        c.getString(15)
+                );
+                agencyModels.add(agencyModel);
+                counter++;
+            } while (c.moveToNext());
+            c.close();
+        } catch (Exception e) {
+            Log.d(TAG, "GetAgenciesByCityID: "+e.toString());
+        }
+        db.close();
+        return agencyModels;
+    }
+
+    public ArrayList<AgencyModel> GetAgenciesByAreaID(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<AgencyModel> agencyModels = new ArrayList<AgencyModel>();
+        AgencyModel agencyModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM " + AGENCY_TABLE_NAME + " WHERE area_id = " + id, null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do {
+                agencyModel = new AgencyModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        c.getString(8),
+                        c.getString(9),
+                        c.getString(10),
+                        c.getString(11),
+                        c.getString(12),
+                        c.getString(13),
+                        c.getString(14),
+                        c.getString(15)
+                );
+                agencyModels.add(agencyModel);
+                counter++;
+            } while (c.moveToNext());
+            c.close();
+        } catch (Exception e) {
+            Log.d(TAG, "GetAgenciesByAreaID: "+e.toString());
+        }
+        db.close();
+        return agencyModels;
+    }
+
+    public ArrayList<AgencyModel> GetAgenciesByDistrictID(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<AgencyModel> agencyModels = new ArrayList<AgencyModel>();
+        AgencyModel agencyModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM " + AGENCY_TABLE_NAME + " WHERE district_id = " + id, null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do {
+                agencyModel = new AgencyModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        c.getString(8),
+                        c.getString(9),
+                        c.getString(10),
+                        c.getString(11),
+                        c.getString(12),
+                        c.getString(13),
+                        c.getString(14),
+                        c.getString(15)
+                );
+                agencyModels.add(agencyModel);
+                counter++;
+            } while (c.moveToNext());
+            c.close();
+        } catch (Exception e) {
+            Log.d(TAG, "GetAgenciesByDistrictID: "+e.toString());
+        }
+        db.close();
+        return agencyModels;
+    }
+
+//----------------------------------------------------------------------------------------------
 
     public MYSQlDBHelper( Context context) {
         super(context, DB_NAME, null, DATABASE_VERSION);
@@ -1563,6 +1887,10 @@ public void InsertDistrict(ContentValues cv){
         sqLiteDatabase.execSQL(CREATE_LAND_EQUIPMENTS_TABLE);
         sqLiteDatabase.execSQL(CREATE_COMPANY_TYPES_TABLE);
         sqLiteDatabase.execSQL(CREATE_BOOKMARK_TABLE);
+        sqLiteDatabase.execSQL(CREATE_OFFICE_TABLE);
+        sqLiteDatabase.execSQL(CREATE_LAWYER_TABLE);
+        sqLiteDatabase.execSQL(CREATE_AGENCY_TABLE);
+
     }
 
     @Override
@@ -1586,5 +1914,8 @@ public void InsertDistrict(ContentValues cv){
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+LAND_EQUIPMENTS_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+COMPANY_TYPES_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+BOOKMARK_TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+OFFICE_TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+LAWYER_TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+AGENCY_TABLE_NAME);
     }
 }

@@ -135,7 +135,10 @@
     <string name="vocabulary_select_image">انتخاب عکس</string>
     <string name="vocabulary_remove_image">حذف عکس</string>
     <string name="vocabulary_land_state"> نوع آگهی</string>
-
+    <string name="vocabulary_agency_name">نام مشاور </string>
+    <string name="vocabulary_agency_manager">مدیر آزانس املاک</string>
+    <string name="vocabulary_mobile">موبایل</string>
+    <string name="vocabulary_chat">چت</string>
 
     <string name="new_land_use_types">نوع کاربری</string>
     <string name="new_land_is_exchange">قابل معاوضه</string>

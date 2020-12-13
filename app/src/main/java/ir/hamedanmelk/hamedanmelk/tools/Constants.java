@@ -446,5 +446,31 @@ public class Constants {
 
 
 
+    public static final String LAWYER_ID = "id";
+    public static final String LAWYER_FULL_NAME = "FullName";
+    public static final String LAWYER_IMAGE="Image";
+    public static final String LAWYER_DESCRIPTION = "Description";
+    public static final String LAWYER_DISABLED = "Disabled";
+    public static final String LAWYER_PHONE = "Phone";
+    public static final String LAWYER_USER_ID = "user_id";
+    public static final String LAWYER_CREATED_AT = "created_at";
+
+    public static final String AGENCY_ ="id";
+    public static final String AGENCY_TITLE ="Title";
+    public static final String AGENCY_OWNER ="Owner";
+    public static final String AGENCY_MANAGER ="Manager";
+    public static final String AGENCY_ADDRESS ="Address";
+    public static final String AGENCY_PROVINCE_ID ="province_id";
+    public static final String AGENCY_CITY_ID ="city_id";
+    public static final String AGENCY_AREA_ID ="area_id";
+    public static final String AGENCY_DISTRICT_ID ="district_id";
+    public static final String AGENCY_USER_ID ="user_id";
+    public static final String AGENCY_MOBILE ="Mobile";
+    public static final String AGENCY_PHONE ="Phone";
+    public static final String AGENCY_LOGO ="Logo";
+    public static final String AGENCY_DISABLED ="Disabled";
+    public static final String AGENCY_CREATE_AT ="created_at";
+    public static final String AGENCY_USER_IMAGE ="UserImage";
+
 
 }

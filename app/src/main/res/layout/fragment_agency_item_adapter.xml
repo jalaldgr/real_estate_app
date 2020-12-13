@@ -16,19 +16,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layoutDirection="rtl"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.4"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/LawyerItemAdapterThumbnailImg"
-                android:layout_width="150dp"
-                android:layout_height="130dp"
+                android:id="@+id/AgencyItemAdapterThumbnailImg"
+                android:layout_width="280dp"
+                android:layout_height="160dp"
                 android:layout_gravity="center|center_horizontal|center_vertical"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/ic_home_black_24dp" />
@@ -36,25 +35,43 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.7"
             android:orientation="vertical">
 
+
             <TextView
-                android:id="@+id/OfficeItemAdapterTitleTxt"
+                android:id="@+id/AgencyItemAdapterNameTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_margin="@dimen/text_margin"
                 android:paddingStart="8dp"
-                android:text="@string/vocabulary_title"
+                android:text="@string/vocabulary_agency_name"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textSize="14sp" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/AgencyItemAdapterAvatarImg"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_gravity="center|center_horizontal|center_vertical"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_person_black_24" />
+
+            </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
@@ -62,10 +79,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="16dp"
-                    android:text="@string/vocabulary_manager" />
+                    android:text="@string/vocabulary_agency_manager" />
 
                 <TextView
-                    android:id="@+id/OfficeItemAdapterManagerTxt"
+                    android:id="@+id/AgencyItemAdapterManagerTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -74,8 +91,9 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
@@ -86,7 +104,7 @@
                     android:text="@string/land_info_address" />
 
                 <TextView
-                    android:id="@+id/OfficeItemAdapterAddressTxt"
+                    android:id="@+id/AgencyItemAdapterAddressTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="16dp"
@@ -94,8 +112,9 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -111,10 +130,10 @@
                         android:text="@string/land_info_phone" />
 
                     <TextView
-                        android:id="@+id/OfficeItemAdapterPhoneTxt"
+                        android:id="@+id/AgencyItemAdapterPhoneTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:drawableLeft="@android:drawable/sym_action_call"
+                        android:drawableLeft="@drawable/ic_baseline_contact_phone_24"
                         android:text="@string/land_info_phone"
                         app:drawableTint="#E30808" />
                 </LinearLayout>
@@ -131,19 +150,42 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="16dp"
-                        android:text="@string/land_info_fax" />
+                        android:text="@string/vocabulary_mobile" />
 
                     <TextView
-                        android:id="@+id/OfficeItemAdapterFaxTxt"
+                        android:id="@+id/AgencyItemAdapterMobileTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:drawableLeft="@android:drawable/ic_dialog_email"
-                        android:text="@string/land_info_fax"
+                        android:drawableLeft="@android:drawable/sym_action_call"
+                        android:text="@string/vocabulary_mobile"
                         app:drawableTint="#E30808" />
                 </LinearLayout>
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingStart="16dp"
+                    android:text="@string/vocabulary_chat" />
+
+                <TextView
+                    android:id="@+id/AgencyItemAdapterChatTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@android:drawable/stat_notify_chat"
+                    android:text="@string/land_info_start_chat"
+                    app:drawableTint="#E30808" />
+            </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

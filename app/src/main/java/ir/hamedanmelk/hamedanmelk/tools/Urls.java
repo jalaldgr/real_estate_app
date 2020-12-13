@@ -42,6 +42,16 @@ public class Urls {
     private static final String StartUserChat                           = "/AppRequests/StartUserChat";
     private static final String RegisterLand                            = "/AppRequests/RegisterLand";
     private static final String Offices                                 = "/AppRequests/GetOffices";
+    private static final String Lawyers                                 = "/AppRequests/GetLawyers";
+    private static final String Agencies                                  = "/AppRequests/GetAgencies";
+
+    public static String getLawyers() {
+        return Lawyers;
+    }
+
+    public static String getAgencies() {
+        return Agencies;
+    }
 
     public static String getOffices() {
         return Offices;
