@@ -102,6 +102,7 @@
     <string name="land_info_meter">متر</string>
     <string name="land_info_name">نام</string>
     <string name="land_info_phone">تلفن</string>
+    <string name="land_info_fax">فکس</string>
     <string name="land_info_user_more_info">اطلاعات بیشتر</string>
     <string name="land_info_start_chat">شروع چت</string>
 

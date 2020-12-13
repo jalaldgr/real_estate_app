@@ -9,6 +9,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import ir.hamedanmelk.hamedanmelk.models.OfficeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.AreaModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.BuildingConditionModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.CityModel;
@@ -53,6 +54,7 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String LAND_EQUIPMENTS_TABLE_NAME="Equipments";
     private static final String COMPANY_TYPES_TABLE_NAME = "CompanyTypes";
     private static final String BOOKMARK_TABLE_NAME = "Bookmarks";
+    private static final String OFFICE_TABLE_NAME = "Office";
 
     private static final String PROVINCE_TABLE_COLUMN_ID="id";
     private static final String PROVINCE_TABLE_COLUMN_TITLE="Title";
@@ -116,6 +118,23 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String COMPANY_TYPES_TABLE_COLUMN_TITLE    ="Title";
     private static final String COMPANY_TYPES_TABLE_COLUMN_ORDER    ="CTOrder";
     private static final String COMPANY_TYPES_TABLE_COLUMN_PARENT_ID="parent_id";
+
+    private static final String OFFICE_TABLE_COLUMN_ID = "id";
+    private static final String OFFICE_TABLE_COLUMN_TITLE = "Title";
+    private static final String OFFICE_TABLE_COLUMN_MANAGER="Manager";
+    private static final String OFFICE_TABLE_COLUMN_NO = "No";
+    private static final String OFFICE_TABLE_COLUMN_ADDRESS = "Address";
+    private static final String OFFICE_TABLE_COLUMN_LOGO = "Logo";
+    private static final String OFFICE_TABLE_COLUMN_PHONE = "Phone";
+    private static final String OFFICE_TABLE_COLUMN_FAX = "Fax";
+    private static final String OFFICE_TABLE_COLUMN_DISABLED = "Disabled";
+    private static final String OFFICE_TABLE_COLUMN_PROVINE_ID = "province_id";
+    private static final String OFFICE_TABLE_COLUMN_CITY_ID = "city_id";
+    private static final String OFFICE_TABLE_COLUMN_AREA_ID= "area_id";
+    private static final String OFFICE_TABLE_COLUMN_DISTRICT_ID = "district_id";
+    private static final String OFFICE_TABLE_COLUMN_USER_ID = "user_id";
+    private static final String OFFICE_TABLE_COLUMN_CREATED_AT = "created_at";
+
 
     private static final String BOOKMARK_TABLE_COLUMN_ID            ="id";
 
@@ -221,6 +240,25 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_BOOKMARK_TABLE="CREATE TABLE "+BOOKMARK_TABLE_NAME+"("
             + COMPANY_TYPES_TABLE_COLUMN_ID + " TEXT"
+            +")";
+
+
+    private static final String CREATE_OFFICE_TABLE="CREATE TABLE "+OFFICE_TABLE_NAME+"("
+            + OFFICE_TABLE_COLUMN_ID + " TEXT,"
+            + OFFICE_TABLE_COLUMN_TITLE + " TEXT,"
+            + OFFICE_TABLE_COLUMN_MANAGER + " TEXT,"
+            + OFFICE_TABLE_COLUMN_NO + " TEXT,"
+            + OFFICE_TABLE_COLUMN_ADDRESS + " TEXT,"
+            + OFFICE_TABLE_COLUMN_LOGO + " TEXT,"
+            + OFFICE_TABLE_COLUMN_PHONE + " TEXT,"
+            + OFFICE_TABLE_COLUMN_FAX + " TEXT,"
+            + OFFICE_TABLE_COLUMN_DISABLED + " TEXT,"
+            + OFFICE_TABLE_COLUMN_PROVINE_ID + " TEXT,"
+            + OFFICE_TABLE_COLUMN_CITY_ID + " TEXT,"
+            + OFFICE_TABLE_COLUMN_AREA_ID + " TEXT,"
+            + OFFICE_TABLE_COLUMN_DISTRICT_ID + " TEXT,"
+            + OFFICE_TABLE_COLUMN_USER_ID + " TEXT,"
+            + OFFICE_TABLE_COLUMN_CREATED_AT + " TEXT"
             +")";
 //////////////////////////////////////Provinces methods////////////////////////////////////////////////
     public void InsertProvinces(ContentValues cv){
@@ -1289,13 +1327,11 @@ public void InsertDistrict(ContentValues cv){
         db.close();
     }
 
-
     public void DeleteBookmarks(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from "+BOOKMARK_TABLE_NAME);
         db.close();
     }
-
 
     public void DeleteBookmarkByLandID(String landid){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -1318,6 +1354,180 @@ public void InsertDistrict(ContentValues cv){
 
         return landExist;
     }
+
+    ////////////////////////////////////////////Office Methods////////////////////////////////////////////////////
+    public void InsertOffice(ContentValues cv){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(OFFICE_TABLE_NAME, null, cv);
+        db.close();
+    }
+
+    public void DeleteOffices(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+OFFICE_TABLE_NAME);
+        db.close();
+    }
+
+    public ArrayList<OfficeModel> GetOfficesByProvinceID(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<OfficeModel> officeModels = new ArrayList<OfficeModel>();
+        OfficeModel officeModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM " + OFFICE_TABLE_NAME + " WHERE province_id = " + id, null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do {
+                officeModel = new OfficeModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        c.getString(8),
+                        c.getString(9),
+                        c.getString(10),
+                        c.getString(11),
+                        c.getString(12),
+                        c.getString(13),
+                        c.getString(14)
+                );
+                officeModels.add(officeModel);
+                counter++;
+            } while (c.moveToNext());
+            c.close();
+        } catch (Exception e) {
+            Log.d(TAG, "GetOfficesByProvinceID: "+e.toString());
+        }
+            db.close();
+            return officeModels;
+    }
+
+    public ArrayList<OfficeModel> GetOfficesByCityID(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<OfficeModel> officeModels = new ArrayList<OfficeModel>();
+        OfficeModel officeModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM " + OFFICE_TABLE_NAME + " WHERE city_id = " + id, null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do {
+                officeModel = new OfficeModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        c.getString(8),
+                        c.getString(9),
+                        c.getString(10),
+                        c.getString(11),
+                        c.getString(12),
+                        c.getString(13),
+                        c.getString(14)
+                );
+                officeModels.add(officeModel);
+                counter++;
+            } while (c.moveToNext());
+            c.close();
+        } catch (Exception e) {
+            Log.d(TAG, "GetOfficesByCityID: "+e.toString());
+        }
+        db.close();
+        return officeModels;
+    }
+
+    public ArrayList<OfficeModel> GetOfficesByAreaID(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<OfficeModel> officeModels = new ArrayList<OfficeModel>();
+        OfficeModel officeModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM " + OFFICE_TABLE_NAME + " WHERE area_id = " + id, null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do {
+                officeModel = new OfficeModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        c.getString(8),
+                        c.getString(9),
+                        c.getString(10),
+                        c.getString(11),
+                        c.getString(12),
+                        c.getString(13),
+                        c.getString(14)
+                );
+                officeModels.add(officeModel);
+                counter++;
+            } while (c.moveToNext());
+            c.close();
+        } catch (Exception e) {
+            Log.d(TAG, "GetOfficesByAreaID: "+e.toString());
+        }
+        db.close();
+        return officeModels;
+    }
+
+    public ArrayList<OfficeModel> GetOfficesByDistrictID(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<OfficeModel> officeModels = new ArrayList<OfficeModel>();
+        OfficeModel officeModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM " + OFFICE_TABLE_NAME + " WHERE district_id = " + id, null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do {
+                officeModel = new OfficeModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        c.getString(8),
+                        c.getString(9),
+                        c.getString(10),
+                        c.getString(11),
+                        c.getString(12),
+                        c.getString(13),
+                        c.getString(14)
+                );
+                officeModels.add(officeModel);
+                counter++;
+            } while (c.moveToNext());
+            c.close();
+        } catch (Exception e) {
+            Log.d(TAG, "GetOfficesByDistrictID: "+e.toString());
+        }
+        db.close();
+        return officeModels;
+    }
+
 
     //----------------------------------------------------------------------------------------------
 

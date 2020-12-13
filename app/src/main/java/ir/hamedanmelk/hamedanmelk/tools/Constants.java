@@ -428,5 +428,23 @@ public class Constants {
 
 
 
+    public static final String OFFICE_ID = "id";
+    public static final String OFFICE_TITLE = "Title";
+    public static final String OFFICE_MANAGER="Manager";
+    public static final String OFFICE_NO = "No";
+    public static final String OFFICE_ADDRESS = "Address";
+    public static final String OFFICE_LOGO = "Logo";
+    public static final String OFFICE_PHONE = "Phone";
+    public static final String OFFICE_FAX = "Fax";
+    public static final String OFFICE_DISABLED = "Disabled";
+    public static final String OFFICE_PROVINCE_ID = "province_id";
+    public static final String OFFICE_CITY_ID = "city_id";
+    public static final String OFFICE_AREA_ID= "area_id";
+    public static final String OFFICE_DISTRICT_ID = "district_id";
+    public static final String OFFICE_USER_ID = "user_id";
+    public static final String OFFICE_CREATED_AT = "created_at";
+
+
+
 
 }
