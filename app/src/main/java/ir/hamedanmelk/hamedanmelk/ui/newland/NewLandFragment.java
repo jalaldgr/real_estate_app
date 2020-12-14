@@ -26,6 +26,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +39,6 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,7 +46,21 @@ import java.util.List;
 import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.models.micro.AreaModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.BuildingConditionModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.CityModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.CompanyTypeModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.DistrictModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.FloorCoveringModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.KitchenServiceModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.LandDirectionModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.LandStateTypeModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.LandTypeModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.LandViewModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.LoanTypeModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.ProvinceModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.RentalPreferenceModel;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.FilePath;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
@@ -78,7 +92,7 @@ public class NewLandFragment extends Fragment {
     String newLandCityIDStr;
     String newLandAreaIDStr;
     String newLandDistrictIDStr;
-    String newLandLandTypeID;
+    String newLandLandTypeIDStr;
     String newLandBuildingConditionIDStr;
     String newLandBuildingYearStr;
     String newLandDebtTotalPriceStr;
@@ -108,6 +122,7 @@ public class NewLandFragment extends Fragment {
     Uri      selectedFileUri;
     EditText titleEtx;
     Spinner  buildingConditionSpnr;
+    Spinner landCaseSpnr;
     Spinner landTypeSpnr;
     Spinner landUseTypeSpnr;
     Spinner voucherTypeSpnr;
@@ -143,7 +158,7 @@ public class NewLandFragment extends Fragment {
     Spinner floorCoveringSpnr;
     Spinner kitchenServicesSpnr;
     Spinner directionSpnr;
-    Spinner adTypeSpnr;
+    Spinner landStateSpnr;///////// Land State=> ads type
     Spinner waterSpnr;
     Spinner gasSpnr;
     Spinner electricitySpnr;
@@ -153,15 +168,82 @@ public class NewLandFragment extends Fragment {
     Button   submitBtn;
 
 
-    ArrayList<CompanyTypeModel> parentCompanyModels ;
-    List<String> parentCompanyTypeTitles= new ArrayList<String>();
-    List<String> parentCompanyTypeIDs= new ArrayList<String>();
-    ArrayList<CompanyTypeModel> subCompanyTypeModels;
-    List<String> subCompanyTypeTitles= new ArrayList<String>();
-    List<String> subCompanyTypeIDs= new ArrayList<String>();
-    ArrayAdapter<String> subDataAdapter ;
-    ArrayAdapter<String> parentDataAdapter;
-    Boolean parentSpinnerFirstSelectionFLAG=false;
+    ArrayList<BuildingConditionModel> buildingConditionModels;
+    List<String> buildingConditionTitles = new ArrayList<String>();
+    List<String> buildingConditionIDs = new ArrayList<String>();
+    ArrayAdapter<String> buildingConditionAdapter;
+
+
+    ArrayList<LandCaseTypeModel> landCaseTypeModels;
+    List<String> landCaseTitles= new ArrayList<String>();
+    List<String> landCaseIDs= new ArrayList<String>();
+    ArrayAdapter<String> landCaseAdapter ;
+
+    ArrayList<LandTypeModel> landTypeModels;
+    List<String> landTypeTitles= new ArrayList<String>();
+    List<String> landTypeIDs= new ArrayList<String>();
+    ArrayAdapter<String> landTypeAdapter ;
+
+    ArrayList<RentalPreferenceModel> rentalPreferenceModels;
+    List<String> rentalPreferenceTitles= new ArrayList<String>();
+    List<String> rentalPreferenceIDs= new ArrayList<String>();
+    ArrayAdapter<String> rentalPreferenceAdapter ;
+
+    ArrayList<LoanTypeModel> loanTypeModels;
+    List<String> loanTypeTitles= new ArrayList<String>();
+    List<String> loanTypeIDs= new ArrayList<String>();
+    ArrayAdapter<String> loanTypeAdapter ;
+
+    ArrayList<ProvinceModel> provinceModels;
+    List<String> provinceTitles= new ArrayList<String>();
+    List<String> provinceIDs= new ArrayList<String>();
+    ArrayAdapter<String> provinceAdapter ;
+
+    ArrayList<CityModel> cityModels;
+    List<String> cityTitles= new ArrayList<String>();
+    List<String> cityIDs= new ArrayList<String>();
+    ArrayAdapter<String> cityAdapter ;
+
+    ArrayList<AreaModel> areaModels;
+    List<String> areaTitles= new ArrayList<String>();
+    List<String> areaIDs= new ArrayList<String>();
+    ArrayAdapter<String> areaAdapter ;
+
+    ArrayList<DistrictModel> districtModels;
+    List<String> districtTitles= new ArrayList<String>();
+    List<String> districtIDs= new ArrayList<String>();
+    ArrayAdapter<String> districtAdapter ;
+
+    ArrayList<LandViewModel> landViewModels;
+    List<String> landViewTitles= new ArrayList<String>();
+    List<String> landViewIDs= new ArrayList<String>();
+    ArrayAdapter<String> landViewAdapter ;
+
+    ArrayList<FloorCoveringModel> floorCoveringModels;
+    List<String> floorCoveringTitles= new ArrayList<String>();
+    List<String> floorCoveringIDs= new ArrayList<String>();
+    ArrayAdapter<String> floorCoveringAdapter ;
+
+    ArrayList<KitchenServiceModel> kitchenServiceModels;
+    List<String> kitchenServiceTitles= new ArrayList<String>();
+    List<String> kitchenServiceIDs= new ArrayList<String>();
+    ArrayAdapter<String> kitchenServiceAdapter ;
+
+    ArrayList<LandDirectionModel> landDirectionModels;
+    List<String> landDirectionTitles= new ArrayList<String>();
+    List<String> landDirectionTypeIDs= new ArrayList<String>();
+    ArrayAdapter<String> landDirectionAdapter ;
+
+    ArrayList<LandStateTypeModel> landStateTypeModels;
+    List<String> landStateTitles= new ArrayList<String>();
+    List<String> landStateIDs= new ArrayList<String>();
+    ArrayAdapter<String> landStateAdapter ;
+
+
+
+
+
+
     private static final String TAG ="NewLandFragment";
     MYSQlDBHelper dbHelper;
     public NewLandFragment() {
@@ -188,6 +270,7 @@ public class NewLandFragment extends Fragment {
 //////////////////////////////////////Find Elements///////////////////////////////////////////////
         titleEtx=(EditText) view.findViewById(R.id.NewLandFragmentTitleTxt);
         buildingConditionSpnr=(Spinner) view.findViewById(R.id.NewLandFragmentBuildingConditionSpnr);
+        landCaseSpnr = (Spinner)view.findViewById(R.id.NewLandFragmentLandCaseSpnr);
         landTypeSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentLandTypeSpnr);
         landUseTypeSpnr =(Spinner)view.findViewById(R.id.NewLandFragmentLandUseTypeSpnr);
         voucherTypeSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentVoucherTypeSpnr);
@@ -223,7 +306,7 @@ public class NewLandFragment extends Fragment {
         floorCoveringSpnr =(Spinner)view.findViewById(R.id.NewLandFragmentFloorCoveringSpnr);
         kitchenServicesSpnr =(Spinner)view.findViewById(R.id.NewLandFragmentKitchenServicesSpnr);
         directionSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentDirectionSpnr);
-        adTypeSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentAdTypeSpnr);
+        landStateSpnr =(Spinner)view.findViewById(R.id.NewLandFragmentAdTypeSpnr);
         waterSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentWaterSpnr);
         gasSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentGasSpnr);
         electricitySpnr=(Spinner)view.findViewById(R.id.NewLandFragmentElectricitySpnr);
@@ -232,48 +315,290 @@ public class NewLandFragment extends Fragment {
         mapView=(MapView) view.findViewById(R.id.NewLandFragmentMapView);
         submitBtn=(Button) view.findViewById(R.id.NewLandFragmentSubmitBtn);
 
-//////////////////////Select parent Company////////////////////////////////
-//        parentCompanyModels =dbHelper.GetParentCompanyTypes();
-//        for(CompanyTypeModel companyItem : parentCompanyModels){
-//            parentCompanyTypeTitles.add(companyItem.getTitle());
-//            parentCompanyTypeIDs.add(companyItem.getId());
-//        }
-//        registerForContextMenu(logoImg);
-//        parentDataAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, parentCompanyTypeTitles);
-//        parentDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        parentCompanySpnr.setAdapter(parentDataAdapter);
-//        parentCompanySpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                if (parentSpinnerFirstSelectionFLAG){
-//                    subDataAdapter.clear();
-//                    subCompanyTypeModels.clear();
-//                    subCompanyTypeIDs.clear();
-//                }
-//                subCompanyTypeModels = dbHelper.GetCompanyTypesByParentID(parentCompanyTypeIDs.get(i));
-//
-//                for(CompanyTypeModel companyItem : subCompanyTypeModels){
-//                    subCompanyTypeTitles.add(companyItem.getTitle());
-//                    subCompanyTypeIDs.add(companyItem.getId());
-//                }
-//                subCompanyId=subCompanyTypeIDs.get(i) ;
-//                subDataAdapter = new ArrayAdapter<String>(Objects.requireNonNull(getContext()), android.R.layout.simple_spinner_item, subCompanyTypeTitles);
-//                subCompanySpnr.setAdapter(subDataAdapter);
-//                parentSpinnerFirstSelectionFLAG=true;//first selection passed
-//            }
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//            }
-//        });
-//        subCompanySpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                childCompanyTypeIDStr=subCompanyTypeIDs.get(i);
-//            }
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//            }
-//        });
+////////////////////// Building Conditions Spinner////////////////////////////////
+        buildingConditionModels =dbHelper.GetBuildingConditionsList();
+        for(BuildingConditionModel Item : buildingConditionModels){
+            buildingConditionTitles.add(Item.getTitle());
+            buildingConditionIDs.add(Item.getId());
+        }
+        buildingConditionAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, buildingConditionTitles);
+        buildingConditionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        buildingConditionSpnr.setAdapter(buildingConditionAdapter);
+        buildingConditionSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                newLandBuildingConditionIDStr = buildingConditionIDs.get(i);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+
+//////////////////////////////// Building Conditions Spinner////////////////////////////////
+        buildingConditionModels =dbHelper.GetBuildingConditionsList();
+        for(BuildingConditionModel Item : buildingConditionModels){
+            buildingConditionTitles.add(Item.getTitle());
+            buildingConditionIDs.add(Item.getId());
+        }
+        buildingConditionAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, buildingConditionTitles);
+        buildingConditionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        buildingConditionSpnr.setAdapter(buildingConditionAdapter);
+        buildingConditionSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                newLandBuildingConditionIDStr = buildingConditionIDs.get(i);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+////////////////////// land Case Spinner////////////////////////////////
+        landCaseTypeModels =dbHelper.GetLandCaseTypesList();
+        for(LandCaseTypeModel Item : landCaseTypeModels){
+            landCaseTitles.add(Item.getTitle());
+            landCaseIDs.add(Item.getId());
+        }
+        landCaseAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, landCaseTitles);
+        landCaseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        landCaseSpnr.setAdapter(landCaseAdapter);
+        landCaseSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                newLandLandCaseIDStr = landCaseIDs.get(i);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+        ////////////////////// land Type Spinner////////////////////////////////
+        landTypeModels =dbHelper.GetLandTypeList();
+        for(LandTypeModel Item : landTypeModels){
+            landTypeTitles.add(Item.getTitle());
+            landTypeIDs.add(Item.getId());
+        }
+        landTypeAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, landTypeTitles);
+        landTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        landTypeSpnr.setAdapter(landTypeAdapter);
+        landTypeSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                newLandLandTypeIDStr = landTypeIDs.get(i);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+        ////////////////////// Rental Preference Spinner////////////////////////////////
+        rentalPreferenceModels =dbHelper.GetRentalPreferenceList();
+        for(RentalPreferenceModel Item : rentalPreferenceModels){
+            rentalPreferenceTitles.add(Item.getTitle());
+            rentalPreferenceIDs.add(Item.getId());
+        }
+        rentalPreferenceAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, rentalPreferenceTitles);
+        rentalPreferenceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        rentalPreferenceSpnr.setAdapter(rentalPreferenceAdapter);
+        rentalPreferenceSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                newLandRentalPreferenceIDStr = rentalPreferenceIDs.get(i);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+
+        ////////////////////// Loan Type Spinner////////////////////////////////
+        loanTypeModels =dbHelper.GetLoanTypesList();
+        for(LoanTypeModel Item : loanTypeModels){
+            loanTypeTitles.add(Item.getTitle());
+            loanTypeIDs.add(Item.getId());
+        }
+        loanTypeAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, loanTypeTitles);
+        loanTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        loanTypeSpnr.setAdapter(loanTypeAdapter);
+        loanTypeSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                newLandLoanTypeIDStr = loanTypeIDs.get(i);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+        ////////////////////// Province Spinner////////////////////////////////
+        provinceModels =dbHelper.GetProvincesList();
+        for(ProvinceModel Item : provinceModels){
+            provinceTitles.add(Item.getTitle());
+            provinceIDs.add(Item.getId());
+        }
+        provinceAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, provinceTitles);
+        provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        provinceSpnr.setAdapter(provinceAdapter);
+        provinceSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                newLandProvinceIDStr = provinceIDs.get(i);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+
+        ////////////////////// City Spinner////////////////////////////////
+        cityModels =dbHelper.GetCitiesList();
+        for(CityModel Item : cityModels){
+            cityTitles.add(Item.getTitle());
+            cityIDs.add(Item.getId());
+        }
+        cityAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, cityTitles);
+        cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        citySpnr.setAdapter(cityAdapter);
+        citySpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                newLandCityIDStr = cityIDs.get(i);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+        ////////////////////// Area Spinner////////////////////////////////
+        areaModels =dbHelper.GetAreaList();
+        for(AreaModel Item : areaModels){
+            areaTitles.add(Item.getTitle());
+            areaIDs.add(Item.getId());
+        }
+        areaAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, areaTitles);
+        areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        areaSpnr.setAdapter(areaAdapter);
+        areaSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                newLandAreaIDStr = areaIDs.get(i);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        ////////////////////// District Spinner////////////////////////////////
+        districtModels =dbHelper.GetDistrictList();
+        for(DistrictModel Item : districtModels){
+            districtTitles.add(Item.getTitle());
+            districtIDs.add(Item.getId());
+        }
+        districtAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, districtTitles);
+        districtAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        districtSpnr.setAdapter(districtAdapter);
+        districtSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                newLandDistrictIDStr = districtIDs.get(i);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+
+        ////////////////////// District Spinner////////////////////////////////
+        floorCoveringModels =dbHelper.GetFloorCoveringList();
+        for(FloorCoveringModel Item : floorCoveringModels){
+            floorCoveringTitles.add(Item.getTitle());
+            floorCoveringIDs.add(Item.getId());
+        }
+        floorCoveringAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, floorCoveringTitles);
+        floorCoveringAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        floorCoveringSpnr.setAdapter(floorCoveringAdapter);
+        floorCoveringSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                newLandFloorCoveringIDStr = floorCoveringIDs.get(i);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+
+        ////////////////////// Province Spinner////////////////////////////////
+        kitchenServiceModels =dbHelper.GetKitchenServicesList();
+        for(KitchenServiceModel Item : kitchenServiceModels){
+            kitchenServiceTitles.add(Item.getTitle());
+            kitchenServiceIDs.add(Item.getId());
+        }
+        kitchenServiceAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, kitchenServiceTitles);
+        kitchenServiceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        kitchenServicesSpnr.setAdapter(kitchenServiceAdapter);
+        kitchenServicesSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                newLandKitchenServiceIDStr = kitchenServiceIDs.get(i);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+        ////////////////////// Province Spinner////////////////////////////////
+        landDirectionModels =dbHelper.GetLandDirectionsList();
+        for(LandDirectionModel Item : landDirectionModels){
+            landDirectionTitles.add(Item.getTitle());
+            landDirectionTypeIDs.add(Item.getId());
+        }
+        landDirectionAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, landDirectionTitles);
+        landDirectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        directionSpnr.setAdapter(landDirectionAdapter);
+        directionSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                newLandDirectionIDStr = landDirectionTypeIDs.get(i);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+        ////////////////////// Province Spinner////////////////////////////////
+        landStateTypeModels =dbHelper.GetLandStateList();
+        for(LandStateTypeModel Item : landStateTypeModels){
+            landStateTitles.add(Item.getTitle());
+            landStateIDs.add(Item.getId());
+        }
+        landStateAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, landStateTitles);
+        landStateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        landStateSpnr.setAdapter(landStateAdapter);
+        landStateSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                newLandLandStateIDStr = landStateIDs.get(i);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+
 ////////////////////////////PickUp Image///////////////////////////////////
 //        logoImg.setOnClickListener(new View.OnClickListener() {
 //            @Override
