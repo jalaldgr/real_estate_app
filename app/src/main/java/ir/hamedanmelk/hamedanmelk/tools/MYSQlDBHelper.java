@@ -31,6 +31,7 @@ import ir.hamedanmelk.hamedanmelk.models.micro.LandViewModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LoanTypeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.ProvinceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.RentalPreferenceModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.UseTypeModel;
 
 
 public class MYSQlDBHelper extends SQLiteOpenHelper {
@@ -60,6 +61,8 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String OFFICE_TABLE_NAME = "Office";
     private static final String LAWYER_TABLE_NAME = "Lawyer";
     private static final String AGENCY_TABLE_NAME = "Agency";
+    private static final String USE_TYPE_TABLE_NAME = "UseType";
+
 
     private static final String PROVINCE_TABLE_COLUMN_ID="id";
     private static final String PROVINCE_TABLE_COLUMN_TITLE="Title";
@@ -168,6 +171,8 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String AGENCY_TABLE_COLUMN_DISABLED = "Disabled";
     private static final String AGENCY_TABLE_COLUMN_CREATED_AT = "created_at";
 
+    private static final String USE_TYPE_TABLE_COLUMN_ID          ="id";
+    private static final String USE_TYPE_TABLE_COLUMN_TITLE       ="Title";
 
     private static final String CREATE_PROVINCE_TABLE= "CREATE TABLE "+PROVINCE_TABLE_NAME+"("
             + PROVINCE_TABLE_COLUMN_ID + " TEXT,"
@@ -319,6 +324,12 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
             + AGENCY_TABLE_COLUMN_LOGO + " TEXT,"
             + AGENCY_TABLE_COLUMN_DISABLED + " TEXT,"
             + AGENCY_TABLE_COLUMN_CREATED_AT + " TEXT"
+            +")";
+
+
+    private static final String CREATE_USE_TYPE_TABLE= "CREATE TABLE "+USE_TYPE_TABLE_NAME+"("
+            + USE_TYPE_TABLE_COLUMN_ID+ " TEXT,"
+            + USE_TYPE_TABLE_COLUMN_TITLE+ " TEXT"
             +")";
 
 //////////////////////////////////////Provinces methods////////////////////////////////////////////////
@@ -1853,6 +1864,45 @@ public ArrayList<LawyerModel> GetLawyers() {
         return agencyModels;
     }
 
+
+
+    public void InsertUseType(ContentValues cv){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(USE_TYPE_TABLE_NAME, null, cv);
+        db.close();
+    }
+
+    public void DeleteUseType(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+USE_TYPE_TABLE_NAME);
+        db.close();
+    }
+
+    public ArrayList<UseTypeModel> GetUseTypeList(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<UseTypeModel> useTypeModels = new ArrayList<UseTypeModel>();
+        UseTypeModel useTypeModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM "+USE_TYPE_TABLE_NAME, null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do{
+                useTypeModel = new UseTypeModel(
+                        c.getString(0),
+                        c.getString(1));
+                useTypeModels.add(useTypeModel);
+                counter++;
+            }while (c.moveToNext());
+            c.close();
+        }catch (Exception e){
+            Log.d("Get UseType Says:", e.toString());}
+        db.close();
+        return useTypeModels;
+    }
+
 //----------------------------------------------------------------------------------------------
 
     public MYSQlDBHelper( Context context) {
@@ -1890,6 +1940,7 @@ public ArrayList<LawyerModel> GetLawyers() {
         sqLiteDatabase.execSQL(CREATE_OFFICE_TABLE);
         sqLiteDatabase.execSQL(CREATE_LAWYER_TABLE);
         sqLiteDatabase.execSQL(CREATE_AGENCY_TABLE);
+        sqLiteDatabase.execSQL(CREATE_USE_TYPE_TABLE);
 
     }
 
@@ -1917,5 +1968,7 @@ public ArrayList<LawyerModel> GetLawyers() {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+OFFICE_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+LAWYER_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+AGENCY_TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+USE_TYPE_TABLE_NAME);
+
     }
 }

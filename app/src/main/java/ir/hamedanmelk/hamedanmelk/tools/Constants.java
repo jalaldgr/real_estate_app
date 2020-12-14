@@ -372,6 +372,10 @@ public class Constants {
 //    public static final String PREF_GET_LAND_DIRECTIONS_ID = "id";
 //    public static final String PREF_GET_LAND_DIRECTIONS_TITLE = "Title";
 
+    public static final String[] USE_TYPE_MODEL_FIELDS = {"id","Title"};
+
+
+
     public static final String START_CHAT_UID = "UID";
     public static final String START_CHAT_TO = "To";
 

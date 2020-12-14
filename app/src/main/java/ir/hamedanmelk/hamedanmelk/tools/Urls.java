@@ -43,7 +43,8 @@ public class Urls {
     private static final String RegisterLand                            = "/AppRequests/RegisterLand";
     private static final String Offices                                 = "/AppRequests/GetOffices";
     private static final String Lawyers                                 = "/AppRequests/GetLawyers";
-    private static final String Agencies                                  = "/AppRequests/GetAgencies";
+    private static final String Agencies                                = "/AppRequests/GetAgencies";
+    private static final String UseTypes                                = "/AppRequests/GetUseTypes";
 
     public static String getLawyers() {
         return Lawyers;
@@ -167,6 +168,10 @@ public class Urls {
 
     public static String getBaseURL() {
         return BaseURL;
+    }
+
+    public static String getUseTypes() {
+        return UseTypes;
     }
 
     public static String getNoImage() {

@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         GetLandSituationsRequest(getApplicationContext());
         GetLandViewsRequest(getApplicationContext());
         GetLandDirectionsRequest(getApplicationContext());
+        GetUseTypeRequest(getApplicationContext());
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
@@ -776,5 +777,45 @@ public class MainActivity extends AppCompatActivity {
         GetCompanyTypesRequestAsync getcompanyTypesRequestAsync = new GetCompanyTypesRequestAsync();
         getcompanyTypesRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
+
+
+    public void GetUseTypeRequest(Context context) {
+
+        class GetUseTypeRequestAsync extends AsyncTask<Void, Void, String> {
+            @Override
+            protected String doInBackground(Void... voids) {
+                HTTPRequestHandlre requestHandler = new HTTPRequestHandlre();
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                return requestHandler.sendGetRequest(Urls.getBaseURL() + Urls.getUseTypes(), params);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try {
+                    JSONObject rawResult = new JSONObject(s);
+                    if (rawResult.getInt("State") > 0) {
+                        JSONArray dataResult = rawResult.getJSONArray("Data");
+                        String[] modelFields = Constants.USE_TYPE_MODEL_FIELDS;
+                        dbHelper.DeleteUseType();
+                        for (int i = 0; i < dataResult.length(); i++) {
+                            JSONObject rowItem = dataResult.getJSONObject(i);
+                            ContentValues itemCV = new ContentValues();
+                            for (String columnItem : modelFields) {
+                                itemCV.put(columnItem, rowItem.getString(columnItem));
+                            }
+                            dbHelper.InsertUseType(itemCV);
+                        }
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "onPostExecute LandViews: " + e.toString());
+                }
+            }
+        }
+        GetUseTypeRequestAsync getUseTypeRequestAsync = new GetUseTypeRequestAsync();
+        getUseTypeRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
+    }
+
 
 }
