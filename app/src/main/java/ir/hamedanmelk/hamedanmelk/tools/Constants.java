@@ -378,7 +378,7 @@ public class Constants {
 
     public static final String[] USE_TYPE_MODEL_FIELDS = {"id","Title"};
 
-
+    public static final String[] VOUCHERS_MODEL_FIELDS = {"id","Title"};
 
     public static final String START_CHAT_UID = "UID";
     public static final String START_CHAT_TO = "To";

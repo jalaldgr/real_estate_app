@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         GetLandDirectionsRequest(getApplicationContext());
         GetUseTypeRequest(getApplicationContext());
         GetEquipmentRequest(getApplicationContext());
+        GetVoucherRequest(getApplicationContext());
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
@@ -826,7 +827,7 @@ public class MainActivity extends AppCompatActivity {
                 HTTPRequestHandlre requestHandler = new HTTPRequestHandlre();
                 HashMap<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
-                return requestHandler.sendGetRequest(Urls.getBaseURL() + Urls.getGetLandEquipments(), params);
+                return requestHandler.sendGetRequest(Urls.getBaseURL() + Urls.getGetEquipments(), params);
             }
 
             @Override
@@ -855,6 +856,45 @@ public class MainActivity extends AppCompatActivity {
         GetEquipmentRequestAsync getEquipmentRequestAsync = new GetEquipmentRequestAsync();
         getEquipmentRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
+
+    public void GetVoucherRequest(Context context) {
+
+        class GetVoucherRequestAsync extends AsyncTask<Void, Void, String> {
+            @Override
+            protected String doInBackground(Void... voids) {
+                HTTPRequestHandlre requestHandler = new HTTPRequestHandlre();
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                return requestHandler.sendGetRequest(Urls.getBaseURL() + Urls.getGetVouchers(), params);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try {
+                    JSONObject rawResult = new JSONObject(s);
+                    if (rawResult.getInt("State") > 0) {
+                        JSONArray dataResult = rawResult.getJSONArray("Data");
+                        String[] modelFields = Constants.VOUCHERS_MODEL_FIELDS;
+                        dbHelper.DeleteVouchers();
+                        for (int i = 0; i < dataResult.length(); i++) {
+                            JSONObject rowItem = dataResult.getJSONObject(i);
+                            ContentValues itemCV = new ContentValues();
+                            for (String columnItem : modelFields) {
+                                itemCV.put(columnItem, rowItem.getString(columnItem));
+                            }
+                            dbHelper.InsertVoucher(itemCV);
+                        }
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "onPostExecute Equipments: " + e.toString());
+                }
+            }
+        }
+        GetVoucherRequestAsync getVoucherRequestAsync = new GetVoucherRequestAsync();
+        getVoucherRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
+    }
+
 
 
 }

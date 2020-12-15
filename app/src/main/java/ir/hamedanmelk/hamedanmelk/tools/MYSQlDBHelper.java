@@ -32,6 +32,7 @@ import ir.hamedanmelk.hamedanmelk.models.micro.LoanTypeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.ProvinceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.RentalPreferenceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.UseTypeModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.VoucherModel;
 
 
 public class MYSQlDBHelper extends SQLiteOpenHelper {
@@ -62,6 +63,7 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String LAWYER_TABLE_NAME = "Lawyer";
     private static final String AGENCY_TABLE_NAME = "Agency";
     private static final String USE_TYPE_TABLE_NAME = "UseType";
+    private static final String VOUCHER_TABLE_NAME = "Voucher";
 
 
     private static final String PROVINCE_TABLE_COLUMN_ID="id";
@@ -126,6 +128,9 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String COMPANY_TYPES_TABLE_COLUMN_TITLE    ="Title";
     private static final String COMPANY_TYPES_TABLE_COLUMN_ORDER    ="CTOrder";
     private static final String COMPANY_TYPES_TABLE_COLUMN_PARENT_ID="parent_id";
+
+    private static final String VOUCHER_TABLE_COLUMN_ID           ="id";
+    private static final String VOUCHER_TABLE_COLUMN_TITLE        ="Title";
 
     private static final String BOOKMARK_TABLE_COLUMN_ID            ="id";
 
@@ -324,6 +329,12 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
             + AGENCY_TABLE_COLUMN_LOGO + " TEXT,"
             + AGENCY_TABLE_COLUMN_DISABLED + " TEXT,"
             + AGENCY_TABLE_COLUMN_CREATED_AT + " TEXT"
+            +")";
+
+
+    private static final String CREATE_VOUCHER_TABLE= "CREATE TABLE "+VOUCHER_TABLE_NAME+"("
+            + VOUCHER_TABLE_COLUMN_ID+ " TEXT,"
+            + VOUCHER_TABLE_COLUMN_TITLE + " TEXT"
             +")";
 
 
@@ -1929,6 +1940,46 @@ public ArrayList<LawyerModel> GetLawyers() {
         return useTypeModels;
     }
 
+
+    //////////////////Voucher Methods////////////////
+    public void InsertVoucher(ContentValues cv){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(VOUCHER_TABLE_NAME, null, cv);
+        db.close();
+    }
+
+    public void DeleteVouchers(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+VOUCHER_TABLE_NAME);
+        db.close();
+    }
+
+    public ArrayList<VoucherModel> GetVouchersList(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<VoucherModel> voucherModels = new ArrayList<VoucherModel>();
+        VoucherModel voucherModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM "+VOUCHER_TABLE_NAME, null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do{
+                voucherModel = new VoucherModel(
+                        c.getString(0),
+                        c.getString(1));
+                voucherModels.add(voucherModel);
+                counter++;
+            }while (c.moveToNext());
+            c.close();
+        }catch (Exception e){
+            Log.d("Get UseType Says:", e.toString());}
+        db.close();
+        return voucherModels;
+    }
+
+
 //----------------------------------------------------------------------------------------------
 
     public MYSQlDBHelper( Context context) {
@@ -1967,6 +2018,8 @@ public ArrayList<LawyerModel> GetLawyers() {
         sqLiteDatabase.execSQL(CREATE_LAWYER_TABLE);
         sqLiteDatabase.execSQL(CREATE_AGENCY_TABLE);
         sqLiteDatabase.execSQL(CREATE_USE_TYPE_TABLE);
+        sqLiteDatabase.execSQL(CREATE_VOUCHER_TABLE);
+
 
     }
 
@@ -1995,6 +2048,8 @@ public ArrayList<LawyerModel> GetLawyers() {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+LAWYER_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+AGENCY_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+USE_TYPE_TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+VOUCHER_TABLE_NAME);
+
 
     }
 }

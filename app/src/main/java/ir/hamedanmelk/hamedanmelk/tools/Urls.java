@@ -45,6 +45,16 @@ public class Urls {
     private static final String Lawyers                                 = "/AppRequests/GetLawyers";
     private static final String Agencies                                = "/AppRequests/GetAgencies";
     private static final String UseTypes                                = "/AppRequests/GetUseTypes";
+    private static final String GetVouchers                             = "/AppRequests/GetVouchers";
+    private static final String GetEquipments                           = "/AppRequests/GetEquipments";
+
+    public static String getGetVouchers() {
+        return GetVouchers;
+    }
+
+    public static String getGetEquipments() {
+        return GetEquipments;
+    }
 
     public static String getLawyers() {
         return Lawyers;
