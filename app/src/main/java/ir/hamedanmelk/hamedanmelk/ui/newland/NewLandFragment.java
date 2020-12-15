@@ -45,12 +45,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import io.apptik.widget.multiselectspinner.MultiSelectSpinner;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.AreaModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.BuildingConditionModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.CityModel;
-import ir.hamedanmelk.hamedanmelk.models.micro.CompanyTypeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.DistrictModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.FloorCoveringModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.KitchenServiceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
@@ -61,6 +62,7 @@ import ir.hamedanmelk.hamedanmelk.models.micro.LandViewModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LoanTypeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.ProvinceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.RentalPreferenceModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.UseTypeModel;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.FilePath;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
@@ -72,8 +74,7 @@ public class NewLandFragment extends Fragment {
     String newLandLongitudeStr;
     String newLandTitleStr;
     ImageView[] newLandImageFiles;
-    String[] newLandUseTypeIDStrArr;
-    String[] newLandEquipmentStrArr;
+    List<String> newLandUseTypeIDLstArr;
     String newLandLandStateIDStr;
     String newLandChkExchangedStr;
     String newLandUIDStr;
@@ -124,7 +125,7 @@ public class NewLandFragment extends Fragment {
     Spinner  buildingConditionSpnr;
     Spinner landCaseSpnr;
     Spinner landTypeSpnr;
-    Spinner landUseTypeSpnr;
+    MultiSelectSpinner landUseTypeSpnr;
     Spinner voucherTypeSpnr;
     Spinner preVoucherTypeSpnr;
     Spinner exVoucherTypeSpnr;
@@ -154,7 +155,7 @@ public class NewLandFragment extends Fragment {
     Spinner districtSpnr;
     EditText addressETxt;
     Spinner landViewSpnr;
-    Spinner equipmentSpnr;
+    MultiSelectSpinner equipmentSpnr;
     Spinner floorCoveringSpnr;
     Spinner kitchenServicesSpnr;
     Spinner directionSpnr;
@@ -239,9 +240,15 @@ public class NewLandFragment extends Fragment {
     List<String> landStateIDs= new ArrayList<String>();
     ArrayAdapter<String> landStateAdapter ;
 
+    ArrayList<UseTypeModel> useTypeModels;
+    List<String> useTypeTitles= new ArrayList<String>();
+    List<String> useTypeIDs= new ArrayList<String>();
+    ArrayAdapter<String> useTypeAdapter ;
 
-
-
+    ArrayList<EquipmentModel> equipmentModels;
+    List<String> equipmentTitles= new ArrayList<String>();
+    List<String> equipmentIDs= new ArrayList<String>();
+    ArrayAdapter<String> equipmentAdapter ;
 
 
     private static final String TAG ="NewLandFragment";
@@ -272,7 +279,7 @@ public class NewLandFragment extends Fragment {
         buildingConditionSpnr=(Spinner) view.findViewById(R.id.NewLandFragmentBuildingConditionSpnr);
         landCaseSpnr = (Spinner)view.findViewById(R.id.NewLandFragmentLandCaseSpnr);
         landTypeSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentLandTypeSpnr);
-        landUseTypeSpnr =(Spinner)view.findViewById(R.id.NewLandFragmentLandUseTypeSpnr);
+        landUseTypeSpnr =(MultiSelectSpinner) view.findViewById(R.id.NewLandFragmentLandUseTypeMltSpnr);
         voucherTypeSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentVoucherTypeSpnr);
         preVoucherTypeSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentPreVoucherTypeSpnr);
         exVoucherTypeSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentExVoucherTypeSpnr);
@@ -302,7 +309,7 @@ public class NewLandFragment extends Fragment {
         districtSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentDistrictSpnr);
         addressETxt=(EditText) view.findViewById(R.id.NewLandFragmentAddressTxt);
         landViewSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentLandViewSpnr);
-        equipmentSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentEquipmentsSpnr);
+        equipmentSpnr=(MultiSelectSpinner) view.findViewById(R.id.NewLandFragmentEquipmentsSpnr);
         floorCoveringSpnr =(Spinner)view.findViewById(R.id.NewLandFragmentFloorCoveringSpnr);
         kitchenServicesSpnr =(Spinner)view.findViewById(R.id.NewLandFragmentKitchenServicesSpnr);
         directionSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentDirectionSpnr);
@@ -597,6 +604,63 @@ public class NewLandFragment extends Fragment {
             }
         });
 
+
+
+        ////////////////////// UseType MultiSelect Spinner////////////////////////////////
+        useTypeModels =dbHelper.GetUseTypeList();
+        for(UseTypeModel Item : useTypeModels){
+            useTypeTitles.add(Item.getTitle());
+            useTypeIDs.add(Item.getId());
+        }
+        useTypeAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_list_item_multiple_choice, useTypeTitles);
+        landUseTypeSpnr
+                .setListAdapter(useTypeAdapter)
+                .setMinSelectedItems(1);
+        landUseTypeSpnr.getListAdapter().getCount();
+        landUseTypeSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d(TAG, "onItemSelected: "+adapterView.getSelectedItemId());
+//                newLandUseTypeIDLstArr.add(useTypeIDs.get(i));
+//                Log.d(TAG, "onItemSelected: "+newLandUseTypeIDLstArr.size()+ "   ID");
+                // TODO: 12/15/2020 Get Selected Items
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        ////////////////////// UseType Equipments Spinner////////////////////////////////
+        equipmentModels =dbHelper.GetLandEquipmentsList();
+        Log.d(TAG, "onCreateView size: "+equipmentModels.size());
+        for(EquipmentModel Item : equipmentModels){
+            equipmentTitles.add(Item.getTitle());
+            equipmentIDs.add(Item.getId());
+            Log.d(TAG, "onCreateView: "+Item.getTitle());
+        }
+        equipmentAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()),
+                android.R.layout.simple_list_item_multiple_choice, equipmentTitles);
+        equipmentSpnr
+                .setListAdapter(equipmentAdapter)
+                .setMinSelectedItems(1);
+        equipmentAdapter.getCount();
+        equipmentSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d(TAG, "onItemSelected: "+adapterView.getSelectedItemId());
+//                newLandUseTypeIDLstArr.add(useTypeIDs.get(i));
+//                Log.d(TAG, "onItemSelected: "+newLandUseTypeIDLstArr.size()+ "   ID");
+                // TODO: 12/15/2020 Get Selected Items
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
 ////////////////////////////PickUp Image///////////////////////////////////

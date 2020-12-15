@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -30,10 +30,18 @@
                     android:hint="hint" />
             </com.google.android.material.textfield.TextInputLayout>
 
+
             <Spinner
                 android:id="@+id/NewLandFragmentLandCaseSpnr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <io.apptik.widget.multiselectspinner.MultiSelectSpinner
+                android:id="@+id/NewLandFragmentLandUseTypeMltSpnr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTintMode="add" />
+
 
             <Spinner
                 android:id="@+id/NewLandFragmentBuildingConditionSpnr"
@@ -46,7 +54,6 @@
                 android:layout_height="wrap_content" />
 
             <Spinner
-                android:id="@+id/NewLandFragmentLandUseTypeSpnr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -68,7 +75,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentDongLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="دانگ">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandFragmentDongTxt"
@@ -80,7 +88,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentPreDongLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="@string/vocabulary_dong">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandFragmentPreDongTxt"
@@ -92,7 +101,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentExDongLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="@string/vocabulary_dong">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandFragmentExDongTxt"
@@ -236,7 +246,8 @@
             <Spinner
                 android:id="@+id/NewLandFragmentWichFloorSpnr"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:entries="@array/new_land_floor" />
 
             <Spinner
                 android:id="@+id/NewLandFragmentRoomCountSpnr"
@@ -258,7 +269,6 @@
                 android:layout_height="wrap_content"
                 android:entries="@array/new_land_unit_in_floor"
                 android:prompt="@string/land_info_units_in_floor" />
-
 
             <Spinner
                 android:id="@+id/NewLandFragmentProvinceSpnr"
@@ -300,10 +310,11 @@
                 android:layout_height="wrap_content" />
 
 
-            <Spinner
+            <io.apptik.widget.multiselectspinner.MultiSelectSpinner
                 android:id="@+id/NewLandFragmentEquipmentsSpnr"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:backgroundTintMode="add" />
             <Spinner
                 android:id="@+id/NewLandFragmentFloorCoveringSpnr"
                 android:layout_width="match_parent"
