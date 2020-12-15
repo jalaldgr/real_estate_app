@@ -31,12 +31,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.material.checkbox.MaterialCheckBox;
 
 import org.json.JSONException;
@@ -68,12 +75,13 @@ import ir.hamedanmelk.hamedanmelk.models.micro.ProvinceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.RentalPreferenceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.UseTypeModel;
 
+import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.FilePath;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.MultipartUtility;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
-public class NewLandFragment extends Fragment {
+public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
     String newLandLatitudeStr;
     String newLandLongitudeStr;
     String newLandTitleStr;
@@ -171,7 +179,7 @@ public class NewLandFragment extends Fragment {
     Spinner electricitySpnr;
     Spinner phoneSpnr;
     EditText descriptionETxt;
-    MapView mapView;
+    MapView landMapView;
     LinearLayout selectedImagesGrid;
     ImageView imageOne;
     ImageView imageTwo;
@@ -180,6 +188,10 @@ public class NewLandFragment extends Fragment {
     ImageView imageFive;
     Button   submitBtn;
 
+    GoogleMap mgoogleMap;
+    private Marker mapMarker;
+    private LatLng mapLatLng = new LatLng(Constants.MAP_EYDAN_LAT,Constants.MAP_MEYDAN_LNG);
+    private boolean mapLoadedFLAG=false;
 
     ArrayList<BuildingConditionModel> buildingConditionModels;
     List<String> buildingConditionTitles = new ArrayList<String>();
@@ -276,7 +288,6 @@ public class NewLandFragment extends Fragment {
         }
         dbHelper = new MYSQlDBHelper(getContext());
         SharedPreferences user_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
-
         newLandUIDStr = user_pref.getString("id","0");
         Log.d(TAG, "onCreate User ID: "+newLandUIDStr);
     }
@@ -287,58 +298,62 @@ public class NewLandFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_new_land, container, false);
 
 //////////////////////////////////////Find Elements///////////////////////////////////////////////
-        titleEtx=(EditText) view.findViewById(R.id.NewLandFragmentTitleTxt);
-        buildingConditionSpnr=(Spinner) view.findViewById(R.id.NewLandFragmentBuildingConditionSpnr);
-        landCaseSpnr = (Spinner)view.findViewById(R.id.NewLandFragmentLandCaseSpnr);
-        landTypeSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentLandTypeSpnr);
-        landUseTypeSpnr =(MultiSelectSpinner) view.findViewById(R.id.NewLandFragmentLandUseTypeMltSpnr);
-        voucherTypeSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentVoucherTypeSpnr);
-        preVoucherTypeSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentPreVoucherTypeSpnr);
-        exVoucherTypeSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentExVoucherTypeSpnr);
-        dongETxt=(EditText)view.findViewById(R.id.NewLandFragmentDongTxt);
-        preDongETxt=(EditText)view.findViewById(R.id.NewLandFragmentPreDongTxt);
-        exDongETxt=(EditText)view.findViewById(R.id.NewLandFragmentExDongTxt);
-        buildingYearETxt=(EditText)view.findViewById(R.id.NewLandFragmentBuildingYearTxt);
-        spaceFoundationETxt=(EditText)view.findViewById(R.id.NewLandFragmentFoundationSpaceTxt);
-        deliveryETxt=(EditText)view.findViewById(R.id.NewLandFragmentDeliveryDateTxt);
-        residentOwnerChkBx=(MaterialCheckBox) view.findViewById(R.id.NewLandFragmentResidentOwnerChkBx);
-        rentalPreferenceSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentRentalPreferenceSpnr);
-        exchangeChkBx=(MaterialCheckBox) view.findViewById(R.id.NewLandFragmentExchangeChkBx);
-        totalPriceETxt=(EditText)view.findViewById(R.id.NewLandFragmentTotalPriceTxt);
-        preSalePriceETxt=(EditText)view.findViewById(R.id.NewLandFragmentPreSalePriceTxt);
-        prePayPriceETxt=(EditText)view.findViewById(R.id.NewLandFragmentPrePayPriceTxt);
-        debtTotalPriceETxt=(EditText)view.findViewById(R.id.NewLandFragmentDebtTotalPriceTxt);
-        loanTypeSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentLoanTypeSpnr);
-        mortgageTotalPriceETxt=(EditText)view.findViewById(R.id.NewLandFragmentMortgGageTotalPriceTxt);
-        totalRentPriceETxt =(EditText)view.findViewById(R.id.NewLandFragmentRentTotalPriceTxt);
-        whichFloorSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentWichFloorSpnr);
-        roomCountSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentRoomCountSpnr);
-        floorCountSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentFloorCountSpnr);
-        unitInFloorSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentUnitInFloorSpnr);
-        provinceSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentProvinceSpnr);
-        citySpnr=(Spinner)view.findViewById(R.id.NewLandFragmentCitySpnr);
-        areaSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentAreaSpnr);
-        districtSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentDistrictSpnr);
-        addressETxt=(EditText) view.findViewById(R.id.NewLandFragmentAddressTxt);
-        landViewSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentLandViewSpnr);
-        equipmentSpnr=(MultiSelectSpinner) view.findViewById(R.id.NewLandFragmentEquipmentsSpnr);
-        floorCoveringSpnr =(Spinner)view.findViewById(R.id.NewLandFragmentFloorCoveringSpnr);
-        kitchenServicesSpnr =(Spinner)view.findViewById(R.id.NewLandFragmentKitchenServicesSpnr);
-        directionSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentDirectionSpnr);
-        landStateSpnr =(Spinner)view.findViewById(R.id.NewLandFragmentAdTypeSpnr);
-        waterSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentWaterSpnr);
-        gasSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentGasSpnr);
-        electricitySpnr=(Spinner)view.findViewById(R.id.NewLandFragmentElectricitySpnr);
-        phoneSpnr=(Spinner)view.findViewById(R.id.NewLandFragmentPhoneSpnr);
-        descriptionETxt=(EditText) view.findViewById(R.id.NewLandFragmentDescriptionTxt);
-        mapView=(MapView) view.findViewById(R.id.NewLandFragmentMapView);
-        submitBtn=(Button) view.findViewById(R.id.NewLandFragmentSubmitBtn);
+        titleEtx = (EditText) view.findViewById(R.id.NewLandFragmentTitleTxt);
+        buildingConditionSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentBuildingConditionSpnr);
+        landCaseSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLandCaseSpnr);
+        landTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLandTypeSpnr);
+        landUseTypeSpnr = (MultiSelectSpinner) view.findViewById(R.id.NewLandFragmentLandUseTypeMltSpnr);
+        voucherTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentVoucherTypeSpnr);
+        preVoucherTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentPreVoucherTypeSpnr);
+        exVoucherTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentExVoucherTypeSpnr);
+        dongETxt = (EditText) view.findViewById(R.id.NewLandFragmentDongTxt);
+        preDongETxt = (EditText) view.findViewById(R.id.NewLandFragmentPreDongTxt);
+        exDongETxt = (EditText) view.findViewById(R.id.NewLandFragmentExDongTxt);
+        buildingYearETxt = (EditText) view.findViewById(R.id.NewLandFragmentBuildingYearTxt);
+        spaceFoundationETxt = (EditText) view.findViewById(R.id.NewLandFragmentFoundationSpaceTxt);
+        deliveryETxt = (EditText) view.findViewById(R.id.NewLandFragmentDeliveryDateTxt);
+        residentOwnerChkBx = (MaterialCheckBox) view.findViewById(R.id.NewLandFragmentResidentOwnerChkBx);
+        rentalPreferenceSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentRentalPreferenceSpnr);
+        exchangeChkBx = (MaterialCheckBox) view.findViewById(R.id.NewLandFragmentExchangeChkBx);
+        totalPriceETxt = (EditText) view.findViewById(R.id.NewLandFragmentTotalPriceTxt);
+        preSalePriceETxt = (EditText) view.findViewById(R.id.NewLandFragmentPreSalePriceTxt);
+        prePayPriceETxt = (EditText) view.findViewById(R.id.NewLandFragmentPrePayPriceTxt);
+        debtTotalPriceETxt = (EditText) view.findViewById(R.id.NewLandFragmentDebtTotalPriceTxt);
+        loanTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLoanTypeSpnr);
+        mortgageTotalPriceETxt = (EditText) view.findViewById(R.id.NewLandFragmentMortgGageTotalPriceTxt);
+        totalRentPriceETxt = (EditText) view.findViewById(R.id.NewLandFragmentRentTotalPriceTxt);
+        whichFloorSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentWichFloorSpnr);
+        roomCountSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentRoomCountSpnr);
+        floorCountSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentFloorCountSpnr);
+        unitInFloorSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentUnitInFloorSpnr);
+        provinceSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentProvinceSpnr);
+        citySpnr = (Spinner) view.findViewById(R.id.NewLandFragmentCitySpnr);
+        areaSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentAreaSpnr);
+        districtSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentDistrictSpnr);
+        addressETxt = (EditText) view.findViewById(R.id.NewLandFragmentAddressTxt);
+        landViewSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLandViewSpnr);
+        equipmentSpnr = (MultiSelectSpinner) view.findViewById(R.id.NewLandFragmentEquipmentsSpnr);
+        floorCoveringSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentFloorCoveringSpnr);
+        kitchenServicesSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentKitchenServicesSpnr);
+        directionSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentDirectionSpnr);
+        landStateSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentAdTypeSpnr);
+        waterSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentWaterSpnr);
+        gasSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentGasSpnr);
+        electricitySpnr = (Spinner) view.findViewById(R.id.NewLandFragmentElectricitySpnr);
+        phoneSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentPhoneSpnr);
+        descriptionETxt = (EditText) view.findViewById(R.id.NewLandFragmentDescriptionTxt);
+        landMapView = (MapView) view.findViewById(R.id.mapView);
+        submitBtn = (Button) view.findViewById(R.id.NewLandFragmentSubmitBtn);
         selectedImagesGrid = (LinearLayout) view.findViewById(R.id.NewLandFragmentGalleryGrid);
-        imageOne = (ImageView)view.findViewById(R.id.NewLandOneImg);
-        imageTwo = (ImageView)view.findViewById(R.id.NewLandTwoImg);
-        imageThree = (ImageView)view.findViewById(R.id.NewLandThreeImg);
-        imageFour = (ImageView)view.findViewById(R.id.NewLandFourImg);
-        imageFive = (ImageView)view.findViewById(R.id.NewLandFiveImg);
+        imageOne = (ImageView) view.findViewById(R.id.NewLandOneImg);
+        imageTwo = (ImageView) view.findViewById(R.id.NewLandTwoImg);
+        imageThree = (ImageView) view.findViewById(R.id.NewLandThreeImg);
+        imageFour = (ImageView) view.findViewById(R.id.NewLandFourImg);
+        imageFive = (ImageView) view.findViewById(R.id.NewLandFiveImg);
+
+///////////////////////////Load map//////////////////////////////////////////////
+        loadMap();
+
 ////////////////////Register Context Menu for images/////////////////////////////
         registerForContextMenu(imageOne);
         registerForContextMenu(imageTwo);
@@ -347,8 +362,8 @@ public class NewLandFragment extends Fragment {
         registerForContextMenu(imageFive);
 
 ////////////////////// Building Conditions Spinner////////////////////////////////
-        buildingConditionModels =dbHelper.GetBuildingConditionsList();
-        for(BuildingConditionModel Item : buildingConditionModels){
+        buildingConditionModels = dbHelper.GetBuildingConditionsList();
+        for (BuildingConditionModel Item : buildingConditionModels) {
             buildingConditionTitles.add(Item.getTitle());
             buildingConditionIDs.add(Item.getId());
         }
@@ -360,16 +375,16 @@ public class NewLandFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 newLandBuildingConditionIDStr = buildingConditionIDs.get(i);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
 
 
-
 //////////////////////////////// Building Conditions Spinner////////////////////////////////
-        buildingConditionModels =dbHelper.GetBuildingConditionsList();
-        for(BuildingConditionModel Item : buildingConditionModels){
+        buildingConditionModels = dbHelper.GetBuildingConditionsList();
+        for (BuildingConditionModel Item : buildingConditionModels) {
             buildingConditionTitles.add(Item.getTitle());
             buildingConditionIDs.add(Item.getId());
         }
@@ -381,14 +396,15 @@ public class NewLandFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 newLandBuildingConditionIDStr = buildingConditionIDs.get(i);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
 
 ////////////////////// land Case Spinner////////////////////////////////
-        landCaseTypeModels =dbHelper.GetLandCaseTypesList();
-        for(LandCaseTypeModel Item : landCaseTypeModels){
+        landCaseTypeModels = dbHelper.GetLandCaseTypesList();
+        for (LandCaseTypeModel Item : landCaseTypeModels) {
             landCaseTitles.add(Item.getTitle());
             landCaseIDs.add(Item.getId());
         }
@@ -400,6 +416,7 @@ public class NewLandFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 newLandLandCaseIDStr = landCaseIDs.get(i);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -407,8 +424,8 @@ public class NewLandFragment extends Fragment {
 
 
         ////////////////////// land Type Spinner////////////////////////////////
-        landTypeModels =dbHelper.GetLandTypeList();
-        for(LandTypeModel Item : landTypeModels){
+        landTypeModels = dbHelper.GetLandTypeList();
+        for (LandTypeModel Item : landTypeModels) {
             landTypeTitles.add(Item.getTitle());
             landTypeIDs.add(Item.getId());
         }
@@ -427,8 +444,8 @@ public class NewLandFragment extends Fragment {
 
 
         ////////////////////// Rental Preference Spinner////////////////////////////////
-        rentalPreferenceModels =dbHelper.GetRentalPreferenceList();
-        for(RentalPreferenceModel Item : rentalPreferenceModels){
+        rentalPreferenceModels = dbHelper.GetRentalPreferenceList();
+        for (RentalPreferenceModel Item : rentalPreferenceModels) {
             rentalPreferenceTitles.add(Item.getTitle());
             rentalPreferenceIDs.add(Item.getId());
         }
@@ -446,10 +463,9 @@ public class NewLandFragment extends Fragment {
         });
 
 
-
         ////////////////////// Loan Type Spinner////////////////////////////////
-        loanTypeModels =dbHelper.GetLoanTypesList();
-        for(LoanTypeModel Item : loanTypeModels){
+        loanTypeModels = dbHelper.GetLoanTypesList();
+        for (LoanTypeModel Item : loanTypeModels) {
             loanTypeTitles.add(Item.getTitle());
             loanTypeIDs.add(Item.getId());
         }
@@ -461,6 +477,7 @@ public class NewLandFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 newLandLoanTypeIDStr = loanTypeIDs.get(i);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -468,8 +485,8 @@ public class NewLandFragment extends Fragment {
 
 
         ////////////////////// Province Spinner////////////////////////////////
-        provinceModels =dbHelper.GetProvincesList();
-        for(ProvinceModel Item : provinceModels){
+        provinceModels = dbHelper.GetProvincesList();
+        for (ProvinceModel Item : provinceModels) {
             provinceTitles.add(Item.getTitle());
             provinceIDs.add(Item.getId());
         }
@@ -481,16 +498,16 @@ public class NewLandFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 newLandProvinceIDStr = provinceIDs.get(i);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
 
 
-
         ////////////////////// City Spinner////////////////////////////////
-        cityModels =dbHelper.GetCitiesList();
-        for(CityModel Item : cityModels){
+        cityModels = dbHelper.GetCitiesList();
+        for (CityModel Item : cityModels) {
             cityTitles.add(Item.getTitle());
             cityIDs.add(Item.getId());
         }
@@ -509,8 +526,8 @@ public class NewLandFragment extends Fragment {
 
 
         ////////////////////// Area Spinner////////////////////////////////
-        areaModels =dbHelper.GetAreaList();
-        for(AreaModel Item : areaModels){
+        areaModels = dbHelper.GetAreaList();
+        for (AreaModel Item : areaModels) {
             areaTitles.add(Item.getTitle());
             areaIDs.add(Item.getId());
         }
@@ -528,8 +545,8 @@ public class NewLandFragment extends Fragment {
         });
 
         ////////////////////// District Spinner////////////////////////////////
-        districtModels =dbHelper.GetDistrictList();
-        for(DistrictModel Item : districtModels){
+        districtModels = dbHelper.GetDistrictList();
+        for (DistrictModel Item : districtModels) {
             districtTitles.add(Item.getTitle());
             districtIDs.add(Item.getId());
         }
@@ -547,10 +564,9 @@ public class NewLandFragment extends Fragment {
         });
 
 
-
         ////////////////////// District Spinner////////////////////////////////
-        floorCoveringModels =dbHelper.GetFloorCoveringList();
-        for(FloorCoveringModel Item : floorCoveringModels){
+        floorCoveringModels = dbHelper.GetFloorCoveringList();
+        for (FloorCoveringModel Item : floorCoveringModels) {
             floorCoveringTitles.add(Item.getTitle());
             floorCoveringIDs.add(Item.getId());
         }
@@ -568,10 +584,9 @@ public class NewLandFragment extends Fragment {
         });
 
 
-
         ////////////////////// Province Spinner////////////////////////////////
-        kitchenServiceModels =dbHelper.GetKitchenServicesList();
-        for(KitchenServiceModel Item : kitchenServiceModels){
+        kitchenServiceModels = dbHelper.GetKitchenServicesList();
+        for (KitchenServiceModel Item : kitchenServiceModels) {
             kitchenServiceTitles.add(Item.getTitle());
             kitchenServiceIDs.add(Item.getId());
         }
@@ -583,6 +598,7 @@ public class NewLandFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 newLandKitchenServiceIDStr = kitchenServiceIDs.get(i);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -590,8 +606,8 @@ public class NewLandFragment extends Fragment {
 
 
         ////////////////////// Province Spinner////////////////////////////////
-        landDirectionModels =dbHelper.GetLandDirectionsList();
-        for(LandDirectionModel Item : landDirectionModels){
+        landDirectionModels = dbHelper.GetLandDirectionsList();
+        for (LandDirectionModel Item : landDirectionModels) {
             landDirectionTitles.add(Item.getTitle());
             landDirectionTypeIDs.add(Item.getId());
         }
@@ -603,6 +619,7 @@ public class NewLandFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 newLandDirectionIDStr = landDirectionTypeIDs.get(i);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -610,8 +627,8 @@ public class NewLandFragment extends Fragment {
 
 
         ////////////////////// Province Spinner////////////////////////////////
-        landStateTypeModels =dbHelper.GetLandStateList();
-        for(LandStateTypeModel Item : landStateTypeModels){
+        landStateTypeModels = dbHelper.GetLandStateList();
+        for (LandStateTypeModel Item : landStateTypeModels) {
             landStateTitles.add(Item.getTitle());
             landStateIDs.add(Item.getId());
         }
@@ -629,10 +646,9 @@ public class NewLandFragment extends Fragment {
         });
 
 
-
         ////////////////////// UseType MultiSelect Spinner////////////////////////////////
-        useTypeModels =dbHelper.GetUseTypeList();
-        for(UseTypeModel Item : useTypeModels){
+        useTypeModels = dbHelper.GetUseTypeList();
+        for (UseTypeModel Item : useTypeModels) {
             useTypeTitles.add(Item.getTitle());
             useTypeIDs.add(Item.getId());
         }
@@ -644,7 +660,7 @@ public class NewLandFragment extends Fragment {
         landUseTypeSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d(TAG, "onItemSelected: "+adapterView.getSelectedItemId());
+                Log.d(TAG, "onItemSelected: " + adapterView.getSelectedItemId());
 //                newLandUseTypeIDLstArr.add(useTypeIDs.get(i));
 //                Log.d(TAG, "onItemSelected: "+newLandUseTypeIDLstArr.size()+ "   ID");
                 // TODO: 12/15/2020 Get Selected Items
@@ -658,12 +674,12 @@ public class NewLandFragment extends Fragment {
 
 
         ////////////////////// UseType Equipments Spinner////////////////////////////////
-        equipmentModels =dbHelper.GetLandEquipmentsList();
-        Log.d(TAG, "onCreateView size: "+equipmentModels.size());
-        for(EquipmentModel Item : equipmentModels){
+        equipmentModels = dbHelper.GetLandEquipmentsList();
+        Log.d(TAG, "onCreateView size: " + equipmentModels.size());
+        for (EquipmentModel Item : equipmentModels) {
             equipmentTitles.add(Item.getTitle());
             equipmentIDs.add(Item.getId());
-            Log.d(TAG, "onCreateView: "+Item.getTitle());
+            Log.d(TAG, "onCreateView: " + Item.getTitle());
         }
         equipmentAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()),
                 android.R.layout.simple_list_item_multiple_choice, equipmentTitles);
@@ -674,7 +690,7 @@ public class NewLandFragment extends Fragment {
         equipmentSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d(TAG, "onItemSelected: "+adapterView.getSelectedItemId());
+                Log.d(TAG, "onItemSelected: " + adapterView.getSelectedItemId());
 //                newLandUseTypeIDLstArr.add(useTypeIDs.get(i));
 //                Log.d(TAG, "onItemSelected: "+newLandUseTypeIDLstArr.size()+ "   ID");
                 // TODO: 12/15/2020 Get Selected Items
@@ -692,38 +708,37 @@ public class NewLandFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 imageOne.showContextMenu();
-                selectedImage="one";
+                selectedImage = "one";
             }
         });
         imageTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 imageTwo.showContextMenu();
-                selectedImage="two";
+                selectedImage = "two";
             }
         });
         imageThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 imageThree.showContextMenu();
-                selectedImage="three";
+                selectedImage = "three";
             }
         });
         imageFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 imageFour.showContextMenu();
-                selectedImage="four";
+                selectedImage = "four";
             }
         });
         imageFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 imageFive.showContextMenu();
-                selectedImage="five";
+                selectedImage = "five";
             }
         });
-
 
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
@@ -905,6 +920,42 @@ public class NewLandFragment extends Fragment {
 //                return false;
 //        }
 //        return false;
+
+
+//////////////////////////Get Map//////////////////////////////////
+    @Override
+    public void onViewCreated(@NonNull View view,  Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    void loadMap(){
+        if(landMapView !=null){
+            landMapView.onCreate(null);
+            landMapView.onResume();
+            landMapView.getMapAsync(this);
+        }
+    }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        MapsInitializer.initialize(Objects.requireNonNull(getContext()));
+        mgoogleMap = googleMap;
+//        mgoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation,17f));
+        mgoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapLatLng, 15.5f));
+        mgoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mgoogleMap.getUiSettings().setAllGesturesEnabled(false);
+        mgoogleMap.getUiSettings().setZoomControlsEnabled(true);
+        mgoogleMap.getUiSettings().setZoomGesturesEnabled(true);
+
+        mgoogleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+                mapLatLng = mgoogleMap.getCameraPosition().target;
+            }
+        });
+
+    }
 
 
 
