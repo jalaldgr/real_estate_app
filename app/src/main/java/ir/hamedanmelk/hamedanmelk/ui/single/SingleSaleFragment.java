@@ -55,8 +55,6 @@ import ir.hamedanmelk.hamedanmelk.tools.Urls;
 import saman.zamani.persiandate.PersianDate;
 import saman.zamani.persiandate.PersianDateFormat;
 
-import static android.content.Context.MODE_PRIVATE;
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SingleSaleFragment#newInstance} factory method to
@@ -74,7 +72,7 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
     MapView mapView;
     private JSONArray galleryImageArrayList;
     private Marker _marker;
-    private LatLng mapLatLng = new LatLng(Constants.MAP_EYDAN_LAT,Constants.MAP_MEYDAN_LNG);
+    private LatLng mapLatLng = new LatLng(Constants.MAP_MEYDAN_LAT,Constants.MAP_MEYDAN_LNG);
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;

@@ -694,8 +694,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        GetLandViewsRequestAsync getDistrictRequestAsync = new GetLandViewsRequestAsync();
-        getDistrictRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
+        GetLandViewsRequestAsync getLandViewsRequestAsync = new GetLandViewsRequestAsync();
+        getLandViewsRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetLandDirectionsRequest(Context context) {
@@ -716,7 +716,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject rawResult = new JSONObject(s);
                     if (rawResult.getInt("State") > 0) {
                         JSONArray dataResult = rawResult.getJSONArray("Data");
-                        String[] modelFields = Constants.DISTRICT_MODEL_FIELDS;
+                        String[] modelFields = Constants.LAND_DIRECTIONS_MODEL_FIELDS;
                         dbHelper.DeleteLadDirections();
                         for (int i = 0; i < dataResult.length(); i++) {
                             JSONObject rowItem = dataResult.getJSONObject(i);

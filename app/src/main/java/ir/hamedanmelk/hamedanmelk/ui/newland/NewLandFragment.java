@@ -30,34 +30,45 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.material.checkbox.MaterialCheckBox;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import io.apptik.widget.multiselectspinner.MultiSelectSpinner;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.ImageModel;
+import ir.hamedanmelk.hamedanmelk.models.NewLandModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.AreaModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.BuildingConditionModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.CityModel;
@@ -82,57 +93,14 @@ import ir.hamedanmelk.hamedanmelk.tools.MultipartUtility;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
-    String newLandLatitudeStr;
-    String newLandLongitudeStr;
-    String newLandTitleStr;
-    String[] newLandImageFiles;
-    List<String> newLandUseTypeIDLstArr;
-    String newLandLandStateIDStr;
-    String newLandChkExchangedStr;
-    String newLandUIDStr;
-    String newLandDongStr;
-    String newLandVoucherTypeIDStr;
-    String newLandSaleTotalPriceStr;
-    String newLandPreDongStr;
-    String newLandPreVoucherTypeIDStr;
-    String newLandDeliveryDateStr;
-    String newLandPreSaleTotalPriceStr;
-    String newLandExDongStr;
-    String newLandExVoucherTypeIDStr;
-    String newLandDescriptionStr;
-    String newLandAddressStr;
-    String newLandProvinceIDStr;
-    String newLandCityIDStr;
-    String newLandAreaIDStr;
-    String newLandDistrictIDStr;
-    String newLandLandTypeIDStr;
-    String newLandBuildingConditionIDStr;
-    String newLandBuildingYearStr;
-    String newLandDebtTotalPriceStr;
-    String newLandMortgageTotalPriceStr;
-    String newLandRentTotalPriceStr;
-    String newLandPrePayPriceStr;
-    String newLandRentalPreferenceIDStr;
-    String newLandResidentOwnerStr;
-    String newLandFoundationSpaceStr;
-    String newLandDirectionIDStr;
-    String newLandLandViewIDStr;
-    String newLandFloorCoveringIDStr;
-    String newLandKitchenServiceIDStr;
-    String newLandRoomCountStr;
-    String newLandFloorCountStr;
-    String newLandUnitInFloorStr;
-    String newLandFloorStr;
-    String newLandLandCaseIDStr;
-    String newLandLoanTypeIDStr;
-    String newLandWaterStr;
-    String newLandGasStr;
-    String newLandElectricityStr;
-    String newLandPhoneStr;
+    private RequestQueue myRequestQueue;
+    private JsonObjectRequest myJsonObjectRequest;
+
     public static final int PICK_IMAGES = 2;
     private static final String TAG = "NewLandFragment";
     public String selectedImage="one";
-
+    public String[] selectedImages= new String[5];
+    NewLandModel requestNewModel= new NewLandModel();
     String   selectedFileStr;
     Uri      selectedFileUri;
     EditText titleEtx;
@@ -190,7 +158,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
 
     GoogleMap mgoogleMap;
     private Marker mapMarker;
-    private LatLng mapLatLng = new LatLng(Constants.MAP_EYDAN_LAT,Constants.MAP_MEYDAN_LNG);
+    private LatLng mapLatLng = new LatLng(Constants.MAP_MEYDAN_LAT,Constants.MAP_MEYDAN_LNG);
     private boolean mapLoadedFLAG=false;
 
     ArrayList<BuildingConditionModel> buildingConditionModels;
@@ -277,6 +245,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
     List<ImageModel>imageModels=new ArrayList<ImageModel>();
 
     MYSQlDBHelper dbHelper;
+
     public NewLandFragment() {
         // Required empty public constructor
     }
@@ -288,8 +257,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         }
         dbHelper = new MYSQlDBHelper(getContext());
         SharedPreferences user_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
-        newLandUIDStr = user_pref.getString("id","0");
-        Log.d(TAG, "onCreate User ID: "+newLandUIDStr);
+        requestNewModel.setUID( user_pref.getString("id","0"));
     }
 
     @Override
@@ -351,6 +319,9 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         imageFour = (ImageView) view.findViewById(R.id.NewLandFourImg);
         imageFive = (ImageView) view.findViewById(R.id.NewLandFiveImg);
 
+        ///////////////////////Read inputs/////////////////////////////
+
+
 ///////////////////////////Load map//////////////////////////////////////////////
         loadMap();
 
@@ -373,7 +344,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         buildingConditionSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                newLandBuildingConditionIDStr = buildingConditionIDs.get(i);
+                requestNewModel.setBuildingConditionID( buildingConditionIDs.get(i));
             }
 
             @Override
@@ -394,7 +365,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         buildingConditionSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                newLandBuildingConditionIDStr = buildingConditionIDs.get(i);
+                requestNewModel.setBuildingConditionID(buildingConditionIDs.get(i));
             }
 
             @Override
@@ -414,9 +385,8 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         landCaseSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                newLandLandCaseIDStr = landCaseIDs.get(i);
+                requestNewModel.setLandCaseID(landCaseIDs.get(i));
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -435,7 +405,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         landTypeSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                newLandLandTypeIDStr = landTypeIDs.get(i);
+                requestNewModel.setLandTypeID(landTypeIDs.get(i));
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -455,7 +425,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         rentalPreferenceSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                newLandRentalPreferenceIDStr = rentalPreferenceIDs.get(i);
+                requestNewModel.setRentalPreferenceID(rentalPreferenceIDs.get(i));
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -475,9 +445,8 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         loanTypeSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                newLandLoanTypeIDStr = loanTypeIDs.get(i);
+                requestNewModel.setLoanTypeID(loanTypeIDs.get(i));
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -496,9 +465,8 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         provinceSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                newLandProvinceIDStr = provinceIDs.get(i);
+                requestNewModel.setProvinceID( provinceIDs.get(i));
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -517,7 +485,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         citySpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                newLandCityIDStr = cityIDs.get(i);
+                requestNewModel.setCityID( cityIDs.get(i));
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -537,7 +505,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         areaSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                newLandAreaIDStr = areaIDs.get(i);
+                requestNewModel.setAreaID( areaIDs.get(i));
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -556,7 +524,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         districtSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                newLandDistrictIDStr = districtIDs.get(i);
+                requestNewModel.setDistrictID( districtIDs.get(i));
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -576,7 +544,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         floorCoveringSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                newLandFloorCoveringIDStr = floorCoveringIDs.get(i);
+                requestNewModel.setFloorCoveringID(floorCoveringIDs.get(i));
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -596,9 +564,8 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         kitchenServicesSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                newLandKitchenServiceIDStr = kitchenServiceIDs.get(i);
+                requestNewModel.setKitchenServiceID( kitchenServiceIDs.get(i));
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -607,6 +574,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
 
         ////////////////////// Province Spinner////////////////////////////////
         landDirectionModels = dbHelper.GetLandDirectionsList();
+        Log.d(TAG, "onCreateView direction: "+landDirectionModels.size());
         for (LandDirectionModel Item : landDirectionModels) {
             landDirectionTitles.add(Item.getTitle());
             landDirectionTypeIDs.add(Item.getId());
@@ -617,9 +585,27 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         directionSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                newLandDirectionIDStr = landDirectionTypeIDs.get(i);
+                requestNewModel.setDirectionID( landDirectionTypeIDs.get(i));
             }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
+        ////////////////////// LandView Spinner////////////////////////////////
+        landViewModels = dbHelper.GetLandViewsList();
+        for (LandViewModel Item : landViewModels) {
+            landViewTitles.add(Item.getTitle());
+            landViewIDs.add(Item.getId());
+        }
+        landViewAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, landViewTitles);
+        landViewAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        landViewSpnr.setAdapter(landViewAdapter);
+        landViewSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                requestNewModel.setLandViewID( landViewIDs.get(i));
+            }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -638,7 +624,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         landStateSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                newLandLandStateIDStr = landStateIDs.get(i);
+                requestNewModel.setLandStateID( landStateIDs.get(i));
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -660,7 +646,8 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         landUseTypeSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d(TAG, "onItemSelected: " + adapterView.getSelectedItemId());
+                Log.d(TAG, "onItemSelected: " + adapterView.getAdapter().getCount());
+
 //                newLandUseTypeIDLstArr.add(useTypeIDs.get(i));
 //                Log.d(TAG, "onItemSelected: "+newLandUseTypeIDLstArr.size()+ "   ID");
                 // TODO: 12/15/2020 Get Selected Items
@@ -669,6 +656,22 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        residentOwnerChkBx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)requestNewModel.setResidentOwner(Constants.ONE);
+                else requestNewModel.setResidentOwner(Constants.ZERO);
+            }
+        });
+
+        exchangeChkBx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)requestNewModel.setChkExchanged(Constants.ONE);
+                else requestNewModel.setChkExchanged(Constants.ZERO);
             }
         });
 
@@ -709,6 +712,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             public void onClick(View view) {
                 imageOne.showContextMenu();
                 selectedImage = "one";
+                selectedImages[0]=selectedFileStr;
             }
         });
         imageTwo.setOnClickListener(new View.OnClickListener() {
@@ -723,6 +727,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             public void onClick(View view) {
                 imageThree.showContextMenu();
                 selectedImage = "three";
+                selectedImages[2]=selectedFileStr;
             }
         });
         imageFour.setOnClickListener(new View.OnClickListener() {
@@ -730,6 +735,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             public void onClick(View view) {
                 imageFour.showContextMenu();
                 selectedImage = "four";
+                selectedImages[3]=selectedFileStr;
             }
         });
         imageFive.setOnClickListener(new View.OnClickListener() {
@@ -737,6 +743,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             public void onClick(View view) {
                 imageFive.showContextMenu();
                 selectedImage = "five";
+                selectedImages[4]=selectedFileStr;
             }
         });
 
@@ -744,12 +751,42 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NewLandRegisterRequest(getContext());
+                requestNewModel.setTitle(titleEtx.getText().toString());
+                requestNewModel.setDong(dongETxt.getText().toString());
+                requestNewModel.setExDong(exDongETxt.getText().toString());
+                requestNewModel.setPreDong(preDongETxt.getText().toString());
+                requestNewModel.setSaleTotalPrice(totalPriceETxt.getText().toString());
+                requestNewModel.setPreSaleTotalPrice(preSalePriceETxt.getText().toString());
+                requestNewModel.setDescription(descriptionETxt.getText().toString());
+                requestNewModel.setAddress(addressETxt.getText().toString());
+                requestNewModel.setBuildingYear(buildingYearETxt.getText().toString());
+                requestNewModel.setDebtTotalPrice(debtTotalPriceETxt.getText().toString());
+                requestNewModel.setMortgageTotalPrice(mortgageTotalPriceETxt.getText().toString());
+                requestNewModel.setRentTotalPrice(totalRentPriceETxt.getText().toString());
+                requestNewModel.setPrePayPrice(prePayPriceETxt.getText().toString());
+                requestNewModel.setFoundationSpace(spaceFoundationETxt.getText().toString());
+                requestNewModel.setRoomCount(Long.toString(roomCountSpnr.getSelectedItemId()));
+                requestNewModel.setFloorCount(Long.toString(floorCountSpnr.getSelectedItemId()));
+                requestNewModel.setUnitInFloor(Long.toString(unitInFloorSpnr.getSelectedItemId()));
+                requestNewModel.setFloor(Long.toString(floorCountSpnr.getSelectedItemId()));
+                requestNewModel.setWater(Long.toString(waterSpnr.getSelectedItemId()));
+                requestNewModel.setGas(Long.toString(gasSpnr.getSelectedItemId()));
+                requestNewModel.setElectricity(Long.toString(electricitySpnr.getSelectedItemId()));
+                requestNewModel.setPhone(Long.toString(phoneSpnr.getSelectedItemId()));
+                String[] temp=new String[5];
+                int i =0;
+                for (String item: selectedImages){
+                    if(item!=null){
+                        temp[i] = item;
+                        i++;
+                    }
+                }
+                requestNewModel.setImageFiles(temp);
+                Log.d(TAG, "onClick reQuest: "+ requestNewModel.toString());
             }
         });
         return view;
     }
-
 
 //////////////////////////////////Context Menu///////////////////////////////////
 
@@ -758,6 +795,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         MenuInflater inflater = Objects.requireNonNull(getActivity()).getMenuInflater();
         inflater.inflate(R.menu.image_long_press_menu, menu);
     }
+
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onContextItemSelected (MenuItem item) {
@@ -778,21 +816,26 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             case R.id.remove_image: {
 
                 switch (selectedImage){
-                    case "one":
+                    case "one":{
                         imageOne.setImageBitmap(null);
-                        break;
-                    case "two":
+                        selectedImages[0]=null;
+                        break;}
+                    case "two":{
                         imageTwo.setImageBitmap(null);
-                        break;
-                    case "three":
+                        selectedImages[1]=null;
+                        break;}
+                    case "three":{
                         imageThree.setImageBitmap(null);
-                        break;
-                    case "four":
+                        selectedImages[2]=null;
+                        break;}
+                    case "four":{
                         imageFour.setImageBitmap(null);
-                        break;
-                    case "five":
+                        selectedImages[3]=null;
+                        break;}
+                    case "five":{
                         imageFive.setImageBitmap(null);
-                        break;
+                        selectedImages[4]=null;
+                        break;}
                 }
 //                ImageView imageView =  (ImageView)findViewById(R.id.news_image_view);
 //                imageView.setImageResource(0);
@@ -808,8 +851,8 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         return false;
     }
 
-
     ////////////////////////////////pickUp Image ////////////////////////////////////
+
     private void startGallery() {
         Intent cameraIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         cameraIntent.setType("image/*");
@@ -835,18 +878,23 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
                 switch (selectedImage){
                     case "one":{
                         imageOne.setImageBitmap(bitmapImage);
+                        selectedImages[0]=selectedFileStr;
                         break;}
                     case "two":{
                         imageTwo.setImageBitmap(bitmapImage);
+                        selectedImages[1]=selectedFileStr;
                         break;}
                     case "three":{
                         imageThree.setImageBitmap(bitmapImage);selectedImage="three";
+                        selectedImages[2]=selectedFileStr;
                         break;}
                     case "four":{
                         imageFour.setImageBitmap(bitmapImage);selectedImage="four";
+                        selectedImages[3]=selectedFileStr;
                         break;}
                     case "five":{
                         imageFive.setImageBitmap(bitmapImage);
+                        selectedImages[4]=selectedFileStr;
                         break;}
                 }
 
@@ -855,7 +903,6 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         //Uri returnUri;
         //returnUri = data.getData();
     }
-
 
 
 
@@ -923,6 +970,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
 
 
 //////////////////////////Get Map//////////////////////////////////
+
     @Override
     public void onViewCreated(@NonNull View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -952,6 +1000,8 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             @Override
             public void onCameraMove() {
                 mapLatLng = mgoogleMap.getCameraPosition().target;
+                requestNewModel.setLatitude(Double.toString(mapLatLng.latitude));
+                requestNewModel.setLongitude(Double.toString(mapLatLng.longitude));
             }
         });
 
@@ -997,57 +1047,6 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             protected List<String> doInBackground(Void... voids) {
                 try {
                     MultipartUtility multipart = new MultipartUtility(requestUrl, "UTF-8");
-
-
-//                    multipart.addFormField(Constants.NEW_LAND_LATITIUDE ,  newLandLatitudeStr);
-//                    multipart.addFormField(Constants.NEW_LAND_LONGITUDE ,  newLandLongitudeStr);
-//                    multipart.addFormField(Constants.NEW_LAND_TITLE , newLandTitleStr);
-//                    multipart.addFormField(Constants.NEW_LAND_IMAGE_FILE , newLandTitleStr);
-//                    multipart.addFormField(Constants.NEW_LAND_USE_TYPE_ID , "12");
-//                    multipart.addFormField(Constants.NEW_LAND_EQUIPMENT , "15");
-//                    multipart.addFormField(Constants.NEW_LAND_LAND_STATE_ID , newLandLandStateIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_CHK_EXCHANGED , newLandChkExchangedStr);
-//                    multipart.addFormField(Constants.NEW_LAND_DONG , newLandDongStr);
-//                    multipart.addFormField(Constants.NEW_LAND_UID , newLandUIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_VOUCHER_TYPE_ID , newLandVoucherTypeIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_SALE_TOTAL_PRICE , newLandSaleTotalPriceStr);
-//                    multipart.addFormField(Constants.NEW_LAND_PRE_DONG , newLandPreDongStr);
-//                    multipart.addFormField(Constants.NEW_LAND_PRE_VOUCHER_TYPE_ID , newLandPreVoucherTypeIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_DELIVERY_DATE , newLandDeliveryDateStr);
-//                    multipart.addFormField(Constants.NEW_LAND_PRE_SALE_TOTAL_PRICE , newLandPreSaleTotalPriceStr);
-//                    multipart.addFormField(Constants.NEW_LAND_EX_DONG , newLandExDongStr);
-//                    multipart.addFormField(Constants.NEW_LAND_EX_VOUCHER_TYPE_ID , newLandExVoucherTypeIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_DESCRIPTION , newLandDescriptionStr);
-//                    multipart.addFormField(Constants.NEW_LAND_ADDRESS , newLandAddressStr);
-//                    multipart.addFormField(Constants.NEW_LAND_PROVINCE_ID , newLandProvinceIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_CITY_ID , newLandCityIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_AREA_ID , newLandAreaIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_DISTRICT_ID , newLandDistrictIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_LAND_TYPE_ID , newLandLandTypeID);
-//                    multipart.addFormField(Constants.NEW_LAND_BUILDING_CONDITION_ID , newLandBuildingConditionIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_BUILDING_YEAR , newLandBuildingYearStr);
-//                    multipart.addFormField(Constants.NEW_LAND_DEBT_TOTAL_PRICE , newLandDebtTotalPriceStr);
-//                    multipart.addFormField(Constants.NEW_LAND_MORTGAGE_TOTAL_PRICE , newLandMortgageTotalPriceStr);
-//                    multipart.addFormField(Constants.NEW_LAND_RENTAL_TOTAL_PRICE , newLandRentalPreferenceIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_PRE_PAY , newLandPrePayPriceStr);
-//                    multipart.addFormField(Constants.NEW_LAND_RENTAL_PREFERENCE , newLandRentalPreferenceIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_RESIDENT_OWNER , newLandResidentOwnerStr);
-//                    multipart.addFormField(Constants.NEW_LAND_FOUNDATION_SPACE , newLandFoundationSpaceStr);
-//                    multipart.addFormField(Constants.NEW_LAND_DIRECTION_ID , newLandDirectionIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_LAND_VIEW_ID , newLandLandViewIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_FLOOR_COVERING_ID , newLandFloorCoveringIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_KITCHEN_SERVICES , newLandKitchenServiceIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_ROOM_COUNT , newLandRoomCountStr);
-//                    multipart.addFormField(Constants.NEW_LAND_FLOOR_COUNT , newLandFloorCountStr);
-//                    multipart.addFormField(Constants.NEW_LAND_UNIT_IN_FLOOR , newLandUnitInFloorStr);
-//                    multipart.addFormField(Constants.NEW_LAND_FLOOR , newLandFloorStr);
-//                    multipart.addFormField(Constants.NEW_LAND_LAND_CASE_ID , newLandLandCaseIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_LOAN_TYPE_ID , newLandLoanTypeIDStr);
-//                    multipart.addFormField(Constants.NEW_LAND_WATER , newLandWaterStr);
-//                    multipart.addFormField(Constants.NEW_LAND_GAS , newLandGasStr);
-//                    multipart.addFormField(Constants.NEW_LAND_ELECTRICITY , newLandElectricityStr);
-//                    multipart.addFormField(Constants.NEW_LAND_PHONE , newLandPhoneStr);
-
                     List<String> responseList = multipart.finish();
                     Log.d(TAG, "doInBackground: response size"+responseList.size());
                     for (String item : responseList) {
@@ -1065,4 +1064,73 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         NewLandRegisterRequestAsync newLandRegisterRequestAsync = new NewLandRegisterRequestAsync();
         newLandRegisterRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
+
+
+
+
+
+
+
+
+
+//    private void HomeFragmentPOSTRequest(Context Cntx) {
+//
+//        Map<String, String> postParam= new HashMap<String, String>();
+//
+//        final ProgressDialog progressDialog=new ProgressDialog(Cntx);
+//        progressDialog.setMessage(getResources().getString(R.string.loading_message));
+//        progressDialog.setCanceledOnTouchOutside(false);
+//        progressDialog.show();
+//        myRequestQueue = Volley.newRequestQueue(Cntx);
+//        myJsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Urls.getBaseURL()+Urls.getRegisterLand(), (JSONObject) requestNewModel,
+//                new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//
+//                    }
+//                },
+//                new Response.ErrorListener(){
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Toast.makeText(getContext(),
+//                                "Response ERRRRRor :" + error.toString(), Toast.LENGTH_LONG).show();
+//                        if (progressDialog.isShowing())
+//                            progressDialog.dismiss();
+//                    }
+//
+//                }){
+//
+//            /**
+//             * Passing some request headers
+//             * */
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                HashMap<String, String> headers = new HashMap<String, String>();
+//                headers.put("Content-Type", "application/json; charset=utf-8");
+//                return headers;
+//            }
+//
+//
+//
+//        };
+////        Cache cache = AppController.getInstance().getRequestQueue().getCache();
+////        Entry entry = cache.get(url);
+////        if(entry != null){
+////            try {
+////                String data = new String(entry.data, "UTF-8");
+////                // handle data, like converting it to xml, json, bitmap etc.,
+////            } catch (UnsupportedEncodingException e) {
+////                e.printStackTrace();
+////            }
+////        }
+////    }else{
+////        // Cached response doesn't exists. Make network call here
+////    }
+//
+////        NetworkImageVi
+//        ew NImg = new NetworkImageView(Cntx);
+////        NImg.setImageUrl(Const.URL_IMAGE, imageLoader);
+//
+//        myRequestQueue.add(myJsonObjectRequest);
+//    }
 }

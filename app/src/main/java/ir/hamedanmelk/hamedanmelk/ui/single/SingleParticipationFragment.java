@@ -72,7 +72,7 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
     MapView mapView;
     private JSONArray galleryImageArrayList;
     private Marker _marker;
-    private LatLng mapLatLng = new LatLng(Constants.MAP_EYDAN_LAT,Constants.MAP_MEYDAN_LNG);
+    private LatLng mapLatLng = new LatLng(Constants.MAP_MEYDAN_LAT,Constants.MAP_MEYDAN_LNG);
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;

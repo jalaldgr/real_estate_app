@@ -8,8 +8,11 @@ public class Constants {
     public static final String APPLICATION_JSON = "application/json";
     public static final String CONTENT_TYPE = "Content-Type";
     // Default Map Location
-    public static final double MAP_EYDAN_LAT = 34.798315;
+    public static final double MAP_MEYDAN_LAT = 34.798315;
     public static final double MAP_MEYDAN_LNG= 48.514898;
+    public static final String ZERO =  "0";
+    public static final String ONE = "1";
+
     //JSON Response Fields
     public static final String JSON_RESPONSE_DATA = "Data";
     public static final String JSON_RESPONSE_STATE = "State";

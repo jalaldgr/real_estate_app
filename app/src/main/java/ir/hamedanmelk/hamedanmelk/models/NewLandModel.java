@@ -1,48 +1,140 @@
 package ir.hamedanmelk.hamedanmelk.models;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class NewLandModel {
-    private String id;
-    private String SaleTotalPrice;
-    private String MortgageTotalPrice;
-    private String RentTotalPrice;
-    private String Title;
-    private String land_state_id;
-    private String created_at;
-    private String land_situation_id;
-    private String View;
-    private String Images;
-    private String LandStateTitle;
-    private String district_id;
-    private String LandSituationTitle;
-    private String LandSituationColor;
-    private String first_name;
-    private String last_name;
 
-    public NewLandModel(String id, String saleTotalPrice, String mortgageTotalPrice, String rentTotalPrice, String title, String land_state_id, String created_at, String land_situation_id, String view, String images, String landStateTitle, String district_id, String landSituationTitle, String landSituationColor, String first_name, String last_name) {
-        this.id = id;
-        SaleTotalPrice = saleTotalPrice;
-        MortgageTotalPrice = mortgageTotalPrice;
-        RentTotalPrice = rentTotalPrice;
+    String Latitude;
+    String Longitude;
+    String Title;
+    String[] ImageFiles;
+    String[] UseTypeIDLstArr;
+    String LandStateID;
+    String ChkExchanged;
+    String UID;
+    String Dong;
+    String VoucherTypeID;
+    String SaleTotalPrice;
+    String PreDong;
+    String PreVoucherTypeID;
+    String DeliveryDate;//Current time, pass it null
+    String PreSaleTotalPrice;
+    String ExDong;
+    String ExVoucherTypeID;
+    String Description;
+    String Address;
+    String ProvinceID;
+    String CityID;
+    String AreaID;
+    String DistrictID;
+    String LandTypeID;
+    String BuildingConditionID;
+    String BuildingYear;
+    String DebtTotalPrice;
+    String MortgageTotalPrice;
+    String RentTotalPrice;
+    String PrePayPrice;
+    String RentalPreferenceID;
+    String ResidentOwner;//checkbox
+    String FoundationSpace;
+    String DirectionID;
+    String LandViewID;
+    String FloorCoveringID;
+    String KitchenServiceID;
+    String RoomCount;
+    String FloorCount;
+    String UnitInFloor;
+    String Floor;
+    String LandCaseID;
+    String LoanTypeID;
+    String Water;
+    String Gas;
+    String Electricity;
+    String Phone;
+    String EquipmentStr[];
+
+    public NewLandModel() {
+    }
+
+    public String getLatitude() {
+        return Latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        Latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        Longitude = longitude;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
         Title = title;
-        this.land_state_id = land_state_id;
-        this.created_at = created_at;
-        this.land_situation_id = land_situation_id;
-        View = view;
-        Images = images;
-        LandStateTitle = landStateTitle;
-        this.district_id = district_id;
-        LandSituationTitle = landSituationTitle;
-        LandSituationColor = landSituationColor;
-        this.first_name = first_name;
-        this.last_name = last_name;
     }
 
-    public String getDistrict_id() {
-        return district_id;
+    public String[] getImageFiles() {
+        return ImageFiles;
     }
 
-    public void setDistrict_id(String district_id) {
-        this.district_id = district_id;
+    public void setImageFiles(String[] imageFiles) {
+        ImageFiles = imageFiles;
+    }
+
+    public String[] getUseTypeIDLstArr() {
+        return UseTypeIDLstArr;
+    }
+
+    public void setUseTypeIDLstArr(String[] useTypeIDLstArr) {
+        UseTypeIDLstArr = useTypeIDLstArr;
+    }
+
+    public String getLandStateID() {
+        return LandStateID;
+    }
+
+    public void setLandStateID(String landStateID) {
+        LandStateID = landStateID;
+    }
+
+    public String getChkExchanged() {
+        return ChkExchanged;
+    }
+
+    public void setChkExchanged(String chkExchanged) {
+        ChkExchanged = chkExchanged;
+    }
+
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
+    }
+
+    public String getDong() {
+        return Dong;
+    }
+
+    public void setDong(String dong) {
+        Dong = dong;
+    }
+
+    public String getVoucherTypeID() {
+        return VoucherTypeID;
+    }
+
+    public void setVoucherTypeID(String voucherTypeID) {
+        VoucherTypeID = voucherTypeID;
     }
 
     public String getSaleTotalPrice() {
@@ -51,6 +143,134 @@ public class NewLandModel {
 
     public void setSaleTotalPrice(String saleTotalPrice) {
         SaleTotalPrice = saleTotalPrice;
+    }
+
+    public String getPreDong() {
+        return PreDong;
+    }
+
+    public void setPreDong(String preDong) {
+        PreDong = preDong;
+    }
+
+    public String getPreVoucherTypeID() {
+        return PreVoucherTypeID;
+    }
+
+    public void setPreVoucherTypeID(String preVoucherTypeID) {
+        PreVoucherTypeID = preVoucherTypeID;
+    }
+
+    public String getDeliveryDate() {
+        return DeliveryDate;
+    }
+
+    public void setDeliveryDate(String deliveryDate) {
+        DeliveryDate = deliveryDate;
+    }
+
+    public String getPreSaleTotalPrice() {
+        return PreSaleTotalPrice;
+    }
+
+    public void setPreSaleTotalPrice(String preSaleTotalPrice) {
+        PreSaleTotalPrice = preSaleTotalPrice;
+    }
+
+    public String getExDong() {
+        return ExDong;
+    }
+
+    public void setExDong(String exDong) {
+        ExDong = exDong;
+    }
+
+    public String getExVoucherTypeID() {
+        return ExVoucherTypeID;
+    }
+
+    public void setExVoucherTypeID(String exVoucherTypeID) {
+        ExVoucherTypeID = exVoucherTypeID;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
+
+    public String getProvinceID() {
+        return ProvinceID;
+    }
+
+    public void setProvinceID(String provinceID) {
+        ProvinceID = provinceID;
+    }
+
+    public String getCityID() {
+        return CityID;
+    }
+
+    public void setCityID(String cityID) {
+        CityID = cityID;
+    }
+
+    public String getAreaID() {
+        return AreaID;
+    }
+
+    public void setAreaID(String areaID) {
+        AreaID = areaID;
+    }
+
+    public String getDistrictID() {
+        return DistrictID;
+    }
+
+    public void setDistrictID(String districtID) {
+        DistrictID = districtID;
+    }
+
+    public String getLandTypeID() {
+        return LandTypeID;
+    }
+
+    public void setLandTypeID(String landTypeID) {
+        LandTypeID = landTypeID;
+    }
+
+    public String getBuildingConditionID() {
+        return BuildingConditionID;
+    }
+
+    public void setBuildingConditionID(String buildingConditionID) {
+        BuildingConditionID = buildingConditionID;
+    }
+
+    public String getBuildingYear() {
+        return BuildingYear;
+    }
+
+    public void setBuildingYear(String buildingYear) {
+        BuildingYear = buildingYear;
+    }
+
+    public String getDebtTotalPrice() {
+        return DebtTotalPrice;
+    }
+
+    public void setDebtTotalPrice(String debtTotalPrice) {
+        DebtTotalPrice = debtTotalPrice;
     }
 
     public String getMortgageTotalPrice() {
@@ -69,118 +289,209 @@ public class NewLandModel {
         RentTotalPrice = rentTotalPrice;
     }
 
-    public String getId() {
-        return id;
+    public String getPrePayPrice() {
+        return PrePayPrice;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setPrePayPrice(String prePayPrice) {
+        PrePayPrice = prePayPrice;
     }
 
-    public String getTitle() {
-        return Title;
+    public String getRentalPreferenceID() {
+        return RentalPreferenceID;
     }
 
-    public void setTitle(String title) {
-        Title = title;
+    public void setRentalPreferenceID(String rentalPreferenceID) {
+        RentalPreferenceID = rentalPreferenceID;
     }
 
-    public String getLand_state_id() {
-        return land_state_id;
+    public String getResidentOwner() {
+        return ResidentOwner;
     }
 
-    public void setLand_state_id(String land_state_id) {
-        this.land_state_id = land_state_id;
+    public void setResidentOwner(String residentOwner) {
+        ResidentOwner = residentOwner;
     }
 
-    public String getCreated_at() {
-        return created_at;
+    public String getFoundationSpace() {
+        return FoundationSpace;
     }
 
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
+    public void setFoundationSpace(String foundationSpace) {
+        FoundationSpace = foundationSpace;
     }
 
-    public String getLand_situation_id() {
-        return land_situation_id;
+    public String getDirectionID() {
+        return DirectionID;
     }
 
-    public void setLand_situation_id(String land_situation_id) {
-        this.land_situation_id = land_situation_id;
+    public void setDirectionID(String directionID) {
+        DirectionID = directionID;
     }
 
-    public String getView() {
-        return View;
+    public String getLandViewID() {
+        return LandViewID;
     }
 
-    public void setView(String view) {
-        View = view;
+    public void setLandViewID(String landViewID) {
+        LandViewID = landViewID;
     }
 
-    public String getLandStateTitle() {
-        return LandStateTitle;
+    public String getFloorCoveringID() {
+        return FloorCoveringID;
     }
 
-    public void setLandStateTitle(String landStateTitle) {
-        LandStateTitle = landStateTitle;
+    public void setFloorCoveringID(String floorCoveringID) {
+        FloorCoveringID = floorCoveringID;
     }
 
-    public String getLandSituationTitle() {
-        return LandSituationTitle;
+    public String getKitchenServiceID() {
+        return KitchenServiceID;
     }
 
-    public void setLandSituationTitle(String landSituationTitle) {
-        LandSituationTitle = landSituationTitle;
+    public void setKitchenServiceID(String kitchenServiceID) {
+        KitchenServiceID = kitchenServiceID;
     }
 
-    public String getLandSituationColor() {
-        return LandSituationColor;
+    public String getRoomCount() {
+        return RoomCount;
     }
 
-    public void setLandSituationColor(String landSituationColor) {
-        LandSituationColor = landSituationColor;
+    public void setRoomCount(String roomCount) {
+        RoomCount = roomCount;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFloorCount() {
+        return FloorCount;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFloorCount(String floorCount) {
+        FloorCount = floorCount;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getUnitInFloor() {
+        return UnitInFloor;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setUnitInFloor(String unitInFloor) {
+        UnitInFloor = unitInFloor;
     }
 
-    public String getImages() {
-        return Images;
+    public String getFloor() {
+        return Floor;
     }
 
-    public void setImages(String images) {
-        Images = images;
+    public void setFloor(String floor) {
+        Floor = floor;
+    }
+
+    public String getLandCaseID() {
+        return LandCaseID;
+    }
+
+    public void setLandCaseID(String landCaseID) {
+        LandCaseID = landCaseID;
+    }
+
+    public String getLoanTypeID() {
+        return LoanTypeID;
+    }
+
+    public void setLoanTypeID(String loanTypeID) {
+        LoanTypeID = loanTypeID;
+    }
+
+    public String getWater() {
+        return Water;
+    }
+
+    public void setWater(String water) {
+        Water = water;
+    }
+
+    public String getGas() {
+        return Gas;
+    }
+
+    public void setGas(String gas) {
+        Gas = gas;
+    }
+
+    public String getElectricity() {
+        return Electricity;
+    }
+
+    public void setElectricity(String electricity) {
+        Electricity = electricity;
+    }
+
+    public String getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(String phone) {
+        Phone = phone;
+    }
+
+    public String[] getEquipmentStr() {
+        return EquipmentStr;
+    }
+
+    public void setEquipmentStr(String[] equipmentStr) {
+        EquipmentStr = equipmentStr;
     }
 
     @Override
     public String toString() {
-        return "LandModel{" +
-                "id='" + id + '\'' +
-                ", SaleTotalPrice='" + SaleTotalPrice + '\'' +
+        return "NewLandModel{" +
+                "Latitude='" + Latitude + '\'' +
+                ", Longitude='" + Longitude + '\'' +
                 ", Title='" + Title + '\'' +
-                ", land_state_id='" + land_state_id + '\'' +
-                ", created_at='" + created_at + '\'' +
-                ", land_situation_id='" + land_situation_id + '\'' +
-                ", View='" + View + '\'' +
-                ", Images='" + Images + '\'' +
-                ", LandStateTitle='" + LandStateTitle + '\'' +
-                ", LandSituationTitle='" + LandSituationTitle + '\'' +
-                ", LandSituationColor='" + LandSituationColor + '\'' +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
+                ", ImageFiles=" + Arrays.toString(ImageFiles) +
+                ", UseTypeIDLstArr=" + Arrays.toString(UseTypeIDLstArr) +
+                ", LandStateID='" + LandStateID + '\'' +
+                ", ChkExchanged='" + ChkExchanged + '\'' +
+                ", UID='" + UID + '\'' +
+                ", Dong='" + Dong + '\'' +
+                ", VoucherTypeID='" + VoucherTypeID + '\'' +
+                ", SaleTotalPrice='" + SaleTotalPrice + '\'' +
+                ", PreDong='" + PreDong + '\'' +
+                ", PreVoucherTypeID='" + PreVoucherTypeID + '\'' +
+                ", DeliveryDate='" + DeliveryDate + '\'' +
+                ", PreSaleTotalPrice='" + PreSaleTotalPrice + '\'' +
+                ", ExDong='" + ExDong + '\'' +
+                ", ExVoucherTypeID='" + ExVoucherTypeID + '\'' +
+                ", Description='" + Description + '\'' +
+                ", Address='" + Address + '\'' +
+                ", ProvinceID='" + ProvinceID + '\'' +
+                ", CityID='" + CityID + '\'' +
+                ", AreaID='" + AreaID + '\'' +
+                ", DistrictID='" + DistrictID + '\'' +
+                ", LandTypeID='" + LandTypeID + '\'' +
+                ", BuildingConditionID='" + BuildingConditionID + '\'' +
+                ", BuildingYear='" + BuildingYear + '\'' +
+                ", DebtTotalPrice='" + DebtTotalPrice + '\'' +
+                ", MortgageTotalPrice='" + MortgageTotalPrice + '\'' +
+                ", RentTotalPrice='" + RentTotalPrice + '\'' +
+                ", PrePayPrice='" + PrePayPrice + '\'' +
+                ", RentalPreferenceID='" + RentalPreferenceID + '\'' +
+                ", ResidentOwner='" + ResidentOwner + '\'' +
+                ", FoundationSpace='" + FoundationSpace + '\'' +
+                ", DirectionID='" + DirectionID + '\'' +
+                ", LandViewID='" + LandViewID + '\'' +
+                ", FloorCoveringID='" + FloorCoveringID + '\'' +
+                ", KitchenServiceID='" + KitchenServiceID + '\'' +
+                ", RoomCount='" + RoomCount + '\'' +
+                ", FloorCount='" + FloorCount + '\'' +
+                ", UnitInFloor='" + UnitInFloor + '\'' +
+                ", Floor='" + Floor + '\'' +
+                ", LandCaseID='" + LandCaseID + '\'' +
+                ", LoanTypeID='" + LoanTypeID + '\'' +
+                ", Water='" + Water + '\'' +
+                ", Gas='" + Gas + '\'' +
+                ", Electricity='" + Electricity + '\'' +
+                ", Phone='" + Phone + '\'' +
+                ", EquipmentStr=" + Arrays.toString(EquipmentStr) +
                 '}';
     }
 }
