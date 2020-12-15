@@ -1,6 +1,7 @@
 package ir.hamedanmelk.hamedanmelk.ui.newland;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -30,7 +31,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.google.android.gms.maps.MapView;
@@ -47,6 +50,7 @@ import java.util.Objects;
 
 import io.apptik.widget.multiselectspinner.MultiSelectSpinner;
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.models.ImageModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.AreaModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.BuildingConditionModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.CityModel;
@@ -63,7 +67,7 @@ import ir.hamedanmelk.hamedanmelk.models.micro.LoanTypeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.ProvinceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.RentalPreferenceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.UseTypeModel;
-import ir.hamedanmelk.hamedanmelk.tools.Constants;
+
 import ir.hamedanmelk.hamedanmelk.tools.FilePath;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.MultipartUtility;
@@ -73,7 +77,7 @@ public class NewLandFragment extends Fragment {
     String newLandLatitudeStr;
     String newLandLongitudeStr;
     String newLandTitleStr;
-    ImageView[] newLandImageFiles;
+    String[] newLandImageFiles;
     List<String> newLandUseTypeIDLstArr;
     String newLandLandStateIDStr;
     String newLandChkExchangedStr;
@@ -117,7 +121,9 @@ public class NewLandFragment extends Fragment {
     String newLandGasStr;
     String newLandElectricityStr;
     String newLandPhoneStr;
-
+    public static final int PICK_IMAGES = 2;
+    private static final String TAG = "NewLandFragment";
+    public String selectedImage="one";
 
     String   selectedFileStr;
     Uri      selectedFileUri;
@@ -166,6 +172,12 @@ public class NewLandFragment extends Fragment {
     Spinner phoneSpnr;
     EditText descriptionETxt;
     MapView mapView;
+    LinearLayout selectedImagesGrid;
+    ImageView imageOne;
+    ImageView imageTwo;
+    ImageView imageThree;
+    ImageView imageFour;
+    ImageView imageFive;
     Button   submitBtn;
 
 
@@ -250,8 +262,8 @@ public class NewLandFragment extends Fragment {
     List<String> equipmentIDs= new ArrayList<String>();
     ArrayAdapter<String> equipmentAdapter ;
 
+    List<ImageModel>imageModels=new ArrayList<ImageModel>();
 
-    private static final String TAG ="NewLandFragment";
     MYSQlDBHelper dbHelper;
     public NewLandFragment() {
         // Required empty public constructor
@@ -321,6 +333,18 @@ public class NewLandFragment extends Fragment {
         descriptionETxt=(EditText) view.findViewById(R.id.NewLandFragmentDescriptionTxt);
         mapView=(MapView) view.findViewById(R.id.NewLandFragmentMapView);
         submitBtn=(Button) view.findViewById(R.id.NewLandFragmentSubmitBtn);
+        selectedImagesGrid = (LinearLayout) view.findViewById(R.id.NewLandFragmentGalleryGrid);
+        imageOne = (ImageView)view.findViewById(R.id.NewLandOneImg);
+        imageTwo = (ImageView)view.findViewById(R.id.NewLandTwoImg);
+        imageThree = (ImageView)view.findViewById(R.id.NewLandThreeImg);
+        imageFour = (ImageView)view.findViewById(R.id.NewLandFourImg);
+        imageFive = (ImageView)view.findViewById(R.id.NewLandFiveImg);
+////////////////////Register Context Menu for images/////////////////////////////
+        registerForContextMenu(imageOne);
+        registerForContextMenu(imageTwo);
+        registerForContextMenu(imageThree);
+        registerForContextMenu(imageFour);
+        registerForContextMenu(imageFive);
 
 ////////////////////// Building Conditions Spinner////////////////////////////////
         buildingConditionModels =dbHelper.GetBuildingConditionsList();
@@ -663,21 +687,45 @@ public class NewLandFragment extends Fragment {
         });
 
 
-////////////////////////////PickUp Image///////////////////////////////////
-//        logoImg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                logoImg.showContextMenu();
-//            }
-//        });
-//
-//        logoImg.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View view) {
-//                return false;
-//            }
-//        });
-//
+        /////////////////////////////////// Five Image //////////////////////////////////////
+        imageOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageOne.showContextMenu();
+                selectedImage="one";
+            }
+        });
+        imageTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageTwo.showContextMenu();
+                selectedImage="two";
+            }
+        });
+        imageThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageThree.showContextMenu();
+                selectedImage="three";
+            }
+        });
+        imageFour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageFour.showContextMenu();
+                selectedImage="four";
+            }
+        });
+        imageFive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageFive.showContextMenu();
+                selectedImage="five";
+            }
+        });
+
+
+
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -686,33 +734,7 @@ public class NewLandFragment extends Fragment {
         });
         return view;
     }
-    ////////////////////////////////pickUp Image ////////////////////////////////////
-    private void startGallery() {
-        Intent cameraIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        cameraIntent.setType("image/*");
-        if (cameraIntent.resolveActivity(Objects.requireNonNull(getActivity()).getPackageManager()) != null) {
-            startActivityForResult(cameraIntent, 1000);
-        }
-    }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super method removed
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == 1000) {
-                selectedFileUri = data.getData();
-                selectedFileStr = FilePath.getPath(getContext(),selectedFileUri);
-                Bitmap bitmapImage = null;
-                try {
-                    bitmapImage = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getActivity()).getContentResolver(), selectedFileUri);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-//                logoImg.setImageBitmap(bitmapImage);
-            }
-        }
-
-    }
 
 //////////////////////////////////Context Menu///////////////////////////////////
 
@@ -721,6 +743,7 @@ public class NewLandFragment extends Fragment {
         MenuInflater inflater = Objects.requireNonNull(getActivity()).getMenuInflater();
         inflater.inflate(R.menu.image_long_press_menu, menu);
     }
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onContextItemSelected (MenuItem item) {
         switch (item.getItemId()) {
@@ -738,14 +761,152 @@ public class NewLandFragment extends Fragment {
             }
             break;
             case R.id.remove_image: {
-//                logoImg.setImageBitmap(null);
 
+                switch (selectedImage){
+                    case "one":
+                        imageOne.setImageBitmap(null);
+                        break;
+                    case "two":
+                        imageTwo.setImageBitmap(null);
+                        break;
+                    case "three":
+                        imageThree.setImageBitmap(null);
+                        break;
+                    case "four":
+                        imageFour.setImageBitmap(null);
+                        break;
+                    case "five":
+                        imageFive.setImageBitmap(null);
+                        break;
+                }
+//                ImageView imageView =  (ImageView)findViewById(R.id.news_image_view);
+//                imageView.setImageResource(0);
+//                Button button = (Button)findViewById(R.id.news_image_button);
+//                button.setVisibility(View.VISIBLE);
+//                selectedFilePath=null;
+//                selectedimage=null;
+//                preNewsUpdateDataModelClass.setNews_MainPic_File(null);
             }
             default:
                 return false;
         }
         return false;
     }
+
+
+    ////////////////////////////////pickUp Image ////////////////////////////////////
+    private void startGallery() {
+        Intent cameraIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        cameraIntent.setType("image/*");
+        if (cameraIntent.resolveActivity(Objects.requireNonNull(getActivity()).getPackageManager()) != null) {
+            startActivityForResult(cameraIntent, 1000);
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //super method removed
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == 1000) {
+                selectedFileUri = data.getData();
+                selectedFileStr = FilePath.getPath(getContext(),selectedFileUri);
+                Bitmap bitmapImage = null;
+                try {
+                    bitmapImage = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getActivity()).getContentResolver(), selectedFileUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                switch (selectedImage){
+                    case "one":{
+                        imageOne.setImageBitmap(bitmapImage);
+                        break;}
+                    case "two":{
+                        imageTwo.setImageBitmap(bitmapImage);
+                        break;}
+                    case "three":{
+                        imageThree.setImageBitmap(bitmapImage);selectedImage="three";
+                        break;}
+                    case "four":{
+                        imageFour.setImageBitmap(bitmapImage);selectedImage="four";
+                        break;}
+                    case "five":{
+                        imageFive.setImageBitmap(bitmapImage);
+                        break;}
+                }
+
+            }
+        }
+        //Uri returnUri;
+        //returnUri = data.getData();
+    }
+
+
+
+
+    //    }
+////////////////////////////////pickUp Image ////////////////////////////////////
+//    public void startGallery(){
+//        Intent intent = new Intent(getActivity(),AlbumSelectActivity.class);
+//        intent.setType("image/*");
+////        intent.putExtra(Constants.INTENT_EXTRA_LIMIT,5);
+////        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+//        startActivityForResult(intent, 2000);
+//    }
+//
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == Constants.REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+////            ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
+////            ImageModel imageModel;
+////            imageModels.clear();
+////            for (int i = 0, l = images.size(); i < l; i++) {
+////                Log.d(TAG, "onActivityResult: "+images.get(i).path );
+////                imageModel = new ImageModel(Uri.fromFile(new File(images.get(i).path)));
+////                imageModels.add(imageModel);
+////
+////            }
+//            Log.d(TAG, "onActivityResult adapter: "+imageModels.size());
+//        }
+//    }
+//
+//
+//
+//
+//
+//
+////////////////////////////////////Context Menu///////////////////////////////////
+//
+//    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, ContextMenu.ContextMenuInfo menuInfo) {
+//        super.onCreateContextMenu(menu, v, menuInfo);
+//        MenuInflater inflater = Objects.requireNonNull(getActivity()).getMenuInflater();
+//        inflater.inflate(R.menu.image_long_press_menu, menu);
+//    }
+//    @Override
+//    public boolean onContextItemSelected (MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.select_image: {
+//                if(ActivityCompat.checkSelfPermission(Objects.requireNonNull(getActivity()),
+//                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+//                {
+//                    requestPermissions(
+//                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+//                            2000);
+//                }
+//                else {
+//                }
+//            }
+//            break;
+//            case R.id.remove_image: {
+////                logoImg.setImageBitmap(null);
+//
+//            }
+//            default:
+//                return false;
+//        }
+//        return false;
+
+
 
     public void NewLandRegisterRequest ( Context context) {
 
@@ -787,9 +948,9 @@ public class NewLandFragment extends Fragment {
                     MultipartUtility multipart = new MultipartUtility(requestUrl, "UTF-8");
 
 
-                    multipart.addFormField(Constants.NEW_LAND_LATITIUDE ,  newLandLatitudeStr);
-                    multipart.addFormField(Constants.NEW_LAND_LONGITUDE ,  newLandLongitudeStr);
-                    multipart.addFormField(Constants.NEW_LAND_TITLE , newLandTitleStr);
+//                    multipart.addFormField(Constants.NEW_LAND_LATITIUDE ,  newLandLatitudeStr);
+//                    multipart.addFormField(Constants.NEW_LAND_LONGITUDE ,  newLandLongitudeStr);
+//                    multipart.addFormField(Constants.NEW_LAND_TITLE , newLandTitleStr);
 //                    multipart.addFormField(Constants.NEW_LAND_IMAGE_FILE , newLandTitleStr);
 //                    multipart.addFormField(Constants.NEW_LAND_USE_TYPE_ID , "12");
 //                    multipart.addFormField(Constants.NEW_LAND_EQUIPMENT , "15");

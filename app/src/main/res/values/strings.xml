@@ -139,7 +139,7 @@
     <string name="vocabulary_agency_manager">مدیر آزانس املاک</string>
     <string name="vocabulary_mobile">موبایل</string>
     <string name="vocabulary_chat">چت</string>
-
+    <string name="vocabulary_dong">دانگ</string>
     <string name="new_land_use_types">نوع کاربری</string>
     <string name="new_land_is_exchange">قابل معاوضه</string>
     <string name="new_land_pre_sale">تعداد دانگ</string>
@@ -223,6 +223,23 @@
         <item>ده تا بیشتر</item>
     </array>
 
+
+<!--    Gallery Picker-->
+    <string name="album_view">انتخاب آلبوم</string>
+    <string name="image_view">برای انتخاب عکس ضربه بزنید</string>
+
+    <string name="add">افزودن</string>
+    <string name="selected">انتخاب شده</string>
+    <string name="limit_exceeded">لطفا حداکثر %d عکس انتخاب کنید</string>
+
+    <string name="error_null_cursor">خطایی رخ داد</string>
+
+    <!--Request Permission-->
+    <string name="permission_info">برای انتخاب عکس دسترسی به گالری نیاز است</string>
+    <string name="permission_force">اپلیکیشن نیازمند دسترسی به گالری است. لطفا از قسمت تنضیمات مجوز دسترسی به گالری را تیک بزنید</string>
+    <string name="permission_ok">انتخاب</string>
+    <string name="permission_settings">تنضیمات</string>
+    <string name="permission_package">بسته</string>
 
 
 </resources>
