@@ -228,6 +228,7 @@ public class Constants {
     public static final String LAND_EQUIPMENTS_ID = "id";
     public static final String LAND_EQUIPMENTS_TITLE = "Title";
     public static final String LAND_EQUIPMENTS_LOGO = "Logo";
+    public static final String[] EQUIPMENTS_MODEL_FIELDS = {"id","Title","Logo"};
 
     ////////////////////////////////Links//////////////////////////////////////
     public static final String LINKS_ID = "id";

@@ -1294,6 +1294,32 @@ public void InsertDistrict(ContentValues cv){
         db.execSQL("delete from "+LAND_EQUIPMENTS_TABLE_NAME);
         db.close();
     }
+    public ArrayList<EquipmentModel> GetLandEquipmentsList(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<EquipmentModel> equipmentModels = new ArrayList<EquipmentModel>();
+        EquipmentModel equipmentModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM "+LAND_EQUIPMENTS_TABLE_NAME, null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do{
+                equipmentModel = new EquipmentModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2));
+                equipmentModels.add(equipmentModel);
+                counter++;
+            }while (c.moveToNext());
+            c.close();
+        }catch (Exception e){
+            Log.d("GetLandEquipments Says:", e.toString());}
+        db.close();
+        return equipmentModels;
+    }
+
     public ArrayList<EquipmentModel> GetLandEquipmentsListByLandID(String id){
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<EquipmentModel> equipmentModels = new ArrayList<EquipmentModel>();

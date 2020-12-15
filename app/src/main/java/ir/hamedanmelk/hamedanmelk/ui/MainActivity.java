@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         GetLandViewsRequest(getApplicationContext());
         GetLandDirectionsRequest(getApplicationContext());
         GetUseTypeRequest(getApplicationContext());
+        GetEquipmentRequest(getApplicationContext());
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
@@ -815,6 +816,44 @@ public class MainActivity extends AppCompatActivity {
         }
         GetUseTypeRequestAsync getUseTypeRequestAsync = new GetUseTypeRequestAsync();
         getUseTypeRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
+    }
+
+    public void GetEquipmentRequest(Context context) {
+
+        class GetEquipmentRequestAsync extends AsyncTask<Void, Void, String> {
+            @Override
+            protected String doInBackground(Void... voids) {
+                HTTPRequestHandlre requestHandler = new HTTPRequestHandlre();
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                return requestHandler.sendGetRequest(Urls.getBaseURL() + Urls.getGetLandEquipments(), params);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try {
+                    JSONObject rawResult = new JSONObject(s);
+                    if (rawResult.getInt("State") > 0) {
+                        JSONArray dataResult = rawResult.getJSONArray("Data");
+                        String[] modelFields = Constants.EQUIPMENTS_MODEL_FIELDS;
+                        dbHelper.DeleteLandEquipments();
+                        for (int i = 0; i < dataResult.length(); i++) {
+                            JSONObject rowItem = dataResult.getJSONObject(i);
+                            ContentValues itemCV = new ContentValues();
+                            for (String columnItem : modelFields) {
+                                itemCV.put(columnItem, rowItem.getString(columnItem));
+                            }
+                            dbHelper.InsertLandEquipments(itemCV);
+                        }
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "onPostExecute Equipments: " + e.toString());
+                }
+            }
+        }
+        GetEquipmentRequestAsync getEquipmentRequestAsync = new GetEquipmentRequestAsync();
+        getEquipmentRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
 
