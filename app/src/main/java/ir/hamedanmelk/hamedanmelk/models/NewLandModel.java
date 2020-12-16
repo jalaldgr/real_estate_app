@@ -1,6 +1,7 @@
 package ir.hamedanmelk.hamedanmelk.models;
 
-import java.util.Arrays;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class NewLandModel {
@@ -8,8 +9,8 @@ public class NewLandModel {
     String Latitude;
     String Longitude;
     String Title;
-    String[] ImageFiles;
-    String[] UseTypeIDLstArr;
+    List<String> ImageFiles;
+    List<String> UseTypeID;
     String LandStateID;
     String ChkExchanged;
     String UID;
@@ -50,12 +51,10 @@ public class NewLandModel {
     String LoanTypeID;
     String Water;
     String Gas;
-    String Electricity;
+    String Electricy;
     String Phone;
-    String EquipmentStr[];
-
-    public NewLandModel() {
-    }
+    @SerializedName("Equipment")
+    List<String> Equipment;
 
     public String getLatitude() {
         return Latitude;
@@ -81,20 +80,20 @@ public class NewLandModel {
         Title = title;
     }
 
-    public String[] getImageFiles() {
+    public List<String> getImageFiles() {
         return ImageFiles;
     }
 
-    public void setImageFiles(String[] imageFiles) {
+    public void setImageFiles(List<String> imageFiles) {
         ImageFiles = imageFiles;
     }
 
-    public String[] getUseTypeIDLstArr() {
-        return UseTypeIDLstArr;
+    public List<String> getUseTypeID() {
+        return UseTypeID;
     }
 
-    public void setUseTypeIDLstArr(String[] useTypeIDLstArr) {
-        UseTypeIDLstArr = useTypeIDLstArr;
+    public void setUseTypeID(List<String> useTypeID) {
+        UseTypeID = useTypeID;
     }
 
     public String getLandStateID() {
@@ -417,12 +416,12 @@ public class NewLandModel {
         Gas = gas;
     }
 
-    public String getElectricity() {
-        return Electricity;
+    public String getElectricy() {
+        return Electricy;
     }
 
-    public void setElectricity(String electricity) {
-        Electricity = electricity;
+    public void setElectricy(String electricy) {
+        Electricy = electricy;
     }
 
     public String getPhone() {
@@ -433,12 +432,12 @@ public class NewLandModel {
         Phone = phone;
     }
 
-    public String[] getEquipmentStr() {
-        return EquipmentStr;
+    public List<String> getEquipment() {
+        return Equipment;
     }
 
-    public void setEquipmentStr(String[] equipmentStr) {
-        EquipmentStr = equipmentStr;
+    public void setEquipment(List<String> equipment) {
+        Equipment = equipment;
     }
 
     @Override
@@ -447,8 +446,8 @@ public class NewLandModel {
                 "Latitude='" + Latitude + '\'' +
                 ", Longitude='" + Longitude + '\'' +
                 ", Title='" + Title + '\'' +
-                ", ImageFiles=" + Arrays.toString(ImageFiles) +
-                ", UseTypeIDLstArr=" + Arrays.toString(UseTypeIDLstArr) +
+                ", ImageFiles=" + ImageFiles +
+                ", UseTypeID=" + UseTypeID +
                 ", LandStateID='" + LandStateID + '\'' +
                 ", ChkExchanged='" + ChkExchanged + '\'' +
                 ", UID='" + UID + '\'' +
@@ -489,9 +488,9 @@ public class NewLandModel {
                 ", LoanTypeID='" + LoanTypeID + '\'' +
                 ", Water='" + Water + '\'' +
                 ", Gas='" + Gas + '\'' +
-                ", Electricity='" + Electricity + '\'' +
+                ", Electricity='" + Electricy + '\'' +
                 ", Phone='" + Phone + '\'' +
-                ", EquipmentStr=" + Arrays.toString(EquipmentStr) +
+                ", Equipment=" + Equipment +
                 '}';
     }
 }

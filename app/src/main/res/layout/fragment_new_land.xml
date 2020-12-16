@@ -17,13 +17,15 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentTitleLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="@string/vocabulary_title">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandFragmentTitleTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="hint" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -32,12 +34,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <io.apptik.widget.multiselectspinner.MultiSelectSpinner
+            <Spinner
                 android:id="@+id/NewLandFragmentLandUseTypeMltSpnr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTintMode="add" />
-
+                android:layout_margin="10dp"
+                 />
 
             <Spinner
                 android:id="@+id/NewLandFragmentBuildingConditionSpnr"
@@ -111,7 +113,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentBuildingYearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="سال ساخت">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandFragmentBuildingYearTxt"
@@ -123,7 +126,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentSpaceFoundationLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="متراژ">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandFragmentFoundationSpaceTxt"
@@ -135,7 +139,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentDeliveryDateLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="تاریخ تحویل">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandFragmentDeliveryDateTxt"
@@ -147,7 +152,8 @@
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/NewLandFragmentResidentOwnerChkBx"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:hint="مالک ساکن است؟">
 
             </com.google.android.material.checkbox.MaterialCheckBox>
 
@@ -155,16 +161,18 @@
                 android:id="@+id/NewLandFragmentRentalPreferenceSpnr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
             <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/NewLandFragmentExchangeChkBx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/NewLandFragmentExchangeChkBx"
-            />
+                android:hint="معاوضه؟" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentTotalPriceLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="hint">
+                android:hint="قیمت کل">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandFragmentTotalPriceTxt"
@@ -177,7 +185,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentPreSaleLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="قیمت پیش فروش">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandFragmentPreSalePriceTxt"
@@ -189,7 +198,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentPrePayLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="پیش پرداخت">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandFragmentPrePayPriceTxt"
@@ -201,7 +211,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentDebtTotalPriceLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="وام">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandFragmentDebtTotalPriceTxt"
@@ -218,7 +229,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentMortgageTotalPriceLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="ودیعه">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandFragmentMortgGageTotalPriceTxt"
@@ -230,7 +242,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentRentTotalPriceLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="اجاره">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandFragmentRentTotalPriceTxt"
@@ -290,7 +303,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentAddressLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="آدرس">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandFragmentAddressTxt"
@@ -307,11 +321,14 @@
                 android:layout_height="wrap_content" />
 
 
-            <io.apptik.widget.multiselectspinner.MultiSelectSpinner
+
+            <Spinner
                 android:id="@+id/NewLandFragmentEquipmentsSpnr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTintMode="add" />
+                android:layout_margin="10dp"
+                 />
+
             <Spinner
                 android:id="@+id/NewLandFragmentFloorCoveringSpnr"
                 android:layout_width="match_parent"
@@ -355,10 +372,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/new_land_water_electricity" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentDescriptionLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="توضیحات">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandFragmentDescriptionTxt"

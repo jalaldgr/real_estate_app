@@ -10,16 +10,15 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -52,22 +51,19 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.material.checkbox.MaterialCheckBox;
+import com.google.gson.Gson;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import io.apptik.widget.multiselectspinner.MultiSelectSpinner;
 import ir.hamedanmelk.hamedanmelk.R;
-import ir.hamedanmelk.hamedanmelk.models.ImageModel;
 import ir.hamedanmelk.hamedanmelk.models.NewLandModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.AreaModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.BuildingConditionModel;
@@ -86,10 +82,10 @@ import ir.hamedanmelk.hamedanmelk.models.micro.ProvinceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.RentalPreferenceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.UseTypeModel;
 
+import ir.hamedanmelk.hamedanmelk.models.micro.VoucherModel;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.FilePath;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
-import ir.hamedanmelk.hamedanmelk.tools.MultipartUtility;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
@@ -99,15 +95,17 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
     public static final int PICK_IMAGES = 2;
     private static final String TAG = "NewLandFragment";
     public String selectedImage="one";
-    public String[] selectedImages= new String[5];
+    public List<String> selectedImages = new ArrayList<>();
+
     NewLandModel requestNewModel= new NewLandModel();
+
     String   selectedFileStr;
     Uri      selectedFileUri;
     EditText titleEtx;
     Spinner  buildingConditionSpnr;
     Spinner landCaseSpnr;
     Spinner landTypeSpnr;
-    MultiSelectSpinner landUseTypeSpnr;
+    Spinner landUseTypeSpnr;
     Spinner voucherTypeSpnr;
     Spinner preVoucherTypeSpnr;
     Spinner exVoucherTypeSpnr;
@@ -137,7 +135,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
     Spinner districtSpnr;
     EditText addressETxt;
     Spinner landViewSpnr;
-    MultiSelectSpinner equipmentSpnr;
+    Spinner equipmentSpnr;
     Spinner floorCoveringSpnr;
     Spinner kitchenServicesSpnr;
     Spinner directionSpnr;
@@ -242,7 +240,11 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
     List<String> equipmentIDs= new ArrayList<String>();
     ArrayAdapter<String> equipmentAdapter ;
 
-    List<ImageModel>imageModels=new ArrayList<ImageModel>();
+    ArrayList<VoucherModel> voucherModels;
+    List<String> voucherTitles= new ArrayList<String>();
+    List<String> voucherIDs= new ArrayList<String>();
+    ArrayAdapter<String> voucherAdapter ;
+
 
     MYSQlDBHelper dbHelper;
 
@@ -258,7 +260,11 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         dbHelper = new MYSQlDBHelper(getContext());
         SharedPreferences user_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
         requestNewModel.setUID( user_pref.getString("id","0"));
+        requestNewModel.setLatitude(Double.toString(mapLatLng.latitude));
+        requestNewModel.setLongitude(Double.toString(mapLatLng.longitude));
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -270,7 +276,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         buildingConditionSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentBuildingConditionSpnr);
         landCaseSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLandCaseSpnr);
         landTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLandTypeSpnr);
-        landUseTypeSpnr = (MultiSelectSpinner) view.findViewById(R.id.NewLandFragmentLandUseTypeMltSpnr);
+        landUseTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLandUseTypeMltSpnr);
         voucherTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentVoucherTypeSpnr);
         preVoucherTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentPreVoucherTypeSpnr);
         exVoucherTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentExVoucherTypeSpnr);
@@ -300,7 +306,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         districtSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentDistrictSpnr);
         addressETxt = (EditText) view.findViewById(R.id.NewLandFragmentAddressTxt);
         landViewSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLandViewSpnr);
-        equipmentSpnr = (MultiSelectSpinner) view.findViewById(R.id.NewLandFragmentEquipmentsSpnr);
+        equipmentSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentEquipmentsSpnr);
         floorCoveringSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentFloorCoveringSpnr);
         kitchenServicesSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentKitchenServicesSpnr);
         directionSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentDirectionSpnr);
@@ -632,6 +638,49 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         });
 
 
+        //////////////////Voucher + Ex,Pre Voucher Spinner/////////////////////////////////////////////////
+        voucherModels = dbHelper.GetVouchersList();
+        for (VoucherModel Item : voucherModels) {
+            voucherTitles.add(Item.getTitle());
+            voucherIDs.add(Item.getId());
+        }
+        voucherAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, voucherTitles);
+        voucherAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        voucherTypeSpnr.setAdapter(voucherAdapter);
+        voucherTypeSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                requestNewModel.setVoucherTypeID( voucherIDs.get(i));
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        exVoucherTypeSpnr.setAdapter(voucherAdapter);
+        exVoucherTypeSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                requestNewModel.setExVoucherTypeID( voucherIDs.get(i));
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        preVoucherTypeSpnr.setAdapter(voucherAdapter);
+        preVoucherTypeSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                requestNewModel.setPreVoucherTypeID( voucherIDs.get(i));
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+
         ////////////////////// UseType MultiSelect Spinner////////////////////////////////
         useTypeModels = dbHelper.GetUseTypeList();
         for (UseTypeModel Item : useTypeModels) {
@@ -639,18 +688,10 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             useTypeIDs.add(Item.getId());
         }
         useTypeAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_list_item_multiple_choice, useTypeTitles);
-        landUseTypeSpnr
-                .setListAdapter(useTypeAdapter)
-                .setMinSelectedItems(1);
-        landUseTypeSpnr.getListAdapter().getCount();
         landUseTypeSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.d(TAG, "onItemSelected: " + adapterView.getAdapter().getCount());
-
-//                newLandUseTypeIDLstArr.add(useTypeIDs.get(i));
-//                Log.d(TAG, "onItemSelected: "+newLandUseTypeIDLstArr.size()+ "   ID");
-                // TODO: 12/15/2020 Get Selected Items
             }
 
             @Override
@@ -658,6 +699,25 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
 
             }
         });
+
+        equipmentModels = dbHelper.GetLandEquipmentsList();
+        for (EquipmentModel Item : equipmentModels) {
+            useTypeTitles.add(Item.getTitle());
+            useTypeIDs.add(Item.getId());
+        }
+        equipmentAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_list_item_multiple_choice, useTypeTitles);
+        equipmentSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d(TAG, "onItemSelected: " + adapterView.getAdapter().getCount());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
         residentOwnerChkBx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -686,10 +746,6 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         }
         equipmentAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()),
                 android.R.layout.simple_list_item_multiple_choice, equipmentTitles);
-        equipmentSpnr
-                .setListAdapter(equipmentAdapter)
-                .setMinSelectedItems(1);
-        equipmentAdapter.getCount();
         equipmentSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -712,7 +768,6 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             public void onClick(View view) {
                 imageOne.showContextMenu();
                 selectedImage = "one";
-                selectedImages[0]=selectedFileStr;
             }
         });
         imageTwo.setOnClickListener(new View.OnClickListener() {
@@ -720,6 +775,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             public void onClick(View view) {
                 imageTwo.showContextMenu();
                 selectedImage = "two";
+
             }
         });
         imageThree.setOnClickListener(new View.OnClickListener() {
@@ -727,7 +783,6 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             public void onClick(View view) {
                 imageThree.showContextMenu();
                 selectedImage = "three";
-                selectedImages[2]=selectedFileStr;
             }
         });
         imageFour.setOnClickListener(new View.OnClickListener() {
@@ -735,7 +790,6 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             public void onClick(View view) {
                 imageFour.showContextMenu();
                 selectedImage = "four";
-                selectedImages[3]=selectedFileStr;
             }
         });
         imageFive.setOnClickListener(new View.OnClickListener() {
@@ -743,46 +797,58 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             public void onClick(View view) {
                 imageFive.showContextMenu();
                 selectedImage = "five";
-                selectedImages[4]=selectedFileStr;
             }
         });
+
+        /////////////////////////////textinputs/////////////////////////////////////
+
 
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 requestNewModel.setTitle(titleEtx.getText().toString());
-                requestNewModel.setDong(dongETxt.getText().toString());
-                requestNewModel.setExDong(exDongETxt.getText().toString());
-                requestNewModel.setPreDong(preDongETxt.getText().toString());
-                requestNewModel.setSaleTotalPrice(totalPriceETxt.getText().toString());
-                requestNewModel.setPreSaleTotalPrice(preSalePriceETxt.getText().toString());
-                requestNewModel.setDescription(descriptionETxt.getText().toString());
-                requestNewModel.setAddress(addressETxt.getText().toString());
-                requestNewModel.setBuildingYear(buildingYearETxt.getText().toString());
-                requestNewModel.setDebtTotalPrice(debtTotalPriceETxt.getText().toString());
+//                requestNewModel.setDong(dongETxt.getText().toString());
+//                requestNewModel.setExDong(exDongETxt.getText().toString());
+//                requestNewModel.setPreDong(preDongETxt.getText().toString());
+//                requestNewModel.setSaleTotalPrice(totalPriceETxt.getText().toString());
+//                requestNewModel.setPreSaleTotalPrice(preSalePriceETxt.getText().toString());
+//                requestNewModel.setDescription(descriptionETxt.getText().toString());
+//                requestNewModel.setAddress(addressETxt.getText().toString());
+//                requestNewModel.setBuildingYear(buildingYearETxt.getText().toString());
+//                requestNewModel.setDebtTotalPrice(debtTotalPriceETxt.getText().toString());
                 requestNewModel.setMortgageTotalPrice(mortgageTotalPriceETxt.getText().toString());
                 requestNewModel.setRentTotalPrice(totalRentPriceETxt.getText().toString());
-                requestNewModel.setPrePayPrice(prePayPriceETxt.getText().toString());
-                requestNewModel.setFoundationSpace(spaceFoundationETxt.getText().toString());
-                requestNewModel.setRoomCount(Long.toString(roomCountSpnr.getSelectedItemId()));
-                requestNewModel.setFloorCount(Long.toString(floorCountSpnr.getSelectedItemId()));
-                requestNewModel.setUnitInFloor(Long.toString(unitInFloorSpnr.getSelectedItemId()));
-                requestNewModel.setFloor(Long.toString(floorCountSpnr.getSelectedItemId()));
+//                requestNewModel.setPrePayPrice(prePayPriceETxt.getText().toString());
+//                requestNewModel.setFoundationSpace(spaceFoundationETxt.getText().toString());
+//                requestNewModel.setRoomCount(Long.toString(roomCountSpnr.getSelectedItemId()));
+//                requestNewModel.setFloorCount(Long.toString(floorCountSpnr.getSelectedItemId()));
+//                requestNewModel.setUnitInFloor(Long.toString(unitInFloorSpnr.getSelectedItemId()));
+//                requestNewModel.setFloor(Long.toString(floorCountSpnr.getSelectedItemId()));
                 requestNewModel.setWater(Long.toString(waterSpnr.getSelectedItemId()));
                 requestNewModel.setGas(Long.toString(gasSpnr.getSelectedItemId()));
-                requestNewModel.setElectricity(Long.toString(electricitySpnr.getSelectedItemId()));
+                requestNewModel.setElectricy(Long.toString(electricitySpnr.getSelectedItemId()));
                 requestNewModel.setPhone(Long.toString(phoneSpnr.getSelectedItemId()));
-                String[] temp=new String[5];
-                int i =0;
-                for (String item: selectedImages){
-                    if(item!=null){
-                        temp[i] = item;
-                        i++;
-                    }
+//                if(residentOwnerChkBx.isChecked())requestNewModel.setResidentOwner(Constants.ONE);
+//                else requestNewModel.setResidentOwner(Constants.ZERO);
+//                if(exchangeChkBx.isChecked())requestNewModel.setChkExchanged(Constants.ONE);
+//                else requestNewModel.setChkExchanged(Constants.ZERO);
+
+                List<String> eqStr=new ArrayList<>();
+                eqStr.add("1");
+
+                requestNewModel.setUseTypeID(eqStr);
+                requestNewModel.setEquipment(eqStr);
+
+
+                requestNewModel.setImageFiles(selectedImages);
+                Log.d(TAG, "onClick: "+selectedImages.size());
+//                requestNewModel.setImageFiles(eqStr);
+                try {
+                    HomeFragmentPOSTRequest(getContext());
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                requestNewModel.setImageFiles(temp);
-                Log.d(TAG, "onClick reQuest: "+ requestNewModel.toString());
             }
         });
         return view;
@@ -818,32 +884,21 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
                 switch (selectedImage){
                     case "one":{
                         imageOne.setImageBitmap(null);
-                        selectedImages[0]=null;
                         break;}
                     case "two":{
                         imageTwo.setImageBitmap(null);
-                        selectedImages[1]=null;
                         break;}
                     case "three":{
                         imageThree.setImageBitmap(null);
-                        selectedImages[2]=null;
                         break;}
                     case "four":{
                         imageFour.setImageBitmap(null);
-                        selectedImages[3]=null;
                         break;}
                     case "five":{
                         imageFive.setImageBitmap(null);
-                        selectedImages[4]=null;
                         break;}
                 }
-//                ImageView imageView =  (ImageView)findViewById(R.id.news_image_view);
-//                imageView.setImageResource(0);
-//                Button button = (Button)findViewById(R.id.news_image_button);
-//                button.setVisibility(View.VISIBLE);
-//                selectedFilePath=null;
-//                selectedimage=null;
-//                preNewsUpdateDataModelClass.setNews_MainPic_File(null);
+
             }
             default:
                 return false;
@@ -878,97 +933,29 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
                 switch (selectedImage){
                     case "one":{
                         imageOne.setImageBitmap(bitmapImage);
-                        selectedImages[0]=selectedFileStr;
+                        selectedImage="one";
+                        selectedImages.add(selectedFileStr);
                         break;}
                     case "two":{
                         imageTwo.setImageBitmap(bitmapImage);
-                        selectedImages[1]=selectedFileStr;
+                        selectedImage="two";
                         break;}
                     case "three":{
-                        imageThree.setImageBitmap(bitmapImage);selectedImage="three";
-                        selectedImages[2]=selectedFileStr;
+                        imageThree.setImageBitmap(bitmapImage);
+                        selectedImage="three";
                         break;}
                     case "four":{
-                        imageFour.setImageBitmap(bitmapImage);selectedImage="four";
-                        selectedImages[3]=selectedFileStr;
+                        imageFour.setImageBitmap(bitmapImage);
+                        selectedImage="four";
                         break;}
                     case "five":{
                         imageFive.setImageBitmap(bitmapImage);
-                        selectedImages[4]=selectedFileStr;
+                        selectedImage="five";
                         break;}
                 }
-
             }
         }
-        //Uri returnUri;
-        //returnUri = data.getData();
     }
-
-
-
-    //    }
-////////////////////////////////pickUp Image ////////////////////////////////////
-//    public void startGallery(){
-//        Intent intent = new Intent(getActivity(),AlbumSelectActivity.class);
-//        intent.setType("image/*");
-////        intent.putExtra(Constants.INTENT_EXTRA_LIMIT,5);
-////        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-//        startActivityForResult(intent, 2000);
-//    }
-//
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == Constants.REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
-////            ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
-////            ImageModel imageModel;
-////            imageModels.clear();
-////            for (int i = 0, l = images.size(); i < l; i++) {
-////                Log.d(TAG, "onActivityResult: "+images.get(i).path );
-////                imageModel = new ImageModel(Uri.fromFile(new File(images.get(i).path)));
-////                imageModels.add(imageModel);
-////
-////            }
-//            Log.d(TAG, "onActivityResult adapter: "+imageModels.size());
-//        }
-//    }
-//
-//
-//
-//
-//
-//
-////////////////////////////////////Context Menu///////////////////////////////////
-//
-//    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, ContextMenu.ContextMenuInfo menuInfo) {
-//        super.onCreateContextMenu(menu, v, menuInfo);
-//        MenuInflater inflater = Objects.requireNonNull(getActivity()).getMenuInflater();
-//        inflater.inflate(R.menu.image_long_press_menu, menu);
-//    }
-//    @Override
-//    public boolean onContextItemSelected (MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.select_image: {
-//                if(ActivityCompat.checkSelfPermission(Objects.requireNonNull(getActivity()),
-//                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-//                {
-//                    requestPermissions(
-//                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-//                            2000);
-//                }
-//                else {
-//                }
-//            }
-//            break;
-//            case R.id.remove_image: {
-////                logoImg.setImageBitmap(null);
-//
-//            }
-//            default:
-//                return false;
-//        }
-//        return false;
-
-
 //////////////////////////Get Map//////////////////////////////////
 
     @Override
@@ -1007,130 +994,52 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
 
     }
 
+    private void HomeFragmentPOSTRequest(Context Cntx) throws JSONException {
 
-
-    public void NewLandRegisterRequest ( Context context) {
-
-        class NewLandRegisterRequestAsync extends AsyncTask<Void, Void, List<String>> {
-            private final ProgressDialog dialog = new ProgressDialog(getContext());
-//            final File imageFile = new File(selectedFileStr);
-            String requestUrl = Urls.getBaseURL() + Urls.getRegisterLand();
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-
-
-
-                this.dialog.setMessage(getResources().getString(R.string.loading_message));
-                this.dialog.setIndeterminate(true);
-                this.dialog.setCanceledOnTouchOutside(false);
-                this.dialog.show();
-            }
-
-            @Override
-            protected void onPostExecute(List<String> s) {
-
-                super.onPostExecute(s);
-                if (this.dialog.isShowing()) this.dialog.dismiss();
-                final NavController controller = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
-
-                try {
-                    JSONObject requestJsonObject = new JSONObject(s.get(0));
-                    if (requestJsonObject.getInt("State") > 0) {
-                    }
-                } catch (JSONException jsonException) {
-                    jsonException.printStackTrace();
-                }
-            }
-
-            @Override
-            protected List<String> doInBackground(Void... voids) {
-                try {
-                    MultipartUtility multipart = new MultipartUtility(requestUrl, "UTF-8");
-                    List<String> responseList = multipart.finish();
-                    Log.d(TAG, "doInBackground: response size"+responseList.size());
-                    for (String item : responseList) {
-                        Log.d(TAG, "Upload Files Response:::" + item);
-                    }
-                    return responseList;
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return Arrays.asList(e.toString());
-                }
-            }
-
+        Map<String, String> postParam= new HashMap<String, String>();
+        Gson gson = new Gson();
+        JSONObject obj=null;
+        try {
+            String json = new Gson().toJson(requestNewModel);
+            Log.d(TAG, "HomeFragmentPOSTRequest Gson>>>: "+json);
+             obj = new JSONObject(json);
+        }catch (Exception e){
+            Log.d(TAG, "HomeFragmentPOSTRequest: "+e.toString());
         }
-        NewLandRegisterRequestAsync newLandRegisterRequestAsync = new NewLandRegisterRequestAsync();
-        newLandRegisterRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
+
+        final ProgressDialog progressDialog=new ProgressDialog(Cntx);
+        progressDialog.setMessage(getResources().getString(R.string.loading_message));
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+        myRequestQueue = Volley.newRequestQueue(Cntx);
+        myJsonObjectRequest = new JsonObjectRequest(Request.Method.POST
+                , Urls.getBaseURL()+Urls.getRegisterLand(), obj,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
+                        Log.d(TAG, "onResponse: "+response.toString());
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(),
+                                "Response ERRRRRor :" + error.toString(), Toast.LENGTH_LONG).show();
+                        if (progressDialog.isShowing())
+                            progressDialog.dismiss();
+                    }
+
+                }){
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
+        };
+
+        myRequestQueue.add(myJsonObjectRequest);
     }
-
-
-
-
-
-
-
-
-
-//    private void HomeFragmentPOSTRequest(Context Cntx) {
-//
-//        Map<String, String> postParam= new HashMap<String, String>();
-//
-//        final ProgressDialog progressDialog=new ProgressDialog(Cntx);
-//        progressDialog.setMessage(getResources().getString(R.string.loading_message));
-//        progressDialog.setCanceledOnTouchOutside(false);
-//        progressDialog.show();
-//        myRequestQueue = Volley.newRequestQueue(Cntx);
-//        myJsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Urls.getBaseURL()+Urls.getRegisterLand(), (JSONObject) requestNewModel,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//
-//                    }
-//                },
-//                new Response.ErrorListener(){
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(getContext(),
-//                                "Response ERRRRRor :" + error.toString(), Toast.LENGTH_LONG).show();
-//                        if (progressDialog.isShowing())
-//                            progressDialog.dismiss();
-//                    }
-//
-//                }){
-//
-//            /**
-//             * Passing some request headers
-//             * */
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                HashMap<String, String> headers = new HashMap<String, String>();
-//                headers.put("Content-Type", "application/json; charset=utf-8");
-//                return headers;
-//            }
-//
-//
-//
-//        };
-////        Cache cache = AppController.getInstance().getRequestQueue().getCache();
-////        Entry entry = cache.get(url);
-////        if(entry != null){
-////            try {
-////                String data = new String(entry.data, "UTF-8");
-////                // handle data, like converting it to xml, json, bitmap etc.,
-////            } catch (UnsupportedEncodingException e) {
-////                e.printStackTrace();
-////            }
-////        }
-////    }else{
-////        // Cached response doesn't exists. Make network call here
-////    }
-//
-////        NetworkImageVi
-//        ew NImg = new NetworkImageView(Cntx);
-////        NImg.setImageUrl(Const.URL_IMAGE, imageLoader);
-//
-//        myRequestQueue.add(myJsonObjectRequest);
-//    }
 }
