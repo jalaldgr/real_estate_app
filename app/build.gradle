@@ -39,7 +39,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.github.samanzamani.persiandate:PersianDate:0.8'
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
-//    implementation 'io.apptik.widget:multiselectspinner:1.0.12'
+    implementation 'io.apptik.widget:multiselectspinner:1.0.12'
     implementation 'com.github.darsh2:MultipleImageSelect:v0.0.4'
     implementation 'com.android.volley:volley:1.1.0'
     implementation 'com.google.code.gson:gson:2.8.5'

@@ -30,11 +30,15 @@
 
 
             <Spinner
+                android:id="@+id/NewLandFragmentAdTypeSpnr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Spinner
                 android:id="@+id/NewLandFragmentLandCaseSpnr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <Spinner
+            <io.apptik.widget.multiselectspinner.MultiSelectSpinner
                 android:id="@+id/NewLandFragmentLandUseTypeMltSpnr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -162,12 +166,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/NewLandFragmentExchangeChkBx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="معاوضه؟" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NewLandFragmentTotalPriceLayout"
                 android:layout_width="match_parent"
@@ -321,8 +325,7 @@
                 android:layout_height="wrap_content" />
 
 
-
-            <Spinner
+            <io.apptik.widget.multiselectspinner.MultiSelectSpinner
                 android:id="@+id/NewLandFragmentEquipmentsSpnr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -344,10 +347,6 @@
                 android:layout_height="wrap_content" />
 
 
-            <Spinner
-                android:id="@+id/NewLandFragmentAdTypeSpnr"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <Spinner
                 android:id="@+id/NewLandFragmentWaterSpnr"

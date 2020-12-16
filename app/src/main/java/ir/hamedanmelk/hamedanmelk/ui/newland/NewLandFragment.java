@@ -15,9 +15,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
-import android.text.TextUtils;
+import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -63,6 +64,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import io.apptik.widget.multiselectspinner.BaseMultiSelectSpinner;
+import io.apptik.widget.multiselectspinner.MultiSelectSpinner;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.NewLandModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.AreaModel;
@@ -96,16 +99,19 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
     private static final String TAG = "NewLandFragment";
     public String selectedImage="one";
     public List<String> selectedImages = new ArrayList<>();
+    public List<String> selectedUseTypes = new ArrayList<>();
+    public List<String> selectedEquipments = new ArrayList<>();
 
     NewLandModel requestNewModel= new NewLandModel();
 
     String   selectedFileStr;
     Uri      selectedFileUri;
+    String   UID;
     EditText titleEtx;
     Spinner  buildingConditionSpnr;
     Spinner landCaseSpnr;
     Spinner landTypeSpnr;
-    Spinner landUseTypeSpnr;
+    MultiSelectSpinner landUseTypeSpnr;
     Spinner voucherTypeSpnr;
     Spinner preVoucherTypeSpnr;
     Spinner exVoucherTypeSpnr;
@@ -135,7 +141,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
     Spinner districtSpnr;
     EditText addressETxt;
     Spinner landViewSpnr;
-    Spinner equipmentSpnr;
+    MultiSelectSpinner  equipmentSpnr;
     Spinner floorCoveringSpnr;
     Spinner kitchenServicesSpnr;
     Spinner directionSpnr;
@@ -259,7 +265,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         }
         dbHelper = new MYSQlDBHelper(getContext());
         SharedPreferences user_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
-        requestNewModel.setUID( user_pref.getString("id","0"));
+        UID =  user_pref.getString("id","0");
         requestNewModel.setLatitude(Double.toString(mapLatLng.latitude));
         requestNewModel.setLongitude(Double.toString(mapLatLng.longitude));
 
@@ -276,7 +282,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         buildingConditionSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentBuildingConditionSpnr);
         landCaseSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLandCaseSpnr);
         landTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLandTypeSpnr);
-        landUseTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLandUseTypeMltSpnr);
+        landUseTypeSpnr = (MultiSelectSpinner) view.findViewById(R.id.NewLandFragmentLandUseTypeMltSpnr);
         voucherTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentVoucherTypeSpnr);
         preVoucherTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentPreVoucherTypeSpnr);
         exVoucherTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentExVoucherTypeSpnr);
@@ -306,7 +312,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         districtSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentDistrictSpnr);
         addressETxt = (EditText) view.findViewById(R.id.NewLandFragmentAddressTxt);
         landViewSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLandViewSpnr);
-        equipmentSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentEquipmentsSpnr);
+        equipmentSpnr = (MultiSelectSpinner) view.findViewById(R.id.NewLandFragmentEquipmentsSpnr);
         floorCoveringSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentFloorCoveringSpnr);
         kitchenServicesSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentKitchenServicesSpnr);
         directionSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentDirectionSpnr);
@@ -631,6 +637,80 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 requestNewModel.setLandStateID( landStateIDs.get(i));
+                switch (i){
+                    case 0:
+                        loanTypeSpnr.setVisibility(View.VISIBLE);
+                        totalPriceETxt.setVisibility(View.VISIBLE);
+                        debtTotalPriceETxt.setVisibility(View.VISIBLE);
+                        preDongETxt.setVisibility(View.GONE);
+                        exDongETxt.setVisibility(View.GONE);
+                        preSalePriceETxt.setVisibility(View.GONE);
+                        preVoucherTypeSpnr.setVisibility(View.GONE);
+                        totalRentPriceETxt.setVisibility(View.GONE);
+                        mortgageTotalPriceETxt.setVisibility(View.GONE);
+                        rentalPreferenceSpnr.setVisibility(View.GONE);
+                        deliveryETxt.setVisibility(View.GONE);
+                        residentOwnerChkBx.setVisibility(View.GONE);
+                        break;
+
+                    case 1:
+                        totalRentPriceETxt.setVisibility(View.VISIBLE);
+                        mortgageTotalPriceETxt.setVisibility(View.VISIBLE);
+                        rentalPreferenceSpnr.setVisibility(View.VISIBLE);
+                        totalPriceETxt.setVisibility(View.GONE);
+                        prePayPriceETxt.setVisibility(View.GONE);
+                        voucherTypeSpnr.setVisibility(View.GONE);
+                        preVoucherTypeSpnr.setVisibility(View.GONE);
+                        exVoucherTypeSpnr.setVisibility(View.GONE);
+                        loanTypeSpnr.setVisibility(View.GONE);
+                        dongETxt.setVisibility(View.GONE);
+                        exDongETxt.setVisibility(View.GONE);
+                        preDongETxt.setVisibility(View.GONE);
+                        deliveryETxt.setVisibility(View.GONE);
+                        exchangeChkBx.setVisibility(View.GONE);
+                        debtTotalPriceETxt.setVisibility(View.GONE);
+                        preSalePriceETxt.setVisibility(View.GONE);
+                        break;
+
+                    case 2:
+                        prePayPriceETxt.setVisibility(View.VISIBLE);
+                        preVoucherTypeSpnr.setVisibility(View.VISIBLE);
+                        totalPriceETxt.setVisibility(View.VISIBLE);
+                        preVoucherTypeSpnr.setVisibility(View.VISIBLE);
+                        deliveryETxt.setVisibility(View.VISIBLE);
+                        preDongETxt.setVisibility(View.GONE);
+                        totalRentPriceETxt.setVisibility(View.GONE);
+                        mortgageTotalPriceETxt.setVisibility(View.GONE);
+                        exVoucherTypeSpnr.setVisibility(View.GONE);
+                        exDongETxt.setVisibility(View.GONE);
+                        exVoucherTypeSpnr.setVisibility(View.GONE);
+                        voucherTypeSpnr.setVisibility(View.GONE);
+                        loanTypeSpnr.setVisibility(View.GONE);
+                        rentalPreferenceSpnr.setVisibility(View.GONE);
+                        debtTotalPriceETxt.setVisibility(View.GONE);
+                        exchangeChkBx.setVisibility(View.GONE);
+
+                        break;
+
+                    case 3:
+                        mortgageTotalPriceETxt.setVisibility(View.GONE);
+                        totalRentPriceETxt.setVisibility(View.GONE);
+                        totalPriceETxt.setVisibility(View.GONE);
+                        prePayPriceETxt.setVisibility(View.GONE);
+                        debtTotalPriceETxt.setVisibility(View.GONE);
+                        totalPriceETxt.setVisibility(View.GONE);
+                        preVoucherTypeSpnr.setVisibility(View.GONE);
+                        exVoucherTypeSpnr.setVisibility(View.GONE);
+                        exDongETxt.setVisibility(View.GONE);
+                        preDongETxt.setVisibility(View.GONE);
+                        debtTotalPriceETxt.setVisibility(View.GONE);
+                        deliveryETxt.setVisibility(View.GONE);
+                        rentalPreferenceSpnr.setVisibility(View.GONE);
+                        preSalePriceETxt.setVisibility(View.GONE);
+
+                        break;
+                }
+                requestNewModel.setLandStateID( landStateIDs.get(i));
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -687,36 +767,37 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             useTypeTitles.add(Item.getTitle());
             useTypeIDs.add(Item.getId());
         }
-        useTypeAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_list_item_multiple_choice, useTypeTitles);
-        landUseTypeSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d(TAG, "onItemSelected: " + adapterView.getAdapter().getCount());
-            }
+        useTypeAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext())
+                , android.R.layout.simple_list_item_multiple_choice, useTypeTitles);
+        landUseTypeSpnr.setListAdapter(useTypeAdapter)
+                .setListener(new BaseMultiSelectSpinner.MultiSpinnerListener() {
+                    @Override
+                    public void onItemsSelected(boolean[] selected) {
+                        for (int i=0 ; i<selected.length;i++){
+                            if(selected[i]) selectedUseTypes.add(useTypeIDs.get(i));
+                        }
+                        requestNewModel.setUseTypeID(selectedUseTypes);
+                    }
+                });
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
+///////////////////////////Get Equipments////////////////////////////////////////////////////////
         equipmentModels = dbHelper.GetLandEquipmentsList();
         for (EquipmentModel Item : equipmentModels) {
-            useTypeTitles.add(Item.getTitle());
-            useTypeIDs.add(Item.getId());
+            equipmentTitles.add(Item.getTitle());
+            equipmentIDs.add(Item.getId());
         }
-        equipmentAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_list_item_multiple_choice, useTypeTitles);
-        equipmentSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d(TAG, "onItemSelected: " + adapterView.getAdapter().getCount());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+        equipmentAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext())
+                , android.R.layout.simple_list_item_multiple_choice, equipmentTitles);
+        equipmentSpnr.setListAdapter(equipmentAdapter)
+                .setListener(new BaseMultiSelectSpinner.MultiSpinnerListener() {
+                    @Override
+                    public void onItemsSelected(boolean[] selected) {
+                        for (int i=0 ; i<selected.length;i++){
+                            if(selected[i]) selectedEquipments.add(equipmentIDs.get(i));
+                        }
+                        requestNewModel.setEquipment(selectedEquipments);
+                    }
+                });
 
 
         residentOwnerChkBx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -736,30 +817,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         });
 
 
-        ////////////////////// UseType Equipments Spinner////////////////////////////////
-        equipmentModels = dbHelper.GetLandEquipmentsList();
-        Log.d(TAG, "onCreateView size: " + equipmentModels.size());
-        for (EquipmentModel Item : equipmentModels) {
-            equipmentTitles.add(Item.getTitle());
-            equipmentIDs.add(Item.getId());
-            Log.d(TAG, "onCreateView: " + Item.getTitle());
-        }
-        equipmentAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()),
-                android.R.layout.simple_list_item_multiple_choice, equipmentTitles);
-        equipmentSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d(TAG, "onItemSelected: " + adapterView.getSelectedItemId());
-//                newLandUseTypeIDLstArr.add(useTypeIDs.get(i));
-//                Log.d(TAG, "onItemSelected: "+newLandUseTypeIDLstArr.size()+ "   ID");
-                // TODO: 12/15/2020 Get Selected Items
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
 
         /////////////////////////////////// Five Image //////////////////////////////////////
@@ -800,10 +858,263 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             }
         });
 
-        /////////////////////////////textinputs/////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////// Text inputs /////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+        titleEtx.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        debtTotalPriceETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                requestNewModel.setDebtTotalPrice(debtTotalPriceETxt.getText().toString());
+            }
+        });
+
+        buildingYearETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                requestNewModel.setBuildingYear(buildingYearETxt.getText().toString());
+            }
+        });
+
+        addressETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                requestNewModel.setAddress(addressETxt.getText().toString());
+            }
+        });
+
+        deliveryETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                requestNewModel.setDeliveryDate(deliveryETxt.getText().toString());
+            }
+        });
+
+        descriptionETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                requestNewModel.setDescription(descriptionETxt.getText().toString());
+            }
+        });
+
+        exDongETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                requestNewModel.setExDong(exDongETxt.getText().toString());
+            }
+        });
+
+        preDongETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                requestNewModel.setPreDong(preDongETxt.getText().toString());
+            }
+        });
+
+        dongETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                requestNewModel.setDong(dongETxt.getText().toString());
+            }
+        });
+
+        mortgageTotalPriceETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                requestNewModel.setMortgageTotalPrice(mortgageTotalPriceETxt.getText().toString());
+            }
+        });
+
+        prePayPriceETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                requestNewModel.setPrePayPrice(prePayPriceETxt.getText().toString());
+            }
+        });
+
+        preSalePriceETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                requestNewModel.setPreSaleTotalPrice(preSalePriceETxt.getText().toString());
+            }
+        });
+
+        spaceFoundationETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                requestNewModel.setFoundationSpace(spaceFoundationETxt.getText().toString());
+            }
+        });
+
+        totalPriceETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                requestNewModel.setSaleTotalPrice(totalPriceETxt.getText().toString());
+            }
+        });
+
+        totalRentPriceETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                requestNewModel.setRentTotalPrice(totalRentPriceETxt.getText().toString());
+            }
+        });
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -817,33 +1128,25 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
 //                requestNewModel.setAddress(addressETxt.getText().toString());
 //                requestNewModel.setBuildingYear(buildingYearETxt.getText().toString());
 //                requestNewModel.setDebtTotalPrice(debtTotalPriceETxt.getText().toString());
-                requestNewModel.setMortgageTotalPrice(mortgageTotalPriceETxt.getText().toString());
-                requestNewModel.setRentTotalPrice(totalRentPriceETxt.getText().toString());
+//                requestNewModel.setMortgageTotalPrice(mortgageTotalPriceETxt.getText().toString());
+//                requestNewModel.setRentTotalPrice(totalRentPriceETxt.getText().toString());
 //                requestNewModel.setPrePayPrice(prePayPriceETxt.getText().toString());
 //                requestNewModel.setFoundationSpace(spaceFoundationETxt.getText().toString());
 //                requestNewModel.setRoomCount(Long.toString(roomCountSpnr.getSelectedItemId()));
 //                requestNewModel.setFloorCount(Long.toString(floorCountSpnr.getSelectedItemId()));
 //                requestNewModel.setUnitInFloor(Long.toString(unitInFloorSpnr.getSelectedItemId()));
-//                requestNewModel.setFloor(Long.toString(floorCountSpnr.getSelectedItemId()));
+                requestNewModel.setFloor(Long.toString(floorCountSpnr.getSelectedItemId()));
                 requestNewModel.setWater(Long.toString(waterSpnr.getSelectedItemId()));
                 requestNewModel.setGas(Long.toString(gasSpnr.getSelectedItemId()));
                 requestNewModel.setElectricy(Long.toString(electricitySpnr.getSelectedItemId()));
                 requestNewModel.setPhone(Long.toString(phoneSpnr.getSelectedItemId()));
-//                if(residentOwnerChkBx.isChecked())requestNewModel.setResidentOwner(Constants.ONE);
-//                else requestNewModel.setResidentOwner(Constants.ZERO);
-//                if(exchangeChkBx.isChecked())requestNewModel.setChkExchanged(Constants.ONE);
-//                else requestNewModel.setChkExchanged(Constants.ZERO);
+                if(residentOwnerChkBx.isChecked())requestNewModel.setResidentOwner(Constants.ONE);
+                else requestNewModel.setResidentOwner(Constants.ZERO);
+                if(exchangeChkBx.isChecked())requestNewModel.setChkExchanged(Constants.ONE);
+                else requestNewModel.setChkExchanged(Constants.ZERO);
+                requestNewModel.setUID(UID);
 
-                List<String> eqStr=new ArrayList<>();
-                eqStr.add("1");
-
-                requestNewModel.setUseTypeID(eqStr);
-                requestNewModel.setEquipment(eqStr);
-
-
-                requestNewModel.setImageFiles(selectedImages);
-                Log.d(TAG, "onClick: "+selectedImages.size());
-//                requestNewModel.setImageFiles(eqStr);
+                //                requestNewModel.setImageFiles(eqStr);
                 try {
                     HomeFragmentPOSTRequest(getContext());
                 } catch (JSONException e) {
