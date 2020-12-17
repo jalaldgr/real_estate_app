@@ -25,7 +25,7 @@
     <fragment
         android:id="@+id/notificationSettingsFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.NotificationSettingsFragment"
-        android:label="@string/my_hamedan_melk_notification_setting_title" />
+        android:label="@string/my_hamedan_melk_register_company" />
     <fragment
         android:id="@+id/FAQFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.help.FAQFragment"

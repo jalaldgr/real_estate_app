@@ -7,22 +7,22 @@
     <string name="title_createnewad">ثبت آگهی</string>
 
 
-    <string name="my_hamedan_melk_notification_setting_vibrate">لرزش</string>
-    <string name="my_hamedan_melk_notification_setting_title">اعلان ها</string>
-    <string name="my_hamedan_melk_bookmarks_title">نشان شده ها</string>
-    <string name="my_hamedan_melk_recent_posts_title">بازدید های اخیر</string>
+    <string name="my_hamedan_melk_register_company_summary">ثبت شرکت و معرفی خدمات</string>
+    <string name="my_hamedan_melk_register_company">ثبت شرکت</string>
+    <string name="my_hamedan_melk_bookmarks_title">علاقه مندی ها</string>
+    <string name="my_hamedan_melk_recent_posts_title">املاک من</string>
     <string name="my_hamedan_melk_aboutus_title">درباره ما</string>
     <string name="my_hamedanmelk_help">راهنما</string>
     <string name="my_hamedanmelk_faq_title">پشتیبانی و قوانین</string>
     <string name="my_hamedan_melk_appinfo_title">اطلاعات نرم افزار</string>
     <string name="my_hamedan_melk_notification_setting_summary">لرزش، اعلان ها</string>
-    <string name="my_hamedan_melk_bookmarks_summary">لیست آگهی های نشان شده</string>
-    <string name="my_hamedan_melk_recent_posts_summary">لیست پست هایی که اخیرا مشاهده نموده اید</string>
-    <string name="my_hamedan_melk_aboutus_summary">درباره همدان ملک،، قوانین و پشتیبانی، اطلعات نرم افزار</string>
+    <string name="my_hamedan_melk_bookmarks_summary">لیست املاک مورد علاقه </string>
+    <string name="my_hamedan_melk_recent_posts_summary">لیست آگهی های املاک من</string>
+    <string name="my_hamedan_melk_aboutus_summary">درباره همدان ملک، قوانین و پشتیبانی، اطلاعات اپلیکیشن</string>
     <string name="my_hamedan_melk_app_info_version">ورژن</string>
     <string name="no_internet_error_title">اینترنت وصل نیست</string>
-    <string name="no_internet_error_description">لطفا اتصال اینترنت را چک نموده و دوباره تلاش کنید</string>
-    <string name="no_internet_error_retry">تلاش دوباره</string>
+    <string name="no_internet_error_description">لطفا اتصال اینترنت را چک نموده و دوباره امتحان کنید</string>
+    <string name="no_internet_error_retry">امتحان دوباره</string>
     <string name="app_bar_search_title">جست و جو</string>
     <string name="app_bar_cities_list">همدان</string>
     <!-- Preference Titles -->
@@ -240,6 +240,11 @@
     <string name="permission_ok">انتخاب</string>
     <string name="permission_settings">تنضیمات</string>
     <string name="permission_package">بسته</string>
+
+    <string name="pref_screen_myhamedanmelk_aboutus_items">myhamedanmelk_aboutus_items</string>
+    <string name="pref_screen_myhamedanmelk_user_favorites">myhamedanmelk_user_favorites</string>
+    <string name="pref_screen_myhamedanmelk_user_lands">myhamedanmelk_user_lands</string>
+    <string name="pref_screen_myhamedanmelk_register_company">myhamedanmelk_register_company</string>
 
 
 </resources>
