@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
+    android:id="@+id/navigation_home"
     app:startDestination="@+id/navigation_new_land">
 
     <fragment
@@ -48,18 +48,17 @@
     <fragment
         android:id="@+id/appInfoFullscreenFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.help.AppInfoFullscreenFragment"
-        android:label="fragment_app_info_fullscreen"
-        tools:layout="@layout/fragment_app_info_fullscreen" >
+        tools:layout="@layout/fragment_app_info_fullscreen">
         <argument
             android:name="hidenavigation"
-            app:argType="boolean"
             android:defaultValue="true"
-            app:nullable="false"/>
+            app:argType="boolean"
+            app:nullable="false" />
     </fragment>
     <fragment
         android:id="@+id/noInternetErrorFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.NoInternetErrorFragment"
-        android:label="fragment_no_internet_error"
+        android:label="@string/title_network_error"
         tools:layout="@layout/fragment_no_internet_error" />
     <fragment
         android:id="@+id/personalPage"
@@ -125,48 +124,42 @@
     <fragment
         android:id="@+id/singleSaleFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleSaleFragment"
-        android:label="fragment_single_land"
         tools:layout="@layout/fragment_single_sale" />
     <fragment
         android:id="@+id/singleRentFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleRentFragment"
-        android:label="fragment_single_rent"
         tools:layout="@layout/fragment_single_rent" />
     <fragment
         android:id="@+id/singlePreSaleFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.single.SinglePreSaleFragment"
-        android:label="fragment_single_presale"
         tools:layout="@layout/fragment_single_presale" />
     <fragment
         android:id="@+id/singleExchangeFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleExchangeFragment"
-        android:label="fragment_single_exchange"
         tools:layout="@layout/fragment_single_exchange" />
     <fragment
         android:id="@+id/singleParticipationFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleParticipationFragment"
-        android:label="fragment_single_assignment"
         tools:layout="@layout/fragment_single_participation" />
 
     <fragment
         android:id="@+id/singleUserLandFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.single.SingleUserLandFragment"
-        android:label="fragment_single_user_land"
         tools:layout="@layout/fragment_single_user_land" />
     <fragment
         android:id="@+id/userLandFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.UserLandFragment"
-        android:label="fragment_user_land"
+        android:label="@string/title_user_lands"
         tools:layout="@layout/fragment_user_land" />
     <fragment
         android:id="@+id/companyFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.company.CompanyFragment"
-        android:label="fragment_company"
+        android:label="@string/title_companies"
         tools:layout="@layout/fragment_company" />
     <fragment
         android:id="@+id/userFavoritesFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.UserFavoritesFragment"
-        android:label="fragment_user_favorites"
+        android:label="@string/title_user_favorite"
         tools:layout="@layout/fragment_user_favorites" />
     <fragment
         android:id="@+id/agencyPublicUserRegister"
@@ -176,11 +169,11 @@
     <fragment
         android:id="@+id/newCompanyFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.company.NewCompanyFragment"
-        android:label="fragment_new_company"
+        android:label="@string/title_register_company"
         tools:layout="@layout/fragment_new_company" />
     <fragment
         android:id="@+id/chatFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.ChatFragment"
-        android:label="ChatFragment" />
+        android:label="@+id/title_chat" />
 
 </navigation>

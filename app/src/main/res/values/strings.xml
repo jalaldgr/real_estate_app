@@ -5,7 +5,14 @@
     <string name="title_aboutus">صفحه شخصی</string>
     <string name="title_personalpage">صفحه شخصی</string>
     <string name="title_createnewad">ثبت آگهی</string>
-
+    <string name="title_about_us">در باره ما</string>
+    <string name="title_register_company">شبت شرکت</string>
+    <string name="title_network_error">خطای اینترنت</string>
+    <string name="title_user_lands">املاک من</string>
+    <string name="title_user_favorite">علاقه مندی ها</string>
+    <string name="title_companies">شرکت ها</string>
+    <string name="title_register_agency_user">ثبت نام مشاور املاک</string>
+    <string name="title_chat">چت</string>
 
     <string name="my_hamedan_melk_register_company_summary">ثبت شرکت و معرفی خدمات</string>
     <string name="my_hamedan_melk_register_company">ثبت شرکت</string>
