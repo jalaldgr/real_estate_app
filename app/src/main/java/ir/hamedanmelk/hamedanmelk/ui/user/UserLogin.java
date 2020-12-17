@@ -165,7 +165,7 @@ public class UserLogin extends Fragment {
                             editor.putString(item, user.getString(item));
                         }
                         editor.apply();
-                        controller.navigate(R.id.personalPage);
+                        controller.navigate(R.id.navigation_aboutus);
                     }
                 } catch (JSONException jsonException) {
                     jsonException.printStackTrace();

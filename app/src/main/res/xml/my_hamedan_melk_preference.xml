@@ -2,30 +2,33 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <Preference
-            android:layout_height="100dp"
-            android:icon="@drawable/splash_ads"
-            android:minHeight="100dp"
-            android:title="Preference category">
+        <ir.hamedanmelk.hamedanmelk.ui.personalpage.loggedInPreference
+            app:key="image_preference"
+            app:layout="@layout/preference_logged_in_layout" />
+        <ir.hamedanmelk.hamedanmelk.ui.personalpage.notLoggedInPreference
+                app:key="not_login_preference"
+                app:layout="@layout/preference_not_logged_in_layout"/>
 
-
-        </Preference>
         <Preference
             android:summary="@string/my_hamedan_melk_register_company_summary"
             android:title="@string/my_hamedan_melk_register_company"
+            android:key="myhamedanmelk_register_company"
             app:icon="@drawable/ic_baseline_assistant_24"></Preference>
         <Preference
             android:icon="@drawable/ic_baseline_favorite_border_on_24"
             android:summary="@string/my_hamedan_melk_bookmarks_summary"
+            android:key="myhamedanmelk_user_favorites"
             android:title="@string/my_hamedan_melk_bookmarks_title"></Preference>
         <Preference
             android:icon="@drawable/ic_baseline_home_work_24"
             android:summary="@string/my_hamedan_melk_recent_posts_summary"
+            android:key="myhamedanmelk_user_lands"
             android:title="@string/my_hamedan_melk_recent_posts_title"></Preference>
 
         <Preference
             android:icon="@drawable/ic_help_outline_red_24"
             android:summary="@string/my_hamedan_melk_aboutus_summary"
+            android:key="myhamedanmelk_aboutus_items"
             android:title="@string/my_hamedanmelk_help"
             app:allowDividerAbove="true"
 
