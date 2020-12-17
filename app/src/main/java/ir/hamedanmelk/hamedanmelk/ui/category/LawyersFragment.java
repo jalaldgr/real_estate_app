@@ -22,7 +22,7 @@ import java.util.HashMap;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.LawyerModel;
-import ir.hamedanmelk.hamedanmelk.models.OfficeModel;
+import ir.hamedanmelk.hamedanmelk.recyclers.LawyersRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;

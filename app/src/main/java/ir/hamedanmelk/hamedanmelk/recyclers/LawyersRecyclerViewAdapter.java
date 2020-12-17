@@ -1,4 +1,4 @@
-package ir.hamedanmelk.hamedanmelk.ui.category;
+package ir.hamedanmelk.hamedanmelk.recyclers;
 
 import android.app.Activity;
 import android.content.Intent;

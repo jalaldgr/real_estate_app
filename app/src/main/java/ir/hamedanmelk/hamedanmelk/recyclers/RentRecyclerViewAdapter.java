@@ -1,4 +1,4 @@
-package ir.hamedanmelk.hamedanmelk.ui.category;
+package ir.hamedanmelk.hamedanmelk.recyclers;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;

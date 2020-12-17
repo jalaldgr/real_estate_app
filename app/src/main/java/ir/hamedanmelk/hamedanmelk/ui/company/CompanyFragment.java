@@ -23,11 +23,9 @@ import java.util.HashMap;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.CompanyModel;
-import ir.hamedanmelk.hamedanmelk.models.RentModel;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
-import ir.hamedanmelk.hamedanmelk.ui.category.RentRecyclerViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
