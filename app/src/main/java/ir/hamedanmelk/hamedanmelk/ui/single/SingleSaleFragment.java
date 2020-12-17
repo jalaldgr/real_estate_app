@@ -1,5 +1,6 @@
 package ir.hamedanmelk.hamedanmelk.ui.single;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -49,6 +50,7 @@ import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.GalleryRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
+import ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
@@ -96,7 +98,7 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
     TextView userPhoneTxt;
     EditText descriptionTxt;
     ImageView userAvatarImg;
-    GridView equipmentsGridView;
+    ExpandableHeightGridView equipmentsGridView;
     ViewPager viewPager;
     CheckBox bookmarkChckbx;
     Button  startChatBtn;
@@ -125,6 +127,7 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
         UID = user_pref.getString(Constants.USER_MODEL_ID,"0");
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -149,7 +152,7 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
         userPhoneTxt = (TextView)view.findViewById(R.id.SingleSaleUserPhoneTxt);
         descriptionTxt = (EditText)view.findViewById(R.id.SingleSaleDescriptionTxt);
         userAvatarImg = (ImageView)view.findViewById(R.id.SingleSaleUserAvatarImg);
-        equipmentsGridView = (GridView)view.findViewById(R.id.SingleSaleLandEquipmentsGridView);
+        equipmentsGridView = (ExpandableHeightGridView) view.findViewById(R.id.SingleSaleLandEquipmentsGridView);
         viewPager = (ViewPager) view.findViewById(R.id.SingleSaleGalleryViewpager);
         bookmarkChckbx = (CheckBox)view.findViewById(R.id.SingleSaleFragmentBookmarkChckbx);
         startChatBtn = (Button)view.findViewById(R.id.SingleSaleStartChatBtn);
@@ -297,6 +300,7 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
                 }
                 LandEquipmentsAdapter equipmentsAdapter = new LandEquipmentsAdapter(equipmentModels,context);
                 equipmentsGridView.setAdapter(equipmentsAdapter);
+                equipmentsGridView.setExpanded(true);
             }
 
             @Override
