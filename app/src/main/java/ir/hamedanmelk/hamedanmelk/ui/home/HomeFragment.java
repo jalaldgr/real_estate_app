@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.recyclers.HomeRecyclerViewAdapter;
+import ir.hamedanmelk.hamedanmelk.recyclers.HomeVerticalRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
@@ -36,8 +37,11 @@ import ir.hamedanmelk.hamedanmelk.models.LandModel;
 public class HomeFragment extends Fragment {
 
     private static final String TAG = "HomeFragment";
-    RecyclerView recyclerView;
+    RecyclerView HorizantalrecyclerView;
+    RecyclerView VerticalrecyclerView;
     ArrayList<LandModel> landModels;
+    ArrayList<LandModel> featuredLandModels;
+
     Button salebtn;
     Button rentbtn;
     Button assignmentbtn;
@@ -131,9 +135,14 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
 
-        recyclerView = (RecyclerView) root.findViewById(R.id.HomeFrgmntHrzntlRcyclVw);
+        HorizantalrecyclerView = (RecyclerView) root.findViewById(R.id.HomeFrgmntHrzntlRcyclVw);
+        VerticalrecyclerView  = (RecyclerView) root.findViewById(R.id.HomeFrgmntVerticalRcyclVw);
         RecyclerView.LayoutManager laymngr =  new LinearLayoutManager(this.getContext());
-        recyclerView.setLayoutManager(laymngr);
+        HorizantalrecyclerView.setLayoutManager(laymngr);
+        RecyclerView.LayoutManager VRLaymngr = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL,false);
+        HorizantalrecyclerView.setLayoutManager(laymngr);
+        VerticalrecyclerView.setLayoutManager(VRLaymngr);
+
         ViewPager viewPager;
         viewPager = (ViewPager) root.findViewById(R.id.viewpager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getContext());
@@ -166,6 +175,8 @@ public class HomeFragment extends Fragment {
                     if (reader.getInt(Constants.JSON_RESPONSE_STATE)==1)
                     {
                         ArrayList<LandModel> landtemp=new ArrayList<LandModel>();
+                        ArrayList<LandModel> featuredlandtemp=new ArrayList<LandModel>();
+
                         for(int i=0; i < LandList.length();i++)
                         {
                             LandItem = LandList.getJSONObject(i);
@@ -191,10 +202,13 @@ public class HomeFragment extends Fragment {
                             );
 
                             landtemp.add(landModel);
+//                            if(landModel.getLandCaseId()>"1")featuredlandtemp.add(landModel)
                         }
                         landModels=landtemp;
+                        featuredLandModels = featuredlandtemp;
                         Log.d(TAG, "onPostExecute rentModels: "+landModels.toString());
-                        recyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
+                        HorizantalrecyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
+                        VerticalrecyclerView.setAdapter(new HomeVerticalRecyclerViewAdapter(landModels,getActivity()));
 
                     }
                 } catch (JSONException e) {
