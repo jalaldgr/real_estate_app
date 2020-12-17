@@ -459,7 +459,7 @@
             >
 
             <com.google.android.gms.maps.MapView
-                android:id="@+id/mapView"
+                android:id="@+id/SingleRentMapView"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" />
         </FrameLayout>

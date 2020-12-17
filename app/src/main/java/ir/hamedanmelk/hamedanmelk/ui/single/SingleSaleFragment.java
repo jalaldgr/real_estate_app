@@ -1,6 +1,5 @@
 package ir.hamedanmelk.hamedanmelk.ui.single;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -25,6 +24,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.Indicators.PagerIndicator;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -50,12 +53,14 @@ import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.GalleryRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
-import ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 import saman.zamani.persiandate.PersianDate;
 import saman.zamani.persiandate.PersianDateFormat;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.daimajia.slider.library.SliderLayout.PresetIndicators.Center_Bottom;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -98,10 +103,13 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
     TextView userPhoneTxt;
     EditText descriptionTxt;
     ImageView userAvatarImg;
-    ExpandableHeightGridView equipmentsGridView;
-    ViewPager viewPager;
+    GridView equipmentsGridView;
+    //ViewPager viewPager;
     CheckBox bookmarkChckbx;
     Button  startChatBtn;
+    SliderLayout mySliderLayout;
+    PagerIndicator myIndicator;
+
     public SingleSaleFragment() {
         // Required empty public constructor
     }
@@ -127,13 +135,12 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
         UID = user_pref.getString(Constants.USER_MODEL_ID,"0");
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_single_sale, container, false);
-        mapView = (MapView) view.findViewById(R.id.mapView);
+        mapView = (MapView) view.findViewById(R.id.SingleSaleMapView);
         qlDBHelper = new MYSQlDBHelper(getContext());
         titleTxt = (TextView)view.findViewById(R.id.SingleSaleTitleTxt);
         landTypeTxt = (TextView)view.findViewById(R.id.SingleSaleLandTypeTxt);
@@ -152,22 +159,41 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
         userPhoneTxt = (TextView)view.findViewById(R.id.SingleSaleUserPhoneTxt);
         descriptionTxt = (EditText)view.findViewById(R.id.SingleSaleDescriptionTxt);
         userAvatarImg = (ImageView)view.findViewById(R.id.SingleSaleUserAvatarImg);
-        equipmentsGridView = (ExpandableHeightGridView) view.findViewById(R.id.SingleSaleLandEquipmentsGridView);
-        viewPager = (ViewPager) view.findViewById(R.id.SingleSaleGalleryViewpager);
+        equipmentsGridView = (GridView)view.findViewById(R.id.SingleSaleLandEquipmentsGridView);
+        //viewPager = (ViewPager) view.findViewById(R.id.SingleSaleGalleryViewpager);
         bookmarkChckbx = (CheckBox)view.findViewById(R.id.SingleSaleFragmentBookmarkChckbx);
         startChatBtn = (Button)view.findViewById(R.id.SingleSaleStartChatBtn);
 
-        bookmarkChckbx.setChecked(qlDBHelper.isBookmarkedByLandID(landId));
+        mySliderLayout = (SliderLayout)view.findViewById(R.id.single_sale_slider);
+        myIndicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
+        mySliderLayout.setPresetTransformer(SliderLayout.Transformer.Tablet);
+
+        mySliderLayout.setPresetIndicator(Center_Bottom);
+        myIndicator.setGravity(0x11);
+        mySliderLayout.setCustomIndicator(myIndicator);
+        mySliderLayout.setCustomAnimation(new DescriptionAnimation());
+
+
+        if(qlDBHelper.isBookmarkedByLandID(landId)){
+            bookmarkChckbx.setChecked(true);
+            bookmarkChckbx.setBackground(getResources().getDrawable(R.drawable.ic_baseline_favorite_br_36));
+        }else{
+            bookmarkChckbx.setChecked(false);
+            bookmarkChckbx.setBackground(getResources().getDrawable(R.drawable.iic_baseline_favorite_disabled_border_on_36));
+        }
         bookmarkChckbx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     AddFavoriteRequest(getContext());
                     qlDBHelper.InsertBookmark(landId);
+                    bookmarkChckbx.setBackground(getResources().getDrawable(R.drawable.ic_baseline_favorite_br_36));
                 }
                 else {
                     RemoveFavoriteRequest(getContext());
                     qlDBHelper.DeleteBookmarkByLandID(landId);
+                    bookmarkChckbx.setBackground(getResources().getDrawable(R.drawable.iic_baseline_favorite_disabled_border_on_36));
+
                 }
             }
         });
@@ -189,6 +215,13 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
 
         return view;
     }
+
+    @Override
+    public void onStop() {
+        mySliderLayout.stopAutoCycle();
+        super.onStop();
+    }
+
 
     public void GetLandInfoRequest(final Context context){
         class GetLandInfoRequestAsync extends AsyncTask<Void, Void, String> {
@@ -241,10 +274,15 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
                                 " "+responseData.getString(Constants.LAND_INFO_LAST_NAME));
                         userPhoneTxt.setText(responseData.getString(Constants.LAND_INFO_USER_PHONE));
                         userDescriptionTxt.setText(Html.fromHtml(responseData.getString(Constants.LAND_INFO_USER_DESCRIPTION)));
-                        GalleryRecyclerViewAdapter galleryRecyclerViewAdapter = new GalleryRecyclerViewAdapter(getContext(),images);
-                        viewPager.setAdapter(galleryRecyclerViewAdapter);
+                        //GalleryRecyclerViewAdapter galleryRecyclerViewAdapter = new GalleryRecyclerViewAdapter(getContext(),images);
+                        //viewPager.setAdapter(galleryRecyclerViewAdapter);
                         new DownloadImage(userAvatarImg).execute(Urls.getBaseURL()+"/"+responseData.getString(Constants.LAND_INFO_USER_IMAGE));
 
+                        for (int i=0; i < images.length(); i++){
+                            DefaultSliderView t1 = new DefaultSliderView(getActivity().getApplicationContext());
+                            t1.image(Urls.getBaseURL()+"/"+images.getString(i));//t1.description("shearch");
+                            mySliderLayout.addSlider(t1);
+                        }
                     }
 
                 } catch (JSONException e) {
@@ -300,7 +338,6 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
                 }
                 LandEquipmentsAdapter equipmentsAdapter = new LandEquipmentsAdapter(equipmentModels,context);
                 equipmentsGridView.setAdapter(equipmentsAdapter);
-                equipmentsGridView.setExpanded(true);
             }
 
             @Override

@@ -140,7 +140,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_single_rent, container, false);
-        mapView = (MapView) view.findViewById(R.id.mapView);
+        mapView = (MapView) view.findViewById(R.id.SingleRentMapView);
         qlDBHelper = new MYSQlDBHelper(getContext());
         titleTxt = (TextView)view.findViewById(R.id.SingleRentTitleTxt);
         landTypeTxt = (TextView)view.findViewById(R.id.SingleRentLandTypeTxt);
