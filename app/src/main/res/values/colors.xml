@@ -13,7 +13,11 @@
     <color name="pink">#f35961</color>
     <color name="gray">#757575</color>
 
-
+    <color name="textview_lable">#CC505050</color>
+    <color name="primary_black_text_color">#ED000000</color>
+    <color name="edit_text_bottom_line">#3D000000</color>
+    <color name="icons_color">#5bb85d</color>
+    <color name="icons_disable_color">#66000000</color>
 
     <color name="multiple_image_select_primary">#673AB7</color>
     <color name="multiple_image_select_primaryDark">#512DA8</color>

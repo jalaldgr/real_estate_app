@@ -22,5 +22,10 @@
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>
+    <style name="information_element" parent="AppTheme">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:gravity">right</item>
+        <item name="android:textColorHint">@color/textview_lable</item>
+    </style>
 
 </resources>

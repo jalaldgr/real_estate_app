@@ -2,7 +2,9 @@ package ir.hamedanmelk.hamedanmelk.ui.single;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -14,7 +16,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,8 +23,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.viewpager.widget.ViewPager;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.Indicators.PagerIndicator;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -49,11 +53,14 @@ import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.GalleryRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
+import ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 import saman.zamani.persiandate.PersianDate;
 import saman.zamani.persiandate.PersianDateFormat;
+
+import static com.daimajia.slider.library.SliderLayout.PresetIndicators.Center_Bottom;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -97,10 +104,12 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
     TextView userPhoneTxt;
     EditText descriptionTxt;
     ImageView userAvatarImg;
-    GridView equipmentsGridView;
-    ViewPager viewPager;
+    ExpandableHeightGridView equipmentsGridView;
     CheckBox bookmarkChckbx;
     Button  startChatBtn;
+    SliderLayout mySliderLayout;
+    PagerIndicator myIndicator;
+
     public SingleRentFragment() {
         // Required empty public constructor
     }
@@ -151,23 +160,55 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
         userPhoneTxt = (TextView)view.findViewById(R.id.SingleRentUserPhoneTxt);
         descriptionTxt = (EditText)view.findViewById(R.id.SingleRentDescriptionTxt);
         userAvatarImg = (ImageView)view.findViewById(R.id.SingleRentUserAvatarImg);
-        equipmentsGridView = (GridView)view.findViewById(R.id.SingleRentLandEquipmentsGridView);
-        viewPager = (ViewPager) view.findViewById(R.id.SingleRentGalleryViewpager);
+        equipmentsGridView = (ExpandableHeightGridView) view.findViewById(R.id.SingleRentLandEquipmentsGridView);
+//        viewPager = (ViewPager) view.findViewById(R.id.SingleRentGalleryViewpager);
         bookmarkChckbx = (CheckBox)view.findViewById(R.id.SingleRentFragmentBookmarkChckbx);
         startChatBtn = (Button)view.findViewById(R.id.SingleRentStartChatBtn);
 
-        bookmarkChckbx.setChecked(qlDBHelper.isBookmarkedByLandID(landId));
+        mySliderLayout = (SliderLayout)view.findViewById(R.id.single_rent_slider);
+        myIndicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
+        mySliderLayout.setPresetTransformer(SliderLayout.Transformer.Tablet);
+
+        mySliderLayout.setPresetIndicator(Center_Bottom);
+        myIndicator.setGravity(0x11);
+        mySliderLayout.setCustomIndicator(myIndicator);
+        mySliderLayout.setCustomAnimation(new DescriptionAnimation());
+
+//                        mySliderLayout.setDuration(3000);
+//                        mySliderLayout.addOnPageChangeListener((ViewPagerEx.OnPageChangeListener) this);
+
+
+        if(qlDBHelper.isBookmarkedByLandID(landId)){
+            bookmarkChckbx.setChecked(true);
+            bookmarkChckbx.setBackground(getResources().getDrawable(R.drawable.ic_baseline_favorite_br_36));
+        }else{
+            bookmarkChckbx.setChecked(false);
+            bookmarkChckbx.setBackground(getResources().getDrawable(R.drawable.iic_baseline_favorite_disabled_border_on_36));
+        }
         bookmarkChckbx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     AddFavoriteRequest(getContext());
                     qlDBHelper.InsertBookmark(landId);
+                    bookmarkChckbx.setBackground(getResources().getDrawable(R.drawable.ic_baseline_favorite_br_36));
                 }
                 else {
                     RemoveFavoriteRequest(getContext());
                     qlDBHelper.DeleteBookmarkByLandID(landId);
+                    bookmarkChckbx.setBackground(getResources().getDrawable(R.drawable.iic_baseline_favorite_disabled_border_on_36));
+
                 }
+            }
+        });
+
+        userPhoneTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String uri = "tel:" + userPhoneTxt.getText().toString() ;
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse(uri));
+                startActivity(intent);
             }
         });
 
@@ -188,6 +229,13 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
 
         return view;
     }
+
+    @Override
+    public void onStop() {
+        mySliderLayout.stopAutoCycle();
+        super.onStop();
+    }
+
 
     public void GetLandInfoRequest(final Context context){
         class GetLandInfoRequestAsync extends AsyncTask<Void, Void, String> {
@@ -221,9 +269,9 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                         titleTxt.setText(responseData.getString(Constants.LAND_INFO_TITLe));
                         landTypeTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_TYPE_TITLE));
                         floorCountTxt.setText(responseData.getString(Constants.LAND_INFO_FLOOR_COUNT));
-                        spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE));
-                        mortgageTotalPriceTxt.setText(new DecimalFormat("###,###,###").format(Integer.parseInt(responseData.getString(Constants.LAND_INFO_MORTGAGE_TOTAL_PRICE))));
-                        rentTotalPriceTxt.setText(new DecimalFormat("###,###,###").format(Integer.parseInt(responseData.getString(Constants.LAND_INFO_RENT_TOTAL_PRICE))));
+                        spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE) + "  متر مربع");
+                        mortgageTotalPriceTxt.setText(new DecimalFormat("###,###,###").format(Integer.parseInt(responseData.getString(Constants.LAND_INFO_MORTGAGE_TOTAL_PRICE))) + "  تومان");
+                        rentTotalPriceTxt.setText(new DecimalFormat("###,###,###").format(Integer.parseInt(responseData.getString(Constants.LAND_INFO_RENT_TOTAL_PRICE))) + "  تومان");
                         LandCaseTypeModel landCaseTypeModel = qlDBHelper.GetLandCaseTypeByID(responseData.getString(Constants.LAND_INFO_LAND_CASE_ID));
                         landCaseTxt.setText(landCaseTypeModel.getTitle());
                         districtTxt.setText(responseData.getString(Constants.LAND_INFO_DISTRICT_TITLE));
@@ -242,8 +290,14 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                         userPhoneTxt.setText(responseData.getString(Constants.LAND_INFO_USER_PHONE));
                         userDescriptionTxt.setText(Html.fromHtml(responseData.getString(Constants.LAND_INFO_USER_DESCRIPTION)));
                         GalleryRecyclerViewAdapter galleryRecyclerViewAdapter = new GalleryRecyclerViewAdapter(getContext(),images);
-                        viewPager.setAdapter(galleryRecyclerViewAdapter);
+//                        viewPager.setAdapter(galleryRecyclerViewAdapter);
                         new DownloadImage(userAvatarImg).execute(Urls.getBaseURL()+"/"+responseData.getString(Constants.LAND_INFO_USER_IMAGE));
+                        for (int i=0; i < images.length(); i++){
+                            DefaultSliderView t1 = new DefaultSliderView(getActivity().getApplicationContext());
+                            t1.image(Urls.getBaseURL()+"/"+images.getString(i));//t1.description("shearch");
+                            mySliderLayout.addSlider(t1);
+                        }
+
 
                     }
 
@@ -291,7 +345,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                             );
                             equipmentModels.add(equipmentModel);
                         }
-                     }
+                    }
 
 
                 } catch (JSONException e) {
@@ -300,6 +354,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                 }
                 LandEquipmentsAdapter equipmentsAdapter = new LandEquipmentsAdapter(equipmentModels,context);
                 equipmentsGridView.setAdapter(equipmentsAdapter);
+                equipmentsGridView.setExpanded(true);
             }
 
             @Override
