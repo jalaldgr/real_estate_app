@@ -175,5 +175,10 @@
         android:id="@+id/chatFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.ChatFragment"
         android:label="@string/title_chat" />
+    <fragment
+        android:id="@+id/tablayoutLawyersOfficesFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.agencis.TablayoutLawyersOfficesFragment"
+        android:label="@string/title_office_lawyers"
+        tools:layout="@layout/fragment_tablayout_lawyer_office" />
 
 </navigation>

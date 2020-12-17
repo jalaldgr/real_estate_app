@@ -119,7 +119,7 @@ public class HomeFragment extends Fragment {
         lawinstiutebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.navigate(R.id.lawInstiuteFragment);
+                controller.navigate(R.id.tablayoutLawyersOfficesFragment);
             }
         });
         inquirybtn.setOnClickListener(new View.OnClickListener() {

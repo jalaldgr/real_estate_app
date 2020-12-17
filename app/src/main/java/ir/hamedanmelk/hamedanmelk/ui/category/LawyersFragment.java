@@ -87,7 +87,7 @@ public class LawyersFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_lawyers, container, false);
         if(view instanceof RecyclerView){
             Context context = getContext();
-            recyclerView = (RecyclerView)view;
+            recyclerView = (RecyclerView)view.findViewById(R.id.list_lawyers);
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
         }
         GetLawyersRequest(getContext());
