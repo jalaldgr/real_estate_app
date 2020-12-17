@@ -24,6 +24,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.Indicators.PagerIndicator;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -54,6 +58,8 @@ import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 import saman.zamani.persiandate.PersianDate;
 import saman.zamani.persiandate.PersianDateFormat;
+
+import static com.daimajia.slider.library.SliderLayout.PresetIndicators.Center_Bottom;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -100,6 +106,8 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
     ViewPager viewPager;
     CheckBox bookmarkChckbx;
     Button  startChatBtn;
+    SliderLayout mySliderLayout;
+    PagerIndicator myIndicator;
     public SingleParticipationFragment() {
         // Required empty public constructor
     }
@@ -150,21 +158,43 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
         descriptionTxt = (EditText)view.findViewById(R.id.SingleParticipationDescriptionTxt);
         userAvatarImg = (ImageView)view.findViewById(R.id.SingleParticipationUserAvatarImg);
         equipmentsGridView = (GridView)view.findViewById(R.id.SingleParticipationLandEquipmentsGridView);
-        viewPager = (ViewPager) view.findViewById(R.id.SingleParticipationGalleryViewpager);
+        //viewPager = (ViewPager) view.findViewById(R.id.SingleParticipationGalleryViewpager);
         bookmarkChckbx = (CheckBox)view.findViewById(R.id.SingleParticipationFragmentBookmarkChckbx);
         startChatBtn = (Button)view.findViewById(R.id.SingleParticipationStartChatBtn);
 
-        bookmarkChckbx.setChecked(qlDBHelper.isBookmarkedByLandID(landId));
+        mySliderLayout = (SliderLayout)view.findViewById(R.id.single_participation_slider);
+        myIndicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
+        mySliderLayout.setPresetTransformer(SliderLayout.Transformer.Tablet);
+
+        mySliderLayout.setPresetIndicator(Center_Bottom);
+        myIndicator.setGravity(0x11);
+        mySliderLayout.setCustomIndicator(myIndicator);
+        mySliderLayout.setCustomAnimation(new DescriptionAnimation());
+
+//                        mySliderLayout.setDuration(3000);
+//                        mySliderLayout.addOnPageChangeListener((ViewPagerEx.OnPageChangeListener) this);
+
+
+        if(qlDBHelper.isBookmarkedByLandID(landId)){
+            bookmarkChckbx.setChecked(true);
+            bookmarkChckbx.setBackground(getResources().getDrawable(R.drawable.ic_baseline_favorite_br_36));
+        }else{
+            bookmarkChckbx.setChecked(false);
+            bookmarkChckbx.setBackground(getResources().getDrawable(R.drawable.iic_baseline_favorite_disabled_border_on_36));
+        }
         bookmarkChckbx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     AddFavoriteRequest(getContext());
                     qlDBHelper.InsertBookmark(landId);
+                    bookmarkChckbx.setBackground(getResources().getDrawable(R.drawable.ic_baseline_favorite_br_36));
                 }
                 else {
                     RemoveFavoriteRequest(getContext());
                     qlDBHelper.DeleteBookmarkByLandID(landId);
+                    bookmarkChckbx.setBackground(getResources().getDrawable(R.drawable.iic_baseline_favorite_disabled_border_on_36));
+
                 }
             }
         });
@@ -185,6 +215,12 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
 
 
         return view;
+    }
+
+    @Override
+    public void onStop() {
+        mySliderLayout.stopAutoCycle();
+        super.onStop();
     }
 
     public void GetLandInfoRequest(final Context context){
@@ -219,8 +255,8 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
                         titleTxt.setText(responseData.getString(Constants.LAND_INFO_TITLe));
                         landTypeTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_TYPE_TITLE));
                         floorCountTxt.setText(responseData.getString(Constants.LAND_INFO_FLOOR_COUNT));
-                        spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE));
-                        totalPriceTxt.setText(new DecimalFormat("###,###,###").format(Integer.parseInt(responseData.getString(Constants.LAND_INFO_MORTGAGE_TOTAL_PRICE))));
+                        spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE) + "  متر مربع");
+                        totalPriceTxt.setText(new DecimalFormat("###,###,###").format(Integer.parseInt(responseData.getString(Constants.LAND_INFO_MORTGAGE_TOTAL_PRICE))) + "  تومان");
                         LandCaseTypeModel landCaseTypeModel = qlDBHelper.GetLandCaseTypeByID(responseData.getString(Constants.LAND_INFO_LAND_CASE_ID));
                         landCaseTxt.setText(landCaseTypeModel.getTitle());
                         districtTxt.setText(responseData.getString(Constants.LAND_INFO_DISTRICT_TITLE));
@@ -238,9 +274,14 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
                                 " "+responseData.getString(Constants.LAND_INFO_LAST_NAME));
                         userPhoneTxt.setText(responseData.getString(Constants.LAND_INFO_USER_PHONE));
                         userDescriptionTxt.setText(Html.fromHtml(responseData.getString(Constants.LAND_INFO_USER_DESCRIPTION)));
-                        GalleryRecyclerViewAdapter galleryRecyclerViewAdapter = new GalleryRecyclerViewAdapter(getContext(),images);
-                        viewPager.setAdapter(galleryRecyclerViewAdapter);
+                        //  GalleryRecyclerViewAdapter galleryRecyclerViewAdapter = new GalleryRecyclerViewAdapter(getContext(),images);
+                        //viewPager.setAdapter(galleryRecyclerViewAdapter);
                         new DownloadImage(userAvatarImg).execute(Urls.getBaseURL()+"/"+responseData.getString(Constants.LAND_INFO_USER_IMAGE));
+                        for (int i=0; i < images.length(); i++){
+                            DefaultSliderView t1 = new DefaultSliderView(getActivity().getApplicationContext());
+                            t1.image(Urls.getBaseURL()+"/"+images.getString(i));//t1.description("shearch");
+                            mySliderLayout.addSlider(t1);
+                        }
 
                     }
 

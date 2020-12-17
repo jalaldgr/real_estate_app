@@ -12,10 +12,16 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.Indicators.PagerIndicator;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.HashMap;
 
@@ -25,6 +31,8 @@ import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 import saman.zamani.persiandate.PersianDate;
 import saman.zamani.persiandate.PersianDateFormat;
+
+import static com.daimajia.slider.library.SliderLayout.PresetIndicators.Center_Bottom;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,6 +60,10 @@ public class SingleUserLandFragment extends Fragment {
     TextView userDescriptionTxt ;
     TextView deliveryDateTxt;
     PersianDate persianDate;
+
+    SliderLayout mySliderLayout;
+    PagerIndicator myIndicator;
+
     public SingleUserLandFragment() {
         // Required empty public constructor
     }
@@ -99,7 +111,23 @@ public class SingleUserLandFragment extends Fragment {
         userDescriptionTxt =(TextView)view.findViewById(R.id.SingleUserLandUserDescriptionMultiTxt);
         deliveryDateTxt = (TextView)view.findViewById(R.id.SingleUserLandDeliveryDateTxt);
         GetLandInfoRequest(getContext());
+
+        mySliderLayout = (SliderLayout)view.findViewById(R.id.single_user_land_slider);
+        myIndicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
+        mySliderLayout.setPresetTransformer(SliderLayout.Transformer.Tablet);
+
+        mySliderLayout.setPresetIndicator(Center_Bottom);
+        myIndicator.setGravity(0x11);
+        mySliderLayout.setCustomIndicator(myIndicator);
+        mySliderLayout.setCustomAnimation(new DescriptionAnimation());
+
         return view;
+    }
+
+    @Override
+    public void onStop() {
+        mySliderLayout.stopAutoCycle();
+        super.onStop();
     }
 
     public void GetLandInfoRequest(final Context context){
@@ -125,9 +153,10 @@ public class SingleUserLandFragment extends Fragment {
                         titleTxt.setText(responseData.getString(Constants.LAND_INFO_TITLe));
                         districtTxt.setText(responseData.getString(Constants.LAND_INFO_DISTRICT_TITLE));
                         landTypeTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_TYPE_TITLE));
-                        spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE));
+                        spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE) + "  متر مربع");
                         unitInFloorTxt.setText(responseData.getString(Constants.LAND_INFO_UNIT_IN_FLOOR));
-                        saleTotalPriceTxt.setText(responseData.getString(Constants.LAND_INFO_SALE_TOTAL_PRICE));
+                        saleTotalPriceTxt.setText(new DecimalFormat("###,###,###").format(Integer.parseInt(responseData.getString(Constants.LAND_INFO_SALE_TOTAL_PRICE))) + "  تومان");
+
                         userDescriptionTxt.setText(responseData.getString(Constants.LAND_INFO_USER_DESCRIPTION));
                         try {
                             PersianDateFormat persianDateFormat=new PersianDateFormat("yyyy-MM-dd");
@@ -135,6 +164,11 @@ public class SingleUserLandFragment extends Fragment {
                             deliveryDateTxt.setText(persianDate.toString());
                         }catch (ParseException e){
                             e.printStackTrace();
+                        }
+                        for (int i=0; i < images.length(); i++){
+                            DefaultSliderView t1 = new DefaultSliderView(getActivity().getApplicationContext());
+                            t1.image(Urls.getBaseURL()+"/"+images.getString(i));//t1.description("shearch");
+                            mySliderLayout.addSlider(t1);
                         }
 
 
