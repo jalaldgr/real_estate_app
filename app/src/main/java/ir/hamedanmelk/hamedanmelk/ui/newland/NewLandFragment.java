@@ -3,6 +3,8 @@ package ir.hamedanmelk.hamedanmelk.ui.newland;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +17,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.FragmentActivity;
 
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -53,12 +55,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.gson.Gson;
+import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
+import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,8 +96,11 @@ import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.FilePath;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
+import ir.hamsaa.persiandatepicker.util.PersianDateParser;
+import saman.zamani.persiandate.PersianDate;
+import saman.zamani.persiandate.PersianDateFormat;
 
-public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
+public class NewLandFragment extends Fragment  implements OnMapReadyCallback, DatePickerDialog.OnDateSetListener{
     private RequestQueue myRequestQueue;
     private JsonObjectRequest myJsonObjectRequest;
 
@@ -158,6 +167,11 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
     ImageView imageThree;
     ImageView imageFour;
     ImageView imageFive;
+    com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog datePicker;
+    Date grgDate;
+    PersianDate persianDate;
+    PersianCalendar persianCalendar = new PersianCalendar();
+
     Button   submitBtn;
 
     GoogleMap mgoogleMap;
@@ -330,6 +344,9 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         imageThree = (ImageView) view.findViewById(R.id.NewLandThreeImg);
         imageFour = (ImageView) view.findViewById(R.id.NewLandFourImg);
         imageFive = (ImageView) view.findViewById(R.id.NewLandFiveImg);
+        persianDate = new PersianDate();
+        datePicker = new DatePickerDialog();
+        datePicker.setMinDate(persianCalendar);
 
         ///////////////////////Read inputs/////////////////////////////
 
@@ -629,6 +646,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         for (LandStateTypeModel Item : landStateTypeModels) {
             landStateTitles.add(Item.getTitle());
             landStateIDs.add(Item.getId());
+            Log.d(TAG, "onCreateView landStateIDs: "+Item.getTitle());
         }
         landStateAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, landStateTitles);
         landStateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -636,6 +654,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         landStateSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                requestNewModel = new NewLandModel();
                 requestNewModel.setLandStateID( landStateIDs.get(i));
                 switch (i){
                     case 0:
@@ -675,12 +694,13 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
                     case 2:
                         prePayPriceETxt.setVisibility(View.VISIBLE);
                         preVoucherTypeSpnr.setVisibility(View.VISIBLE);
-                        totalPriceETxt.setVisibility(View.VISIBLE);
+                        preSalePriceETxt.setVisibility(View.VISIBLE);
                         preVoucherTypeSpnr.setVisibility(View.VISIBLE);
                         deliveryETxt.setVisibility(View.VISIBLE);
-                        preDongETxt.setVisibility(View.GONE);
+                        preDongETxt.setVisibility(View.VISIBLE);
                         totalRentPriceETxt.setVisibility(View.GONE);
                         mortgageTotalPriceETxt.setVisibility(View.GONE);
+                        dongETxt.setVisibility(View.GONE);
                         exVoucherTypeSpnr.setVisibility(View.GONE);
                         exDongETxt.setVisibility(View.GONE);
                         exVoucherTypeSpnr.setVisibility(View.GONE);
@@ -703,6 +723,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
                         exVoucherTypeSpnr.setVisibility(View.GONE);
                         exDongETxt.setVisibility(View.GONE);
                         preDongETxt.setVisibility(View.GONE);
+                        dongETxt.setVisibility(View.GONE);
                         debtTotalPriceETxt.setVisibility(View.GONE);
                         deliveryETxt.setVisibility(View.GONE);
                         rentalPreferenceSpnr.setVisibility(View.GONE);
@@ -928,6 +949,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         deliveryETxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                requestNewModel.setDeliveryDate("2021-02-21");
 
             }
 
@@ -938,7 +960,15 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
 
             @Override
             public void afterTextChanged(Editable editable) {
-                requestNewModel.setDeliveryDate(deliveryETxt.getText().toString());
+            }
+        });
+
+        deliveryETxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestNewModel.setDeliveryDate("2021-02-21");
+                datePicker.show(getActivity().getFragmentManager(),"ffff");
+
             }
         });
 
@@ -956,6 +986,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             @Override
             public void afterTextChanged(Editable editable) {
                 requestNewModel.setDescription(descriptionETxt.getText().toString());
+
             }
         });
 
@@ -1146,6 +1177,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
                 else requestNewModel.setChkExchanged(Constants.ZERO);
                 requestNewModel.setUID(UID);
 
+
                 //                requestNewModel.setImageFiles(eqStr);
                 try {
                     HomeFragmentPOSTRequest(getContext());
@@ -1156,6 +1188,8 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         });
         return view;
     }
+
+
 
 //////////////////////////////////Context Menu///////////////////////////////////
 
@@ -1219,7 +1253,6 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         }
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //super method removed
@@ -1259,6 +1292,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
             }
         }
     }
+
 //////////////////////////Get Map//////////////////////////////////
 
     @Override
@@ -1344,5 +1378,10 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback{
         };
 
         myRequestQueue.add(myJsonObjectRequest);
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        Log.d(TAG, "onDateSet: ");
     }
 }
