@@ -12,7 +12,7 @@
         android:visibility="visible"
         app:actionLayout="@layout/login_action_bar"
         app:showAsAction="always"
-        tools:visibility="visible" />
+        tools:visibility="invisible" />
     <item android:title="Item" />
 
 

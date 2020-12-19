@@ -155,7 +155,7 @@ public class ParticipationFragment extends Fragment {
                 HTTPRequestHandlre httpRequestHandlre = new HTTPRequestHandlre();
                 HashMap<String,String> params = new HashMap<>();
                 params.put(Constants.CONTENT_TYPE,Constants.APPLICATION_JSON);
-                return httpRequestHandlre.sendGetRequest(Urls.getBaseURL()+Urls.getTotalLands(),params);
+                return httpRequestHandlre.sendGetRequest(Urls.getBaseURL()+Urls.getTotalParticipationLands(),params);
             }
         }
         TotalAssignmentRequestAsync totalAssignmentRequestAsync = new TotalAssignmentRequestAsync();

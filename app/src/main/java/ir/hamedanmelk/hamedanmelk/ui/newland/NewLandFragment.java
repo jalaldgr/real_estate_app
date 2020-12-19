@@ -1356,6 +1356,12 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
                     public void onResponse(JSONObject response) {
                         progressDialog.dismiss();
                         Log.d(TAG, "onResponse: "+response.toString());
+                        try {
+                            if(response.getString(Constants.JSON_RESPONSE_DATA).contains("success"))
+                                Toast.makeText(getContext(),"آگهی با موفقیت ثبت شد",Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener(){

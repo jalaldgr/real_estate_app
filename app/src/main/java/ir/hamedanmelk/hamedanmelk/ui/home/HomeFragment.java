@@ -197,18 +197,23 @@ public class HomeFragment extends Fragment {
                                     LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONTITLE),
                                     LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONCOLOR),
                                     LandItem.getString(Constants.LAND_MODEL_FIRST_NAME),
-                                    LandItem.getString(Constants.LAND_MODEL_LAST_NAME)
+                                    LandItem.getString(Constants.LAND_MODEL_LAST_NAME),
+                                    LandItem.getString(Constants.LAND_MODEL_LAND_CASE_ID)
+
 
                             );
 
                             landtemp.add(landModel);
-//                            if(landModel.getLandCaseId()>"1")featuredlandtemp.add(landModel)
+
+                            if(landModel.getLand_case_id().equals("3")){
+                                featuredlandtemp.add(landModel);
+                            };
                         }
                         landModels=landtemp;
                         featuredLandModels = featuredlandtemp;
-                        Log.d(TAG, "onPostExecute rentModels: "+landModels.toString());
+//                        Log.d(TAG, "onPostExecute rentModels: "+landModels.toString());
                         HorizantalrecyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
-                        VerticalrecyclerView.setAdapter(new HomeVerticalRecyclerViewAdapter(landModels,getActivity()));
+                        VerticalrecyclerView.setAdapter(new HomeVerticalRecyclerViewAdapter(featuredLandModels,getActivity()));
 
                     }
                 } catch (JSONException e) {

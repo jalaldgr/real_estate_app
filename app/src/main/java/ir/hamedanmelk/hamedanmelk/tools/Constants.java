@@ -74,6 +74,7 @@ public class Constants {
     public static final String LAND_MODEL_LANDSITUATIONCOLOR="LandSituationColor";
     public static final String LAND_MODEL_FIRST_NAME="first_name";
     public static final String LAND_MODEL_LAST_NAME="last_name";
+    public static final String LAND_MODEL_LAND_CASE_ID="land_case_id";
     public static final String[] LAND_MODEL_FIELDS={"ID","Title","land_state_id","created_at","land_situation_id","View","LandStateTitle","LandSituationTitle","LandSituationColor","first_name","last_name"};
 
     // PreSale model

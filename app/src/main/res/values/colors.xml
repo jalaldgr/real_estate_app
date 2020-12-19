@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#e03030</color>
-    <color name="colorPrimaryDark">#D13636</color>
-    <color name="colorBorderAboutApp">#BA3131</color>
+    <color name="colorPrimaryDark">#757575</color>
+    <color name="colorBorderAboutApp">#C51162</color>
 
-    <color name="colorAccent">#5bb85d</color>
+    <color name="colorAccent">#30a6e4</color>
     <color name="ic_luancher_background">#00000000</color>
     <color name="black_overlay">#66000000</color>
-    <color name="splashAdStatusbar">#3e32d1</color>
+    <color name="splashAdStatusbar">#010101</color>
     <color name="map_circle_stroke">#800000</color>
     <color name="map_circle_fill_color">#08A8A7DA</color>
-    <color name="pink">#f35961</color>
+    <color name="pink">#e03030</color>
     <color name="gray">#757575</color>
 
     <color name="textview_lable">#CC505050</color>
     <color name="primary_black_text_color">#ED000000</color>
     <color name="edit_text_bottom_line">#3D000000</color>
-    <color name="icons_color">#5bb85d</color>
+    <color name="icons_color">#e03030</color>
     <color name="icons_disable_color">#66000000</color>
 
-    <color name="multiple_image_select_primary">#673AB7</color>
-    <color name="multiple_image_select_primaryDark">#512DA8</color>
-    <color name="multiple_image_select_primaryLight">#D1C4E9</color>
-    <color name="multiple_image_select_accent">#536DFE</color>
+    <color name="multiple_image_select_primary">#e03030</color>
+    <color name="multiple_image_select_primaryDark">#757575</color>
+    <color name="multiple_image_select_primaryLight">#757575</color>
+    <color name="multiple_image_select_accent">#e03030</color>
     <color name="multiple_image_select_primaryText">#212121</color>
     <color name="multiple_image_select_secondaryText">#727272</color>
     <color name="multiple_image_select_divider">#B6B6B6</color>

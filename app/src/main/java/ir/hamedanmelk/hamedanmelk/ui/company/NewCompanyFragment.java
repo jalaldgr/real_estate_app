@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -262,7 +263,7 @@ public class NewCompanyFragment extends Fragment {
 
 
 
-    public void AddCompanyRequest ( Context context) {
+    public void AddCompanyRequest (final Context context) {
 
         class AddCompanyRequestAsync extends AsyncTask<Void, Void, List<String>> {
             private final ProgressDialog dialog = new ProgressDialog(getContext());
@@ -291,6 +292,10 @@ public class NewCompanyFragment extends Fragment {
                 try {
                     JSONObject requestJsonObject = new JSONObject(s.get(0));
                     if (requestJsonObject.getInt("State") > 0) {
+
+                        if(requestJsonObject.getString(Constants.JSON_RESPONSE_DATA).contains("success"))
+                            Toast.makeText(context,"شرکت با موفقیت ثبت شد",Toast.LENGTH_LONG).show();
+
                     }
                 } catch (JSONException jsonException) {
                     jsonException.printStackTrace();

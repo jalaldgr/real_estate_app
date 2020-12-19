@@ -19,32 +19,14 @@ public class LandModel {
     private String LandSituationColor;
     private String first_name;
     private String last_name;
+    private String land_case_id;
 
-    public LandModel(String id, String saleTotalPrice, String mortgageTotalPrice, String rentTotalPrice, String title, String land_state_id, String created_at, String land_situation_id, String view, String images, String landStateTitle, String district_id, String landSituationTitle, String landSituationColor, String first_name, String last_name) {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
         this.id = id;
-        SaleTotalPrice = saleTotalPrice;
-        MortgageTotalPrice = mortgageTotalPrice;
-        RentTotalPrice = rentTotalPrice;
-        Title = title;
-        this.land_state_id = land_state_id;
-        this.created_at = created_at;
-        this.land_situation_id = land_situation_id;
-        View = view;
-        Images = images;
-        LandStateTitle = landStateTitle;
-        this.district_id = district_id;
-        LandSituationTitle = landSituationTitle;
-        LandSituationColor = landSituationColor;
-        this.first_name = first_name;
-        this.last_name = last_name;
-    }
-
-    public String getDistrict_id() {
-        return district_id;
-    }
-
-    public void setDistrict_id(String district_id) {
-        this.district_id = district_id;
     }
 
     public String getSaleTotalPrice() {
@@ -69,14 +51,6 @@ public class LandModel {
 
     public void setRentTotalPrice(String rentTotalPrice) {
         RentTotalPrice = rentTotalPrice;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -119,12 +93,28 @@ public class LandModel {
         View = view;
     }
 
+    public String getImages() {
+        return Images;
+    }
+
+    public void setImages(String images) {
+        Images = images;
+    }
+
     public String getLandStateTitle() {
         return LandStateTitle;
     }
 
     public void setLandStateTitle(String landStateTitle) {
         LandStateTitle = landStateTitle;
+    }
+
+    public String getDistrict_id() {
+        return district_id;
+    }
+
+    public void setDistrict_id(String district_id) {
+        this.district_id = district_id;
     }
 
     public String getLandSituationTitle() {
@@ -159,30 +149,33 @@ public class LandModel {
         this.last_name = last_name;
     }
 
-    public String getImages() {
-        return Images;
+    public String getLand_case_id() {
+        return land_case_id;
     }
 
-    public void setImages(String images) {
+    public void setLand_case_id(String land_case_id) {
+        this.land_case_id = land_case_id;
+    }
+
+    public LandModel(String id, String saleTotalPrice, String mortgageTotalPrice, String rentTotalPrice, String title, String land_state_id, String created_at, String land_situation_id, String view, String images, String landStateTitle, String district_id, String landSituationTitle, String landSituationColor, String first_name, String last_name, String land_case_id) {
+        this.id = id;
+        SaleTotalPrice = saleTotalPrice;
+        MortgageTotalPrice = mortgageTotalPrice;
+        RentTotalPrice = rentTotalPrice;
+        Title = title;
+        this.land_state_id = land_state_id;
+        this.created_at = created_at;
+        this.land_situation_id = land_situation_id;
+        View = view;
         Images = images;
-    }
+        LandStateTitle = landStateTitle;
+        this.district_id = district_id;
+        LandSituationTitle = landSituationTitle;
+        LandSituationColor = landSituationColor;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.land_case_id = land_case_id;
 
-    @Override
-    public String toString() {
-        return "LandModel{" +
-                "id='" + id + '\'' +
-                ", SaleTotalPrice='" + SaleTotalPrice + '\'' +
-                ", Title='" + Title + '\'' +
-                ", land_state_id='" + land_state_id + '\'' +
-                ", created_at='" + created_at + '\'' +
-                ", land_situation_id='" + land_situation_id + '\'' +
-                ", View='" + View + '\'' +
-                ", Images='" + Images + '\'' +
-                ", LandStateTitle='" + LandStateTitle + '\'' +
-                ", LandSituationTitle='" + LandSituationTitle + '\'' +
-                ", LandSituationColor='" + LandSituationColor + '\'' +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                '}';
+
     }
 }
