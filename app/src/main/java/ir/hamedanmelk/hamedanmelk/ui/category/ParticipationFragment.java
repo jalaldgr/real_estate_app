@@ -23,6 +23,8 @@ import java.util.HashMap;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.AssignmentModel;
+import ir.hamedanmelk.hamedanmelk.models.LandModel;
+import ir.hamedanmelk.hamedanmelk.recyclers.HomeRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.recyclers.ParticipationRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
@@ -40,7 +42,9 @@ public class ParticipationFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String TAG = "AssignmentFragment";
+    ArrayList<LandModel> landModels;
     ArrayList<AssignmentModel> assignmentModels;
+
     RecyclerView recyclerView;
     private String mParam1;
     private String mParam2;
@@ -108,39 +112,41 @@ public class ParticipationFragment extends Fragment {
                 try {
                     JSONObject reader = new JSONObject(s);
                     JSONObject ResponseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
-                    JSONArray assignmentList = new JSONArray(ResponseData.getString("data"));
-                    JSONObject assignmentItem;
+                    JSONArray LandList = new JSONArray(ResponseData.getString("data"));
+                    JSONObject LandItem;
                     JSONArray imagesArray;
                     if (reader.getInt(Constants.JSON_RESPONSE_STATE)==1)
                     {
-                        Log.d(TAG, "onPostExecute: "+assignmentList.toString());
-                        ArrayList<AssignmentModel> assignmentTemp=new ArrayList<AssignmentModel>();
-                        for(int i=0; i < assignmentList.length();i++)
+                        ArrayList<LandModel> landtemp=new ArrayList<LandModel>();
+                        for(int i=0; i < LandList.length();i++)
                         {
-                            assignmentItem = assignmentList.getJSONObject(i);
-                            imagesArray =new JSONArray( assignmentItem.getString(Constants.ASSIGNMENT_MODEL_IMAGES));
-                            AssignmentModel assignmentModel = new AssignmentModel(
-                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_ID),
-                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_TITLE),
-                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_LAND_STATE_ID),
-                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_CREATED_AT),
-                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_LAND_SITUATION_ID),
-                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_VIEW),
+                            LandItem = LandList.getJSONObject(i);
+                            imagesArray =new JSONArray( LandItem.getString(Constants.SALE_MODEL_IMAGES));
+                            LandModel landModel = new LandModel(
+                                    LandItem.getString(Constants.LAND_MODEL_ID),
+                                    LandItem.getString(Constants.LAND_MODEL_TOTAL_PRICE),
+                                    "0",
+                                    "0",
+                                    LandItem.getString(Constants.LAND_MODEL_TITLE),
+                                    LandItem.getString(Constants.LAND_MODEL_LAND_STATE_ID),
+                                    LandItem.getString(Constants.LAND_MODEL_CREATED_AT),
+                                    LandItem.getString(Constants.LAND_MODEL_LAND_SITUATION_ID),
+                                    LandItem.getString(Constants.LAND_MODEL_VIEW),
                                     imagesArray.get(0).toString(),
-                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_LAND_STATE_TITLE),
-                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_LAND_SITUATION_TITLE),
-                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_LAND_SITUATION_COLOR),
-                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_FIRST_NAME),
-                                    assignmentItem.getString(Constants.ASSIGNMENT_MODEL_LAST_NAME)
+                                    LandItem.getString(Constants.LAND_MODEL_LANDSTATETITLE),
+                                    LandItem.getString(Constants.USER_LAND_MODEL_DISTRICT_ID),
+                                    LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONTITLE),
+                                    LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONCOLOR),
+                                    LandItem.getString(Constants.LAND_MODEL_FIRST_NAME),
+                                    LandItem.getString(Constants.LAND_MODEL_LAST_NAME),
+                                    ""
                             );
 
-                            assignmentTemp.add(assignmentModel);
+                            landtemp.add(landModel);
                         }
-                        assignmentModels=assignmentTemp;
-                        Log.d(TAG, "onPostExecute: kkk"+assignmentTemp.toString());
+                        landModels=landtemp;
 
-                        Log.d(TAG, "onPostExecute: jjj"+ assignmentModels.toString());
-                        recyclerView.setAdapter(new ParticipationRecyclerViewAdapter(assignmentModels,getActivity()));
+                        recyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
 
                     }
                 } catch (JSONException e) {

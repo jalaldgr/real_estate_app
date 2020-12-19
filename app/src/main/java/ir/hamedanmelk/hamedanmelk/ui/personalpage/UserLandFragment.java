@@ -23,7 +23,9 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.models.LandModel;
 import ir.hamedanmelk.hamedanmelk.models.UserLandModel;
+import ir.hamedanmelk.hamedanmelk.recyclers.HomeRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
@@ -42,6 +44,7 @@ public class UserLandFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private static final String TAG = "UserLandFragment";
     ArrayList<UserLandModel> userLandModels;
+    ArrayList<LandModel> landModels;
     RecyclerView recyclerView;
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -107,41 +110,45 @@ public class UserLandFragment extends Fragment {
                 if (progressDialog.isShowing())progressDialog.dismiss();
                 try {
                     JSONObject reader = new JSONObject(s);
-                    Log.d(TAG, "onPostExecute: "+s.toString());
+                    JSONObject ResponseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
+                    JSONArray LandList = new JSONArray(ResponseData.getString("data"));
+                    JSONObject LandItem;
+                    JSONArray imagesArray;
 
-                    if(reader.getInt(Constants.JSON_RESPONSE_STATE)==1){
-                        JSONObject responseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
-                        JSONArray responseList = new JSONArray(responseData.getString("data"));
-                        ArrayList<UserLandModel>tempUserLandModels = new ArrayList<UserLandModel>();
-                        JSONObject userLandItem;
-                        JSONArray imagesArray;
-                        for(int i=0; i<responseList.length();i++){
-                            userLandItem = responseList.getJSONObject(i);
-                            imagesArray =new JSONArray( userLandItem.getString(Constants.SALE_MODEL_IMAGES));
-
-                            UserLandModel userLandModel = new UserLandModel(
-                                    userLandItem.getString(Constants.USER_LAND_MODEL_ID),
-                                    userLandItem.getString(Constants.USER_LAND_MODEL_TITLE),
-                                    userLandItem.getString(Constants.USER_LAND_MODEL_LAND_STATE_ID),
-                                    userLandItem.getString(Constants.USER_LAND_MODEL_CREATED_AT),
-                                    userLandItem.getString(Constants.USER_LAND_MODEL_LAND_SITUATION_ID),
-                                    userLandItem.getString(Constants.USER_LAND_MODEL_VIEW),
+                    if (reader.getInt(Constants.JSON_RESPONSE_STATE)==1)
+                    {
+                        ArrayList<LandModel> landtemp=new ArrayList<LandModel>();
+                        Log.d(TAG, "onPostExecute land list: "+LandList.length());
+                        for(int i=0; i < LandList.length();i++)
+                        {
+                            LandItem = LandList.getJSONObject(i);
+                            imagesArray =new JSONArray( LandItem.getString(Constants.SALE_MODEL_IMAGES));
+                            LandModel landModel = new LandModel(
+                                    LandItem.getString(Constants.LAND_MODEL_ID),
+                                    LandItem.getString(Constants.LAND_MODEL_TOTAL_PRICE),
+                                    LandItem.getString(Constants.LAND_MODEL_TOTAL_MORTGAGE_PRICE),
+                                    LandItem.getString(Constants.NEW_LAND_RENTAL_TOTAL_PRICE),
+                                    LandItem.getString(Constants.LAND_MODEL_TITLE),
+                                    LandItem.getString(Constants.LAND_MODEL_LAND_STATE_ID),
+                                    LandItem.getString(Constants.LAND_MODEL_CREATED_AT),
+                                    LandItem.getString(Constants.LAND_MODEL_LAND_SITUATION_ID),
+                                    LandItem.getString(Constants.LAND_MODEL_VIEW),
                                     imagesArray.get(0).toString(),
-                                    userLandItem.getString(Constants.USER_LAND_MODEL_LANDSTATETITLE),
-                                    userLandItem.getString(Constants.USER_LAND_MODEL_DISTRICT_ID),
-                                    userLandItem.getString(Constants.USER_LAND_MODEL_LAND_SITUATIONTITLE),
-                                    userLandItem.getString(Constants.USER_LAND_MODEL_LANDSITUATIONCOLOR),
-                                    userLandItem.getString(Constants.USER_LAND_MODEL_FIRST_NAME),
-                                    userLandItem.getString(Constants.USER_LAND_MODEL_LAST_NAME)
+                                    LandItem.getString(Constants.LAND_MODEL_LANDSTATETITLE),
+                                    LandItem.getString(Constants.USER_LAND_MODEL_DISTRICT_ID),
+                                    LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONTITLE),
+                                    LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONCOLOR),
+                                    LandItem.getString(Constants.LAND_MODEL_FIRST_NAME),
+                                    LandItem.getString(Constants.LAND_MODEL_LAST_NAME),
+                                    LandItem.getString(Constants.LAND_MODEL_LAND_CASE_ID)
                             );
-                            tempUserLandModels.add(userLandModel);
+
+                            landtemp.add(landModel);
                         }
-                        userLandModels=tempUserLandModels;
-                        Log.d(TAG, "onPostExecute userlands: "+userLandModels.toString());
-                        recyclerView.setAdapter(new UserLandRecyclerViewAdapter(userLandModels,getActivity()));
+                        landModels=landtemp;
+                        recyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
 
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.d(TAG, "onPostExecute exception:"+e.toString());

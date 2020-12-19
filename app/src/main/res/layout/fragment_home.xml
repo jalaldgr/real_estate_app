@@ -248,17 +248,16 @@
                 android:layout_marginStart="@dimen/general_margin_start"
                 android:layout_marginTop="@dimen/general_margin_top"
                 android:layout_marginEnd="@dimen/general_margin_end"
-                android:text="اکازیون ها"
-                android:textColor="@color/primary_black_text_color"
+                android:text="آگهی های ویژه"
                 android:textSize="@dimen/title_text_size"
                 android:textStyle="bold" />
 
             <RelativeLayout
                 android:id="@+id/HomeFrgmntVerticalRcyclRltvLyt"
                 android:layout_width="match_parent"
-                android:layout_height="196dp">
+                android:layout_height="match_parent">
 
-                    android:layout_marginStart="@dimen/general_margin_start"
+                android:layout_marginStart="@dimen/general_margin_start"
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/HomeFrgmntVerticalRcyclVw"
@@ -273,7 +272,6 @@
                 android:layout_marginTop="@dimen/general_margin_top"
                 android:layout_marginEnd="@dimen/general_margin_end"
                 android:text="تازه ترین ها"
-                android:textColor="@color/primary_black_text_color"
                 android:textSize="@dimen/title_text_size"
                 android:textStyle="bold" />
             <RelativeLayout

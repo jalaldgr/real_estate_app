@@ -3,34 +3,33 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="132dp"
-    android:layout_height="184dp"
-    android:layout_marginLeft="4dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginRight="4dp"
-    android:layout_marginBottom="8dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="12dp"
     android:elevation="2dp"
     android:theme="@style/Widget.MaterialComponents.CardView"
     app:cardCornerRadius="@dimen/cardview_default_radius">
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layoutDirection="rtl"
         android:orientation="vertical">
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.6777"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:cardCornerRadius="@dimen/cardview_default_radius"
+                android:layout_width="152dp"
+                android:layout_height="128dp"
+                app:cardCornerRadius="4dp"
                 app:cardMaxElevation="4dp">
 
                 <ImageView
@@ -46,21 +45,34 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.33333"
+            android:layout_height="96dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/HomeFragmentVerticalTitleTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center|center_horizontal|center_vertical"
-                android:layout_marginTop="8dp"
-                android:paddingStart="4dp"
-                android:paddingEnd="4dp"
+                android:padding="8dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="8dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="8dp"
                 android:text="@string/vocabulary_title"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/HomeFragmentVerticalDistrictTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="12dp"
+                android:text="@string/vocabulary_district"
+                android:textSize="13sp"
+                android:visibility="visible" />
 
         </LinearLayout>
     </LinearLayout>

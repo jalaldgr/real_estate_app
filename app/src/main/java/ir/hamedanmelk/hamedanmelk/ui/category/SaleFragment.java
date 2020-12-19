@@ -22,8 +22,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.models.LandModel;
 import ir.hamedanmelk.hamedanmelk.models.SaleModel;
-import ir.hamedanmelk.hamedanmelk.recyclers.SaleRecyclerViewAdapter;
+import ir.hamedanmelk.hamedanmelk.recyclers.HomeRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
@@ -41,6 +42,7 @@ public class SaleFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private static final String TAG = "SaleFragment";
     ArrayList<SaleModel> SaleModels;
+    ArrayList<LandModel> landModels;
     RecyclerView recyclerView;
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -108,40 +110,44 @@ public class SaleFragment extends Fragment {
                     if (progressDialog.isShowing())progressDialog.dismiss();
                     try {
                         JSONObject reader = new JSONObject(s);
-                        if(reader.getInt(Constants.JSON_RESPONSE_STATE)==1){
-                            JSONObject responseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
-                            JSONArray responseList = new JSONArray(responseData.getString("data"));
-                            ArrayList<SaleModel>tempSaleModels = new ArrayList<SaleModel>();
-                            JSONObject SaleItem;
-                            JSONArray imagesArray;
-                            for(int i=0; i<responseList.length();i++){
-                                SaleItem = responseList.getJSONObject(i);
-                                imagesArray =new JSONArray( SaleItem.getString(Constants.SALE_MODEL_IMAGES));
+                        JSONObject ResponseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
+                        JSONArray LandList = new JSONArray(ResponseData.getString("data"));
+                        JSONObject LandItem;
+                        JSONArray imagesArray;
 
-                                        SaleModel SaleModel = new SaleModel(
-                                        SaleItem.getString(Constants.SALE_MODEL_ID),
-                                        SaleItem.getString(Constants.SALE_MODEL_TOTAL_PRICE),
-                                        SaleItem.getString(Constants.SALE_MODEL_TITLE),
-                                        SaleItem.getString(Constants.SALE_MODEL_LAND_STATE_ID),
-                                        SaleItem.getString(Constants.SALE_MODEL_CREATED_AT),
-                                        SaleItem.getString(Constants.SALE_MODEL_LAND_SITUATION_ID),
-                                        SaleItem.getString(Constants.SALE_MODEL_VIEW),
+                        if (reader.getInt(Constants.JSON_RESPONSE_STATE)==1)
+                        {
+                            ArrayList<LandModel> landtemp=new ArrayList<LandModel>();
+                            for(int i=0; i < LandList.length();i++)
+                            {
+                                LandItem = LandList.getJSONObject(i);
+                                imagesArray =new JSONArray( LandItem.getString(Constants.SALE_MODEL_IMAGES));
+                                LandModel landModel = new LandModel(
+                                        LandItem.getString(Constants.LAND_MODEL_ID),
+                                        LandItem.getString(Constants.LAND_MODEL_TOTAL_PRICE),
+                                        "0",
+                                        "0",
+                                        LandItem.getString(Constants.LAND_MODEL_TITLE),
+                                        LandItem.getString(Constants.LAND_MODEL_LAND_STATE_ID),
+                                        LandItem.getString(Constants.LAND_MODEL_CREATED_AT),
+                                        LandItem.getString(Constants.LAND_MODEL_LAND_SITUATION_ID),
+                                        LandItem.getString(Constants.LAND_MODEL_VIEW),
                                         imagesArray.get(0).toString(),
-                                        SaleItem.getString(Constants.SALE_MODEL_LANDSTATETITLE),
-                                        SaleItem.getString(Constants.SALE_MODEL_DISTRICT_ID),
-                                        SaleItem.getString(Constants.SALE_MODEL_LAND_SITUATIONTITLE),
-                                        SaleItem.getString(Constants.SALE_MODEL_LANDSITUATIONCOLOR),
-                                        SaleItem.getString(Constants.SALE_MODEL_FIRST_NAME),
-                                        SaleItem.getString(Constants.SALE_MODEL_LAST_NAME)
+                                        LandItem.getString(Constants.LAND_MODEL_LANDSTATETITLE),
+                                        LandItem.getString(Constants.USER_LAND_MODEL_DISTRICT_ID),
+                                        LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONTITLE),
+                                        LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONCOLOR),
+                                        LandItem.getString(Constants.LAND_MODEL_FIRST_NAME),
+                                        LandItem.getString(Constants.LAND_MODEL_LAST_NAME),
+                                        ""
                                 );
-                                tempSaleModels.add(SaleModel);
+
+                                landtemp.add(landModel);
                             }
-                            SaleModels=tempSaleModels;
-                            Log.d(TAG, "onPostExecute Sales: "+SaleModels.toString());
-                            recyclerView.setAdapter(new SaleRecyclerViewAdapter(SaleModels,getActivity()));
+                            landModels=landtemp;
+                            recyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
 
                         }
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Log.d(TAG, "onPostExecute exception:"+e.toString());

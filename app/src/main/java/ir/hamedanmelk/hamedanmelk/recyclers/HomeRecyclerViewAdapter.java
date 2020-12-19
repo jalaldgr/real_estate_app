@@ -15,6 +15,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,6 +51,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     @Override
     public void onBindViewHolder(final ViewHolder holder,final int position) {
         final LandModel landModel = landModels.get(position);
+        String price ="توافقی";
         dbHelper = new MYSQlDBHelper(act.getApplicationContext());
         holder.titleTxt.setText(landModel.getTitle());
         new DownloadImage(holder.thumbnailImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+landModel.getImages());
@@ -58,17 +60,26 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         switch (landModels.get(position).getLand_state_id()) {
             case "1" :
                 holder.totalSaleLayout.setVisibility(View.VISIBLE);
-                holder.totalSalePriceTxt.setText(landModel.getSaleTotalPrice());
+                if(Long.parseLong(landModel.getSaleTotalPrice())>0)
+                        price = new DecimalFormat("###,###,###").format(Long.parseLong(landModel.getSaleTotalPrice()))+" تومان";
+                holder.totalSalePriceTxt.setText(price);
                 break;
             case "2":
                 holder.totalMortgageLayout.setVisibility(View.VISIBLE);
                 holder.totalRentLayout.setVisibility(View.VISIBLE);
-                holder.totalMortgagePriceTxt.setText(landModel.getMortgageTotalPrice());
-                holder.totalRentPriceTxt.setText(landModel.getRentTotalPrice());
+                holder.totalMortgagePriceTxt.setText(new DecimalFormat("###,###,###")
+                        .format(Long.parseLong(landModel.getMortgageTotalPrice()))+" تومان");
+                String rentPrice="ندارد";
+                if(Long.parseLong(landModel.getRentTotalPrice())>0)
+                    rentPrice = new DecimalFormat("###,###,###").format(Long.parseLong(landModel.getRentTotalPrice()))+" تومان";
+                holder.totalRentPriceTxt.setText(rentPrice);
                 break;
             case "3":
                 holder.totalSaleLayout.setVisibility(View.VISIBLE);
-                holder.totalSalePriceTxt.setText(landModel.getSaleTotalPrice());
+                if(Long.parseLong(landModel.getSaleTotalPrice())>0)
+                    price = new DecimalFormat("###,###,###").format(Long.parseLong(landModel.getSaleTotalPrice()))+" تومان";
+                holder.totalSalePriceTxt.setText(price);
+
         }
             holder.titleTxt.setOnClickListener(new View.OnClickListener() {
             @Override

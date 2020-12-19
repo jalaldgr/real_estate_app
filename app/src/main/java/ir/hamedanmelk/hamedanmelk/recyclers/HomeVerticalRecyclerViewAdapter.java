@@ -54,7 +54,7 @@ public class HomeVerticalRecyclerViewAdapter extends RecyclerView.Adapter<HomeVe
         holder.titleTxt.setText(landModel.getTitle());
         new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+landModel.getImages());
         DistrictModel districtModel = dbHelper.GetDistrictByID(landModel.getDistrict_id());
-        //holder.districtTxt.setText(districtModel.getTitle());
+        holder.districtTxt.setText(districtModel.getTitle());
         switch (landModels.get(position).getLand_state_id()) {
             case "1" :
                 //holder.totalSaleLayout.setVisibility(View.VISIBLE);
@@ -76,11 +76,14 @@ public class HomeVerticalRecyclerViewAdapter extends RecyclerView.Adapter<HomeVe
                     case "1" :
                         controller.navigate(R.id.singleSaleFragment,args);
                         break;
-                    case  "2":
+                    case "2":
                         controller.navigate(R.id.singleRentFragment,args);
                         break;
                     case "3" :
                         controller.navigate(R.id.singlePreSaleFragment,args);
+                        break;
+                    case "5":
+                        controller.navigate(R.id.singleParticipationFragment,args);
 
                 }
             }
@@ -96,11 +99,13 @@ public class HomeVerticalRecyclerViewAdapter extends RecyclerView.Adapter<HomeVe
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView titleTxt;
         public final ImageView thumbnailImg;
+        public final TextView districtTxt;
 
         public ViewHolder(View view) {
             super(view);
             titleTxt = (TextView) view.findViewById(R.id.HomeFragmentVerticalTitleTxt);
             thumbnailImg = (ImageView)view.findViewById(R.id.HomeFragmentVerticalThumbnailImg);
+            districtTxt = (TextView)view.findViewById(R.id.HomeFragmentVerticalDistrictTxt);
         }
 
     }

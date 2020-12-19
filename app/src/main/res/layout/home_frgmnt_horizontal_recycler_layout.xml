@@ -3,20 +3,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    android:elevation="2dp"
-    android:padding="4dp"
-    android:theme="@style/Widget.MaterialComponents.CardView"
     app:cardCornerRadius="@dimen/cardview_default_radius"
-    >
+    style="@style/AdsRecyclerGridView">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_height="match_parent"
         android:layoutDirection="rtl"
         android:orientation="horizontal">
 
@@ -24,14 +16,15 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.4"
-            android:orientation="vertical">
+            android:layout_weight="0.48"
+            android:orientation="vertical"
+            android:padding="12dp">
 
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:cardCornerRadius="2dp"
+                android:layout_height="128dp"
+                app:cardCornerRadius="4dp"
                 app:cardMaxElevation="4dp">
 
                 <ImageView
@@ -48,28 +41,24 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.7"
-            android:orientation="vertical">
+            android:layout_weight="0.52"
+            android:orientation="vertical"
+            android:paddingLeft="12dp"
+            android:paddingTop="12dp">
 
             <TextView
                 android:id="@+id/HomeFragmentTitleTxt"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingStart="12dp"
                 android:text="@string/vocabulary_title"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="14sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/HomeFragmentDistrictTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingStart="12dp"
-                android:text="@string/vocabulary_district"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="14sp" />
+                style="@style/AdsRecyclerItemSubtitle"
+                android:layout_marginTop="4dp"
+                android:text="@string/vocabulary_district" />
 
             <ImageView
                 android:id="@+id/HomeFragmentStarImg"
@@ -86,72 +75,89 @@
                 android:id="@+id/HomeFragmentTotalSalePriceLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                android:layout_marginTop="8dp"
-                >
+                android:layout_marginTop="4dp"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/textView15"
+                    style="@style/AdsRecyclerItemSubtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="16dp"
+                    android:layout_gravity="center_vertical"
                     android:text="@string/vocabulary_total_price" />
 
-                <TextView
-                    android:id="@+id/HomeFragmentTotalSaleTxt"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/vocabulary_total_price"
-                    android:layout_gravity="left"
-                    android:paddingStart="4dp"/>
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/HomeFragmentTotalSaleTxt"
+                        style="@style/AdsRecyclerPrice"
+                        android:text="@string/land_info_total_price" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/HomeFragmentTotalMortgagePriceLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="8dp"
                 android:visibility="gone">
 
                 <TextView
                     android:id="@+id/textView16"
+                    style="@style/AdsRecyclerItemSubtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="16dp"
+                    android:layout_gravity="center_vertical"
                     android:text="@string/vocabulary_mortgage_price" />
 
-                <TextView
-                    android:id="@+id/HomeFragmentHomelMortgageTxt"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:text="@string/vocabulary_mortgage_price"
-                    android:paddingStart="4dp"/>
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/HomeFragmentHomelMortgageTxt"
+                        style="@style/AdsRecyclerPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vocabulary_mortgage_price" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/HomeFragmentTotalRentPriceLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="8dp"
                 android:visibility="gone">
 
                 <TextView
                     android:id="@+id/textView14"
+                    style="@style/AdsRecyclerItemSubtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="16dp"
                     android:text="@string/vocabulary_rent_price" />
 
-                <TextView
-                    android:id="@+id/HomeFragmentTotalRentTxt"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/vocabulary_rent_price"
-                    android:paddingStart="4dp"/>
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/HomeFragmentTotalRentTxt"
+                        style="@style/AdsRecyclerPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vocabulary_rent_price" />
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>

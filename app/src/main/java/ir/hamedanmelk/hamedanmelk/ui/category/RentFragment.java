@@ -22,7 +22,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.models.LandModel;
 import ir.hamedanmelk.hamedanmelk.models.RentModel;
+import ir.hamedanmelk.hamedanmelk.recyclers.HomeRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.recyclers.RentRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
@@ -41,6 +43,8 @@ public class RentFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private static final String TAG = "RentFragment";
     ArrayList<RentModel> rentModels;
+    ArrayList<LandModel> landModels;
+
     RecyclerView recyclerView;
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -109,38 +113,40 @@ public class RentFragment extends Fragment {
                 try {
                     JSONObject reader = new JSONObject(s);
                     JSONObject ResponseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
-                    JSONArray RentList = new JSONArray(ResponseData.getString("data"));
-                    JSONObject RentItem;
+                    JSONArray LandList = new JSONArray(ResponseData.getString("data"));
+                    JSONObject LandItem;
                     JSONArray imagesArray;
                     if (reader.getInt(Constants.JSON_RESPONSE_STATE)==1)
                     {
-                        ArrayList<RentModel> renttemp=new ArrayList<RentModel>();
-                        for(int i=0; i < RentList.length();i++)
+                        ArrayList<LandModel> renttemp=new ArrayList<LandModel>();
+                        for(int i=0; i < LandList.length();i++)
                         {
-                            RentItem = RentList.getJSONObject(i);
-                            imagesArray =new JSONArray( RentItem.getString(Constants.SALE_MODEL_IMAGES));
-                            RentModel rentModel = new RentModel(
-                                    RentItem.getString(Constants.RENT_MODEL_ID),
-                                    RentItem.getString(Constants.RENT_MODEL_TOTAL_MORTGAGE_PRICE),
-                                    RentItem.getString(Constants.RENT_MODEL_TOTAL_RENT_PRICE),
-                                    RentItem.getString(Constants.RENT_MODEL_TITLE),
-                                    RentItem.getString(Constants.RENT_MODEL_LAND_STATE_ID),
-                                    RentItem.getString(Constants.RENT_MODEL_LAND_SITUATION_ID),
-                                    RentItem.getString(Constants.RENT_MODEL_VIEW),
+                            LandItem = LandList.getJSONObject(i);
+                            imagesArray =new JSONArray( LandItem.getString(Constants.SALE_MODEL_IMAGES));
+                            LandModel landModel = new LandModel(
+                                    LandItem.getString(Constants.LAND_MODEL_ID),
+                                    "",
+                                    LandItem.getString(Constants.LAND_MODEL_TOTAL_MORTGAGE_PRICE),
+                                    LandItem.getString(Constants.LAND_INFO_RENT_TOTAL_PRICE),
+                                    LandItem.getString(Constants.LAND_MODEL_TITLE),
+                                    LandItem.getString(Constants.LAND_MODEL_LAND_STATE_ID),
+                                    LandItem.getString(Constants.LAND_MODEL_CREATED_AT),
+                                    LandItem.getString(Constants.LAND_MODEL_LAND_SITUATION_ID),
+                                    LandItem.getString(Constants.LAND_MODEL_VIEW),
                                     imagesArray.get(0).toString(),
-                                    RentItem.getString(Constants.RENT_MODEL_LAND_STATE_TITLE),
-                                    RentItem.getString(Constants.RENT_MODEL_DISTRICT_ID),
-                                    RentItem.getString(Constants.RENT_MODEL_LAND_SITUATION_TITLE),
-                                    RentItem.getString(Constants.RENT_MODEL_LAND_SITUATION_COLOR),
-                                    RentItem.getString(Constants.RENT_MODEL_FIRST_NAME),
-                                    RentItem.getString(Constants.RENT_MODEL_LAST_NAME)
-                                    );
+                                    LandItem.getString(Constants.LAND_MODEL_LANDSTATETITLE),
+                                    LandItem.getString(Constants.USER_LAND_MODEL_DISTRICT_ID),
+                                    LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONTITLE),
+                                    LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONCOLOR),
+                                    LandItem.getString(Constants.LAND_MODEL_FIRST_NAME),
+                                    LandItem.getString(Constants.LAND_MODEL_LAST_NAME),
+                                    ""
+                            );
 
-                            renttemp.add(rentModel);
+                            renttemp.add(landModel);
                         }
-                        rentModels=renttemp;
-                        Log.d(TAG, "onPostExecute rentModels: "+rentModels.toString());
-                        recyclerView.setAdapter(new RentRecyclerViewAdapter(rentModels,getActivity()));
+                        landModels=renttemp;
+                        recyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
 
                     }
                 } catch (JSONException e) {
