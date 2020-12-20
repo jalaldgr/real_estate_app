@@ -13,7 +13,7 @@ public class Urls {
     private static final String GetNewsLists                            = "/AppRequests/GetNewsLists";//خبر ها
     private static final String RegisterPublicUser                      = "/AppRequests/RegisterPublicUser";//ثبت نام کاربر
     private static final String GetLandInfo                             = "/AppRequests/GetLandInfo";
-    private static final String NoImage                                 = "/assets/no-image.png";
+    private static final String NoImage                                 = "/assets/no_image.png";
     private static final String GetProvinces                            = "/AppRequests/GetProvinces";
     private static final String GetDistricts                            = "/AppRequests/GetDistricts";
     private static final String GetCities                               = "/AppRequests/GetCities";
