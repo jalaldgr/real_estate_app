@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.category.LinksFragment">
-
-
-        <GridView
-            android:id="@+id/LinksFragmentGridView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:numColumns="3"
-            tools:listitem="@layout/fragment_links_item_adapter" />
-    </RelativeLayout>
+    android:id="@+id/LinksFragmentGridView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:numColumns="1"
+    android:layout_marginBottom="60dp"
+    tools:listitem="@layout/fragment_links_item_adapter" />
 

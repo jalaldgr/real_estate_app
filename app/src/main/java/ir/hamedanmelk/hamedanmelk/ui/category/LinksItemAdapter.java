@@ -36,7 +36,9 @@ public class LinksItemAdapter extends BaseAdapter {
         ImageView logoImg = (ImageView)view.findViewById(R.id.LinksFragmentLogoImg);
         TextView  titleTxt= (TextView)view.findViewById(R.id.LinksFragmentTitleTxt);
         titleTxt.setText(linksModels.get(position).getTitle());
-        new DownloadImage(logoImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+"/"+linksModels.get(position).getLogo());
+        if(linksModels.get(position).getLogo()!="null") {
+            new DownloadImage(logoImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Urls.getBaseURL() + "/" + linksModels.get(position).getLogo());
+        }
         logoImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
