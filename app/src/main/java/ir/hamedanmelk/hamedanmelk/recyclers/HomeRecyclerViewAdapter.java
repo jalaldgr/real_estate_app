@@ -60,6 +60,8 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         switch (landModels.get(position).getLand_state_id()) {
             case "1" :
                 holder.totalSaleLayout.setVisibility(View.VISIBLE);
+                holder.totalMortgageLayout.setVisibility(View.GONE);
+                holder.totalRentLayout.setVisibility(View.GONE);
                 if(Long.parseLong(landModel.getSaleTotalPrice())>0)
                         price = new DecimalFormat("###,###,###").format(Long.parseLong(landModel.getSaleTotalPrice()))+" تومان";
                 holder.totalSalePriceTxt.setText(price);
@@ -67,6 +69,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             case "2":
                 holder.totalMortgageLayout.setVisibility(View.VISIBLE);
                 holder.totalRentLayout.setVisibility(View.VISIBLE);
+                holder.totalSaleLayout.setVisibility(View.GONE);
                 holder.totalMortgagePriceTxt.setText(new DecimalFormat("###,###,###")
                         .format(Long.parseLong(landModel.getMortgageTotalPrice()))+" تومان");
                 String rentPrice="ندارد";
@@ -76,12 +79,21 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
                 break;
             case "3":
                 holder.totalSaleLayout.setVisibility(View.VISIBLE);
+                holder.totalMortgageLayout.setVisibility(View.GONE);
+                holder.totalRentLayout.setVisibility(View.GONE);
+                if(Long.parseLong(landModel.getSaleTotalPrice())>0)
+                    price = new DecimalFormat("###,###,###").format(Long.parseLong(landModel.getSaleTotalPrice()))+" تومان";
+                holder.totalSalePriceTxt.setText(price);
+                break;
+            case "5":
+                holder.totalSaleLayout.setVisibility(View.GONE);
+                holder.totalMortgageLayout.setVisibility(View.GONE);
                 if(Long.parseLong(landModel.getSaleTotalPrice())>0)
                     price = new DecimalFormat("###,###,###").format(Long.parseLong(landModel.getSaleTotalPrice()))+" تومان";
                 holder.totalSalePriceTxt.setText(price);
 
         }
-            holder.titleTxt.setOnClickListener(new View.OnClickListener() {
+            holder.mainLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final NavController controller= Navigation.findNavController(Objects.requireNonNull(act),R.id.nav_host_fragment);
@@ -96,6 +108,9 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
                         break;
                     case "3" :
                         controller.navigate(R.id.singlePreSaleFragment,args);
+                        break;
+                    case "5":
+                        controller.navigate(R.id.singleParticipationFragment);
 
                 }
             }
@@ -118,6 +133,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         public final LinearLayout totalMortgageLayout;
         public final LinearLayout totalRentLayout;
         public final TextView districtTxt;
+        public final LinearLayout mainLinearLayout;
 
         public ViewHolder(View view) {
             super(view);
@@ -130,6 +146,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             totalMortgageLayout = (LinearLayout)view.findViewById(R.id.HomeFragmentTotalMortgagePriceLayout);
             totalRentLayout     =(LinearLayout)view.findViewById(R.id.HomeFragmentTotalRentPriceLayout);
             districtTxt         = (TextView)view.findViewById(R.id.HomeFragmentDistrictTxt);
+            mainLinearLayout = (LinearLayout)view.findViewById(R.id.HomeFragmentMainLinearLayout);
 
 
         }

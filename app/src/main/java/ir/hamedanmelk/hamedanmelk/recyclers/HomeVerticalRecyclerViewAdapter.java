@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -66,7 +67,7 @@ public class HomeVerticalRecyclerViewAdapter extends RecyclerView.Adapter<HomeVe
             case "3":
                 //holder.totalSaleLayout.setVisibility(View.VISIBLE);
         }
-        holder.titleTxt.setOnClickListener(new View.OnClickListener() {
+        holder.mainLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final NavController controller= Navigation.findNavController(Objects.requireNonNull(act), R.id.nav_host_fragment);
@@ -100,12 +101,14 @@ public class HomeVerticalRecyclerViewAdapter extends RecyclerView.Adapter<HomeVe
         public final TextView titleTxt;
         public final ImageView thumbnailImg;
         public final TextView districtTxt;
+        public final LinearLayout mainLinearLayout;
 
         public ViewHolder(View view) {
             super(view);
             titleTxt = (TextView) view.findViewById(R.id.HomeFragmentVerticalTitleTxt);
             thumbnailImg = (ImageView)view.findViewById(R.id.HomeFragmentVerticalThumbnailImg);
             districtTxt = (TextView)view.findViewById(R.id.HomeFragmentVerticalDistrictTxt);
+            mainLinearLayout = (LinearLayout)view.findViewById(R.id.HomeFragmentVerticalMainLinearLayout);
         }
 
     }
