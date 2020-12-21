@@ -19,11 +19,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="100dp" />
-
             <LinearLayout
                 android:id="@+id/cat"
                 android:layout_width="match_parent"
@@ -132,6 +127,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:elevation="4dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -234,23 +230,41 @@
 
             </LinearLayout>
 
-            <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_weight="1"
-                android:background="?android:attr/listDivider" />
 
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginTop="@dimen/general_margin_top"
-                android:layout_marginEnd="@dimen/general_margin_end"
-                android:text="آگهی های ویژه"
-                android:textSize="@dimen/title_text_size"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:text="آگهی های ویژه"
+                    android:textSize="@dimen/title_text_size"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/HomeFragmentFeaturedTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_margin="8dp"
+                        android:drawableRight="@drawable/ic_baseline_arrow_right_24"
+                        android:text="@string/all_featured" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/HomeFrgmntVerticalRcyclRltvLyt"

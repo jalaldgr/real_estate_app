@@ -180,5 +180,10 @@
         android:name="ir.hamedanmelk.hamedanmelk.ui.category.agencis.TablayoutLawyersOfficesFragment"
         android:label="@string/title_office_lawyers"
         tools:layout="@layout/fragment_tablayout_lawyer_office" />
+    <fragment
+        android:id="@+id/featuredLandFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.FeaturedLandFragment"
+        android:label="@string/all_featured"
+        />
 
 </navigation>
