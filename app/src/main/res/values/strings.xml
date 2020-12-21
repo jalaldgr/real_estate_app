@@ -144,6 +144,7 @@
     <string name="vocabulary_land_building_condition">وضعیت بنا</string>
     <string name="vocabulary_land_case_type">نوع کاربری</string>
     <string name="vocabulary_manager">با مدیریت</string>
+    <string name="vocabulary_office_manager">نام سردفتر</string>
     <string name="vocabulary_submit_company">ثبت شرکت</string>
     <string name="vocabulary_select_image">انتخاب عکس</string>
     <string name="vocabulary_remove_image">حذف عکس</string>
@@ -152,6 +153,9 @@
     <string name="vocabulary_agency_manager">با مدیریت</string>
     <string name="vocabulary_mobile">موبایل</string>
     <string name="vocabulary_chat">چت</string>
+    <string name="vocabulary_office">دفترخانه</string>
+    <string name="vocabulary_office_no">دفترخانه شماره </string>
+    <string name="vocabulary_no">شماره</string>
     <string name="vocabulary_share">اشتراک گذاری</string>
     <string name="vocabulary_sms">پیامک</string>
     <string name="vocabulary_dong">دانگ</string>

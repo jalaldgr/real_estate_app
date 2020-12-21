@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list_Office"
-    android:name="ir.hamedanmelk.hamedanmelk.ui.company.CompanyFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="60dp"
     tools:context=".ui.company.CompanyFragment"
     tools:listitem="@layout/fragment_company_item_adapter" />
