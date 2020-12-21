@@ -1,9 +1,11 @@
 package ir.hamedanmelk.hamedanmelk.ui.company;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -25,6 +27,7 @@ import ir.hamedanmelk.hamedanmelk.models.micro.CompanyTypeModel;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
+import ir.hamedanmelk.hamedanmelk.ui.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +40,8 @@ public class ServicesFragment extends Fragment {
     Button decorationBtn;
     Button structuralBtn;
     Button servicesBtn;
+    ActionBar actionBar ;
+
     public ServicesFragment() {
         // Required empty public constructor
     }
@@ -45,6 +50,7 @@ public class ServicesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
     }
 
@@ -64,12 +70,14 @@ public class ServicesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 GetCompanyTypesRequest(getContext(),"10");
+//                actionBar.setTitle(getActivity().getResources().getString(R.string.construction_building));
             }
         });
         decorationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 GetCompanyTypesRequest(getContext(),"12");
+//                actionBar.setTitle(getActivity().getResources().getString(R.string.construction_decoration));
 
             }
         });
@@ -77,6 +85,7 @@ public class ServicesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 GetCompanyTypesRequest(getContext(),"11");
+//                actionBar.setTitle(getActivity().getResources().getString(R.string.construction_installation));
 
             }
         });
@@ -84,7 +93,7 @@ public class ServicesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 GetCompanyTypesRequest(getContext(),"50");
-
+//                actionBar.setTitle(getActivity().getResources().getString(R.string.construction_services));
             }
         });
 

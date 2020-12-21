@@ -6,13 +6,15 @@
     android:layout_height="wrap_content"  >
 
 
-    <TextView
-        android:id="@+id/CompaniesFragmentTitleTxt"
+    <Button
+        android:id="@+id/CompaniesFragmentTitleBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="4dp"
         android:gravity="center"
         android:padding="4dp"
-        android:text="@string/vocabulary_title" />
+        android:text="@string/vocabulary_title"
+        android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
 </LinearLayout>
 

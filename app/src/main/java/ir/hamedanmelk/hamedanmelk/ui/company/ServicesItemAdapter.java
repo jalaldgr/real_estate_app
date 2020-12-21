@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.navigation.NavController;
@@ -26,6 +27,7 @@ public class ServicesItemAdapter extends BaseAdapter {
         companyTypeModels = items;
         context = c;
         activity = act;
+
     }
 
     @Override
@@ -33,7 +35,7 @@ public class ServicesItemAdapter extends BaseAdapter {
         if (view == null) {
             view = ViewGroup.inflate(parent.getContext(), R.layout.fragment_service_item_adapter, null);
         }
-        TextView  titleTxt= (TextView)view.findViewById(R.id.CompaniesFragmentTitleTxt);
+        Button titleTxt= (Button)view.findViewById(R.id.CompaniesFragmentTitleBtn);
         titleTxt.setText(companyTypeModels.get(position).getTitle());
         titleTxt.setOnClickListener(new View.OnClickListener() {
             @Override

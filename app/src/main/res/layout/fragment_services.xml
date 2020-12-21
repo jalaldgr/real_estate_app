@@ -14,52 +14,75 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="8dp">
 
-            <Button
-                android:id="@+id/ServicesFragmentStructurallBtn"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/company_type_structural" />
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/ServicesFragmentBuildingBtn"
-                android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/ServicesFragmentStructurallBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_baseline_home_repair_service_48"
+                    android:padding="16dp"
+                    android:text="@string/company_type_structural"
+                    android:textAlignment="center"
+                    android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+                <Button
+                    android:id="@+id/ServicesFragmentBuildingBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_baseline_construction_48"
+                    android:padding="16dp"
+                    android:text="@string/company_type_building"
+                    android:textAlignment="center"
+                    android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/company_type_building" />
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/ServicesFragmentDecorationBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_baseline_format_paint_48"
+                    android:padding="16dp"
+                    android:text="@string/company_type_decoration"
+                    android:textAlignment="center"
+                    android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+                <Button
+                    android:id="@+id/ServicesFragmentServicesBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_baseline_cleaning_services_48"
+                    android:padding="16dp"
+                    android:text="@string/company_type_services"
+                    android:textAlignment="center"
+                    android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
+        <GridView
+            android:id="@+id/ServicesFragmentAllGridView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/ServicesFragmentDecorationBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/company_type_decoration" />
-
-            <Button
-                android:id="@+id/ServicesFragmentServicesBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/company_type_services" />
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:numColumns="2"
+            tools:listitem="@layout/fragment_service_item_adapter" />
     </LinearLayout>
 
-
-    <GridView
-        android:id="@+id/ServicesFragmentAllGridView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
-        android:numColumns="2"
-        tools:listitem="@layout/fragment_company_item_adapter" />
 
 </RelativeLayout>
 

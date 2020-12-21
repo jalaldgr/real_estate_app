@@ -80,7 +80,10 @@
     <string name="more_category">سرویس و خدمات</string>
     <string name="exchange_category">معاوضه</string>
 
-
+    <string name="construction_building">خدمات ساختمانی > ساخت و ساز</string>
+    <string name="construction_decoration">خدمات ساختمانی > تزئینات</string>
+    <string name="construction_services">خدمات ساختمانی > خدماتی</string>
+    <string name="construction_installation">خدمات ساختمانی > تاسیساتی</string>
     <string name="loading_message">دریافت اطلاعات…</string>
     <string name="username_input_error_msg">لطفا نام کاربری را وارد نمایید</string>
     <string name="password_input_error_msg">لطفا گذرواژه خود را وارد نمایید</string>
@@ -116,6 +119,7 @@
     <string name="land_info_start_chat">شروع چت</string>
 
 
+
     <!--Company Types-->
     <string name="company_type_building">ساختمانی</string>
     <string name="company_type_structural">تاسیساتی</string>
@@ -149,6 +153,7 @@
     <string name="vocabulary_mobile">موبایل</string>
     <string name="vocabulary_chat">چت</string>
     <string name="vocabulary_share">اشتراک گذاری</string>
+    <string name="vocabulary_sms">پیامک</string>
     <string name="vocabulary_dong">دانگ</string>
     <string name="new_land_use_types">نوع کاربری</string>
     <string name="new_land_is_exchange">قابل معاوضه</string>
