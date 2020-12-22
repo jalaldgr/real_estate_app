@@ -2,7 +2,9 @@ package ir.hamedanmelk.hamedanmelk.ui.single;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -10,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -50,7 +51,6 @@ import java.util.Objects;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
-import ir.hamedanmelk.hamedanmelk.recyclers.GalleryRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
@@ -94,7 +94,7 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
     TextView landCaseTxt;
     TextView userDescriptionTxt ;
     TextView landStateTxt;
-    TextView buildingYearTxt;
+    TextView deliveryDateTxt;
     TextView districtTxt ;
     TextView addressTxt;
     TextView createAtTxt;
@@ -105,7 +105,9 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
     GridView equipmentsGridView;
     ViewPager viewPager;
     CheckBox bookmarkChckbx;
-    Button  startChatBtn;
+    TextView startChatTxt;
+    TextView shareTxt;
+    TextView mobileTxt;
     SliderLayout mySliderLayout;
     PagerIndicator myIndicator;
     public SinglePreSaleFragment() {
@@ -144,25 +146,27 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
         landTypeTxt = (TextView)view.findViewById(R.id.SinglePreSaleLandTypeTxt);
         roomCountTxt = (TextView)view.findViewById(R.id.SinglePreSaleRoomCountTxt);
         spaceFoundationTxt = (TextView)view.findViewById(R.id.SinglePreSaleFoundationSpaceTxt);
-        districtTxt =(TextView)view.findViewById(R.id.SinglePreSaleDistrictTxtTxt);
+        districtTxt =(TextView)view.findViewById(R.id.SinglePreSaleDistrictTxt);
         preSaleTotalPriceTxt = (TextView)view.findViewById(R.id.SinglePreSaleTotalPriceTxt);
         addressTxt = (TextView)view.findViewById(R.id.SinglePreSaleAddressTxt);
         floorCountTxt = (TextView)view.findViewById(R.id.SinglePreSaleFloorCountTxt);
         landCaseTxt = (TextView)view.findViewById(R.id.SinglePreSaleLandCaseTxt);
-        userDescriptionTxt =(TextView)view.findViewById(R.id.SinglePreSaleUserDescriptionMultiTxt);
+//        userDescriptionTxt =(TextView)view.findViewById(R.id.SinglePreSaleUserDescriptionMultiTxt);
         landStateTxt = (TextView)view.findViewById(R.id.SinglePreSaleLandStateTxt);
-        buildingYearTxt = (TextView)view.findViewById(R.id.SinglePreSaleBuildingYearTxt);
+        deliveryDateTxt = (TextView)view.findViewById(R.id.SinglePreSaleDeliveryDateTxt);
         createAtTxt = (TextView)view.findViewById(R.id.SinglePreSaleCreatedAtTxt);
         userNameTxt = (TextView)view.findViewById(R.id.SinglePreSaleUserNameTxt);
-        userPhoneTxt = (TextView)view.findViewById(R.id.SinglePreSaleUserPhoneTxt);
+        userPhoneTxt = (TextView)view.findViewById(R.id.SinglePreSaleMobileTxt);
         descriptionTxt = (EditText)view.findViewById(R.id.SinglePreSaleDescriptionTxt);
         userAvatarImg = (ImageView)view.findViewById(R.id.SinglePreSaleUserAvatarImg);
         equipmentsGridView = (GridView)view.findViewById(R.id.SinglePreSaleLandEquipmentsGridView);
         //viewPager = (ViewPager) view.findViewById(R.id.SinglePreSaleGalleryViewpager);
         bookmarkChckbx = (CheckBox)view.findViewById(R.id.SinglePreSaleFragmentBookmarkChckbx);
-        startChatBtn = (Button)view.findViewById(R.id.SinglePreSaleStartChatBtn);
+        startChatTxt = (TextView) view.findViewById(R.id.SinglePreSaleStartChatTxt);
+        shareTxt = (TextView) view.findViewById(R.id.SinglePreSaleShareTxt);
+        mobileTxt = (TextView) view.findViewById(R .id.SinglePreSaleMobileTxt);
 
-        mySliderLayout = (SliderLayout)view.findViewById(R.id.single_presale_slider);
+        mySliderLayout = (SliderLayout)view.findViewById(R.id.single_PreSale_slider);
         myIndicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
         mySliderLayout.setPresetTransformer(SliderLayout.Transformer.Tablet);
 
@@ -198,7 +202,7 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
             }
         });
 
-        startChatBtn.setOnClickListener(new View.OnClickListener() {
+        startChatTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
@@ -206,6 +210,27 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
                 args.putString(Constants.START_CHAT_UID,UID);
                 args.putString(Constants.START_CHAT_TO,landUserID);
                 controller.navigate(R.id.chatFragment,args);
+            }
+        });
+
+        shareTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_SUBJECT, "اشتراک گذاری");
+                i.putExtra(Intent.EXTRA_TEXT, "https://hamedanmelk.ir/AdsRentDetail/"+landId);
+                startActivity(Intent.createChooser(i, "اشتراک گذاری"));
+            }
+        });
+
+        mobileTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String uri = "tel:" + mobileTxt.getText().toString() ;
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse(uri));
+                startActivity(intent);
             }
         });
 
@@ -249,7 +274,14 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
                         landUserID=responseData.getString(Constants.LAND_INFO_USER_ID);
                         loadMap();
                         landStateTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_STATE_TITLE));
-                        buildingYearTxt.setText(responseData.getString(Constants.LAND_INFO_BUILDING_YEAR));
+                        try {
+                            PersianDateFormat persianDateFormat=new PersianDateFormat("yyyy-MM-dd");
+                            PersianDate persianDate = persianDateFormat.parseGrg(responseData.get(Constants.LAND_INFO_DELIVERY_DATE).toString(), "yyyy-MM-dd");
+                            String withoutTime = persianDate.toString().replace("00:00:00","");
+                            deliveryDateTxt.setText(withoutTime);
+                        }catch (ParseException e){
+                            e.printStackTrace();
+                        }
                         roomCountTxt.setText(responseData.getString(Constants.LAND_INFO_ROOM_COUNT));
                         titleTxt.setText(responseData.getString(Constants.LAND_INFO_TITLe));
                         landTypeTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_TYPE_TITLE));
@@ -264,7 +296,7 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
                         try {
                             PersianDateFormat persianDateFormat=new PersianDateFormat("yyyy-MM-dd");
                             PersianDate persianDate = persianDateFormat.parseGrg(responseData.get(Constants.LAND_INFO_CREATED_AT).toString(), "yyyy-MM-dd");
-                            createAtTxt.setText(persianDate.toString());
+                            createAtTxt.setText(persianDate.toString().replace("00:00:00",""));
                         }catch (ParseException e){
                             e.printStackTrace();
                         }
@@ -272,7 +304,7 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
                         userNameTxt.setText(responseData.getString(Constants.LAND_INFO_FIRST_NAME)+
                                 " "+responseData.getString(Constants.LAND_INFO_LAST_NAME));
                         userPhoneTxt.setText(responseData.getString(Constants.LAND_INFO_USER_PHONE));
-                        userDescriptionTxt.setText(Html.fromHtml(responseData.getString(Constants.LAND_INFO_USER_DESCRIPTION)));
+//                        userDescriptionTxt.setText(Html.fromHtml(responseData.getString(Constants.LAND_INFO_USER_DESCRIPTION)));
                         //GalleryRecyclerViewAdapter galleryRecyclerViewAdapter = new GalleryRecyclerViewAdapter(getContext(),images);
                         //viewPager.setAdapter(galleryRecyclerViewAdapter);
                         new DownloadImage(userAvatarImg).execute(Urls.getBaseURL()+"/"+responseData.getString(Constants.LAND_INFO_USER_IMAGE));
