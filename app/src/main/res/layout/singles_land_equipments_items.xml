@@ -15,8 +15,8 @@
 
             <ImageView
                 android:id="@+id/SinglesLandEquipmentLogoImg"
-                android:layout_width="136dp"
-                android:layout_height="100dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center|center_horizontal|center_vertical"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/ic_action_camera" />

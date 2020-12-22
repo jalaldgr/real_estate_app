@@ -1940,6 +1940,27 @@ public ArrayList<LawyerModel> GetLawyers() {
         return useTypeModels;
     }
 
+    public UseTypeModel GetUseTypeByID(String id){
+        UseTypeModel useTypeModel=null;
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor;
+        try {
+            cursor = database.rawQuery("SELECT * FROM "+USE_TYPE_TABLE_NAME+" WHERE id = "+id, null);
+            if (cursor==null) return null;
+
+            cursor.moveToFirst();
+            Log.d(TAG, "GetUseTypeByID: "+cursor.toString());
+            useTypeModel= new UseTypeModel(
+                    cursor.getString(0),
+                    cursor.getString(1));
+            cursor.close();
+        }catch (Exception e){
+            Log.d(TAG, "GetUseTypeByID: "+e.toString());
+        }
+        database.close();
+        return useTypeModel;
+    }
+
 
     //////////////////Voucher Methods////////////////
     public void InsertVoucher(ContentValues cv){
@@ -1978,7 +1999,26 @@ public ArrayList<LawyerModel> GetLawyers() {
         db.close();
         return voucherModels;
     }
+    public VoucherModel GetVoucherByID(String id){
+        VoucherModel voucherModel=null;
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor;
+        try {
+            cursor = database.rawQuery("SELECT * FROM "+VOUCHER_TABLE_NAME+" WHERE id = "+id, null);
+            if (cursor==null) return null;
 
+            cursor.moveToFirst();
+            Log.d(TAG, "GetVoucherByID: "+cursor.toString());
+            voucherModel= new VoucherModel(
+                    cursor.getString(0),
+                    cursor.getString(1));
+            cursor.close();
+        }catch (Exception e){
+            Log.d(TAG, "GetVoucherByID: "+e.toString());
+        }
+        database.close();
+        return voucherModel;
+    }
 
 //----------------------------------------------------------------------------------------------
 

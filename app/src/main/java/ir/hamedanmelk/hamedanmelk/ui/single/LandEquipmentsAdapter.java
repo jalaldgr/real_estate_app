@@ -33,7 +33,9 @@ public class LandEquipmentsAdapter extends BaseAdapter {
         ImageView logoImg = (ImageView)view.findViewById(R.id.SinglesLandEquipmentLogoImg);
         TextView  titleTxt= (TextView)view.findViewById(R.id.SinglesLandEquipmentTitleTxt);
         titleTxt.setText(equipmentModels.get(position).getTitle());
-        new DownloadImage(logoImg).execute(Urls.getBaseURL()+"/"+equipmentModels.get(position).getLogo());
+        if(equipmentModels.get(position).getLogo()!=("null")) {
+            new DownloadImage(logoImg).execute(Urls.getBaseURL() + "/" + equipmentModels.get(position).getLogo());
+        }
         Log.d("hhh", "getView: "+equipmentModels.get(position).getTitle());
         return view;
     }

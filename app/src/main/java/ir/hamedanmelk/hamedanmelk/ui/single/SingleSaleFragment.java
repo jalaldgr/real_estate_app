@@ -2,7 +2,9 @@ package ir.hamedanmelk.hamedanmelk.ui.single;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -14,7 +16,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +23,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.viewpager.widget.ViewPager;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
@@ -50,16 +50,17 @@ import java.util.Objects;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
-import ir.hamedanmelk.hamedanmelk.recyclers.GalleryRecyclerViewAdapter;
+import ir.hamedanmelk.hamedanmelk.models.micro.LoanTypeModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.VoucherModel;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
+import ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 import saman.zamani.persiandate.PersianDate;
 import saman.zamani.persiandate.PersianDateFormat;
 
-import static android.content.Context.MODE_PRIVATE;
 import static com.daimajia.slider.library.SliderLayout.PresetIndicators.Center_Bottom;
 
 /**
@@ -90,23 +91,33 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
     TextView roomCountTxt;
     TextView landTypeTxt ;
     TextView floorCountTxt ;
-    TextView spaceFoundationTxt ;
-    TextView saleTotalPriceTxt ;
+    TextView spaceFoundationTxt;
+    TextView saleTotalPriceTxt;
+    TextView debtTotalProceTxt;
+    TextView loanTypeTxt;
     TextView landCaseTxt;
+    TextView voucherTypeTxt;
     TextView userDescriptionTxt ;
+    TextView unitInFloorTxt;
+    TextView floorTxt;
     TextView landStateTxt;
     TextView buildingYearTxt;
+    TextView provinceTxt;
+    TextView cityTxt;
+    TextView areaTxt;
     TextView districtTxt ;
     TextView addressTxt;
     TextView createAtTxt;
     TextView userNameTxt;
-    TextView userPhoneTxt;
     EditText descriptionTxt;
     ImageView userAvatarImg;
-    GridView equipmentsGridView;
+    ExpandableHeightGridView equipmentsGridView;
     //ViewPager viewPager;
     CheckBox bookmarkChckbx;
-    Button  startChatBtn;
+    TextView startChatTxt;
+    TextView shareTxt;
+    TextView mobileTxt;
+
     SliderLayout mySliderLayout;
     PagerIndicator myIndicator;
 
@@ -147,22 +158,33 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
         roomCountTxt = (TextView)view.findViewById(R.id.SingleSaleRoomCountTxt);
         spaceFoundationTxt = (TextView)view.findViewById(R.id.SingleSaleFoundationSpaceTxt);
         saleTotalPriceTxt  =(TextView)view.findViewById(R.id.SingleSaleTotalPriceTxt);
-        districtTxt =(TextView)view.findViewById(R.id.SingleSaleDistrictTxtTxt);
+        debtTotalProceTxt = (TextView)view.findViewById(R.id.SingleLoanTotalPriceTxt);
+        loanTypeTxt = (TextView)view.findViewById(R.id.SingleLoanTypeTxt);
+//        districtTxt =(TextView)view.findViewById(R.id.SingleSaleDistrictTxt);
         addressTxt = (TextView)view.findViewById(R.id.SingleSaleAddressTxt);
+        provinceTxt = (TextView)view.findViewById(R.id.SingleSaleProvinceTxt);
+        cityTxt = (TextView)view.findViewById(R.id.SingleSaleCityTxt);
+        areaTxt = (TextView)view.findViewById(R.id.SingleSaleAreaTxt);
+        districtTxt =(TextView)view.findViewById(R.id.SingleSaleDistrictTxt);
         floorCountTxt = (TextView)view.findViewById(R.id.SingleSaleFloorCountTxt);
+        floorTxt = (TextView)view.findViewById(R.id.SingleSaleFloorTxt);
+        unitInFloorTxt = (TextView)view.findViewById(R.id.SingleUnitInFloorTxt);
         landCaseTxt = (TextView)view.findViewById(R.id.SingleSaleLandCaseTxt);
-        userDescriptionTxt =(TextView)view.findViewById(R.id.SingleSaleUserDescriptionMultiTxt);
+        voucherTypeTxt=(TextView)view.findViewById(R.id.SingleSaleVoucherTxt);
         landStateTxt = (TextView)view.findViewById(R.id.SingleSaleLandStateTxt);
+//        userDescriptionTxt =(TextView)view.findViewById(R.id.SingleSaleUserDescriptionMultiTxt);
         buildingYearTxt = (TextView)view.findViewById(R.id.SingleSaleBuildingYearTxt);
         createAtTxt = (TextView)view.findViewById(R.id.SingleSaleCreatedAtTxt);
         userNameTxt = (TextView)view.findViewById(R.id.SingleSaleUserNameTxt);
-        userPhoneTxt = (TextView)view.findViewById(R.id.SingleSaleUserPhoneTxt);
         descriptionTxt = (EditText)view.findViewById(R.id.SingleSaleDescriptionTxt);
         userAvatarImg = (ImageView)view.findViewById(R.id.SingleSaleUserAvatarImg);
-        equipmentsGridView = (GridView)view.findViewById(R.id.SingleSaleLandEquipmentsGridView);
+        equipmentsGridView = (ExpandableHeightGridView) view.findViewById(R.id.SingleSaleLandEquipmentsGridView);
         //viewPager = (ViewPager) view.findViewById(R.id.SingleSaleGalleryViewpager);
         bookmarkChckbx = (CheckBox)view.findViewById(R.id.SingleSaleFragmentBookmarkChckbx);
-        startChatBtn = (Button)view.findViewById(R.id.SingleSaleStartChatBtn);
+        startChatTxt = (TextView) view.findViewById(R.id.SingleSaleStartChatTxt);
+        shareTxt = (TextView) view.findViewById(R.id.SingleSaleShareTxt);
+        mobileTxt = (TextView) view.findViewById(R.id.SingleSaleMobileTxt);
+
 
         mySliderLayout = (SliderLayout)view.findViewById(R.id.single_sale_slider);
         myIndicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
@@ -198,7 +220,7 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        startChatBtn.setOnClickListener(new View.OnClickListener() {
+        startChatTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
@@ -206,6 +228,27 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
                 args.putString(Constants.START_CHAT_UID,UID);
                 args.putString(Constants.START_CHAT_TO,landUserID);
                 controller.navigate(R.id.chatFragment,args);
+            }
+        });
+
+        shareTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_SUBJECT, "اشتراک گذاری");
+                i.putExtra(Intent.EXTRA_TEXT, "https://hamedanmelk.ir/AdsRentDetail/"+landId);
+                startActivity(Intent.createChooser(i, "اشتراک گذاری"));
+            }
+        });
+
+        mobileTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String uri = "tel:" + mobileTxt.getText().toString() ;
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse(uri));
+                startActivity(intent);
             }
         });
 
@@ -256,12 +299,30 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
                         landTypeTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_TYPE_TITLE));
                         floorCountTxt.setText(responseData.getString(Constants.LAND_INFO_FLOOR_COUNT));
                         spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE));
-                        saleTotalPriceTxt.setText(new DecimalFormat("###,###,###").format(Integer.parseInt(responseData.getString(Constants.LAND_INFO_RENT_TOTAL_PRICE))));
+                        if(Long.parseLong(responseData.getString(Constants.LAND_INFO_SALE_TOTAL_PRICE))>0) {
+                            saleTotalPriceTxt.setText(new DecimalFormat("###,###,###").format(Long.parseLong(responseData.getString(Constants.LAND_INFO_SALE_TOTAL_PRICE)))+" تومان");
+                        }
+                        if(Long.parseLong(responseData.getString(Constants.LAND_INFO_DEBT_TOTAL_PRICE))>0) {
+                            debtTotalProceTxt.setText(new DecimalFormat("###,###,###").format(Long.parseLong(responseData.getString(Constants.LAND_INFO_DEBT_TOTAL_PRICE)))+" تومان");
+                        }
                         LandCaseTypeModel landCaseTypeModel = qlDBHelper.GetLandCaseTypeByID(responseData.getString(Constants.LAND_INFO_LAND_CASE_ID));
                         landCaseTxt.setText(landCaseTypeModel.getTitle());
-                        districtTxt.setText(responseData.getString(Constants.LAND_INFO_DISTRICT_TITLE));
+                        VoucherModel voucherModel = qlDBHelper.GetVoucherByID(responseData.getString(Constants.LAND_INFO_VOUCHER_TYPE_ID));
+                        LoanTypeModel loanTypeModel = qlDBHelper.GetLoanTypeByID(responseData.getString(Constants.LAND_INFO_LOAN_TYPE_ID));
+                        loanTypeTxt.setText(loanTypeModel.getTitle());
+                        voucherTypeTxt.setText(voucherModel.getTitle());
+//                        districtTxt.setText(responseData.getString(Constants.LAND_INFO_DISTRICT_TITLE));
                         addressTxt.setText(responseData.getString(Constants.LAND_INFO_ADDRESS));
-                        floorCountTxt.setText(responseData.getString(Constants.LAND_INFO_FLOOR_COUNT));
+                        provinceTxt.setText(responseData.getString(Constants.LAND_INFO_PROVINCE_TITLE));
+                        cityTxt.setText(responseData.getString(Constants.LAND_INFO_CITY_TITLE));
+                        areaTxt.setText(responseData.getString(Constants.LAND_INFO_AREA_TITLE));
+                        districtTxt.setText(responseData.getString(Constants.LAND_INFO_DISTRICT_TITLE));
+                        if(Integer.parseInt(responseData.getString(Constants.LAND_INFO_FLOOR))>0) {
+                            floorTxt.setText(responseData.getString(Constants.LAND_INFO_FLOOR));
+                        }
+                        unitInFloorTxt.setText(responseData.getString(Constants.LAND_INFO_UNIT_IN_FLOOR));
+
+
                         try {
                             PersianDateFormat persianDateFormat=new PersianDateFormat("yyyy-MM-dd");
                             PersianDate persianDate = persianDateFormat.parseGrg(responseData.get(Constants.LAND_INFO_CREATED_AT).toString(), "yyyy-MM-dd");
@@ -272,8 +333,8 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
                         descriptionTxt.setText(Html.fromHtml(responseData.getString(Constants.LAND_INFO_DESCRIPTION)));
                         userNameTxt.setText(responseData.getString(Constants.LAND_INFO_FIRST_NAME)+
                                 " "+responseData.getString(Constants.LAND_INFO_LAST_NAME));
-                        userPhoneTxt.setText(responseData.getString(Constants.LAND_INFO_USER_PHONE));
-                        userDescriptionTxt.setText(Html.fromHtml(responseData.getString(Constants.LAND_INFO_USER_DESCRIPTION)));
+                        mobileTxt.setText(responseData.getString(Constants.LAND_INFO_USER_PHONE));
+//                        userDescriptionTxt.setText(Html.fromHtml(responseData.getString(Constants.LAND_INFO_USER_DESCRIPTION)));
                         //GalleryRecyclerViewAdapter galleryRecyclerViewAdapter = new GalleryRecyclerViewAdapter(getContext(),images);
                         //viewPager.setAdapter(galleryRecyclerViewAdapter);
                         new DownloadImage(userAvatarImg).execute(Urls.getBaseURL()+"/"+responseData.getString(Constants.LAND_INFO_USER_IMAGE));
@@ -338,6 +399,7 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
                 }
                 LandEquipmentsAdapter equipmentsAdapter = new LandEquipmentsAdapter(equipmentModels,context);
                 equipmentsGridView.setAdapter(equipmentsAdapter);
+                equipmentsGridView.setExpanded(true);
             }
 
             @Override
