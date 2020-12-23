@@ -447,7 +447,7 @@
                             android:textSize="@dimen/smal_text_size" />
 
                         <TextView
-                            android:id="@+id/SingleUnitInFloorTxt"
+                            android:id="@+id/SinglePreSaleUnitInfloorTxt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/general_margin_start"
@@ -589,6 +589,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/SinglePreSaleDescriptionCardView"
             android:layout_margin="8dp"
             app:cardCornerRadius="4dp">
 

@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -50,6 +51,8 @@ import java.util.Objects;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.RentalPreferenceModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.VoucherModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.GalleryRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
@@ -88,25 +91,33 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
     String  UID;
     TextView titleTxt ;
     TextView roomCountTxt;
+    TextView rental_Preference;
     TextView landTypeTxt ;
+    TextView buildingYearTxt;
     TextView floorCountTxt ;
+    TextView unitInFloor;
     TextView spaceFoundationTxt ;
     TextView rentTotalPriceTxt ;
     TextView mortgageTotalPriceTxt  ;
     TextView landCaseTxt;
-    TextView userDescriptionTxt ;
     TextView landStateTxt;
-    TextView buildingYearTxt;
+    TextView residentOwnerTxt;
     TextView districtTxt ;
+    TextView provinceTxt;
+    TextView cityTxt;
+    TextView areaTxt;
     TextView addressTxt;
     TextView createAtTxt;
     TextView userNameTxt;
-    TextView userPhoneTxt;
     EditText descriptionTxt;
+    CardView decCardView;
     ImageView userAvatarImg;
     ExpandableHeightGridView equipmentsGridView;
     CheckBox bookmarkChckbx;
-    Button  startChatBtn;
+    TextView startChatTxt;
+    TextView shareTxt;
+    TextView mobileTxt;
+
     SliderLayout mySliderLayout;
     PagerIndicator myIndicator;
 
@@ -145,30 +156,36 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
         titleTxt = (TextView)view.findViewById(R.id.SingleRentTitleTxt);
         landTypeTxt = (TextView)view.findViewById(R.id.SingleRentLandTypeTxt);
         roomCountTxt = (TextView)view.findViewById(R.id.SingleRentRoomCountTxt);
+        rental_Preference = (TextView)view.findViewById(R.id.SingleRentRentalPreferenceTxt);
         spaceFoundationTxt = (TextView)view.findViewById(R.id.SingleRentFoundationSpaceTxt);
         mortgageTotalPriceTxt = (TextView)view.findViewById(R.id.SingleRentMortgageTotalPriceTxt);
         rentTotalPriceTxt  =(TextView)view.findViewById(R.id.SingleRentRentTotalPriceTxt);
-        districtTxt =(TextView)view.findViewById(R.id.SingleRentDistrictTxtTxt);
         addressTxt = (TextView)view.findViewById(R.id.SingleRentAddressTxt);
+        provinceTxt = (TextView)view.findViewById(R.id.SingleRentProvinceTxt);
+        cityTxt = (TextView)view.findViewById(R.id.SingleRentCityTxt);
+        areaTxt = (TextView)view.findViewById(R.id.SingleRentAreaTxt);
+        districtTxt =(TextView)view.findViewById(R.id.SingleRentDistrictTxt);
         floorCountTxt = (TextView)view.findViewById(R.id.SingleRentFloorCountTxt);
+        unitInFloor = (TextView)view.findViewById(R.id.SingleUnitInFloorTxt);
+        rental_Preference = (TextView)view.findViewById(R.id.SingleRentRentalPreferenceTxt);
         landCaseTxt = (TextView)view.findViewById(R.id.SingleRentLandCaseTxt);
-        userDescriptionTxt =(TextView)view.findViewById(R.id.SingleRentUserDescriptionMultiTxt);
         landStateTxt = (TextView)view.findViewById(R.id.SingleRentLandStateTxt);
         buildingYearTxt = (TextView)view.findViewById(R.id.SingleRentBuildingYearTxt);
+        residentOwnerTxt = (TextView)view.findViewById(R.id.SingleRentResidentOwnerTxt);
         createAtTxt = (TextView)view.findViewById(R.id.SingleRentCreatedAtTxt);
         userNameTxt = (TextView)view.findViewById(R.id.SingleRentUserNameTxt);
-        userPhoneTxt = (TextView)view.findViewById(R.id.SingleRentUserPhoneTxt);
         descriptionTxt = (EditText)view.findViewById(R.id.SingleRentDescriptionTxt);
+        decCardView = (CardView)view.findViewById(R.id.SingleRentDescriptionCardView);
         userAvatarImg = (ImageView)view.findViewById(R.id.SingleRentUserAvatarImg);
         equipmentsGridView = (ExpandableHeightGridView) view.findViewById(R.id.SingleRentLandEquipmentsGridView);
 //        viewPager = (ViewPager) view.findViewById(R.id.SingleRentGalleryViewpager);
         bookmarkChckbx = (CheckBox)view.findViewById(R.id.SingleRentFragmentBookmarkChckbx);
-        startChatBtn = (Button)view.findViewById(R.id.SingleRentStartChatBtn);
-
+        startChatTxt = (TextView) view.findViewById(R.id.SingleRentStartChatTxt);
+        shareTxt = (TextView) view.findViewById(R.id.SingleRentShareTxt);
+        mobileTxt = (TextView) view.findViewById(R.id.SingleRentMobileTxt);
         mySliderLayout = (SliderLayout)view.findViewById(R.id.single_rent_slider);
         myIndicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
         mySliderLayout.setPresetTransformer(SliderLayout.Transformer.Tablet);
-
         mySliderLayout.setPresetIndicator(Center_Bottom);
         myIndicator.setGravity(0x11);
         mySliderLayout.setCustomIndicator(myIndicator);
@@ -202,17 +219,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        userPhoneTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String uri = "tel:" + userPhoneTxt.getText().toString() ;
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse(uri));
-                startActivity(intent);
-            }
-        });
-
-        startChatBtn.setOnClickListener(new View.OnClickListener() {
+        startChatTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
@@ -220,6 +227,27 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                 args.putString(Constants.START_CHAT_UID,UID);
                 args.putString(Constants.START_CHAT_TO,landUserID);
                 controller.navigate(R.id.chatFragment,args);
+            }
+        });
+
+        shareTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_SUBJECT, "اشتراک گذاری");
+                i.putExtra(Intent.EXTRA_TEXT, "https://hamedanmelk.ir/AdsRentDetail/"+landId);
+                startActivity(Intent.createChooser(i, "اشتراک گذاری"));
+            }
+        });
+
+        mobileTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String uri = "tel:" + mobileTxt.getText().toString() ;
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse(uri));
+                startActivity(intent);
             }
         });
 
@@ -264,31 +292,41 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                         landUserID=responseData.getString(Constants.LAND_INFO_USER_ID);
                         loadMap();
                         landStateTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_STATE_TITLE));
-                        buildingYearTxt.setText(responseData.getString(Constants.LAND_INFO_BUILDING_YEAR));
                         roomCountTxt.setText(responseData.getString(Constants.LAND_INFO_ROOM_COUNT));
+                        if(responseData.getString(Constants.LAND_INFO_RESIDENT_OWNER).equals("1")){
+                            residentOwnerTxt.setText(getResources().getString(R.string.vocabulary_yes));
+                        }
+                        buildingYearTxt.setText(responseData.getString(Constants.LAND_INFO_BUILDING_YEAR));
                         titleTxt.setText(responseData.getString(Constants.LAND_INFO_TITLe));
                         landTypeTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_TYPE_TITLE));
                         floorCountTxt.setText(responseData.getString(Constants.LAND_INFO_FLOOR_COUNT));
+                        unitInFloor.setText(responseData.getString(Constants.LAND_INFO_UNIT_IN_FLOOR));
+//                        RentalPreferenceModel rentalPreferenceModel = qlDBHelper.GetRentalRantalByID(landId);
+//                        rental_Preference.setText(rentalPreferenceModel.getTitle());
+                        rentTotalPriceTxt.setText(responseData.getString(Constants.LAND_INFO_RENTAL_PREFERENCE_ID));
                         spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE) + "  متر مربع");
                         mortgageTotalPriceTxt.setText(new DecimalFormat("###,###,###").format(Integer.parseInt(responseData.getString(Constants.LAND_INFO_MORTGAGE_TOTAL_PRICE))) + "  تومان");
                         rentTotalPriceTxt.setText(new DecimalFormat("###,###,###").format(Integer.parseInt(responseData.getString(Constants.LAND_INFO_RENT_TOTAL_PRICE))) + "  تومان");
                         LandCaseTypeModel landCaseTypeModel = qlDBHelper.GetLandCaseTypeByID(responseData.getString(Constants.LAND_INFO_LAND_CASE_ID));
                         landCaseTxt.setText(landCaseTypeModel.getTitle());
-                        districtTxt.setText(responseData.getString(Constants.LAND_INFO_DISTRICT_TITLE));
+                        mobileTxt.setText(responseData.getString(Constants.LAND_INFO_USER_PHONE));
+                        provinceTxt.setText(responseData.getString(Constants.LAND_INFO_PROVINCE_TITLE));
+                        cityTxt.setText(responseData.getString(Constants.LAND_INFO_CITY_TITLE));
+                        areaTxt.setText(responseData.getString(Constants.LAND_INFO_AREA_TITLE));
                         addressTxt.setText(responseData.getString(Constants.LAND_INFO_ADDRESS));
+                        districtTxt.setText(responseData.getString(Constants.LAND_INFO_DISTRICT_TITLE));
                         floorCountTxt.setText(responseData.getString(Constants.LAND_INFO_FLOOR_COUNT));
                         try {
                             PersianDateFormat persianDateFormat=new PersianDateFormat("yyyy-MM-dd");
                             PersianDate persianDate = persianDateFormat.parseGrg(responseData.get(Constants.LAND_INFO_CREATED_AT).toString(), "yyyy-MM-dd");
-                            createAtTxt.setText(persianDate.toString());
+                            createAtTxt.setText(persianDate.toString().replace("00:00:00",""));
                         }catch (ParseException e){
                             e.printStackTrace();
                         }
+                        if (responseData.getString(Constants.LAND_INFO_DESCRIPTION)=="null")decCardView.setVisibility(View.GONE);
                         descriptionTxt.setText(Html.fromHtml(responseData.getString(Constants.LAND_INFO_DESCRIPTION)));
                         userNameTxt.setText(responseData.getString(Constants.LAND_INFO_FIRST_NAME)+
                                 " "+responseData.getString(Constants.LAND_INFO_LAST_NAME));
-                        userPhoneTxt.setText(responseData.getString(Constants.LAND_INFO_USER_PHONE));
-                        userDescriptionTxt.setText(Html.fromHtml(responseData.getString(Constants.LAND_INFO_USER_DESCRIPTION)));
                         GalleryRecyclerViewAdapter galleryRecyclerViewAdapter = new GalleryRecyclerViewAdapter(getContext(),images);
 //                        viewPager.setAdapter(galleryRecyclerViewAdapter);
                         new DownloadImage(userAvatarImg).execute(Urls.getBaseURL()+"/"+responseData.getString(Constants.LAND_INFO_USER_IMAGE));

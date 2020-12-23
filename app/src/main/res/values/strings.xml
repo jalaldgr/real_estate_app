@@ -106,7 +106,7 @@
     <string name="land_info_space_price">قیمت هر متر</string>
     <string name="land_info_total_price">قیمت کل</string>
     <string name="land_info_description">توضیحات</string>
-    <string name="land_info_mortgage">رهن</string>
+    <string name="land_info_mortgage">قیمت رهن</string>
     <string name="land_info_rent_total_price">اجاره</string>
     <string name="land_info_resident_owner">مالک ساکن است؟</string>
     <string name="land_info_delivery_date">تاریخ تحویل</string>
@@ -122,6 +122,7 @@
     <string name="land_info_fax">فکس</string>
     <string name="land_info_user_more_info">اطلاعات بیشتر</string>
     <string name="land_info_start_chat">شروع چت</string>
+
 
 
 
@@ -170,6 +171,8 @@
     <string name="vocabulary_adser_agency">مشاور املاک</string>
     <string name="vocabulary_deal">توافقی</string>
     <string name="vocabulary_base_floor">همکف</string>
+    <string name="vocabulary_yes">بله</string>
+    <string name="vocabulary_no_o_yes">خیر</string>
 
     <string name="new_land_use_types">نوع کاربری</string>
     <string name="new_land_is_exchange">قابل معاوضه</string>

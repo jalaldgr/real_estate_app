@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -110,6 +111,7 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
     TextView createAtTxt;
     TextView userNameTxt;
     EditText descriptionTxt;
+    CardView descCardView;
     ImageView userAvatarImg;
     ExpandableHeightGridView equipmentsGridView;
     //ViewPager viewPager;
@@ -177,6 +179,7 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
         createAtTxt = (TextView)view.findViewById(R.id.SingleSaleCreatedAtTxt);
         userNameTxt = (TextView)view.findViewById(R.id.SingleSaleUserNameTxt);
         descriptionTxt = (EditText)view.findViewById(R.id.SingleSaleDescriptionTxt);
+        descCardView = (CardView)view.findViewById(R.id.SingleSaleDescriptionCardView);
         userAvatarImg = (ImageView)view.findViewById(R.id.SingleSaleUserAvatarImg);
         equipmentsGridView = (ExpandableHeightGridView) view.findViewById(R.id.SingleSaleLandEquipmentsGridView);
         //viewPager = (ViewPager) view.findViewById(R.id.SingleSaleGalleryViewpager);
@@ -326,11 +329,12 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
                         try {
                             PersianDateFormat persianDateFormat=new PersianDateFormat("yyyy-MM-dd");
                             PersianDate persianDate = persianDateFormat.parseGrg(responseData.get(Constants.LAND_INFO_CREATED_AT).toString(), "yyyy-MM-dd");
-                            createAtTxt.setText(persianDate.toString());
+                            createAtTxt.setText(persianDate.toString().replace("00:00:00",""));
                         }catch (ParseException e){
                             e.printStackTrace();
                         }
                         descriptionTxt.setText(Html.fromHtml(responseData.getString(Constants.LAND_INFO_DESCRIPTION)));
+                        if(responseData.getString(Constants.LAND_INFO_DESCRIPTION)=="null")descCardView.setVisibility(View.GONE);
                         userNameTxt.setText(responseData.getString(Constants.LAND_INFO_FIRST_NAME)+
                                 " "+responseData.getString(Constants.LAND_INFO_LAST_NAME));
                         mobileTxt.setText(responseData.getString(Constants.LAND_INFO_USER_PHONE));

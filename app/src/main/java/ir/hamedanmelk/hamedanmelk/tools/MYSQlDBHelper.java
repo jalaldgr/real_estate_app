@@ -779,7 +779,7 @@ public void InsertDistrict(ContentValues cv){
         db.close();
     }
 
-    public RentalPreferenceModel GetRentalStateByID(String id){
+    public RentalPreferenceModel GetRentalRantalByID(String id){
         RentalPreferenceModel rentalPreferenceModel=null;
         SQLiteDatabase database = this.getReadableDatabase();
         Cursor cursor;

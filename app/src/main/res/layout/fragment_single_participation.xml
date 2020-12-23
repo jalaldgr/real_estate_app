@@ -18,7 +18,8 @@
             android:id="@+id/single_participation_slider"
             android:layout_width="match_parent"
             android:layout_height="332dp"
-            android:gravity="center|center_horizontal|fill_vertical" />
+            android:gravity="center|center_horizontal|fill_vertical"
+            android:visibility="gone" />
 
         <com.daimajia.slider.library.Indicators.PagerIndicator
             android:id="@+id/custom_indicator"
@@ -35,10 +36,32 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginStart="@dimen/general_margin_start"
+            android:layout_marginTop="-52dp"
             android:layout_marginEnd="@dimen/general_margin_end"
             android:background="@drawable/iic_baseline_favorite_disabled_border_on_36"
             android:button="@null"
             android:shadowColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/SingleParticipationTitleTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="8dp"
+            android:text="@string/vocabulary_title"
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/SingleParticipationCreatedAtTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/general_margin_start"
+            android:layout_marginEnd="@dimen/general_margin_end"
+            android:backgroundTint="@color/edit_text_bottom_line"
+            android:text="@string/land_info_created_at"
+            android:textIsSelectable="false"
+            android:textSize="12sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,7 +69,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,18 +159,6 @@
         </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/SingleParticipationTitleTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:text="@string/vocabulary_title"
-            android:textColor="@color/primary_black_text_color"
-            android:textSize="@dimen/title_text_size"
-            android:textStyle="bold" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/SingleparticipationLandTypeTxtInputLayout"
             android:layout_width="match_parent"
@@ -155,12 +167,12 @@
             android:layout_marginStart="@dimen/general_margin_start"
             android:layout_marginTop="@dimen/general_margin_top"
             android:layout_marginEnd="@dimen/general_margin_end"
-            android:textColor="@color/primary_black_text_color"
-            android:textColorHint="@color/textview_lable"
             android:gravity="right"
             android:hint="@string/land_info_land_type"
             android:layoutDirection="rtl"
             android:text="@string/vocabulary_title"
+            android:textColor="@color/primary_black_text_color"
+            android:textColorHint="@color/textview_lable"
             android:textDirection="rtl"
             app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
 
@@ -180,26 +192,26 @@
             android:id="@+id/SingleParticipationLandTypeTxtInputLayoutFoundationSpaceTxtInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/general_margin_start"
+            android:layout_marginTop="@dimen/general_margin_top"
+            android:layout_marginEnd="@dimen/general_margin_end"
             android:gravity="right"
             android:hint="متراژ"
             android:layoutDirection="rtl"
             android:textColorHint="@color/textview_lable"
             android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end">
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/SingleParticipationFoundationSpaceTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/general_margin_start"
+                android:layout_marginEnd="@dimen/general_margin_end"
                 android:backgroundTint="@color/edit_text_bottom_line"
                 android:editable="false"
                 android:text="@string/land_info_foundation_space"
-                android:textIsSelectable="false"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginEnd="@dimen/general_margin_end"/>
+                android:textIsSelectable="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -207,26 +219,26 @@
             android:id="@+id/SingleParticipationTotalPriceTxtInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/general_margin_start"
+            android:layout_marginTop="@dimen/general_margin_top"
+            android:layout_marginEnd="@dimen/general_margin_end"
             android:gravity="right"
             android:hint="@string/land_info_total_price"
             android:layoutDirection="rtl"
             android:textColorHint="@color/textview_lable"
             android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end">
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/SingleParticipationTotalPriceTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/land_info_mortgage"
+                android:layout_marginStart="@dimen/general_margin_start"
+                android:layout_marginEnd="@dimen/general_margin_end"
                 android:backgroundTint="@color/edit_text_bottom_line"
                 android:editable="false"
-                android:textIsSelectable="false"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginEnd="@dimen/general_margin_end"/>
+                android:text="@string/land_info_mortgage"
+                android:textIsSelectable="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -234,52 +246,52 @@
             android:id="@+id/SingleParticipationLandCaseTxtInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/general_margin_start"
+            android:layout_marginTop="@dimen/general_margin_top"
+            android:layout_marginEnd="@dimen/general_margin_end"
             android:gravity="right"
             android:hint="@string/vocabulary_land_case_type"
             android:layoutDirection="rtl"
             android:textColorHint="@color/textview_lable"
             android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end">
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/SingleParticipationLandCaseTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/vocabulary_land_case_type"
+                android:layout_marginStart="@dimen/general_margin_start"
+                android:layout_marginEnd="@dimen/general_margin_end"
                 android:backgroundTint="@color/edit_text_bottom_line"
                 android:editable="false"
-                android:textIsSelectable="false"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginEnd="@dimen/general_margin_end"/>
+                android:text="@string/vocabulary_land_case_type"
+                android:textIsSelectable="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/SingleParticipationDistrictTxtTxtInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/general_margin_start"
+            android:layout_marginTop="@dimen/general_margin_top"
+            android:layout_marginEnd="@dimen/general_margin_end"
             android:gravity="right"
             android:hint="@string/vocabulary_district"
             android:layoutDirection="rtl"
             android:textColorHint="@color/textview_lable"
             android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end">
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/SingleParticipationDistrictTxtTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/vocabulary_district"
+                android:layout_marginStart="@dimen/general_margin_start"
+                android:layout_marginEnd="@dimen/general_margin_end"
                 android:backgroundTint="@color/edit_text_bottom_line"
                 android:editable="false"
-                android:textIsSelectable="false"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginEnd="@dimen/general_margin_end"/>
+                android:text="@string/vocabulary_district"
+                android:textIsSelectable="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -287,26 +299,26 @@
             android:id="@+id/SingleParticipationAddressTxtTxtInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/general_margin_start"
+            android:layout_marginTop="@dimen/general_margin_top"
+            android:layout_marginEnd="@dimen/general_margin_end"
             android:gravity="right"
             android:hint="@string/land_info_address"
             android:layoutDirection="rtl"
             android:textColorHint="@color/textview_lable"
             android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end">
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/SingleParticipationAddressTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/land_info_address"
+                android:layout_marginStart="@dimen/general_margin_start"
+                android:layout_marginEnd="@dimen/general_margin_end"
                 android:backgroundTint="@color/edit_text_bottom_line"
                 android:editable="false"
-                android:textIsSelectable="false"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginEnd="@dimen/general_margin_end"/>
+                android:text="@string/land_info_address"
+                android:textIsSelectable="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -314,62 +326,36 @@
             android:id="@+id/SingleParticipationFloorCountTxtInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/general_margin_start"
+            android:layout_marginTop="@dimen/general_margin_top"
+            android:layout_marginEnd="@dimen/general_margin_end"
             android:gravity="right"
             android:hint="@string/land_info_floor_count"
             android:layoutDirection="rtl"
             android:textColorHint="@color/textview_lable"
             android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end">
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/SingleParticipationFloorCountTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/general_margin_start"
+                android:layout_marginEnd="@dimen/general_margin_end"
+                android:backgroundTint="@color/edit_text_bottom_line"
+                android:editable="false"
                 android:text="@string/land_info_floor_count"
-                android:backgroundTint="@color/edit_text_bottom_line"
-                android:editable="false"
-                android:textIsSelectable="false"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginEnd="@dimen/general_margin_end"/>
+                android:textIsSelectable="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/SingleParticipationCreatedAtTxtInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:hint="@string/land_info_created_at"
-            android:layoutDirection="rtl"
-            android:textColorHint="@color/textview_lable"
-            android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/SingleParticipationCreatedAtTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/land_info_created_at"
-                android:backgroundTint="@color/edit_text_bottom_line"
-                android:editable="false"
-                android:textIsSelectable="false"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginEnd="@dimen/general_margin_end"/>
-        </com.google.android.material.textfield.TextInputLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginStart="@dimen/general_margin_start"
             android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end">
+            android:layout_marginEnd="@dimen/general_margin_end"
+            android:orientation="horizontal">
 
             <GridView
                 android:id="@+id/SingleParticipationLandEquipmentsGridView"
@@ -378,20 +364,25 @@
                 android:numColumns="3"
                 tools:listitem="@layout/singles_land_equipments_items" />
         </RelativeLayout>
-
+        <androidx.cardview.widget.CardView
+            android:id="@+id/SingleParticipationDescriptionCardView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="4dp">
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/SingleParticipationDescriptionTxtInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/general_margin_start"
+            android:layout_marginTop="@dimen/general_margin_top"
+            android:layout_marginEnd="@dimen/general_margin_end"
             android:gravity="right"
             android:hint="توضیحات تکمیلی"
             android:layoutDirection="rtl"
             android:textColorHint="@color/textview_lable"
             android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end">
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/SingleParticipationDescriptionTxt"
@@ -409,20 +400,19 @@
                 android:textColor="@color/primary_black_text_color"
                 android:textIsSelectable="false" />
         </com.google.android.material.textfield.TextInputLayout>
-
-
+        </androidx.cardview.widget.CardView>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            android:layout_marginTop="@dimen/general_margin_top"
-            >
+            android:layout_marginTop="@dimen/general_margin_top">
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/SingleParticipationMapView"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" />
         </FrameLayout>
+
         <androidx.cardview.widget.CardView
             android:layout_width="224dp"
             android:layout_height="224dp"
@@ -444,6 +434,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_action_camera" />
         </androidx.cardview.widget.CardView>
+
         <TextView
             android:id="@+id/SingleParticipationUserNameTxt"
             android:layout_width="match_parent"
