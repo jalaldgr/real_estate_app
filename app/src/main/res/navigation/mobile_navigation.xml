@@ -197,5 +197,9 @@
         android:id="@+id/newLandRentFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.newland.NewLandRentFragment"
         android:label="@string/new_land_rent" />
+    <fragment
+        android:id="@+id/newLandParticipationFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.newland.NewLandParticipationFragment"
+        android:label="@string/new_land_participation" />
 
 </navigation>
