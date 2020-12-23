@@ -2,10 +2,11 @@
     <string name="app_name">همدان ملک</string>
     <string name="title_home">خانه</string>
     <string name="title_dashboard">ثبت ملک جدید</string>
-    <string name="new_land_sale">ثبت آگهی فروش</string>
-    <string name="new_land_rent">ثبت آگهی اجاره</string>
-    <string name="new_land_participation">ثبت آگهی مشارکت</string>
-    <string name="new_land_pre_sale">ثبت آگهی پیش فروش</string>
+    <string name="new_land_sale">فروش</string>
+    <string name="new_land_rent">اجاره</string>
+    <string name="new_land_participation">مشارکت</string>
+    <string name="new_land_pre_sale">پیش فروش</string>
+    <string name="new_land_company">ثبت شرکت</string>
 
     <string name="title_aboutus">صفحه شخصی</string>
     <string name="title_personalpage">صفحه شخصی</string>
@@ -201,6 +202,9 @@
     <string name="new_land_gas">گاز</string>
     <string name="new_land_phone">تلفن</string>
     <string name="new_land_submit">ثبت آگهی</string>
+    <string name="new_land_contractor_share">سهم سازنده</string>
+    <string name="new_land_owner_share">سهم مالک</string>
+
     <array name="new_land_water_electricity">
         <item>نا مشخص</item>
         <item>مستقل</item>
