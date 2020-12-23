@@ -102,7 +102,7 @@
     <string name="land_info_floor_count">تعداد طبقات</string>
     <string name="land_info_units_in_floor">تعداد واحد در طبقه</string>
     <string name="land_info_foundation_space">متراژ</string>
-    <string name="land_info_foundation_floor">طبقه</string>
+    <string name="land_info_floor">طبقه</string>
     <string name="land_info_space_price">قیمت هر متر</string>
     <string name="land_info_total_price">قیمت کل</string>
     <string name="land_info_description">توضیحات</string>
@@ -148,6 +148,7 @@
     <string name="vocabulary_room_count">تعداد اتاق</string>
     <string name="vocabulary_building_year">سال ساخت</string>
     <string name="vocabulary_land_building_condition">وضعیت بنا</string>
+    <string name="vocabulary_equipment">امکانات</string>
     <string name="vocabulary_land_case_type">نوع کاربری</string>
     <string name="vocabulary_manager">با مدیریت</string>
     <string name="vocabulary_office_manager">نام سردفتر</string>
@@ -187,6 +188,7 @@
     <string name="new_land_kitchen_services">سرویس آشپزخانه</string>
     <string name="new_land_land_case">نوع آگهی</string>
     <string name="new_land_loan_type">نوع وام</string>
+    <string name="new_land_loan_slice">اقساط وام</string>
     <string name="new_land_loan_total_price">مبلغ وام</string>
     <string name="new_land_water">آب</string>
     <string name="new_land_electricity">برق</string>
