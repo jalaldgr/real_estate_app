@@ -415,7 +415,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal|center_vertical"
-                            android:text="@string/land_info_foundation_floor"
+                            android:text="@string/land_info_floor"
                             android:textColor="@color/textview_lable"
                             android:textSize="@dimen/smal_text_size" />
 
