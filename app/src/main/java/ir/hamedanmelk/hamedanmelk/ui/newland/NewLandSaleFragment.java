@@ -3,8 +3,6 @@ package ir.hamedanmelk.hamedanmelk.ui.newland;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,14 +11,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -40,6 +30,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -57,9 +52,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.gson.Gson;
-import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
-import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -92,17 +86,14 @@ import ir.hamedanmelk.hamedanmelk.models.micro.LoanTypeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.ProvinceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.RentalPreferenceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.UseTypeModel;
-
 import ir.hamedanmelk.hamedanmelk.models.micro.VoucherModel;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.FilePath;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
-import ir.hamsaa.persiandatepicker.util.PersianDateParser;
 import saman.zamani.persiandate.PersianDate;
-import saman.zamani.persiandate.PersianDateFormat;
 
-public class NewLandFragment extends Fragment  implements OnMapReadyCallback, DatePickerDialog.OnDateSetListener{
+public class NewLandSaleFragment extends Fragment  implements OnMapReadyCallback, DatePickerDialog.OnDateSetListener{
     private RequestQueue myRequestQueue;
     private JsonObjectRequest myJsonObjectRequest;
 
@@ -124,24 +115,13 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
     Spinner landTypeSpnr;
     MultiSelectSpinner landUseTypeSpnr;
     Spinner voucherTypeSpnr;
-    Spinner preVoucherTypeSpnr;
-    Spinner exVoucherTypeSpnr;
     EditText dongETxt;
-    EditText preDongETxt;
-    EditText exDongETxt;
     EditText buildingYearETxt;
     EditText spaceFoundationETxt;
-    EditText deliveryETxt;
-    MaterialCheckBox residentOwnerChkBx;
-    Spinner rentalPreferenceSpnr;
-    MaterialCheckBox exchangeChkBx;
     EditText totalPriceETxt;
-    EditText preSalePriceETxt;
-    EditText prePayPriceETxt;
     EditText debtTotalPriceETxt;
+    ToggleButton exchangeChkBx;
     Spinner loanTypeSpnr;
-    EditText mortgageTotalPriceETxt;
-    EditText totalRentPriceETxt;
     Spinner whichFloorSpnr;
     Spinner roomCountSpnr;
     Spinner floorCountSpnr;
@@ -154,7 +134,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
     Spinner landViewSpnr;
     MultiSelectSpinner  equipmentSpnr;
     Spinner floorCoveringSpnr;
-    Spinner kitchenServicesSpnr;
+//    Spinner kitchenServicesSpnr;
     Spinner directionSpnr;
     Spinner landStateSpnr;///////// Land State=> ads type
     Spinner waterSpnr;
@@ -169,7 +149,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
     ImageView imageThree;
     ImageView imageFour;
     ImageView imageFive;
-    com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog datePicker;
+    DatePickerDialog datePicker;
     Date grgDate;
     PersianDate persianDate;
     PersianCalendar persianCalendar = new PersianCalendar();
@@ -270,7 +250,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
 
     MYSQlDBHelper dbHelper;
 
-    public NewLandFragment() {
+    public NewLandSaleFragment() {
         // Required empty public constructor
     }
 
@@ -289,63 +269,51 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_new_land, container, false);
+        View view = inflater.inflate(R.layout.fragment_new_sale, container, false);
 
 //////////////////////////////////////Find Elements///////////////////////////////////////////////
-        titleEtx = (EditText) view.findViewById(R.id.NewLandFragmentTitleTxt);
-        buildingConditionSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentBuildingConditionSpnr);
-        landCaseSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLandCaseSpnr);
-        landTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLandTypeSpnr);
-        landUseTypeSpnr = (MultiSelectSpinner) view.findViewById(R.id.NewLandFragmentLandUseTypeMltSpnr);
-        voucherTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentVoucherTypeSpnr);
-        preVoucherTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentPreVoucherTypeSpnr);
-        exVoucherTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentExVoucherTypeSpnr);
-        dongETxt = (EditText) view.findViewById(R.id.NewLandFragmentDongTxt);
-        preDongETxt = (EditText) view.findViewById(R.id.NewLandFragmentPreDongTxt);
-        exDongETxt = (EditText) view.findViewById(R.id.NewLandFragmentExDongTxt);
-        buildingYearETxt = (EditText) view.findViewById(R.id.NewLandFragmentBuildingYearTxt);
-        spaceFoundationETxt = (EditText) view.findViewById(R.id.NewLandFragmentFoundationSpaceTxt);
-        deliveryETxt = (EditText) view.findViewById(R.id.NewLandFragmentDeliveryDateTxt);
-        residentOwnerChkBx = (MaterialCheckBox) view.findViewById(R.id.NewLandFragmentResidentOwnerChkBx);
-        rentalPreferenceSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentRentalPreferenceSpnr);
-        exchangeChkBx = (MaterialCheckBox) view.findViewById(R.id.NewLandFragmentExchangeChkBx);
-        totalPriceETxt = (EditText) view.findViewById(R.id.NewLandFragmentTotalPriceTxt);
-        preSalePriceETxt = (EditText) view.findViewById(R.id.NewLandFragmentPreSalePriceTxt);
-        prePayPriceETxt = (EditText) view.findViewById(R.id.NewLandFragmentPrePayPriceTxt);
-        debtTotalPriceETxt = (EditText) view.findViewById(R.id.NewLandFragmentDebtTotalPriceTxt);
-        loanTypeSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLoanTypeSpnr);
-        mortgageTotalPriceETxt = (EditText) view.findViewById(R.id.NewLandFragmentMortgGageTotalPriceTxt);
-        totalRentPriceETxt = (EditText) view.findViewById(R.id.NewLandFragmentRentTotalPriceTxt);
-        whichFloorSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentWichFloorSpnr);
-        roomCountSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentRoomCountSpnr);
-        floorCountSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentFloorCountSpnr);
-        unitInFloorSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentUnitInFloorSpnr);
-        provinceSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentProvinceSpnr);
-        citySpnr = (Spinner) view.findViewById(R.id.NewLandFragmentCitySpnr);
-        areaSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentAreaSpnr);
-        districtSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentDistrictSpnr);
-        addressETxt = (EditText) view.findViewById(R.id.NewLandFragmentAddressTxt);
-        landViewSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentLandViewSpnr);
-        equipmentSpnr = (MultiSelectSpinner) view.findViewById(R.id.NewLandFragmentEquipmentsSpnr);
-        floorCoveringSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentFloorCoveringSpnr);
-        kitchenServicesSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentKitchenServicesSpnr);
-        directionSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentDirectionSpnr);
-        landStateSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentAdTypeSpnr);
-        waterSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentWaterSpnr);
-        gasSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentGasSpnr);
-        electricitySpnr = (Spinner) view.findViewById(R.id.NewLandFragmentElectricitySpnr);
-        phoneSpnr = (Spinner) view.findViewById(R.id.NewLandFragmentPhoneSpnr);
-        descriptionETxt = (EditText) view.findViewById(R.id.NewLandFragmentDescriptionTxt);
+        titleEtx = (EditText) view.findViewById(R.id.NewLandSaleFragmentTitleTxt);
+        buildingConditionSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentBuildingConditionSpnr);
+        landCaseSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentLandCaseSpnr);
+        landTypeSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentLandTypeSpnr);
+        landUseTypeSpnr = (MultiSelectSpinner) view.findViewById(R.id.NewLandSaleFragmentLandUseTypeMltSpnr);
+        voucherTypeSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentVoucherTypeSpnr);
+        dongETxt = (EditText) view.findViewById(R.id.NewLandSaleFragmentDongTxt);
+        buildingYearETxt = (EditText) view.findViewById(R.id.NewLandSaleFragmentBuildingYearTxt);
+        spaceFoundationETxt = (EditText) view.findViewById(R.id.NewLandSaleFragmentFoundationSpaceTxt);
+        exchangeChkBx = (ToggleButton) view.findViewById(R.id.NewLandSaleFragmentExchangeTglBtn);
+        totalPriceETxt = (EditText) view.findViewById(R.id.NewLandSaleFragmentTotalPriceTxt);
+        debtTotalPriceETxt = (EditText) view.findViewById(R.id.NewLandSaleFragmentDebtTotalPriceTxt);
+        loanTypeSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentLoanTypeSpnr);
+        whichFloorSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentWichFloorSpnr);
+        roomCountSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentRoomCountSpnr);
+        floorCountSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentFloorCountSpnr);
+        unitInFloorSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentUnitInFloorSpnr);
+        provinceSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentProvinceSpnr);
+        citySpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentCitySpnr);
+        areaSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentAreaSpnr);
+        districtSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentDistrictSpnr);
+        addressETxt = (EditText) view.findViewById(R.id.NewLandSaleFragmentAddressTxt);
+        landViewSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentLandViewSpnr);
+        equipmentSpnr = (MultiSelectSpinner) view.findViewById(R.id.NewLandSaleFragmentEquipmentsSpnr);
+        floorCoveringSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentFloorCoveringSpnr);
+//        kitchenServicesSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentKitchenServicesSpnr);
+        directionSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentDirectionSpnr);
+        waterSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentWaterSpnr);
+        gasSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentGasSpnr);
+        electricitySpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentElectricitySpnr);
+        phoneSpnr = (Spinner) view.findViewById(R.id.NewLandSaleFragmentPhoneSpnr);
+        descriptionETxt = (EditText) view.findViewById(R.id.NewLandSaleFragmentDescriptionTxt);
         landMapView = (MapView) view.findViewById(R.id.mapView);
-        submitBtn = (Button) view.findViewById(R.id.NewLandFragmentSubmitBtn);
-        selectedImagesGrid = (LinearLayout) view.findViewById(R.id.NewLandFragmentGalleryGrid);
-        imageOne = (ImageView) view.findViewById(R.id.NewLandOneImg);
-        imageTwo = (ImageView) view.findViewById(R.id.NewLandTwoImg);
-        imageThree = (ImageView) view.findViewById(R.id.NewLandThreeImg);
-        imageFour = (ImageView) view.findViewById(R.id.NewLandFourImg);
-        imageFive = (ImageView) view.findViewById(R.id.NewLandFiveImg);
+        submitBtn = (Button) view.findViewById(R.id.NewLandSaleFragmentSubmitBtn);
+        selectedImagesGrid = (LinearLayout) view.findViewById(R.id.NewLandSaleFragmentGalleryGrid);
+        imageOne = (ImageView) view.findViewById(R.id.NewLandSaleOneImg);
+        imageTwo = (ImageView) view.findViewById(R.id.NewLandSaleTwoImg);
+        imageThree = (ImageView) view.findViewById(R.id.NewLandSaleThreeImg);
+        imageFour = (ImageView) view.findViewById(R.id.NewLandSaleFourImg);
+        imageFive = (ImageView) view.findViewById(R.id.NewLandSaleFiveImg);
         persianDate = new PersianDate();
         datePicker = new DatePickerDialog();
         datePicker.setMinDate(persianCalendar);
@@ -452,17 +420,6 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
         }
         rentalPreferenceAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, rentalPreferenceTitles);
         rentalPreferenceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        rentalPreferenceSpnr.setAdapter(rentalPreferenceAdapter);
-        rentalPreferenceSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                requestNewModel.setRentalPreferenceID(rentalPreferenceIDs.get(i));
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
 
         ////////////////////// Loan Type Spinner////////////////////////////////
         loanTypeModels = dbHelper.GetLoanTypesList();
@@ -591,16 +548,16 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
         }
         kitchenServiceAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, kitchenServiceTitles);
         kitchenServiceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        kitchenServicesSpnr.setAdapter(kitchenServiceAdapter);
-        kitchenServicesSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                requestNewModel.setKitchenServiceID( kitchenServiceIDs.get(i));
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
+//        kitchenServicesSpnr.setAdapter(kitchenServiceAdapter);
+//        kitchenServicesSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                requestNewModel.setKitchenServiceID( kitchenServiceIDs.get(i));
+//            }
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//            }
+//        });
 
 
         ////////////////////// Province Spinner////////////////////////////////
@@ -643,104 +600,6 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
         });
 
 
-        ////////////////////// Province Spinner////////////////////////////////
-        landStateTypeModels = dbHelper.GetLandStateList();
-        for (LandStateTypeModel Item : landStateTypeModels) {
-            landStateTitles.add(Item.getTitle());
-            landStateIDs.add(Item.getId());
-            Log.d(TAG, "onCreateView landStateIDs: "+Item.getTitle());
-        }
-        landStateAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, landStateTitles);
-        landStateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        landStateSpnr.setAdapter(landStateAdapter);
-        landStateSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                requestNewModel = new NewLandModel();
-                requestNewModel.setLandStateID( landStateIDs.get(i));
-                switch (i){
-                    case 0:
-                        loanTypeSpnr.setVisibility(View.VISIBLE);
-                        totalPriceETxt.setVisibility(View.VISIBLE);
-                        debtTotalPriceETxt.setVisibility(View.VISIBLE);
-                        preDongETxt.setVisibility(View.GONE);
-                        exDongETxt.setVisibility(View.GONE);
-                        preSalePriceETxt.setVisibility(View.GONE);
-                        preVoucherTypeSpnr.setVisibility(View.GONE);
-                        totalRentPriceETxt.setVisibility(View.GONE);
-                        mortgageTotalPriceETxt.setVisibility(View.GONE);
-                        rentalPreferenceSpnr.setVisibility(View.GONE);
-                        deliveryETxt.setVisibility(View.GONE);
-                        residentOwnerChkBx.setVisibility(View.GONE);
-                        break;
-
-                    case 1:
-                        totalRentPriceETxt.setVisibility(View.VISIBLE);
-                        mortgageTotalPriceETxt.setVisibility(View.VISIBLE);
-                        rentalPreferenceSpnr.setVisibility(View.VISIBLE);
-                        totalPriceETxt.setVisibility(View.GONE);
-                        prePayPriceETxt.setVisibility(View.GONE);
-                        voucherTypeSpnr.setVisibility(View.GONE);
-                        preVoucherTypeSpnr.setVisibility(View.GONE);
-                        exVoucherTypeSpnr.setVisibility(View.GONE);
-                        loanTypeSpnr.setVisibility(View.GONE);
-                        dongETxt.setVisibility(View.GONE);
-                        exDongETxt.setVisibility(View.GONE);
-                        preDongETxt.setVisibility(View.GONE);
-                        deliveryETxt.setVisibility(View.GONE);
-                        exchangeChkBx.setVisibility(View.GONE);
-                        debtTotalPriceETxt.setVisibility(View.GONE);
-                        preSalePriceETxt.setVisibility(View.GONE);
-                        break;
-
-                    case 2:
-                        prePayPriceETxt.setVisibility(View.VISIBLE);
-                        preVoucherTypeSpnr.setVisibility(View.VISIBLE);
-                        preSalePriceETxt.setVisibility(View.VISIBLE);
-                        preVoucherTypeSpnr.setVisibility(View.VISIBLE);
-                        deliveryETxt.setVisibility(View.VISIBLE);
-                        preDongETxt.setVisibility(View.VISIBLE);
-                        totalRentPriceETxt.setVisibility(View.GONE);
-                        mortgageTotalPriceETxt.setVisibility(View.GONE);
-                        dongETxt.setVisibility(View.GONE);
-                        exVoucherTypeSpnr.setVisibility(View.GONE);
-                        exDongETxt.setVisibility(View.GONE);
-                        exVoucherTypeSpnr.setVisibility(View.GONE);
-                        voucherTypeSpnr.setVisibility(View.GONE);
-                        loanTypeSpnr.setVisibility(View.GONE);
-                        rentalPreferenceSpnr.setVisibility(View.GONE);
-                        debtTotalPriceETxt.setVisibility(View.GONE);
-                        exchangeChkBx.setVisibility(View.GONE);
-
-                        break;
-
-                    case 3:
-                        mortgageTotalPriceETxt.setVisibility(View.GONE);
-                        totalRentPriceETxt.setVisibility(View.GONE);
-                        totalPriceETxt.setVisibility(View.GONE);
-                        prePayPriceETxt.setVisibility(View.GONE);
-                        debtTotalPriceETxt.setVisibility(View.GONE);
-                        totalPriceETxt.setVisibility(View.GONE);
-                        preVoucherTypeSpnr.setVisibility(View.GONE);
-                        exVoucherTypeSpnr.setVisibility(View.GONE);
-                        exDongETxt.setVisibility(View.GONE);
-                        preDongETxt.setVisibility(View.GONE);
-                        dongETxt.setVisibility(View.GONE);
-                        debtTotalPriceETxt.setVisibility(View.GONE);
-                        deliveryETxt.setVisibility(View.GONE);
-                        rentalPreferenceSpnr.setVisibility(View.GONE);
-                        preSalePriceETxt.setVisibility(View.GONE);
-
-                        break;
-                }
-                requestNewModel.setLandStateID( landStateIDs.get(i));
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-
         //////////////////Voucher + Ex,Pre Voucher Spinner/////////////////////////////////////////////////
         voucherModels = dbHelper.GetVouchersList();
         for (VoucherModel Item : voucherModels) {
@@ -759,30 +618,6 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-
-        exVoucherTypeSpnr.setAdapter(voucherAdapter);
-        exVoucherTypeSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                requestNewModel.setExVoucherTypeID( voucherIDs.get(i));
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-        preVoucherTypeSpnr.setAdapter(voucherAdapter);
-        preVoucherTypeSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                requestNewModel.setPreVoucherTypeID( voucherIDs.get(i));
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-
 
         ////////////////////// UseType MultiSelect Spinner////////////////////////////////
         useTypeModels = dbHelper.GetUseTypeList();
@@ -822,14 +657,6 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
                     }
                 });
 
-
-        residentOwnerChkBx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b)requestNewModel.setResidentOwner(Constants.ONE);
-                else requestNewModel.setResidentOwner(Constants.ZERO);
-            }
-        });
 
         exchangeChkBx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -948,32 +775,6 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
             }
         });
 
-        deliveryETxt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                requestNewModel.setDeliveryDate("2021-02-21");
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
-
-        deliveryETxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                requestNewModel.setDeliveryDate("2021-02-21");
-                datePicker.show(getActivity().getFragmentManager(),"ffff");
-
-            }
-        });
-
         descriptionETxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -992,40 +793,6 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
             }
         });
 
-        exDongETxt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                requestNewModel.setExDong(exDongETxt.getText().toString());
-            }
-        });
-
-        preDongETxt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                requestNewModel.setPreDong(preDongETxt.getText().toString());
-            }
-        });
-
         dongETxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -1040,57 +807,6 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
             @Override
             public void afterTextChanged(Editable editable) {
                 requestNewModel.setDong(dongETxt.getText().toString());
-            }
-        });
-
-        mortgageTotalPriceETxt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                requestNewModel.setMortgageTotalPrice(mortgageTotalPriceETxt.getText().toString());
-            }
-        });
-
-        prePayPriceETxt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                requestNewModel.setPrePayPrice(prePayPriceETxt.getText().toString());
-            }
-        });
-
-        preSalePriceETxt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                requestNewModel.setPreSaleTotalPrice(preSalePriceETxt.getText().toString());
             }
         });
 
@@ -1128,22 +844,6 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
             }
         });
 
-        totalRentPriceETxt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                requestNewModel.setRentTotalPrice(totalRentPriceETxt.getText().toString());
-            }
-        });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1155,7 +855,7 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
 //                requestNewModel.setDong(dongETxt.getText().toString());
 //                requestNewModel.setExDong(exDongETxt.getText().toString());
 //                requestNewModel.setPreDong(preDongETxt.getText().toString());
-//                requestNewModel.setSaleTotalPrice(totalPriceETxt.getText().toString());
+                requestNewModel.setSaleTotalPrice(totalPriceETxt.getText().toString());
 //                requestNewModel.setPreSaleTotalPrice(preSalePriceETxt.getText().toString());
 //                requestNewModel.setDescription(descriptionETxt.getText().toString());
 //                requestNewModel.setAddress(addressETxt.getText().toString());
@@ -1168,27 +868,23 @@ public class NewLandFragment extends Fragment  implements OnMapReadyCallback, Da
 //                requestNewModel.setRoomCount(Long.toString(roomCountSpnr.getSelectedItemId()));
 //                requestNewModel.setFloorCount(Long.toString(floorCountSpnr.getSelectedItemId()));
 //                requestNewModel.setUnitInFloor(Long.toString(unitInFloorSpnr.getSelectedItemId()));
-//                requestNewModel.setFloor(Long.toString(floorCountSpnr.getSelectedItemId()));
-//                requestNewModel.setWater(Long.toString(waterSpnr.getSelectedItemId()));
-//                requestNewModel.setGas(Long.toString(gasSpnr.getSelectedItemId()));
-//                requestNewModel.setElectricy(Long.toString(electricitySpnr.getSelectedItemId()));
-//                requestNewModel.setPhone(Long.toString(phoneSpnr.getSelectedItemId()));
-//                if(residentOwnerChkBx.isChecked())requestNewModel.setResidentOwner(Constants.ONE);
-//                else requestNewModel.setResidentOwner(Constants.ZERO);
-//                if(exchangeChkBx.isChecked())requestNewModel.setChkExchanged(Constants.ONE);
-//                else requestNewModel.setChkExchanged(Constants.ZERO);
-//                requestNewModel.setUID(UID);
-//
-//
-//                //                requestNewModel.setImageFiles(eqStr);
-//                try {
-//                    HomeFragmentPOSTRequest(getContext());
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-                final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
-                controller.navigate(R.id.newLandSaleFragment);
+                requestNewModel.setFloor(Long.toString(floorCountSpnr.getSelectedItemId()));
+                requestNewModel.setWater(Long.toString(waterSpnr.getSelectedItemId()));
+                requestNewModel.setGas(Long.toString(gasSpnr.getSelectedItemId()));
+                requestNewModel.setElectricy(Long.toString(electricitySpnr.getSelectedItemId()));
+                requestNewModel.setPhone(Long.toString(phoneSpnr.getSelectedItemId()));
+                requestNewModel.setLandStateID("1");
+                if(exchangeChkBx.isChecked())requestNewModel.setChkExchanged(Constants.ONE);
+                else requestNewModel.setChkExchanged(Constants.ZERO);
+                requestNewModel.setUID(UID);
 
+
+                //                requestNewModel.setImageFiles(eqStr);
+                try {
+                    HomeFragmentPOSTRequest(getContext());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
         return view;

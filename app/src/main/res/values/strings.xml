@@ -2,6 +2,11 @@
     <string name="app_name">همدان ملک</string>
     <string name="title_home">خانه</string>
     <string name="title_dashboard">ثبت ملک جدید</string>
+    <string name="new_land_sale">ثبت آگهی فروش</string>
+    <string name="new_land_rent">ثبت آگهی اجاره</string>
+    <string name="new_land_participation">ثبت آگهی مشارکت</string>
+    <string name="new_land_pre_sale">ثبت آگهی پیش فروش</string>
+
     <string name="title_aboutus">صفحه شخصی</string>
     <string name="title_personalpage">صفحه شخصی</string>
     <string name="title_createnewad">ثبت آگهی</string>
@@ -177,7 +182,6 @@
 
     <string name="new_land_use_types">نوع کاربری</string>
     <string name="new_land_is_exchange">قابل معاوضه</string>
-    <string name="new_land_pre_sale">تعداد دانگ</string>
     <string name="new_land_voucher_type">نوع سند</string>
     <string name="new_land_area">منطفه</string>
     <string name="new_land_rental_preference">ارجیت اجاره</string>

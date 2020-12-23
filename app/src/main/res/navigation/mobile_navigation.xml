@@ -185,5 +185,9 @@
         android:name="ir.hamedanmelk.hamedanmelk.ui.category.FeaturedLandFragment"
         android:label="@string/all_featured"
         />
+    <fragment
+        android:id="@+id/newLandSaleFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.newland.NewLandSaleFragment"
+        android:label="@string/new_land_sale" />
 
 </navigation>
