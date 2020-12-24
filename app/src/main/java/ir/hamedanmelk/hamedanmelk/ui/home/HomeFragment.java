@@ -161,6 +161,7 @@ public class HomeFragment extends Fragment {
         Log.d(TAG, "onCreateView: "+landModels.size());
         HorizantalrecyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
         VerticalrecyclerView.setAdapter(new HomeVerticalRecyclerViewAdapter(featuredLandModels,getActivity()));
+        HorizantalrecyclerView.setNestedScrollingEnabled(false);
 
 //
 //        ViewPager viewPager;
