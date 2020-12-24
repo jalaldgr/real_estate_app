@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import ir.hamedanmelk.hamedanmelk.models.AgencyModel;
 import ir.hamedanmelk.hamedanmelk.models.AgentUserModel;
+import ir.hamedanmelk.hamedanmelk.models.LandModel;
 import ir.hamedanmelk.hamedanmelk.models.LawyerModel;
 import ir.hamedanmelk.hamedanmelk.models.OfficeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.AreaModel;
@@ -64,6 +65,7 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String AGENCY_TABLE_NAME = "Agency";
     private static final String USE_TYPE_TABLE_NAME = "UseType";
     private static final String VOUCHER_TABLE_NAME = "Voucher";
+    private static final String LAND_TABLE_NAME = "Land";
 
 
     private static final String PROVINCE_TABLE_COLUMN_ID="id";
@@ -178,6 +180,25 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
 
     private static final String USE_TYPE_TABLE_COLUMN_ID          ="id";
     private static final String USE_TYPE_TABLE_COLUMN_TITLE       ="Title";
+
+    private static final String LAND_TABLE_COLUMN_ID = "id";
+    private static final String LAND_TABLE_COLUMN_SALE_TOTAL_PRICE = "SaleTotalPrice";
+    private static final String LAND_TABLE_COLUMN_MORTGAGE_TOTAL_PRICE = "MortgageTotalPrice";
+    private static final String LAND_TABLE_COLUMN_RENT_TOTAL_PRICE = "RentTotalPrice";
+    private static final String LAND_TABLE_COLUMN_TITLE = "Title";
+    private static final String LAND_TABLE_COLUMN_LAND_STATE_ID = "land_state_id";
+    private static final String LAND_TABLE_COLUMN_CREATED_AT = "created_at";
+    private static final String LAND_TABLE_COLUMN_LAND_SITUATION_ID = "land_situation_id";
+    private static final String LAND_TABLE_COLUMN_VIEW = "LView";
+    private static final String LAND_TABLE_COLUMN_IMAGES = "Images";
+    private static final String LAND_TABLE_COLUMN_LAND_STATE_TITLE = "LandStateTitle";
+    private static final String LAND_TABLE_COLUMN_DISTRICT_ID = "district_id";
+    private static final String LAND_TABLE_COLUMN_LAND_SITUATION_TITLE = "LandSituationTitle";
+    private static final String LAND_TABLE_COLUMN_LAND_SITUATION_COLOR = "LandSituationColor";
+    private static final String LAND_TABLE_COLUMN_FIRST_NAME = "first_name";
+    private static final String LAND_TABLE_COLUMN_LAST_NAME = "last_name";
+    private static final String LAND_TABLE_COLUMN_LAND_CASE_ID = "land_case_id";
+
 
     private static final String CREATE_PROVINCE_TABLE= "CREATE TABLE "+PROVINCE_TABLE_NAME+"("
             + PROVINCE_TABLE_COLUMN_ID + " TEXT,"
@@ -341,6 +362,26 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String CREATE_USE_TYPE_TABLE= "CREATE TABLE "+USE_TYPE_TABLE_NAME+"("
             + USE_TYPE_TABLE_COLUMN_ID+ " TEXT,"
             + USE_TYPE_TABLE_COLUMN_TITLE+ " TEXT"
+            +")";
+
+    private static final String CREATE_LAND_TABLE="CREATE TABLE "+LAND_TABLE_NAME+"("
+            + LAND_TABLE_COLUMN_ID + " TEXT,"
+            + LAND_TABLE_COLUMN_SALE_TOTAL_PRICE + " TEXT,"
+            + LAND_TABLE_COLUMN_MORTGAGE_TOTAL_PRICE + " TEXT,"
+            + LAND_TABLE_COLUMN_RENT_TOTAL_PRICE + " TEXT,"
+            + LAND_TABLE_COLUMN_TITLE + " TEXT,"
+            + LAND_TABLE_COLUMN_LAND_STATE_ID + " TEXT,"
+            + LAND_TABLE_COLUMN_CREATED_AT + " TEXT,"
+            + LAND_TABLE_COLUMN_LAND_SITUATION_ID + " TEXT,"
+            + LAND_TABLE_COLUMN_VIEW + " TEXT,"
+            + LAND_TABLE_COLUMN_IMAGES + " TEXT,"
+            + LAND_TABLE_COLUMN_LAND_STATE_TITLE + " TEXT,"
+            + LAND_TABLE_COLUMN_DISTRICT_ID + " TEXT,"
+            + LAND_TABLE_COLUMN_LAND_SITUATION_TITLE + " TEXT,"
+            + LAND_TABLE_COLUMN_LAND_SITUATION_COLOR + " TEXT,"
+            + LAND_TABLE_COLUMN_FIRST_NAME + " TEXT,"
+            + LAND_TABLE_COLUMN_LAST_NAME + " TEXT,"
+            + LAND_TABLE_COLUMN_LAND_CASE_ID + " TEXT"
             +")";
 
 //////////////////////////////////////Provinces methods////////////////////////////////////////////////
@@ -2020,6 +2061,150 @@ public ArrayList<LawyerModel> GetLawyers() {
         return voucherModel;
     }
 
+
+    ///////////////////////// Total Land Methods //////////////////////////////
+    public void InsertLand(ContentValues cv){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(LAND_TABLE_NAME, null, cv);
+        db.close();
+    }
+
+    public void DeleteLand(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+LAND_TABLE_NAME);
+        db.close();
+    }
+
+    public ArrayList<LandModel> GetAllLands() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<LandModel> landModels = new ArrayList<LandModel>();
+        LandModel landModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM " + LAND_TABLE_NAME , null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do {
+                landModel = new LandModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        c.getString(8),
+                        c.getString(9),
+                        c.getString(10),
+                        c.getString(11),
+                        c.getString(12),
+                        c.getString(13),
+                        c.getString(14),
+                        c.getString(15),
+                        c.getString(16)
+                );
+                landModels.add(landModel);
+                counter++;
+            } while (c.moveToNext());
+            c.close();
+        } catch (Exception e) {
+            Log.d(TAG, "GetLands: "+e.toString());
+        }
+        db.close();
+        return landModels;
+    }
+
+    public ArrayList<LandModel> GetAllFeaturedLands() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<LandModel> landModels = new ArrayList<LandModel>();
+        LandModel landModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM " + LAND_TABLE_NAME , null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do {
+                landModel = new LandModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        c.getString(8),
+                        c.getString(9),
+                        c.getString(10),
+                        c.getString(11),
+                        c.getString(12),
+                        c.getString(13),
+                        c.getString(14),
+                        c.getString(15),
+                        c.getString(16)
+                );
+                if(Integer.parseInt(c.getString(16))>1) {
+                    landModels.add(landModel);
+                }
+                counter++;
+            } while (c.moveToNext());
+            c.close();
+        } catch (Exception e) {
+            Log.d(TAG, "GetFeaturedLands: "+e.toString());
+        }
+        db.close();
+        return landModels;
+    }
+
+    public ArrayList<LandModel> GetAllFeatured20Lands() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<LandModel> landModels = new ArrayList<LandModel>();
+        LandModel landModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM " + LAND_TABLE_NAME , null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do {
+                landModel = new LandModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        c.getString(8),
+                        c.getString(9),
+                        c.getString(10),
+                        c.getString(11),
+                        c.getString(12),
+                        c.getString(13),
+                        c.getString(14),
+                        c.getString(15),
+                        c.getString(16)
+                );
+                if(Integer.parseInt(c.getString(16))>1 && counter<20) {
+                    landModels.add(landModel);
+                }
+                counter++;
+            } while (c.moveToNext());
+            c.close();
+        } catch (Exception e) {
+            Log.d(TAG, "GetFeaturedLands: "+e.toString());
+        }
+        db.close();
+        return landModels;
+    }
+
 //----------------------------------------------------------------------------------------------
 
     public MYSQlDBHelper( Context context) {
@@ -2059,7 +2244,7 @@ public ArrayList<LawyerModel> GetLawyers() {
         sqLiteDatabase.execSQL(CREATE_AGENCY_TABLE);
         sqLiteDatabase.execSQL(CREATE_USE_TYPE_TABLE);
         sqLiteDatabase.execSQL(CREATE_VOUCHER_TABLE);
-
+        sqLiteDatabase.execSQL(CREATE_LAND_TABLE);
 
     }
 
@@ -2089,6 +2274,8 @@ public ArrayList<LawyerModel> GetLawyers() {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+AGENCY_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+USE_TYPE_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+VOUCHER_TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+LAND_TABLE_NAME );
+
 
 
     }

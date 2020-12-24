@@ -149,10 +149,9 @@ public class FeaturedLandFragment extends Fragment {
                             featuredlandtemp.add(landModel);
                         };
                     }
-                    landModels=landtemp;
+
                     featuredLandModels = featuredlandtemp;
-                    Log.d(TAG, "onPostExecute rentModels: "+landModels.toString());
-                        recyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
+                        recyclerView.setAdapter(new HomeRecyclerViewAdapter(featuredLandModels,getActivity()));
 
                     }
                 } catch (JSONException e) {

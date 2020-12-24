@@ -32,6 +32,7 @@ import ir.hamedanmelk.hamedanmelk.recyclers.HomeRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.recyclers.HomeVerticalRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
+import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 import ir.hamedanmelk.hamedanmelk.tools.ViewPagerAdapter;
 import ir.hamedanmelk.hamedanmelk.models.LandModel;
@@ -43,7 +44,7 @@ public class HomeFragment extends Fragment {
     RecyclerView VerticalrecyclerView;
     ArrayList<LandModel> landModels;
     ArrayList<LandModel> featuredLandModels;
-
+    MYSQlDBHelper dbHelper;
     Button salebtn;
     Button rentbtn;
     Button assignmentbtn;
@@ -65,7 +66,8 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
-        TotalLandRequest(getContext());
+        dbHelper = new MYSQlDBHelper(getContext());
+//        TotalLandRequest(getContext());
         salebtn = (Button)root.findViewById(R.id.HomeFragmentSaleButton);
         rentbtn=(Button)root.findViewById(R.id.HomeFragmentRentButton);
         assignmentbtn=(Button)root.findViewById(R.id.HomeFragmentAssignmentButton);
@@ -153,6 +155,13 @@ public class HomeFragment extends Fragment {
         RecyclerView.LayoutManager VRLaymngr = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL,false);
         HorizantalrecyclerView.setLayoutManager(laymngr);
         VerticalrecyclerView.setLayoutManager(VRLaymngr);
+
+        landModels = dbHelper.GetAllLands();
+        featuredLandModels = dbHelper.GetAllFeatured20Lands();
+        Log.d(TAG, "onCreateView: "+landModels.size());
+        HorizantalrecyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
+        VerticalrecyclerView.setAdapter(new HomeVerticalRecyclerViewAdapter(featuredLandModels,getActivity()));
+
 //
 //        ViewPager viewPager;
 ////        viewPager = (ViewPager) root.findViewById(R.id.viewpager);
@@ -216,7 +225,7 @@ public class HomeFragment extends Fragment {
 
                             landtemp.add(landModel);
 
-                            if(Integer.parseInt(landModel.getLand_case_id())>1){
+                            if(Integer.parseInt(landModel.getLand_case_id())>1 && i<20   ){
                                 featuredlandtemp.add(landModel);
                             };
                         }
