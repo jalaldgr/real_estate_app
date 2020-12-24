@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layoutDirection="rtl"
         android:orientation="vertical"
+        android:descendantFocusability="blocksDescendants"
         android:textDirection="rtl">
 
         <com.daimajia.slider.library.SliderLayout

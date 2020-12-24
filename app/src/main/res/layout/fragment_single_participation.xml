@@ -12,14 +12,14 @@
         android:layout_height="wrap_content"
         android:layoutDirection="rtl"
         android:orientation="vertical"
+        android:descendantFocusability="blocksDescendants"
         android:textDirection="rtl">
 
         <com.daimajia.slider.library.SliderLayout
             android:id="@+id/single_participation_slider"
             android:layout_width="match_parent"
             android:layout_height="332dp"
-            android:gravity="center|center_horizontal|fill_vertical"
-            android:visibility="gone" />
+            android:gravity="center|center_horizontal|fill_vertical" />
 
         <com.daimajia.slider.library.Indicators.PagerIndicator
             android:id="@+id/custom_indicator"
@@ -69,8 +69,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
