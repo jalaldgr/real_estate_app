@@ -14,6 +14,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -53,7 +56,10 @@ public class HomeVerticalRecyclerViewAdapter extends RecyclerView.Adapter<HomeVe
         final LandModel landModel = landModels.get(position);
         dbHelper = new MYSQlDBHelper(act.getApplicationContext());
         holder.titleTxt.setText(landModel.getTitle());
-        new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+landModel.getImages());
+
+//        Picasso.with(act.getApplicationContext()).load(Urls.getBaseURL()+landModel.getImages()).into(holder.thumbnailImg);
+        Glide.with(act.getApplicationContext()).load(Urls.getBaseURL()+landModel.getImages()).into(holder.thumbnailImg);
+//        new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+landModel.getImages());
         DistrictModel districtModel = dbHelper.GetDistrictByID(landModel.getDistrict_id());
         holder.districtTxt.setText(districtModel.getTitle());
         switch (landModels.get(position).getLand_state_id()) {

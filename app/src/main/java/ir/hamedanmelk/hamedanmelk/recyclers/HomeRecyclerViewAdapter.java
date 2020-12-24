@@ -15,6 +15,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
+
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Objects;
@@ -54,7 +57,11 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         String price ="توافقی";
         dbHelper = new MYSQlDBHelper(act.getApplicationContext());
         holder.titleTxt.setText(landModel.getTitle());
-        new DownloadImage(holder.thumbnailImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+landModel.getImages());
+
+        Glide.with(act.getApplicationContext()).load(Urls.getBaseURL()+landModel.getImages()).into(holder.thumbnailImg);
+//        new DownloadImage(holder.thumbnailImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+landModel.getImages());
+//        Picasso.with(act.getApplicationContext()).load(Urls.getBaseURL()+landModel.getImages()).into(holder.thumbnailImg);
+
         DistrictModel districtModel = dbHelper.GetDistrictByID(landModel.getDistrict_id());
         holder.districtTxt.setText(districtModel.getTitle());
         switch (landModels.get(position).getLand_state_id()) {
