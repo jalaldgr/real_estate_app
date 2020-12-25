@@ -32,6 +32,8 @@ import android.widget.ToggleButton;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -895,8 +897,11 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
                         progressDialog.dismiss();
                         Log.d(TAG, "onResponse: "+response.toString());
                         try {
-                            if(response.getString(Constants.JSON_RESPONSE_DATA).contains("success"))
-                                Toast.makeText(getContext(),"آگهی با موفقیت ثبت شد",Toast.LENGTH_LONG).show();
+                            if(response.getString(Constants.JSON_RESPONSE_DATA).contains("Success")) {
+                                Toast.makeText(getContext(), "آگهی با موفقیت ثبت شد", Toast.LENGTH_LONG).show();
+                                final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
+                                controller.navigate(R.id.navigation_home);
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

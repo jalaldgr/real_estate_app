@@ -293,9 +293,10 @@ public class NewCompanyFragment extends Fragment {
                     JSONObject requestJsonObject = new JSONObject(s.get(0));
                     if (requestJsonObject.getInt("State") > 0) {
 
-                        if(requestJsonObject.getString(Constants.JSON_RESPONSE_DATA).contains("success"))
-                            Toast.makeText(context,"شرکت با موفقیت ثبت شد",Toast.LENGTH_LONG).show();
-
+                        if(requestJsonObject.getString(Constants.JSON_RESPONSE_DATA).contains("Success")) {
+                            Toast.makeText(getContext(), "آگهی با موفقیت ثبت شد", Toast.LENGTH_LONG).show();
+                            controller.navigate(R.id.navigation_home);
+                        }
                     }
                 } catch (JSONException jsonException) {
                     jsonException.printStackTrace();

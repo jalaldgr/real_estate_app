@@ -31,6 +31,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -86,6 +88,8 @@ import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.FilePath;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
+import okhttp3.MultipartBody;
+import retrofit2.Retrofit;
 import saman.zamani.persiandate.PersianDate;
 
 public class NewLandParticipationFragment extends Fragment  implements OnMapReadyCallback, DatePickerDialog.OnDateSetListener{
@@ -711,8 +715,11 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
                         progressDialog.dismiss();
                         Log.d(TAG, "onResponse: "+response.toString());
                         try {
-                            if(response.getString(Constants.JSON_RESPONSE_DATA).contains("success"))
-                                Toast.makeText(getContext(),"آگهی با موفقیت ثبت شد",Toast.LENGTH_LONG).show();
+                            if(response.getString(Constants.JSON_RESPONSE_DATA).contains("Success")) {
+                                Toast.makeText(getContext(), "آگهی با موفقیت ثبت شد", Toast.LENGTH_LONG).show();
+                                final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
+                                controller.navigate(R.id.navigation_home);
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
