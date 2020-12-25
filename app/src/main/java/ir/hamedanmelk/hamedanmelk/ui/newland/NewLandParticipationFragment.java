@@ -88,8 +88,6 @@ import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.FilePath;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
-import okhttp3.MultipartBody;
-import retrofit2.Retrofit;
 import saman.zamani.persiandate.PersianDate;
 
 public class NewLandParticipationFragment extends Fragment  implements OnMapReadyCallback, DatePickerDialog.OnDateSetListener{

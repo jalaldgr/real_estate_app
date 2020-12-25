@@ -1,6 +1,7 @@
 package ir.hamedanmelk.hamedanmelk.ui.personalpage;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +23,7 @@ public class MyHamedanMelkFragment extends PreferenceFragmentCompat {
     Preference about_preference;
     Preference user_favorites;
     Preference user_lands ;
-    Preference register_company;
+    Preference share;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -36,30 +37,20 @@ public class MyHamedanMelkFragment extends PreferenceFragmentCompat {
         about_preference= findPreference("myhamedanmelk_aboutus_items");
         user_favorites = findPreference("myhamedanmelk_user_favorites");
         user_lands     = findPreference("myhamedanmelk_user_lands");
-        register_company=findPreference("myhamedanmelk_register_company");
+        share   = findPreference("myhamedanmelk_share");
 
         if(user_pref.contains("id")) {
             notLoggedInPreference.setVisible(false);
             loggedInPreference.setVisible(true);
-            register_company.setVisible(true);
             user_favorites.setVisible(true);
             user_lands.setVisible(true);
         }
         else{
             notLoggedInPreference.setVisible(true);
             loggedInPreference.setVisible(false);
-            register_company.setVisible(false);
             user_favorites.setVisible(false);
             user_lands.setVisible(false);
         }
-
-        register_company.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                controller.navigate(R.id.newCompanyFragment);
-                return false;
-            }
-        });
 
         user_lands.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -76,6 +67,17 @@ public class MyHamedanMelkFragment extends PreferenceFragmentCompat {
                 return false;
             }
         });
+        share.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_SUBJECT, "اشتراک گذاری");
+                i.putExtra(Intent.EXTRA_TEXT, "https://hamedanmelk.ir/");
+                startActivity(Intent.createChooser(i, "اشتراک گذاری"));
+                return false;
+            }
+        });
 
         Objects.requireNonNull(about_preference).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -84,12 +86,13 @@ public class MyHamedanMelkFragment extends PreferenceFragmentCompat {
                 return false;
             }
         });
+
+
         if (loggedInPreference != null)
             loggedInPreference.setExitButtonClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     loggedInPreference.setVisible(false);
-                    register_company.setVisible(false);
                     user_favorites.setVisible(false);
                     user_lands.setVisible(false);
                     notLoggedInPreference.setVisible(true);

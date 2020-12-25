@@ -18,7 +18,8 @@
         android:layout_width="96dp"
         android:layout_height="match_parent"
         android:layout_weight="0.3"
-        android:text="@string/user_login" />
+        android:text="@string/user_login"
+        android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
 
     ]
