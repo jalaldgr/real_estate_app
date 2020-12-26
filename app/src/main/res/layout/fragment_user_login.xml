@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
 
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:baselineAligned="false"
         android:orientation="vertical">
 
@@ -46,7 +45,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:text="@string/user_register"
-                android:textColor="@color/splashAdStatusbar"
+                android:textColor="@color/colorAccent"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -59,24 +58,28 @@
         android:layout_marginTop="200dp"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/UserLogineditTextPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:hint="@string/user_username"
-            android:inputType="number|text"
-            android:textDirection="ltr" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/UserLogineditTextTextPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:hint="@string/user_password"
-            android:inputType="textPassword" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/UserLogineditTextPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/user_username"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/UserLogineditTextTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/user_password" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/UserLoginFragmentLoginButton"
@@ -85,9 +88,8 @@
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:background="@color/pink"
             android:text="@string/user_login"
-            android:textColor="#FFFFFF" />
+            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
     </LinearLayout>
 
 </FrameLayout>

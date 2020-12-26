@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:orientation="vertical">
 
         <TextView
@@ -19,46 +20,54 @@
             android:textAlignment="center"
             android:textSize="30sp" />
 
-        <EditText
-            android:id="@+id/PublicUserRegistereFirstNametxt"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/user_register_name" />
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/PublicUserRegistereLastNametxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="none|number"
-            android:text="@string/user_register_family" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/PublicUserRegistereFirstNametxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/user_register_name" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/PublicUserRegisterePhonetxt"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone"
-            android:text="@string/user_register_phone" />
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/PublicUserRegistereLastNametxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/user_register_family" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/PublicUserRegisterePhonetxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/land_info_phone" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/PublicUserRegisterRegisterationBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
             android:text="@string/user_register"
-            android:textColor="#FFFFFF" />
+            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
         <TextView
             android:id="@+id/PublicUserRegistereAgencyRegistertxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            android:text="ثبت نام مشاور املاک"
+            android:text="@string/agency_register"
             android:textAlignment="center"
-            android:textColor="#1663B5" />
+            android:textColor="@color/colorAccent" />
 
     </LinearLayout>
 

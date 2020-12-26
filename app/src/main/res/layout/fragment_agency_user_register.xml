@@ -10,69 +10,90 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/user_register"
+            android:text="@string/agency_register"
             android:textAlignment="center"
             android:textSize="30sp" />
 
-        <EditText
-            android:id="@+id/AgencyPublicUserRegisterFirstNametxt"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/user_register_name" />
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/AgencyPublicUserRegisterLastNametxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/user_register_family" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/AgencyPublicUserRegisterFirstNametxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/user_register_name" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/AgencyPublicUserRegistereAgencyNamext"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/AgencyPublicUserRegistereManagerNametxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/AgencyPublicUserRegisterLastNametxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/user_register_family" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/AgencyPublicUserRegistereAgencyPhonetxt"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone" />
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/AgencyPublicUserRegistereMobiletxt"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/AgencyPublicUserRegistereAgencyNamext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/vocabulary_agency_name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone"
-            android:text="@string/user_register_phone" />
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/AgencyPublicUserRegistereManagerNametxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/vocabulary_manager" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/AgencyPublicUserRegistereAgencyPhonetxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/land_info_phone"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/AgencyPublicUserRegistereMobiletxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/vocabulary_mobile"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/AgencyPublicUserRegisterRegisterationBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
             android:text="@string/user_register"
-            android:textColor="#FFFFFF" />
+            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
     </LinearLayout>
 

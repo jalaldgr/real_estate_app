@@ -62,7 +62,8 @@
     <!--login goods-->
     <string name="user_login">ورود</string>
     <string name="user_login_fragment_not_registered">کاربر جدید هستید؟ </string>
-    <string name="user_register">ثبت نام</string>
+    <string name="user_register">ثبت نام کاربر</string>
+    <string name="agency_register">ثبت نام مشاور املاک</string>
     <string name="user_username">نام کاربری</string>
     <string name="user_password">کلمه عبور</string>
     <string name="user_register_name">نام</string>

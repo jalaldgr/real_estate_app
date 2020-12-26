@@ -164,7 +164,7 @@
     <fragment
         android:id="@+id/agencyPublicUserRegister"
         android:name="ir.hamedanmelk.hamedanmelk.ui.user.AgencyPublicUserRegister"
-        android:label="fragment_agency_user_register"
+        android:label="@string/agency_register"
         tools:layout="@layout/fragment_agency_user_register" />
     <fragment
         android:id="@+id/newCompanyFragment"
