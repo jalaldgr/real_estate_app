@@ -175,7 +175,8 @@
                     android:id="@+id/NewLandPreSaleFragmentWichFloorSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/new_land_floor" />
+                    android:entries="@array/new_land_floor"
+                    android:visibility="gone" />
             </LinearLayout>
 
         </LinearLayout>
@@ -507,7 +508,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -515,6 +517,7 @@
                     android:text="@string/new_land_loan_slice"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
+
                 <EditText
                     android:id="@+id/NewLandPreSaleFragmentLoanSliceTxt"
                     android:layout_width="match_parent"
@@ -586,7 +589,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
