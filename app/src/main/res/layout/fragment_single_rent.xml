@@ -19,7 +19,8 @@
             android:id="@+id/single_rent_slider"
             android:layout_width="match_parent"
             android:layout_height="332dp"
-            android:gravity="center|center_horizontal|fill_vertical" />
+            android:gravity="center|center_horizontal|fill_vertical"
+            android:visibility="gone" />
 
         <com.daimajia.slider.library.Indicators.PagerIndicator
             android:id="@+id/custom_indicator"
@@ -253,21 +254,21 @@
                     android:padding="8dp">
 
                     <TextView
-                        android:id="@+id/SingleRentRentalPreferenceTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center|center_horizontal|center_vertical"
-                        android:text="@string/new_land_rental_preference"
-                        android:textColor="@color/primary_black_text_color"
-                        android:textSize="@dimen/smal_text_size" />
-
-                    <TextView
                         android:id="@+id/textView13"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:text="@string/new_land_rental_preference"
                         android:textColor="@color/textview_lable"
+                        android:textSize="@dimen/smal_text_size" />
+
+                    <TextView
+                        android:id="@+id/SingleRentRentalPreferenceTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|end"
+                        android:text="@string/new_land_rental_preference"
+                        android:textColor="@color/primary_black_text_color"
                         android:textSize="@dimen/smal_text_size" />
 
                 </LinearLayout>
@@ -456,117 +457,117 @@
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/new_land_water"
+                    android:textColor="@color/textview_lable"
+                    android:textSize="@dimen/smal_text_size" />
+
+                <TextView
+                    android:id="@+id/SingleRentWaterTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/new_land_water"
+                    android:textColor="@color/textview_lable"
+                    android:textSize="@dimen/smal_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView34"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/new_land_electricity"
+                    android:textColor="@color/textview_lable"
+                    android:textSize="@dimen/smal_text_size" />
+
+                <TextView
+                    android:id="@+id/SingleRentElectricityTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/new_land_electricity"
+                    android:textColor="@color/textview_lable"
+                    android:textSize="@dimen/smal_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView36"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/new_land_gas"
+                    android:textColor="@color/textview_lable"
+                    android:textSize="@dimen/smal_text_size" />
+
+                <TextView
+                    android:id="@+id/SingleRentGasTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/new_land_gas"
+                    android:textColor="@color/textview_lable"
+                    android:textSize="@dimen/smal_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView38"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/new_land_phone"
+                    android:textColor="@color/textview_lable"
+                    android:textSize="@dimen/smal_text_size" />
+
+                <TextView
+                    android:id="@+id/SingleRentPhoneTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/new_land_phone"
+                    android:textColor="@color/textview_lable"
+                    android:textSize="@dimen/smal_text_size" />
+            </LinearLayout>
+        </LinearLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
             app:cardCornerRadius="4dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_water"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-
-                    <TextView
-                        android:id="@+id/SingleRentWaterTxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_water"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView34"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_electricity"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-
-                    <TextView
-                        android:id="@+id/SingleRentElectricityTxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_electricity"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView36"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_gas"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-
-                    <TextView
-                        android:id="@+id/SingleRentGasTxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_gas"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView38"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_phone"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-
-                    <TextView
-                        android:id="@+id/SingleRentPhoneTxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_phone"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-                </LinearLayout>
-            </LinearLayout>
 
             <ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView
                 android:id="@+id/SingleRentLandEquipmentsGridView"
