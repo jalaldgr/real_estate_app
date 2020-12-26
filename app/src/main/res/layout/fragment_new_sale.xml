@@ -24,7 +24,6 @@
                 android:id="@+id/NewLandSaleFragmentTitleTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="hint"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp" />
 
@@ -33,9 +32,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             android:paddingTop="8dp"
             android:paddingBottom="8dp">
@@ -43,13 +40,93 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33333"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:text="@string/land_info_land_type"
+                    android:textColor="@color/textview_lable"
+                    android:textSize="@dimen/smal_text_size" />
+
+                <Spinner
+                    android:id="@+id/NewLandSaleFragmentLandTypeSpnr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:contentDescription="نوع ملک"
+                    android:fadingEdge="vertical"
+                    android:nestedScrollingEnabled="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/new_land_land_case"
+                    android:textColor="@color/textview_lable"
+                    android:textSize="@dimen/smal_text_size" />
+
+                <Spinner
+                    android:id="@+id/NewLandSaleFragmentLandCaseSpnr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/land_info_foundation_space">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/NewLandSaleFragmentFoundationSpaceTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="@string/new_land_use_types"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -58,57 +135,14 @@
                     android:id="@+id/NewLandSaleFragmentLandUseTypeMltSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.33333"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/land_info_land_type"
-                    android:textColor="@color/textview_lable"
-                    android:textSize="@dimen/smal_text_size" />
-
-                <Spinner
-                    android:id="@+id/NewLandSaleFragmentLandTypeSpnr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.33333"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/new_land_land_case"
-                    android:textColor="@color/textview_lable"
-                    android:textSize="@dimen/smal_text_size" />
-
-                <Spinner
-                    android:id="@+id/NewLandSaleFragmentLandCaseSpnr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             android:paddingTop="8dp"
             android:paddingBottom="8dp">
@@ -116,13 +150,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33333"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/land_info_floor_count"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -131,6 +166,7 @@
                     android:id="@+id/NewLandSaleFragmentFloorCountSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
                     android:entries="@array/new_land_floor_count"
                     android:prompt="@string/land_info_floor_count" />
             </LinearLayout>
@@ -138,13 +174,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33333"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/land_info_floor"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -153,19 +190,31 @@
                     android:id="@+id/NewLandSaleFragmentWichFloorSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
                     android:entries="@array/new_land_floor" />
             </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33333"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/land_info_units_in_floor"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -174,52 +223,22 @@
                     android:id="@+id/NewLandSaleFragmentUnitInFloorSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
                     android:entries="@array/new_land_unit_in_floor"
                     android:prompt="@string/land_info_units_in_floor" />
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33333"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/land_info_foundation_space"
-                    android:textColor="@color/textview_lable"
-                    android:textSize="@dimen/smal_text_size" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/NewLandSaleFragmentFoundationSpaceTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.33333"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/land_info_room_count"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -228,37 +247,18 @@
                     android:id="@+id/NewLandSaleFragmentRoomCountSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
                     android:entries="@array/new_land_room_count"
                     android:prompt="@string/land_info_room_count" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.33333"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/new_land_voucher_type"
-                    android:textColor="@color/textview_lable"
-                    android:textSize="@dimen/smal_text_size" />
-
-                <Spinner
-                    android:id="@+id/NewLandSaleFragmentVoucherTypeSpnr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             android:paddingTop="8dp"
             android:paddingBottom="8dp">
@@ -266,34 +266,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33333"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/vocabulary_building_year"
-                    android:textColor="@color/textview_lable"
-                    android:textSize="@dimen/smal_text_size" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/NewLandSaleFragmentBuildingYearTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.33333"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/vocabulary_land_building_condition"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -301,19 +281,83 @@
                 <Spinner
                     android:id="@+id/NewLandSaleFragmentBuildingConditionSpnr"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33333"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:text="@string/new_land_voucher_type"
+                    android:textColor="@color/textview_lable"
+                    android:textSize="@dimen/smal_text_size" />
+
+                <Spinner
+                    android:id="@+id/NewLandSaleFragmentVoucherTypeSpnr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:layout_marginLeft="8dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/vocabulary_building_year">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/NewLandSaleFragmentBuildingYearTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:layout_marginLeft="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="@string/vocabulary_equipment"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -322,16 +366,15 @@
                     android:id="@+id/NewLandSaleFragmentEquipmentsSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp" />
+                    android:backgroundTint="@color/colorPrimary" />
+
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             android:paddingTop="8dp"
             android:paddingBottom="8dp">
@@ -339,13 +382,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33333"
-                android:orientation="vertical">
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:layout_marginLeft="8dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/new_land_direction"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -353,40 +397,22 @@
                 <Spinner
                     android:id="@+id/NewLandSaleFragmentDirectionSpnr"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33333"
-                android:orientation="vertical">
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:layout_marginLeft="8dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/new_land_floor_covering"
-                    android:textColor="@color/textview_lable"
-                    android:textSize="@dimen/smal_text_size" />
-
-                <Spinner
-                    android:id="@+id/NewLandSaleFragmentFloorCoveringSpnr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.33333"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/new_land_view"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -394,16 +420,15 @@
                 <Spinner
                     android:id="@+id/NewLandSaleFragmentLandViewSpnr"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             android:paddingTop="8dp"
             android:paddingBottom="8dp">
@@ -411,35 +436,67 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33333"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/new_land_loan_total_price"
+                    android:text="@string/new_land_floor_covering"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
 
-                <EditText
+                <Spinner
+                    android:id="@+id/NewLandSaleFragmentFloorCoveringSpnr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/new_land_loan_total_price">
+
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandSaleFragmentDebtTotalPriceTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33333"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/new_land_loan_type"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -447,19 +504,20 @@
                 <Spinner
                     android:id="@+id/NewLandSaleFragmentLoanTypeSpnr"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33333"
-                android:orientation="vertical">
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/new_land_loan_slice"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -469,9 +527,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             android:paddingTop="8dp"
             android:paddingBottom="8dp">
@@ -479,57 +535,65 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3333"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
-                <TextView
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/land_info_total_price"
-                    android:textColor="@color/textview_lable"
-                    android:textSize="@dimen/smal_text_size" />
+                    android:layout_height="match_parent"
+                    android:hint="@string/vocabulary_total_price">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandSaleFragmentTotalPriceTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3333"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView35"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/vocabulary_dong"
-                    android:textColor="@color/textview_lable"
-                    android:textSize="@dimen/smal_text_size" />
+                    android:layout_height="match_parent"
+                    android:hint="@string/vocabulary_dong">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NewLandSaleFragmentDongTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number" />
-
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3333"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/exchange_category"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -538,7 +602,10 @@
                     android:id="@+id/NewLandSaleFragmentExchangeTglBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="معاوضه؟" />
+                    android:hint="معاوضه؟"
+                    android:textOff="خیر"
+                    android:textOn="بله"
+                    android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
             </LinearLayout>
 
         </LinearLayout>
@@ -546,9 +613,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             android:paddingTop="8dp"
             android:paddingBottom="8dp">
@@ -556,13 +621,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_weight="0.25"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/new_land_water"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -571,19 +637,21 @@
                     android:id="@+id/NewLandSaleFragmentWaterSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
                     android:entries="@array/new_land_water_electricity" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_weight="0.25"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/new_land_electricity"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -592,19 +660,31 @@
                     android:id="@+id/NewLandSaleFragmentElectricitySpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
                     android:entries="@array/new_land_water_electricity" />
             </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_weight="0.25"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/new_land_gas"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -613,19 +693,21 @@
                     android:id="@+id/NewLandSaleFragmentGasSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
                     android:entries="@array/new_land_water_electricity" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_weight="0.25"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/land_info_phone"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -634,6 +716,7 @@
                     android:id="@+id/NewLandSaleFragmentPhoneSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
                     android:entries="@array/new_land_water_electricity" />
             </LinearLayout>
         </LinearLayout>
@@ -641,9 +724,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             android:paddingTop="8dp"
             android:paddingBottom="8dp">
@@ -651,13 +732,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_weight="0.25"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/land_info_province"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -665,19 +747,21 @@
                 <Spinner
                     android:id="@+id/NewLandSaleFragmentProvinceSpnr"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_weight="0.25"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/land_info_city"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -685,19 +769,30 @@
                 <Spinner
                     android:id="@+id/NewLandSaleFragmentCitySpnr"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_weight="0.25"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/new_land_area"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -705,19 +800,21 @@
                 <Spinner
                     android:id="@+id/NewLandSaleFragmentAreaSpnr"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_weight="0.25"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="@string/vocabulary_district"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -725,7 +822,8 @@
                 <Spinner
                     android:id="@+id/NewLandSaleFragmentDistrictSpnr"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
         </LinearLayout>
 
@@ -739,15 +837,17 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/NewLandSaleFragmentAddressTxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="hint" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <Spinner
             android:id="@+id/NewLandSaleFragmentKitchenServicesSpnr"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/colorPrimary"
+            android:visibility="gone"
+            />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -759,26 +859,24 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/NewLandSaleFragmentDescriptionTxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="hint" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="240dp">
+            android:layout_height="match_parent">
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/mapView"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                />
+                android:layout_height="fill_parent" />
         </FrameLayout>
 
 
         <LinearLayout
             android:id="@+id/NewLandSaleFragmentGalleryGrid"
             android:layout_width="match_parent"
-            android:layout_height="184dp"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             tools:listitem="@layout/selected_image_gallery">
 
@@ -786,14 +884,16 @@
                 android:id="@+id/NewLandSaleOneImg"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3333"
+                android:layout_weight="0.5"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_home_black_24dp" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3333"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <ImageView
@@ -816,7 +916,9 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3333"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <ImageView
@@ -842,7 +944,9 @@
             android:id="@+id/NewLandSaleFragmentSubmitBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/new_land_submit" />
+            android:gravity="center"
+            android:text="@string/new_land_submit"
+            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
 
