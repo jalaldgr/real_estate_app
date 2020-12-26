@@ -139,6 +139,8 @@
     <string name="company_type_structural">تاسیساتی</string>
     <string name="company_type_decoration">دکوراسیون</string>
     <string name="company_type_services">خدماتی</string>
+    <string name="company_parent">گروه</string>
+    <string name="company_children">زیرگروه</string>
 
     <!--    Authentication Method Fields-->
     <string name="authentication_username">Username</string>

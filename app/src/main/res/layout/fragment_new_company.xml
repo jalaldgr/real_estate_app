@@ -12,72 +12,103 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="8dp"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/NewCompanyFragmentTitleEtxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:layoutDirection="rtl" />
-
-        <EditText
-            android:id="@+id/NewCompanyFragmenAddresstEtxt"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:ems="10"
-            android:inputType="textPostalAddress"
-            android:layoutDirection="rtl" />
+            android:layout_height="match_parent"
+            android:hint="@string/vocabulary_title">
 
-        <EditText
-            android:id="@+id/NewCompanyFragmenManagerEtxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:ems="10"
-            android:inputType="textPostalAddress"
-            android:layoutDirection="rtl" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/NewCompanyFragmentTitleEtxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/NewCompanyFragmentPhoneEtxt"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:ems="10"
-            android:inputType="phone"
-            android:layoutDirection="rtl" />
+            android:layout_height="match_parent">
 
-        <Spinner
-            android:id="@+id/NewCompanyFragmentParentCompanyTypesSpnr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
-            android:fadingEdge="vertical"
-            android:padding="8dp"
-            android:spinnerMode="dropdown"
-            android:textAlignment="center" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/NewCompanyFragmenAddresstEtxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/land_info_address" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/NewCompanyFragmentCompanyTypesSpnr"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
-            android:fadingEdge="vertical"
-            android:padding="8dp"
-            android:spinnerMode="dropdown"
-            android:textAlignment="center" />
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/NewCompanyFragmenManagerEtxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/vocabulary_manager" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/land_info_phone">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/NewCompanyFragmentPhoneEtxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView39"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="@string/company_parent" />
+
+                <Spinner
+                    android:id="@+id/NewCompanyFragmentParentCompanyTypesSpnr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:fadingEdge="none"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView40"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="@string/company_children" />
+
+                <Spinner
+                    android:id="@+id/NewCompanyFragmentCompanyTypesSpnr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:fadingEdge="none"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/NewCompanyFragmentLogoImg"
@@ -92,7 +123,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="@string/vocabulary_submit_company" />
+            android:text="@string/vocabulary_submit_company"
+            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
     </LinearLayout>
 
