@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.app.DialogFragment;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -35,6 +36,9 @@ import android.widget.ToggleButton;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -159,7 +163,7 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
     PersianCalendar persianCalendar = new PersianCalendar();
 
     Button   submitBtn;
-
+    private FragmentActivity myContext;
     GoogleMap mgoogleMap;
     private Marker mapMarker;
     private LatLng mapLatLng = new LatLng(Constants.MAP_MEYDAN_LAT,Constants.MAP_MEYDAN_LNG);
@@ -271,6 +275,11 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
 
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        myContext = (FragmentActivity)context;
+        super.onAttach(context);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -321,7 +330,12 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
         imageFour = (ImageView) view.findViewById(R.id.NewLandPreSaleFourImg);
         imageFive = (ImageView) view.findViewById(R.id.NewLandPreSaleFiveImg);
         persianDate = new PersianDate();
-        datePicker = new DatePickerDialog();
+        datePicker = DatePickerDialog.newInstance(
+                this,
+                persianCalendar.getPersianYear(),
+                persianCalendar.getPersianMonth(),
+                persianCalendar.getPersianDay()
+        );
         datePicker.setMinDate(persianCalendar);
         requestNewModel = new NewLandModel();
         ///////////////////////Read inputs/////////////////////////////
@@ -662,6 +676,16 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
                     }
                 });
 
+        ///////////////////////Date Picker /////////////////////////////////
+        deliveryDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                datePicker.show(getActivity().getFragmentManager(), "Datepickerdialog");
+            }
+        });
+
+
         /////////////////////////////////// Five Image //////////////////////////////////////
         imageOne.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -944,8 +968,11 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
         myRequestQueue.add(myJsonObjectRequest);
     }
 
+
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        Log.d(TAG, "onDateSet: ");
+        String pickedDate = year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+        deliveryDate.setText(pickedDate);
+
     }
 }

@@ -20,6 +20,10 @@
     <color name="icons_color">#e03030</color>
     <color name="icons_disable_color">#66000000</color>
 
+    <color name="mdtp_accent_color">#e03030</color>
+    <color name="mdtp_accent_color_dark">#757575</color>
+
+
     <color name="multiple_image_select_primary">#e03030</color>
     <color name="multiple_image_select_primaryDark">#757575</color>
     <color name="multiple_image_select_primaryLight">#757575</color>
