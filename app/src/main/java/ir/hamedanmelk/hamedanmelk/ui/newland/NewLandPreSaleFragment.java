@@ -149,7 +149,6 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
     Date grgDate;
     PersianDate persianDate;
     PersianCalendar persianCalendar = new PersianCalendar();
-
     Button   submitBtn;
     private FragmentActivity myContext;
     GoogleMap mgoogleMap;
@@ -669,7 +668,13 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
         addPhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startMultiImagesGallery();
+                if (imageModels.size()!=5){
+                    startMultiImagesGallery();
+                }
+                else
+                {
+                    Toast.makeText(getContext(),getResources().getString(R.string.max_images_selected),Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -713,54 +718,6 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
     }
 
 
-
-//////////////////////////////////Context Menu///////////////////////////////////
-
-    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = Objects.requireNonNull(getActivity()).getMenuInflater();
-        inflater.inflate(R.menu.image_long_press_menu, menu);
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public boolean onContextItemSelected (MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.select_image: {
-                if(ActivityCompat.checkSelfPermission(Objects.requireNonNull(getActivity()),
-                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-                {
-                    requestPermissions(
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                            2000);
-                }
-                else {
-                    startMultiImagesGallery();
-                }
-            }
-            break;
-            case R.id.remove_image: {
-
-                Log.d(TAG, "onContextItemSelected remove image: ");
-
-            }
-            default:
-                return false;
-        }
-        return false;
-    }
-
-    ////////////////////////////////pickUp Image ////////////////////////////////////
-
-    private void startGallery() {
-        Intent cameraIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        cameraIntent.setType("image/*");
-        if (cameraIntent.resolveActivity(Objects.requireNonNull(getActivity()).getPackageManager()) != null) {
-            startActivityForResult(cameraIntent, 1000);
-        }
-    }
-
-////////////////// PickUp MultiImages //////////////////////////////
 
 ////////////////////////////////pickUp Image ////////////////////////////////////
     public void startMultiImagesGallery(){

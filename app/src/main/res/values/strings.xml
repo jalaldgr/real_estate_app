@@ -282,7 +282,7 @@
     <string name="limit_exceeded">لطفا حداکثر %d عکس انتخاب کنید</string>
 
     <string name="error_null_cursor">خطایی رخ داد</string>
-
+    <string name="max_images_selected">تعداد عکس های مجاز انتخاب شده است</string>
     <!--Request Permission-->
     <string name="permission_info">برای انتخاب عکس دسترسی به گالری نیاز است</string>
     <string name="permission_force">اپلیکیشن نیازمند دسترسی به گالری است. لطفا از قسمت تنضیمات مجوز دسترسی به گالری را تیک بزنید</string>

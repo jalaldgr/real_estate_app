@@ -807,69 +807,31 @@
         </FrameLayout>
 
 
-        <LinearLayout
-            android:id="@+id/NewLandRentFragmentGalleryGrid"
-            android:layout_width="match_parent"
-            android:layout_height="184dp"
-            android:orientation="horizontal"
+        <Button
+            android:id="@+id/NewLandRentFragmentAddPhotoBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:drawableTop="@drawable/ic_baseline_add_photo_alternate_48"
+            android:padding="8dp"
+            android:text="@string/new_land_add_photo"
+            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+        <ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView
+            android:id="@+id/NewLandRentFragmentGalleryExpandableGrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_margin="8dp"
+            android:numColumns="3"
+            android:scrollbars="none"
+            android:layout_gravity="center"
             tools:listitem="@layout/selected_image_gallery">
 
-            <ImageView
-                android:id="@+id/NewLandRentOneImg"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3333"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_home_black_24dp" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3333"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/NewLandRentTwoImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/ic_home_black_24dp" />
-
-                <ImageView
-                    android:id="@+id/NewLandRentThreeImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/ic_home_black_24dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3333"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/NewLandRentFourImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/ic_home_black_24dp" />
-
-                <ImageView
-                    android:id="@+id/NewLandRentFiveImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/ic_home_black_24dp" />
-            </LinearLayout>
-
-        </LinearLayout>
-
+        </ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView>
         <Button
             android:id="@+id/NewLandRentFragmentSubmitBtn"
             android:layout_width="wrap_content"
