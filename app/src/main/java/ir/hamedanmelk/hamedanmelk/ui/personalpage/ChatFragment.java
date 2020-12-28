@@ -4,10 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -53,9 +56,13 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_chat, container, false);
         mwebview = (WebView) v.findViewById(R.id.webview_chat);
+        mwebview.setWebViewClient(new WebViewClient());
+        WebSettings webSettings = mwebview.getSettings();
+        webSettings.setJavaScriptEnabled(true);//prevent open target _blank in new window
+
+
         String postData = null;
         try {
             postData = Constants.START_CHAT_UID+ "=" +
