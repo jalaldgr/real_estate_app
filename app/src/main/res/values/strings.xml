@@ -132,9 +132,6 @@
     <string name="land_info_user_more_info">اطلاعات بیشتر</string>
     <string name="land_info_start_chat">شروع چت</string>
 
-
-
-
     <!--Company Types-->
     <string name="company_type_building">ساختمانی</string>
     <string name="company_type_structural">تاسیساتی</string>
@@ -208,6 +205,7 @@
     <string name="new_land_submit">ثبت آگهی</string>
     <string name="new_land_contractor_share">سهم سازنده</string>
     <string name="new_land_owner_share">سهم مالک</string>
+    <string name="new_land_add_photo">افزودن عکس</string>
 
     <array name="new_land_water_electricity">
         <item>نامشخص</item>

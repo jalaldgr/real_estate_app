@@ -8,13 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.app.DialogFragment;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -25,10 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -37,8 +30,6 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -49,6 +40,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.darsh.multipleimageselect.activities.AlbumSelectActivity;
+import com.darsh.multipleimageselect.models.Image;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -63,7 +56,7 @@ import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -74,6 +67,7 @@ import java.util.Objects;
 import io.apptik.widget.multiselectspinner.BaseMultiSelectSpinner;
 import io.apptik.widget.multiselectspinner.MultiSelectSpinner;
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.models.ImageModel;
 import ir.hamedanmelk.hamedanmelk.models.NewLandModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.AreaModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.BuildingConditionModel;
@@ -93,7 +87,7 @@ import ir.hamedanmelk.hamedanmelk.models.micro.RentalPreferenceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.UseTypeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.VoucherModel;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
-import ir.hamedanmelk.hamedanmelk.tools.FilePath;
+import ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 import saman.zamani.persiandate.PersianDate;
@@ -102,13 +96,11 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
     private RequestQueue myRequestQueue;
     private JsonObjectRequest myJsonObjectRequest;
 
-    public static final int PICK_IMAGES = 2;
+    public static final int PICK_IMAGES = 5;
     private static final String TAG = "NewLandPreSaleFragment";
-    public String selectedImage="one";
-    public List<String> selectedImages = new ArrayList<>();
+
     public List<String> selectedUseTypes = new ArrayList<>();
     public List<String> selectedEquipments = new ArrayList<>();
-
     NewLandModel requestNewModel= new NewLandModel();
 
     String   selectedFileStr;
@@ -151,12 +143,8 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
     EditText deliveryDate;
     EditText voucherDate;
     MapView landMapView;
-    LinearLayout selectedImagesGrid;
-    ImageView imageOne;
-    ImageView imageTwo;
-    ImageView imageThree;
-    ImageView imageFour;
-    ImageView imageFive;
+    ExpandableHeightGridView selectedImagesExpandableGrid;
+    Button addPhotoBtn;
     DatePickerDialog datePicker;
     Date grgDate;
     PersianDate persianDate;
@@ -255,7 +243,7 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
     List<String> voucherIDs= new ArrayList<String>();
     ArrayAdapter<String> voucherAdapter ;
 
-
+    List<ImageModel> imageModels = new ArrayList<>();
     MYSQlDBHelper dbHelper;
 
     public NewLandPreSaleFragment() {
@@ -323,12 +311,8 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
         voucherDate = (EditText)view.findViewById(R.id.NewLandPreSaleFragmentVoucherDateETxt);
         landMapView = (MapView) view.findViewById(R.id.mapView);
         submitBtn = (Button) view.findViewById(R.id.NewLandPreSaleFragmentSubmitBtn);
-        selectedImagesGrid = (LinearLayout) view.findViewById(R.id.NewLandPreSaleFragmentGalleryGrid);
-        imageOne = (ImageView) view.findViewById(R.id.NewLandPreSaleOneImg);
-        imageTwo = (ImageView) view.findViewById(R.id.NewLandPreSaleTwoImg);
-        imageThree = (ImageView) view.findViewById(R.id.NewLandPreSaleThreeImg);
-        imageFour = (ImageView) view.findViewById(R.id.NewLandPreSaleFourImg);
-        imageFive = (ImageView) view.findViewById(R.id.NewLandPreSaleFiveImg);
+        selectedImagesExpandableGrid = (ExpandableHeightGridView) view.findViewById(R.id.NewLandPreSaleFragmentGalleryExpandableGrid);
+        addPhotoBtn = (Button)view.findViewById(R.id.NewLandPreSaleFragmentAddPhotoBtn);
         persianDate = new PersianDate();
         datePicker = DatePickerDialog.newInstance(
                 this,
@@ -345,11 +329,8 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
         loadMap();
 
 ////////////////////Register Context Menu for images/////////////////////////////
-        registerForContextMenu(imageOne);
-        registerForContextMenu(imageTwo);
-        registerForContextMenu(imageThree);
-        registerForContextMenu(imageFour);
-        registerForContextMenu(imageFive);
+//        registerForContextMenu(imageOne);
+
 
 ////////////////////// Building Conditions Spinner////////////////////////////////
         buildingConditionModels = dbHelper.GetBuildingConditionsList();
@@ -685,48 +666,13 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
             }
         });
 
-
-        /////////////////////////////////// Five Image //////////////////////////////////////
-        imageOne.setOnClickListener(new View.OnClickListener() {
+        addPhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                imageOne.showContextMenu();
-                selectedImage = "one";
-            }
-        });
-        imageTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                imageTwo.showContextMenu();
-                selectedImage = "two";
-
-            }
-        });
-        imageThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                imageThree.showContextMenu();
-                selectedImage = "three";
-            }
-        });
-        imageFour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                imageFour.showContextMenu();
-                selectedImage = "four";
-            }
-        });
-        imageFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                imageFive.showContextMenu();
-                selectedImage = "five";
+                startMultiImagesGallery();
             }
         });
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////// Text inputs /////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -753,9 +699,7 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
                 requestNewModel.setElectricy(Long.toString(electricitySpnr.getSelectedItemId()));
                 requestNewModel.setPhone(Long.toString(phoneSpnr.getSelectedItemId()));
                 requestNewModel.setLandStateID("3");
-                requestNewModel.setDeliveryDate("2020-12-30");
                 requestNewModel.setUID(UID);
-
 
                 //                requestNewModel.setImageFiles(eqStr);
                 try {
@@ -791,29 +735,13 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
                             2000);
                 }
                 else {
-                    startGallery();
+                    startMultiImagesGallery();
                 }
             }
             break;
             case R.id.remove_image: {
 
-                switch (selectedImage){
-                    case "one":{
-                        imageOne.setImageBitmap(null);
-                        break;}
-                    case "two":{
-                        imageTwo.setImageBitmap(null);
-                        break;}
-                    case "three":{
-                        imageThree.setImageBitmap(null);
-                        break;}
-                    case "four":{
-                        imageFour.setImageBitmap(null);
-                        break;}
-                    case "five":{
-                        imageFive.setImageBitmap(null);
-                        break;}
-                }
+                Log.d(TAG, "onContextItemSelected remove image: ");
 
             }
             default:
@@ -832,45 +760,36 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
         }
     }
 
-    @Override
+////////////////// PickUp MultiImages //////////////////////////////
+
+////////////////////////////////pickUp Image ////////////////////////////////////
+    public void startMultiImagesGallery(){
+        Intent intent = new Intent(getActivity(), AlbumSelectActivity.class);
+        intent.setType("image/*");
+        intent.putExtra(com.darsh.multipleimageselect.helpers.Constants.INTENT_EXTRA_LIMIT,PICK_IMAGES-imageModels.size());
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(intent, 2000);
+    }
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super method removed
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == 1000) {
-                selectedFileUri = data.getData();
-                selectedFileStr = FilePath.getPath(getContext(),selectedFileUri);
-                Bitmap bitmapImage = null;
-                try {
-                    bitmapImage = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getActivity()).getContentResolver(), selectedFileUri);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                switch (selectedImage){
-                    case "one":{
-                        imageOne.setImageBitmap(bitmapImage);
-                        selectedImage="one";
-                        selectedImages.add(selectedFileStr);
-                        break;}
-                    case "two":{
-                        imageTwo.setImageBitmap(bitmapImage);
-                        selectedImage="two";
-                        break;}
-                    case "three":{
-                        imageThree.setImageBitmap(bitmapImage);
-                        selectedImage="three";
-                        break;}
-                    case "four":{
-                        imageFour.setImageBitmap(bitmapImage);
-                        selectedImage="four";
-                        break;}
-                    case "five":{
-                        imageFive.setImageBitmap(bitmapImage);
-                        selectedImage="five";
-                        break;}
-                }
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 2000 && resultCode == Activity.RESULT_OK && data != null) {
+            ArrayList<Image> images = data.getParcelableArrayListExtra(com.darsh.multipleimageselect.helpers.Constants.INTENT_EXTRA_IMAGES);
+            ImageModel imageModel;
+            for (int i = 0, l = images.size(); i < l; i++) {
+                Log.d(TAG, "onActivityResult: "+images.get(i).path );
+                imageModel = new ImageModel(Uri.fromFile(new File(images.get(i).path)));
+                imageModels.add(imageModel);
+
             }
+            SelectedImageRecyclerViewAdapter selectedImageRecyclerViewAdapter = new SelectedImageRecyclerViewAdapter(imageModels,getActivity());
+            selectedImagesExpandableGrid.setAdapter(selectedImageRecyclerViewAdapter);
+            selectedImagesExpandableGrid.setExpanded(true);
+            Log.d(TAG, "onActivityResult adapter: "+imageModels.size());
         }
     }
+
+
 
 //////////////////////////Get Map//////////////////////////////////
 
