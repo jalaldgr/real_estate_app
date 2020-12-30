@@ -216,11 +216,18 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
         startChatTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
-                Bundle args=new Bundle();
-                args.putString(Constants.START_CHAT_UID,UID);
-                args.putString(Constants.START_CHAT_TO,landUserID);
-                controller.navigate(R.id.chatFragment,args);
+                SharedPreferences user_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
+                final NavController controller = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
+                if(user_pref.contains("id")) {
+
+                    Bundle args = new Bundle();
+                    args.putString(Constants.START_CHAT_UID, UID);
+                    args.putString(Constants.START_CHAT_TO, landUserID);
+                    controller.navigate(R.id.chatFragment, args);
+                }else
+                {
+                    controller.navigate(R.id.userLogin);
+                }
             }
         });
 
