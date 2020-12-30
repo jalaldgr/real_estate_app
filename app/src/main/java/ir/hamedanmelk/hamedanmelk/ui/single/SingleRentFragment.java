@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -52,8 +51,8 @@ import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.RentalPreferenceModel;
-import ir.hamedanmelk.hamedanmelk.models.micro.VoucherModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.GalleryRecyclerViewAdapter;
+import ir.hamedanmelk.hamedanmelk.recyclers.LandEquipmentsAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
 import ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView;
@@ -397,7 +396,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                     e.printStackTrace();
                     Log.d(TAG, "onPostExecute exception:"+e.toString());
                 }
-                LandEquipmentsAdapter equipmentsAdapter = new LandEquipmentsAdapter(equipmentModels,context);
+                LandEquipmentsAdapter equipmentsAdapter = new LandEquipmentsAdapter(equipmentModels,context,getActivity());
                 equipmentsGridView.setAdapter(equipmentsAdapter);
                 equipmentsGridView.setExpanded(true);
             }

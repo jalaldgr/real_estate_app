@@ -15,6 +15,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -50,8 +52,7 @@ public class UserFavoritesRecyclerViewAdapter extends RecyclerView.Adapter<UserF
         final UserFavoriteModel userFavoriteModel = userFavoriteModels.get(position);
         holder.titleTxt.setText(userFavoriteModel.getTitle());
 
-        new DownloadImage(holder.thumbnailImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+userFavoriteModel.getImages());
-
+        Glide.with(act).load(Urls.getBaseURL()+userFavoriteModel.getImages()).into(holder.thumbnailImg);
         holder.titleTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +68,10 @@ public class UserFavoritesRecyclerViewAdapter extends RecyclerView.Adapter<UserF
                         break;
                     case "3" :
                         controller.navigate(R.id.singlePreSaleFragment,args);
+                        break;
+                    case "5":
+                        controller.navigate(R.id.singleParticipationFragment,args);
+                        break;
 
                 }
 

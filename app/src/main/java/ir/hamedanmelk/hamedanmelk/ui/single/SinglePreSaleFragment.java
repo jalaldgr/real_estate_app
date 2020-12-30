@@ -53,6 +53,7 @@ import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.VoucherModel;
+import ir.hamedanmelk.hamedanmelk.recyclers.LandEquipmentsAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
@@ -392,7 +393,7 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
                     e.printStackTrace();
                     Log.d(TAG, "onPostExecute exception:"+e.toString());
                 }
-                LandEquipmentsAdapter equipmentsAdapter = new LandEquipmentsAdapter(equipmentModels,context);
+                LandEquipmentsAdapter equipmentsAdapter = new LandEquipmentsAdapter(equipmentModels,context, getActivity());
                 equipmentsGridView.setAdapter(equipmentsAdapter);
             }
 

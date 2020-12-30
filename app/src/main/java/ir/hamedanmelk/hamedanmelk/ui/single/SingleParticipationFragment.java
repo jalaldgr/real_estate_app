@@ -50,7 +50,7 @@ import java.util.Objects;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
-import ir.hamedanmelk.hamedanmelk.recyclers.GalleryRecyclerViewAdapter;
+import ir.hamedanmelk.hamedanmelk.recyclers.LandEquipmentsAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
@@ -72,7 +72,7 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static final String TAG        = "SingleParticipationFragment";
+    private static final String TAG        = "SingleParticipation";
     MYSQlDBHelper qlDBHelper;
     GoogleMap mgoogleMap;
     MapView mapView;
@@ -343,7 +343,7 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
                     e.printStackTrace();
                     Log.d(TAG, "onPostExecute exception:"+e.toString());
                 }
-                LandEquipmentsAdapter equipmentsAdapter = new LandEquipmentsAdapter(equipmentModels,context);
+                LandEquipmentsAdapter equipmentsAdapter = new LandEquipmentsAdapter(equipmentModels,context,getActivity());
                 equipmentsGridView.setAdapter(equipmentsAdapter);
             }
 

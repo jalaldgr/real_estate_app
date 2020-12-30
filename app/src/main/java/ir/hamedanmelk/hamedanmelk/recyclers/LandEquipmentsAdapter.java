@@ -1,4 +1,5 @@
-package ir.hamedanmelk.hamedanmelk.ui.single;
+package ir.hamedanmelk.hamedanmelk.recyclers;
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
@@ -6,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,10 +22,12 @@ import ir.hamedanmelk.hamedanmelk.tools.Urls;
 public class LandEquipmentsAdapter extends BaseAdapter {
     private final ArrayList<EquipmentModel> equipmentModels;
     private final Context context;
-
-    public LandEquipmentsAdapter(ArrayList<EquipmentModel>items, Context c) {
+    Activity act;
+    public LandEquipmentsAdapter(ArrayList<EquipmentModel>items, Context c, Activity activity) {
         equipmentModels = items;
         context = c;
+        act = activity;
+
     }
 
     @Override
@@ -34,7 +39,7 @@ public class LandEquipmentsAdapter extends BaseAdapter {
         TextView  titleTxt= (TextView)view.findViewById(R.id.SinglesLandEquipmentTitleTxt);
         titleTxt.setText(equipmentModels.get(position).getTitle());
         if(equipmentModels.get(position).getLogo()!=("null")) {
-            new DownloadImage(logoImg).execute(Urls.getBaseURL() + "/" + equipmentModels.get(position).getLogo());
+            Glide.with(act).load(Urls.getBaseURL() + "/" + equipmentModels.get(position).getLogo()).into(logoImg);
         }
         Log.d("hhh", "getView: "+equipmentModels.get(position).getTitle());
         return view;

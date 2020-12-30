@@ -6,5 +6,6 @@
     android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.UserFavoritesFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="60dp"
     tools:context=".ui.personalpage.UserFavoritesFragment"
     tools:listitem="@layout/fragment_user_favorites_item" />

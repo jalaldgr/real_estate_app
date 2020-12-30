@@ -15,6 +15,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -49,8 +51,7 @@ public class UserLandRecyclerViewAdapter extends RecyclerView.Adapter<UserLandRe
         UserLandModel userLandModel = userLandModels.get(position);
         holder.titleTxt.setText(userLandModel.getTitle());
 
-        new DownloadImage(holder.thumbnailImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+userLandModel.getImages());
-
+        Glide.with(act).load(Urls.getBaseURL()+userLandModel.getImages()).into(holder.thumbnailImg);
         holder.titleTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +68,10 @@ public class UserLandRecyclerViewAdapter extends RecyclerView.Adapter<UserLandRe
                         break;
                     case "3" :
                         controller.navigate(R.id.singlePreSaleFragment,args);
+                        break;
+                    case "5":
+                        controller.navigate(R.id.singleParticipationFragment,args);
+                        break;
 
                 }            }
         });
