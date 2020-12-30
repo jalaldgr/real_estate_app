@@ -301,7 +301,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                         landTypeTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_TYPE_TITLE));
                         floorCountTxt.setText(responseData.getString(Constants.LAND_INFO_FLOOR_COUNT));
                         unitInFloor.setText(responseData.getString(Constants.LAND_INFO_UNIT_IN_FLOOR));
-                        RentalPreferenceModel rentalPreferenceModel = qlDBHelper.GetRentalRantalByID(landId);
+                        RentalPreferenceModel rentalPreferenceModel = qlDBHelper.GetRentalRantalByID(responseData.getString(Constants.LAND_INFO_RENTAL_PREFERENCE_ID));
                         rental_Preference.setText(rentalPreferenceModel.getTitle());
                         rentTotalPriceTxt.setText(responseData.getString(Constants.LAND_INFO_RENTAL_PREFERENCE_ID));
                         spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE) + "  متر مربع");

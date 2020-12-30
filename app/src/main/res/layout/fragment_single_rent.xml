@@ -19,8 +19,7 @@
             android:id="@+id/single_rent_slider"
             android:layout_width="match_parent"
             android:layout_height="332dp"
-            android:gravity="center|center_horizontal|fill_vertical"
-            android:visibility="gone" />
+            android:gravity="center|center_horizontal|fill_vertical" />
 
         <com.daimajia.slider.library.Indicators.PagerIndicator
             android:id="@+id/custom_indicator"
