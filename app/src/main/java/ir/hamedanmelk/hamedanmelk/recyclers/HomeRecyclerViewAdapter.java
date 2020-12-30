@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -106,7 +107,9 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
                 final NavController controller= Navigation.findNavController(Objects.requireNonNull(act),R.id.nav_host_fragment);
                 Bundle args=new Bundle();
                 args.putString("id",landModels.get(position).getId());
-                switch (landModels.get(position).getLand_state_id()){
+                if (landModels.get(position).getLand_situation_id().equals("3")) {
+
+                    switch (landModels.get(position).getLand_state_id()){
                     case "1" :
                         controller.navigate(R.id.singleSaleFragment,args);
                         break;
@@ -117,8 +120,13 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
                         controller.navigate(R.id.singlePreSaleFragment,args);
                         break;
                     case "5":
-                        controller.navigate(R.id.singleParticipationFragment);
+                        controller.navigate(R.id.singleParticipationFragment,args);
+                        break;
 
+                    }
+                }
+                else{
+                    Toast.makeText(act.getApplicationContext(),"آگهی فعال نیست",Toast.LENGTH_SHORT).show();
                 }
             }
         });

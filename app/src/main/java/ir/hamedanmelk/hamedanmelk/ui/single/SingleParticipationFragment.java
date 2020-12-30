@@ -2,7 +2,9 @@ package ir.hamedanmelk.hamedanmelk.ui.single;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -10,19 +12,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.viewpager.widget.ViewPager;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
@@ -50,9 +50,12 @@ import java.util.Objects;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.LoanTypeModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.VoucherModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.LandEquipmentsAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
+import ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
@@ -89,25 +92,37 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
     TextView roomCountTxt;
     TextView landTypeTxt ;
     TextView floorCountTxt ;
-    TextView spaceFoundationTxt ;
-    TextView totalPriceTxt;
+    TextView spaceFoundationTxt;
+    TextView saleTotalPriceTxt;
+    TextView debtTotalProceTxt;
+    TextView loanTypeTxt;
     TextView landCaseTxt;
+    TextView voucherTypeTxt;
     TextView userDescriptionTxt ;
+    TextView unitInFloorTxt;
+    TextView floorTxt;
     TextView landStateTxt;
     TextView buildingYearTxt;
+    TextView provinceTxt;
+    TextView cityTxt;
+    TextView areaTxt;
     TextView districtTxt ;
     TextView addressTxt;
     TextView createAtTxt;
     TextView userNameTxt;
-    TextView userPhoneTxt;
     EditText descriptionTxt;
+    CardView descCardView;
     ImageView userAvatarImg;
-    GridView equipmentsGridView;
-    ViewPager viewPager;
+    ExpandableHeightGridView equipmentsGridView;
+    //ViewPager viewPager;
     CheckBox bookmarkChckbx;
-    Button  startChatBtn;
+    TextView startChatTxt;
+    TextView shareTxt;
+    TextView mobileTxt;
+
     SliderLayout mySliderLayout;
     PagerIndicator myIndicator;
+
     public SingleParticipationFragment() {
         // Required empty public constructor
     }
@@ -138,42 +153,47 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_single_participation, container, false);
-        mapView = (MapView) view.findViewById(R.id.mapView);
+        mapView = (MapView) view.findViewById(R.id.SingleParticipationMapView);
         qlDBHelper = new MYSQlDBHelper(getContext());
         titleTxt = (TextView)view.findViewById(R.id.SingleParticipationTitleTxt);
         landTypeTxt = (TextView)view.findViewById(R.id.SingleParticipationLandTypeTxt);
         roomCountTxt = (TextView)view.findViewById(R.id.SingleParticipationRoomCountTxt);
         spaceFoundationTxt = (TextView)view.findViewById(R.id.SingleParticipationFoundationSpaceTxt);
-        totalPriceTxt = (TextView)view.findViewById(R.id.SingleParticipationTotalPriceTxt);
-        districtTxt =(TextView)view.findViewById(R.id.SingleParticipationDistrictTxtTxt);
+        saleTotalPriceTxt  =(TextView)view.findViewById(R.id.SingleParticipationTotalPriceTxt);
+        debtTotalProceTxt = (TextView)view.findViewById(R.id.SingleLoanTotalPriceTxt);
+        loanTypeTxt = (TextView)view.findViewById(R.id.SingleLoanTypeTxt);
+//        districtTxt =(TextView)view.findViewById(R.id.SingleParticipationDistrictTxt);
         addressTxt = (TextView)view.findViewById(R.id.SingleParticipationAddressTxt);
+        provinceTxt = (TextView)view.findViewById(R.id.SingleParticipationProvinceTxt);
+        cityTxt = (TextView)view.findViewById(R.id.SingleParticipationCityTxt);
+        areaTxt = (TextView)view.findViewById(R.id.SingleParticipationAreaTxt);
+        districtTxt =(TextView)view.findViewById(R.id.SingleParticipationDistrictTxt);
         floorCountTxt = (TextView)view.findViewById(R.id.SingleParticipationFloorCountTxt);
+        floorTxt = (TextView)view.findViewById(R.id.SingleParticipationFloorTxt);
+        unitInFloorTxt = (TextView)view.findViewById(R.id.SingleUnitInFloorTxt);
         landCaseTxt = (TextView)view.findViewById(R.id.SingleParticipationLandCaseTxt);
-        userDescriptionTxt =(TextView)view.findViewById(R.id.SingleParticipationUserDescriptionMultiTxt);
+        voucherTypeTxt=(TextView)view.findViewById(R.id.SingleParticipationVoucherTxt);
         landStateTxt = (TextView)view.findViewById(R.id.SingleParticipationLandStateTxt);
+//        userDescriptionTxt =(TextView)view.findViewById(R.id.SingleParticipationUserDescriptionMultiTxt);
         buildingYearTxt = (TextView)view.findViewById(R.id.SingleParticipationBuildingYearTxt);
         createAtTxt = (TextView)view.findViewById(R.id.SingleParticipationCreatedAtTxt);
         userNameTxt = (TextView)view.findViewById(R.id.SingleParticipationUserNameTxt);
-        userPhoneTxt = (TextView)view.findViewById(R.id.SingleParticipationUserPhoneTxt);
         descriptionTxt = (EditText)view.findViewById(R.id.SingleParticipationDescriptionTxt);
+        descCardView = (CardView)view.findViewById(R.id.SingleParticipationDescriptionCardView);
         userAvatarImg = (ImageView)view.findViewById(R.id.SingleParticipationUserAvatarImg);
-        equipmentsGridView = (GridView)view.findViewById(R.id.SingleParticipationLandEquipmentsGridView);
+        equipmentsGridView = (ExpandableHeightGridView) view.findViewById(R.id.SingleParticipationLandEquipmentsGridView);
         //viewPager = (ViewPager) view.findViewById(R.id.SingleParticipationGalleryViewpager);
         bookmarkChckbx = (CheckBox)view.findViewById(R.id.SingleParticipationFragmentBookmarkChckbx);
-        startChatBtn = (Button)view.findViewById(R.id.SingleParticipationStartChatBtn);
-
+        startChatTxt = (TextView) view.findViewById(R.id.SingleParticipationStartChatTxt);
+        shareTxt = (TextView) view.findViewById(R.id.SingleParticipationShareTxt);
+        mobileTxt = (TextView) view.findViewById(R.id.SingleParticipationMobileTxt);
         mySliderLayout = (SliderLayout)view.findViewById(R.id.single_participation_slider);
         myIndicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
         mySliderLayout.setPresetTransformer(SliderLayout.Transformer.Tablet);
-
         mySliderLayout.setPresetIndicator(Center_Bottom);
         myIndicator.setGravity(0x11);
         mySliderLayout.setCustomIndicator(myIndicator);
         mySliderLayout.setCustomAnimation(new DescriptionAnimation());
-
-//                        mySliderLayout.setDuration(3000);
-//                        mySliderLayout.addOnPageChangeListener((ViewPagerEx.OnPageChangeListener) this);
-
 
         if(qlDBHelper.isBookmarkedByLandID(landId)){
             bookmarkChckbx.setChecked(true);
@@ -199,7 +219,7 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
             }
         });
 
-        startChatBtn.setOnClickListener(new View.OnClickListener() {
+        startChatTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SharedPreferences user_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
@@ -217,6 +237,27 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
             }
         });
 
+        shareTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_SUBJECT, "اشتراک گذاری");
+                i.putExtra(Intent.EXTRA_TEXT, "https://hamedanmelk.ir/AdsRentDetail/"+landId);
+                startActivity(Intent.createChooser(i, "اشتراک گذاری"));
+            }
+        });
+
+        mobileTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String uri = "tel:" + mobileTxt.getText().toString() ;
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse(uri));
+                startActivity(intent);
+            }
+        });
+
         GetLandInfoRequest(getContext());
         GetLandEquipmentsRequest(getContext(),landId);
 
@@ -229,6 +270,7 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
         mySliderLayout.stopAutoCycle();
         super.onStop();
     }
+
 
     public void GetLandInfoRequest(final Context context){
         class GetLandInfoRequestAsync extends AsyncTask<Void, Void, String> {
@@ -262,34 +304,53 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
                         titleTxt.setText(responseData.getString(Constants.LAND_INFO_TITLe));
                         landTypeTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_TYPE_TITLE));
                         floorCountTxt.setText(responseData.getString(Constants.LAND_INFO_FLOOR_COUNT));
-                        spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE) + "  متر مربع");
-                        totalPriceTxt.setText(new DecimalFormat("###,###,###").format(Integer.parseInt(responseData.getString(Constants.LAND_INFO_MORTGAGE_TOTAL_PRICE))) + "  تومان");
+                        spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE));
+                        if(Long.parseLong(responseData.getString(Constants.LAND_INFO_SALE_TOTAL_PRICE))>0) {
+                            saleTotalPriceTxt.setText(new DecimalFormat("###,###,###").format(Long.parseLong(responseData.getString(Constants.LAND_INFO_SALE_TOTAL_PRICE)))+" تومان");
+                        }
+                        if(Long.parseLong(responseData.getString(Constants.LAND_INFO_DEBT_TOTAL_PRICE))>0) {
+                            debtTotalProceTxt.setText(new DecimalFormat("###,###,###").format(Long.parseLong(responseData.getString(Constants.LAND_INFO_DEBT_TOTAL_PRICE)))+" تومان");
+                        }
                         LandCaseTypeModel landCaseTypeModel = qlDBHelper.GetLandCaseTypeByID(responseData.getString(Constants.LAND_INFO_LAND_CASE_ID));
                         landCaseTxt.setText(landCaseTypeModel.getTitle());
-                        districtTxt.setText(responseData.getString(Constants.LAND_INFO_DISTRICT_TITLE));
+                        VoucherModel voucherModel = qlDBHelper.GetVoucherByID(responseData.getString(Constants.LAND_INFO_VOUCHER_TYPE_ID));
+                        LoanTypeModel loanTypeModel = qlDBHelper.GetLoanTypeByID(responseData.getString(Constants.LAND_INFO_LOAN_TYPE_ID));
+                        loanTypeTxt.setText(loanTypeModel.getTitle());
+                        voucherTypeTxt.setText(voucherModel.getTitle());
+//                        districtTxt.setText(responseData.getString(Constants.LAND_INFO_DISTRICT_TITLE));
                         addressTxt.setText(responseData.getString(Constants.LAND_INFO_ADDRESS));
-                        floorCountTxt.setText(responseData.getString(Constants.LAND_INFO_FLOOR_COUNT));
+                        provinceTxt.setText(responseData.getString(Constants.LAND_INFO_PROVINCE_TITLE));
+                        cityTxt.setText(responseData.getString(Constants.LAND_INFO_CITY_TITLE));
+                        areaTxt.setText(responseData.getString(Constants.LAND_INFO_AREA_TITLE));
+                        districtTxt.setText(responseData.getString(Constants.LAND_INFO_DISTRICT_TITLE));
+                        if(Integer.parseInt(responseData.getString(Constants.LAND_INFO_FLOOR))>0) {
+                            floorTxt.setText(responseData.getString(Constants.LAND_INFO_FLOOR));
+                        }
+                        unitInFloorTxt.setText(responseData.getString(Constants.LAND_INFO_UNIT_IN_FLOOR));
+
+
                         try {
                             PersianDateFormat persianDateFormat=new PersianDateFormat("yyyy-MM-dd");
                             PersianDate persianDate = persianDateFormat.parseGrg(responseData.get(Constants.LAND_INFO_CREATED_AT).toString(), "yyyy-MM-dd");
-                            createAtTxt.setText(persianDate.toString());
+                            createAtTxt.setText(persianDate.toString().replace("00:00:00",""));
                         }catch (ParseException e){
                             e.printStackTrace();
                         }
                         descriptionTxt.setText(Html.fromHtml(responseData.getString(Constants.LAND_INFO_DESCRIPTION)));
+                        if(responseData.getString(Constants.LAND_INFO_DESCRIPTION)=="null")descCardView.setVisibility(View.GONE);
                         userNameTxt.setText(responseData.getString(Constants.LAND_INFO_FIRST_NAME)+
                                 " "+responseData.getString(Constants.LAND_INFO_LAST_NAME));
-                        userPhoneTxt.setText(responseData.getString(Constants.LAND_INFO_USER_PHONE));
-                        userDescriptionTxt.setText(Html.fromHtml(responseData.getString(Constants.LAND_INFO_USER_DESCRIPTION)));
-                        //  GalleryRecyclerViewAdapter galleryRecyclerViewAdapter = new GalleryRecyclerViewAdapter(getContext(),images);
+                        mobileTxt.setText(responseData.getString(Constants.LAND_INFO_USER_PHONE));
+//                        userDescriptionTxt.setText(Html.fromHtml(responseData.getString(Constants.LAND_INFO_USER_DESCRIPTION)));
+                        //GalleryRecyclerViewAdapter galleryRecyclerViewAdapter = new GalleryRecyclerViewAdapter(getContext(),images);
                         //viewPager.setAdapter(galleryRecyclerViewAdapter);
                         new DownloadImage(userAvatarImg).execute(Urls.getBaseURL()+"/"+responseData.getString(Constants.LAND_INFO_USER_IMAGE));
+
                         for (int i=0; i < images.length(); i++){
                             DefaultSliderView t1 = new DefaultSliderView(getActivity().getApplicationContext());
                             t1.image(Urls.getBaseURL()+"/"+images.getString(i));//t1.description("shearch");
                             mySliderLayout.addSlider(t1);
                         }
-
                     }
 
                 } catch (JSONException e) {
@@ -343,8 +404,9 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
                     e.printStackTrace();
                     Log.d(TAG, "onPostExecute exception:"+e.toString());
                 }
-                LandEquipmentsAdapter equipmentsAdapter = new LandEquipmentsAdapter(equipmentModels,context,getActivity());
+                LandEquipmentsAdapter equipmentsAdapter = new LandEquipmentsAdapter(equipmentModels,context, getActivity());
                 equipmentsGridView.setAdapter(equipmentsAdapter);
+                equipmentsGridView.setExpanded(true);
             }
 
             @Override

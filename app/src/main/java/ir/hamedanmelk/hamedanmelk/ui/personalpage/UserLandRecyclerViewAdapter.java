@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -55,25 +56,32 @@ public class UserLandRecyclerViewAdapter extends RecyclerView.Adapter<UserLandRe
         holder.titleTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final NavController controller= Navigation.findNavController(Objects.requireNonNull(act),R.id.nav_host_fragment);
-                Bundle args=new Bundle();
-                args.putString("id",userLandModels.get(position).getId());
+                final NavController controller = Navigation.findNavController(Objects.requireNonNull(act), R.id.nav_host_fragment);
+                Bundle args = new Bundle();
+                    args.putString("id", userLandModels.get(position).getId());
+                Log.d("kkkk", "onClick: "+userLandModels.get(position).getLand_situation_id());
+                if (userLandModels.get(position).getLand_situation_id().equals("3")) {
 
-                switch (userLandModels.get(position).getLand_state_id()){
-                    case "1" :
-                        controller.navigate(R.id.singleSaleFragment,args);
-                        break;
-                    case  "2":
-                        controller.navigate(R.id.singleRentFragment,args);
-                        break;
-                    case "3" :
-                        controller.navigate(R.id.singlePreSaleFragment,args);
-                        break;
-                    case "5":
-                        controller.navigate(R.id.singleParticipationFragment,args);
-                        break;
+                    switch (userLandModels.get(position).getLand_state_id()) {
+                        case "1":
+                            controller.navigate(R.id.singleSaleFragment, args);
+                            break;
+                        case "2":
+                            controller.navigate(R.id.singleRentFragment, args);
+                            break;
+                        case "3":
+                            controller.navigate(R.id.singlePreSaleFragment, args);
+                            break;
+                        case "5":
+                            controller.navigate(R.id.singleParticipationFragment, args);
+                            break;
 
-                }            }
+                    }
+                }
+                else{
+                    Toast.makeText(act.getApplicationContext(),"آگهی فعال نیست و یا تایید نشده",Toast.LENGTH_LONG).show();
+                }
+            }
         });
     }
 

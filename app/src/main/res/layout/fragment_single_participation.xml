@@ -42,6 +42,7 @@
             android:button="@null"
             android:shadowColor="#FFFFFF" />
 
+
         <TextView
             android:id="@+id/SingleParticipationTitleTxt"
             android:layout_width="match_parent"
@@ -49,19 +50,34 @@
             android:layout_marginTop="20dp"
             android:padding="8dp"
             android:text="@string/vocabulary_title"
-            android:textSize="@dimen/title_text_size"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/SingleParticipationCreatedAtTxt"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:backgroundTint="@color/edit_text_bottom_line"
-            android:text="@string/land_info_created_at"
-            android:textIsSelectable="false"
-            android:textSize="12sp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/SingleParticipationCreatedAtTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/general_margin_start"
+                android:layout_marginEnd="@dimen/general_margin_end"
+                android:text="@string/land_info_created_at"
+                android:textIsSelectable="false"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/SingleParticipationLandStateTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/sale_category" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,7 +85,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
-            android:orientation="horizontal">
+            android:background="@drawable/border_linear_layout"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,20 +100,19 @@
                     android:id="@+id/textView6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.33"
                     android:gravity="center|center_horizontal|center_vertical"
-                    android:text="@string/vocabulary_land_state"
+                    android:text="@string/land_info_foundation_space"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
 
                 <TextView
-                    android:id="@+id/SingleParticipationLandStateTxt"
+                    android:id="@+id/SingleParticipationFoundationSpaceTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.33"
-                    android:gravity="center|center_horizontal|center_vertical"
-                    android:text="@string/vocabulary_land_state"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/land_info_foundation_space"
                     android:textColor="@color/primary_black_text_color"
+                    android:textIsSelectable="false"
                     android:textSize="@dimen/smal_text_size" />
 
             </LinearLayout>
@@ -109,7 +127,6 @@
                     android:id="@+id/textView11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.33"
                     android:gravity="center|center_horizontal|center_vertical"
                     android:text="@string/vocabulary_building_year"
                     android:textColor="@color/textview_lable"
@@ -119,12 +136,10 @@
                     android:id="@+id/SingleParticipationBuildingYearTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.33"
                     android:gravity="center|center_horizontal|center_vertical"
                     android:text="@string/vocabulary_building_year"
                     android:textColor="@color/primary_black_text_color"
                     android:textSize="@dimen/smal_text_size" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -137,7 +152,6 @@
                     android:id="@+id/textView13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.33"
                     android:gravity="center|center_horizontal|center_vertical"
                     android:text="@string/land_info_room_count"
                     android:textColor="@color/textview_lable"
@@ -147,359 +161,735 @@
                     android:id="@+id/SingleParticipationRoomCountTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.33"
                     android:gravity="center|center_horizontal|center_vertical"
                     android:text="@string/land_info_room_count"
                     android:textColor="@color/primary_black_text_color"
                     android:textSize="@dimen/smal_text_size" />
-
             </LinearLayout>
 
         </LinearLayout>
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/SingleparticipationLandTypeTxtInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:gravity="right"
-            android:hint="@string/land_info_land_type"
-            android:layoutDirection="rtl"
-            android:text="@string/vocabulary_title"
-            android:textColor="@color/primary_black_text_color"
-            android:textColorHint="@color/textview_lable"
-            android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/SingleParticipationLandTypeTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginEnd="@dimen/general_margin_end"
-                android:backgroundTint="@color/edit_text_bottom_line"
-                android:editable="false"
-                android:text="@string/land_info_land_type"
-                android:textIsSelectable="false" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/SingleParticipationLandTypeTxtInputLayoutFoundationSpaceTxtInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:gravity="right"
-            android:hint="متراژ"
-            android:layoutDirection="rtl"
-            android:textColorHint="@color/textview_lable"
-            android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/SingleParticipationFoundationSpaceTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginEnd="@dimen/general_margin_end"
-                android:backgroundTint="@color/edit_text_bottom_line"
-                android:editable="false"
-                android:text="@string/land_info_foundation_space"
-                android:textIsSelectable="false" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/SingleParticipationTotalPriceTxtInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:gravity="right"
-            android:hint="@string/land_info_total_price"
-            android:layoutDirection="rtl"
-            android:textColorHint="@color/textview_lable"
-            android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/SingleParticipationTotalPriceTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginEnd="@dimen/general_margin_end"
-                android:backgroundTint="@color/edit_text_bottom_line"
-                android:editable="false"
-                android:text="@string/land_info_mortgage"
-                android:textIsSelectable="false" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/SingleParticipationLandCaseTxtInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:gravity="right"
-            android:hint="@string/vocabulary_land_case_type"
-            android:layoutDirection="rtl"
-            android:textColorHint="@color/textview_lable"
-            android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/SingleParticipationLandCaseTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginEnd="@dimen/general_margin_end"
-                android:backgroundTint="@color/edit_text_bottom_line"
-                android:editable="false"
-                android:text="@string/vocabulary_land_case_type"
-                android:textIsSelectable="false" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/SingleParticipationDistrictTxtTxtInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:gravity="right"
-            android:hint="@string/vocabulary_district"
-            android:layoutDirection="rtl"
-            android:textColorHint="@color/textview_lable"
-            android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/SingleParticipationDistrictTxtTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginEnd="@dimen/general_margin_end"
-                android:backgroundTint="@color/edit_text_bottom_line"
-                android:editable="false"
-                android:text="@string/vocabulary_district"
-                android:textIsSelectable="false" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/SingleParticipationAddressTxtTxtInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:gravity="right"
-            android:hint="@string/land_info_address"
-            android:layoutDirection="rtl"
-            android:textColorHint="@color/textview_lable"
-            android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/SingleParticipationAddressTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginEnd="@dimen/general_margin_end"
-                android:backgroundTint="@color/edit_text_bottom_line"
-                android:editable="false"
-                android:text="@string/land_info_address"
-                android:textIsSelectable="false" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/SingleParticipationFloorCountTxtInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:gravity="right"
-            android:hint="@string/land_info_floor_count"
-            android:layoutDirection="rtl"
-            android:textColorHint="@color/textview_lable"
-            android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/SingleParticipationFloorCountTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginEnd="@dimen/general_margin_end"
-                android:backgroundTint="@color/edit_text_bottom_line"
-                android:editable="false"
-                android:text="@string/land_info_floor_count"
-                android:textIsSelectable="false" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:orientation="horizontal">
-
-            <GridView
-                android:id="@+id/SingleParticipationLandEquipmentsGridView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:numColumns="3"
-                tools:listitem="@layout/singles_land_equipments_items" />
-        </RelativeLayout>
         <androidx.cardview.widget.CardView
-            android:id="@+id/SingleParticipationDescriptionCardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
             app:cardCornerRadius="4dp">
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/SingleParticipationDescriptionTxtInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:gravity="right"
-            android:hint="توضیحات تکمیلی"
-            android:layoutDirection="rtl"
-            android:textColorHint="@color/textview_lable"
-            android:textDirection="rtl"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/SingleParticipationDescriptionTxt"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/land_info_total_price"
+                        android:textColor="@color/textview_lable"
+                        android:textSize="@dimen/smal_text_size" />
+
+                    <TextView
+                        android:id="@+id/SingleParticipationTotalPriceTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/general_margin_start"
+                        android:layout_marginEnd="@dimen/general_margin_end"
+                        android:backgroundTint="@color/edit_text_bottom_line"
+                        android:gravity="end"
+                        android:text="@string/vocabulary_deal"
+                        android:textColor="@color/primary_black_text_color"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/smal_text_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/new_land_loan_total_price"
+                        android:textColor="@color/textview_lable"
+                        android:textSize="@dimen/smal_text_size" />
+
+                    <TextView
+                        android:id="@+id/SingleLoanTotalPriceTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/general_margin_start"
+                        android:layout_marginEnd="@dimen/general_margin_end"
+                        android:backgroundTint="@color/edit_text_bottom_line"
+                        android:gravity="end"
+                        android:text="ندارد"
+                        android:textColor="@color/primary_black_text_color"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/smal_text_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/new_land_loan_type"
+                        android:textColor="@color/textview_lable"
+                        android:textSize="@dimen/smal_text_size" />
+
+                    <TextView
+                        android:id="@+id/SingleLoanTypeTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/general_margin_start"
+                        android:layout_marginEnd="@dimen/general_margin_end"
+                        android:backgroundTint="@color/edit_text_bottom_line"
+                        android:gravity="end"
+                        android:text="ندارد"
+                        android:textColor="@color/primary_black_text_color"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/smal_text_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.33"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView55"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/land_info_land_type"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SingleParticipationLandTypeTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/general_margin_start"
+                            android:layout_marginEnd="@dimen/general_margin_end"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/land_info_land_type"
+                            android:textColor="@color/primary_black_text_color"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.33"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/new_land_land_case"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SingleParticipationLandCaseTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/general_margin_start"
+                            android:layout_marginEnd="@dimen/general_margin_end"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/new_land_land_case"
+                            android:textColor="@color/primary_black_text_color"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.33"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/new_land_voucher_type"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SingleParticipationVoucherTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/general_margin_start"
+                            android:layout_marginEnd="@dimen/general_margin_end"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/new_land_voucher_type"
+                            android:textColor="@color/primary_black_text_color"
+                            android:textSize="@dimen/smal_text_size">
+
+                        </TextView>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.33"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView31"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/land_info_floor_count"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SingleParticipationFloorCountTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/general_margin_start"
+                            android:layout_marginEnd="@dimen/general_margin_end"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/land_info_floor_count"
+                            android:textColor="@color/primary_black_text_color"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.33"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView12"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/land_info_floor"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SingleParticipationFloorTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/general_margin_start"
+                            android:layout_marginEnd="@dimen/general_margin_end"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/vocabulary_base_floor"
+                            android:textColor="@color/primary_black_text_color"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.33"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/land_info_units_in_floor"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SingleUnitInFloorTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/general_margin_start"
+                            android:layout_marginEnd="@dimen/general_margin_end"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/land_info_units_in_floor"
+                            android:textColor="@color/primary_black_text_color"
+                            android:textSize="@dimen/smal_text_size"></TextView>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/new_land_water"
+                        android:textColor="@color/textview_lable"
+                        android:textSize="@dimen/smal_text_size" />
+
+                    <TextView
+                        android:id="@+id/SingleParticipationWaterTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/new_land_water"
+                        android:textColor="@color/textview_lable"
+                        android:textSize="@dimen/smal_text_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView34"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/new_land_electricity"
+                        android:textColor="@color/textview_lable"
+                        android:textSize="@dimen/smal_text_size" />
+
+                    <TextView
+                        android:id="@+id/SingleParticipationElectricityTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/new_land_electricity"
+                        android:textColor="@color/textview_lable"
+                        android:textSize="@dimen/smal_text_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView36"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/new_land_gas"
+                        android:textColor="@color/textview_lable"
+                        android:textSize="@dimen/smal_text_size" />
+
+                    <TextView
+                        android:id="@+id/SingleParticipationGasTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/new_land_gas"
+                        android:textColor="@color/textview_lable"
+                        android:textSize="@dimen/smal_text_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView38"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/new_land_phone"
+                        android:textColor="@color/textview_lable"
+                        android:textSize="@dimen/smal_text_size" />
+
+                    <TextView
+                        android:id="@+id/SingleParticipationPhoneTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/new_land_phone"
+                        android:textColor="@color/textview_lable"
+                        android:textSize="@dimen/smal_text_size" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView
+                android:id="@+id/SingleParticipationLandEquipmentsGridView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="2dp"
+                android:numColumns="4"
+                android:padding="8dp"
+                android:scrollbars="none"
+                tools:listitem="@layout/singles_land_equipments_items" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/SingleParticipationDescriptionCardView"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="4dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/SingleParticipationDescriptionTxtInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/general_margin_start"
+                android:layout_marginTop="@dimen/general_margin_top"
                 android:layout_marginEnd="@dimen/general_margin_end"
-                android:backgroundTint="@color/edit_text_bottom_line"
-                android:editable="false"
-                android:ems="10"
-                android:enabled="false"
-                android:gravity="start|top"
-                android:inputType="textMultiLine"
-                android:text=""
-                android:textColor="@color/primary_black_text_color"
-                android:textIsSelectable="false" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:gravity="right"
+                android:hint="توضیحات تکمیلی"
+                android:layoutDirection="rtl"
+                android:textColorHint="@color/textview_lable"
+                android:textDirection="rtl"
+                app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/SingleParticipationDescriptionTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:backgroundTint="@color/edit_text_bottom_line"
+                    android:editable="false"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:text=""
+                    android:textColor="@color/primary_black_text_color"
+                    android:textIsSelectable="false" />
+            </com.google.android.material.textfield.TextInputLayout>
         </androidx.cardview.widget.CardView>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:layout_marginTop="@dimen/general_margin_top">
-
-            <com.google.android.gms.maps.MapView
-                android:id="@+id/SingleParticipationMapView"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
-        </FrameLayout>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="224dp"
-            android:layout_height="224dp"
-            android:layout_gravity="center|center_horizontal|center_vertical"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:elevation="200dp"
-            app:cardCornerRadius="112dp"
-            app:cardElevation="200dp"
-            app:cardMaxElevation="200dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="4dp">
 
-            <ImageView
-                android:id="@+id/SingleParticipationUserAvatarImg"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:cropToPadding="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_action_camera" />
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/SingleParticipationAddressTxtInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/general_margin_start"
+                    android:layout_marginTop="@dimen/general_margin_top"
+                    android:layout_marginEnd="@dimen/general_margin_end"
+                    android:gravity="right"
+                    android:hint="@string/land_info_address"
+                    android:layoutDirection="rtl"
+                    android:textColorHint="@color/textview_lable"
+                    android:textDirection="rtl"
+                    app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/SingleParticipationAddressTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/general_margin_start"
+                        android:layout_marginEnd="@dimen/general_margin_end"
+                        android:backgroundTint="@color/edit_text_bottom_line"
+                        android:editable="false"
+                        android:text="@string/land_info_address"
+                        android:textIsSelectable="false" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView20"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/land_info_province"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SingleParticipationProvinceTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/land_info_province"
+                            android:textColor="@color/primary_black_text_color"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView28"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/land_info_city"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SingleParticipationCityTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/land_info_city"
+                            android:textColor="@color/primary_black_text_color"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView30"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/land_info_area"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SingleParticipationAreaTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/land_info_area"
+                            android:textColor="@color/primary_black_text_color"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView33"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/vocabulary_district"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SingleParticipationDistrictTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/vocabulary_district"
+                            android:textColor="@color/primary_black_text_color"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:elevation="8dp">
+
+                    <com.google.android.gms.maps.MapView
+                        android:id="@+id/SingleParticipationMapView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" />
+                </FrameLayout>
+
+            </LinearLayout>
+
         </androidx.cardview.widget.CardView>
+        <!--   End Address     -->
 
-        <TextView
-            android:id="@+id/SingleParticipationUserNameTxt"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:backgroundTint="@color/edit_text_bottom_line"
-            android:editable="false"
-            android:ems="10"
-            android:enabled="false"
-            android:gravity="center|center_horizontal|center_vertical"
-            android:inputType="textMultiLine"
-            android:text="@string/land_info_name"
-            android:textColor="@color/primary_black_text_color"
-            android:textIsSelectable="false"
-            android:textSize="18sp" />
+            android:layout_margin="8dp"
+            app:cardCornerRadius="4dp">
 
-        <TextView
-            android:id="@+id/SingleParticipationUserPhoneTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|center_horizontal|center_vertical"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:backgroundTint="@color/edit_text_bottom_line"
-            android:editable="false"
-            android:ems="10"
-            android:enabled="true"
-            android:gravity="center|center_horizontal|center_vertical"
-            android:inputType="textMultiLine"
-            android:text="@string/land_info_phone"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            android:textColor="@color/primary_black_text_color"
-            android:textIsSelectable="true"
-            android:textSize="18sp" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_gravity="center|center_horizontal|center_vertical"
+                    android:layout_marginStart="@dimen/general_margin_start"
+                    android:layout_marginTop="@dimen/general_margin_top"
+                    android:layout_marginEnd="@dimen/general_margin_end"
+                    android:elevation="64dp"
+                    app:cardCornerRadius="64dp"
+                    app:cardElevation="64dp"
+                    app:cardMaxElevation="64dp">
 
+                    <ImageView
+                        android:id="@+id/SingleParticipationUserAvatarImg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:cropToPadding="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_action_camera" />
+                </androidx.cardview.widget.CardView>
 
-        <Button
-            android:id="@+id/SingleParticipationStartChatBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/general_margin_top"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_top"
-            android:text="@string/land_info_start_chat" />
+                <TextView
+                    android:id="@+id/SingleParticipationUserNameTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/general_margin_start"
+                    android:layout_marginTop="@dimen/general_margin_top"
+                    android:layout_marginEnd="@dimen/general_margin_end"
+                    android:backgroundTint="@color/edit_text_bottom_line"
+                    android:editable="false"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:gravity="center|center_horizontal|center_vertical"
+                    android:inputType="textMultiLine"
+                    android:text="@string/land_info_name"
+                    android:textColor="@color/primary_black_text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/SingleParticipationUserDescriptionMultiTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="@dimen/general_margin_top"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:backgroundTint="@color/edit_text_bottom_line"
-            android:editable="false"
-            android:ems="10"
-            android:enabled="false"
-            android:gravity="center|center_horizontal|center_vertical"
-            android:hint="آزمایشی"
-            android:inputType="textMultiLine"
-            android:text="@string/land_info_user_more_info"
-            android:textColor="@color/primary_black_text_color"
-            android:textIsSelectable="false"
-            android:textSize="18sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingStart="8dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:elevation="2dp"
+                        android:orientation="horizontal"
+                        android:paddingBottom="4dp">
+
+                        <TextView
+                            android:id="@+id/SingleParticipationStartChatTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:drawableBottom="@drawable/ic_baseline_chat_24"
+                            android:padding="4dp"
+                            android:text="@string/land_info_start_chat"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/SingleParticipationMobileTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3.5"
+                            android:drawableBottom="@drawable/ic_baseline_call_24"
+                            android:padding="4dp"
+                            android:text="@string/vocabulary_mobile"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/SingleParticipationShareTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:drawableBottom="@drawable/ic_baseline_share_24"
+                            android:padding="4dp"
+                            android:text="@string/vocabulary_share"
+                            android:textAlignment="center" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
     </LinearLayout>
