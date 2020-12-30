@@ -1,6 +1,8 @@
 package ir.hamedanmelk.hamedanmelk.ui.newland;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -11,7 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.Objects;
+
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.tools.Constants;
+
 public class NewLandFragment extends Fragment  {
     Button saleBtn;
     Button preSaleBtn;
@@ -37,6 +43,14 @@ public class NewLandFragment extends Fragment  {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_new_land, container, false);
         final NavController controller = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+
+
+        SharedPreferences user_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
+        if(!user_pref.contains("id")) {
+
+            controller.navigate(R.id.userLogin);
+
+        }
 
         saleBtn = (Button)view.findViewById(R.id.NewLandFragmentSaleBtn);
         preSaleBtn =(Button)view.findViewById(R.id.NewLandFragmentPreSaleBtn);

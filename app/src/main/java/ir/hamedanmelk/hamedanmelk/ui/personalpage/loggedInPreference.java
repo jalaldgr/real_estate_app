@@ -20,7 +20,7 @@ import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 public class loggedInPreference extends Preference {
-    private static final String TAG="LoggedInLayoutPreference";
+    private static final String TAG="LoggedInPreference";
     String fullNameStr;
     String avatarStr;
     String phoneStr;

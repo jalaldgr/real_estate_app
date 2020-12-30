@@ -92,6 +92,8 @@ public class MyHamedanMelkFragment extends PreferenceFragmentCompat {
             loggedInPreference.setExitButtonClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    SharedPreferences.Editor editor = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE).edit();
+                    editor.clear().apply();
                     loggedInPreference.setVisible(false);
                     user_favorites.setVisible(false);
                     user_lands.setVisible(false);
@@ -104,8 +106,6 @@ public class MyHamedanMelkFragment extends PreferenceFragmentCompat {
             notLoggedInPreference.setLoginButtonClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SharedPreferences.Editor editor = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE).edit();
-                    editor.clear().apply();
                     controller.navigate(R.id.userLogin);
                 }
             });
