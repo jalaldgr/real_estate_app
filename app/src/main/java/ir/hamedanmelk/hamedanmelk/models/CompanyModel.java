@@ -1,5 +1,8 @@
 package ir.hamedanmelk.hamedanmelk.models;
 
+import ir.hamedanmelk.hamedanmelk.tools.Constants;
+import okhttp3.MultipartBody;
+
 public class CompanyModel {
     private String id;
     private String Title;
@@ -103,5 +106,32 @@ public class CompanyModel {
 
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
+    }
+
+    public MultipartBody.Part[] getMultipartBody(){
+        MultipartBody.Part[] muParts = new MultipartBody.Part[10];
+        int i = 0;
+        if (user_id !=null){
+            muParts[i] = MultipartBody.Part.createFormData(Constants.ADD_COMPANY_UID, user_id); i++;
+        }
+        if (Manager !=null){
+            muParts[i] = MultipartBody.Part.createFormData(Constants.ADD_COMPANY_MANAGER, Manager);i++;
+        }
+        if (Address !=null){
+            muParts[i] = MultipartBody.Part.createFormData(Constants.ADD_COMPANY_ADDRESS, Address);i++;
+        }
+        if (company_type_id !=null){
+            muParts[i] = MultipartBody.Part.createFormData(Constants.ADD_COMPANY_SUB_COMPANY_TYPE_ID, company_type_id);i++;
+        }
+        if (Title !=null){
+            muParts[i] = MultipartBody.Part.createFormData(Constants.ADD_COMPANY_TITLE, Title);i++;
+        }
+        if (Phone !=null){
+            muParts[i] = MultipartBody.Part.createFormData(Constants.COMPANY_ADD_PHONE, Phone);i++;
+        }
+        if (created_at !=null){
+            // muParts[i] = MultipartBody.Part.createFormData("created_at", created_at);i++;
+        }
+        return muParts;
     }
 }

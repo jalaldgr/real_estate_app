@@ -34,6 +34,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,22 +43,36 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.models.CompanyModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.CompanyTypeModel;
+import ir.hamedanmelk.hamedanmelk.models.myResponse;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.FilePath;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.MultipartUtility;
+import ir.hamedanmelk.hamedanmelk.tools.RetrofitInterface;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewCompanyFragment extends Fragment {
 
     private static final String TAG ="NewCompanyFragment";
     MYSQlDBHelper dbHelper;
+    CompanyModel NewCompanyDataModel;
 
     String   UIDStr    ;
     String   childCompanyTypeIDStr;
@@ -106,14 +122,14 @@ public class NewCompanyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_new_company, container, false);
 
-         parentCompanySpnr = view.findViewById(R.id.NewCompanyFragmentParentCompanyTypesSpnr);
-         subCompanySpnr =view.findViewById(R.id.NewCompanyFragmentCompanyTypesSpnr);
-         titleETxt = (EditText)view.findViewById(R.id.NewCompanyFragmentTitleEtxt);
-         managerETxt = (EditText)view.findViewById(R.id.NewCompanyFragmenManagerEtxt);
-         addressETxt = (EditText)view.findViewById(R.id.NewCompanyFragmenAddresstEtxt);
-         phoneETxt = (EditText)view.findViewById(R.id.NewCompanyFragmentPhoneEtxt);
-         submitBtn =(Button)view.findViewById(R.id.NewCompanyFragmentSubmitBtn);
-         logoImg = (ImageView)view.findViewById(R.id.NewCompanyFragmentLogoImg);
+        parentCompanySpnr = view.findViewById(R.id.NewCompanyFragmentParentCompanyTypesSpnr);
+        subCompanySpnr =view.findViewById(R.id.NewCompanyFragmentCompanyTypesSpnr);
+        titleETxt = (EditText)view.findViewById(R.id.NewCompanyFragmentTitleEtxt);
+        managerETxt = (EditText)view.findViewById(R.id.NewCompanyFragmenManagerEtxt);
+        addressETxt = (EditText)view.findViewById(R.id.NewCompanyFragmenAddresstEtxt);
+        phoneETxt = (EditText)view.findViewById(R.id.NewCompanyFragmentPhoneEtxt);
+        submitBtn =(Button)view.findViewById(R.id.NewCompanyFragmentSubmitBtn);
+        logoImg = (ImageView)view.findViewById(R.id.NewCompanyFragmentLogoImg);
 
 //////////////////////Select parent Company////////////////////////////////
         parentCompanyModels =dbHelper.GetParentCompanyTypes();
@@ -159,11 +175,11 @@ public class NewCompanyFragment extends Fragment {
         });
 //////////////////////////PickUp Image///////////////////////////////////
         logoImg.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    logoImg.showContextMenu();
-                }
-            });
+            @Override
+            public void onClick(View view) {
+                logoImg.showContextMenu();
+            }
+        });
 
         logoImg.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -175,12 +191,18 @@ public class NewCompanyFragment extends Fragment {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddCompanyRequest(getContext());
+                MakeModel();
+                //AddCompanyRequest(getContext());
+                try {
+                    AddNEWCompanyRequest();
+                } catch (JSONException e) {
+                    Log.d("ThisTAG JSONException", "I Am Not Bayram JSONException : " + e.toString());
+                }
             }
         });
         return view;
     }
-////////////////////////////////pickUp Image ////////////////////////////////////
+    ////////////////////////////////pickUp Image ////////////////////////////////////
     private void startGallery() {
         Intent cameraIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         cameraIntent.setType("image/*");
@@ -271,11 +293,7 @@ public class NewCompanyFragment extends Fragment {
             String requestUrl = Urls.getBaseURL() + Urls.getCompanyAdd();
             @Override
             protected void onPreExecute() {
-                super.onPreExecute();
-                titleStr = titleETxt.getText().toString();
-                phoneStr = phoneETxt.getText().toString();
-                addressStr = addressETxt.getText().toString();
-                managerStr = managerETxt.getText().toString();
+                super.onPreExecute();;
                 this.dialog.setMessage(getResources().getString(R.string.loading_message));
                 this.dialog.setIndeterminate(true);
                 this.dialog.setCanceledOnTouchOutside(false);
@@ -330,4 +348,70 @@ public class NewCompanyFragment extends Fragment {
         AddCompanyRequestAsync addCompanyRequestAsync = new AddCompanyRequestAsync();
         addCompanyRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
+
+    //**********************************************************************************************
+    //UP;OAD NEW COMPANY BY RETROFIT
+    private void AddNEWCompanyRequest() throws JSONException {
+
+        final String ThisTAG = "AddNEWCompanyRequestTAG";
+        String json = new Gson().toJson(NewCompanyDataModel);
+        JSONObject JSONrequestBody = new JSONObject(json);
+        File file = new File(NewCompanyDataModel.getLogo());
+        RequestBody logoRequestBody = RequestBody.create(MediaType.parse("image/*"),file);
+        MultipartBody.Part logoMultipartBodyPart =
+                MultipartBody.Part.createFormData("Logo", file.getName(), logoRequestBody);
+        Log.d(ThisTAG, "json string : " + json);
+
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                Log.d(ThisTAG, "log log: " + message);
+            }
+        });
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(logging);
+        final Retrofit myRetrofit = new Retrofit.Builder().baseUrl("https://hamedanmelk.ir")
+                .addConverterFactory(GsonConverterFactory.create()).client(httpClient.build()).build();
+        RetrofitInterface RI = myRetrofit.create(RetrofitInterface.class);
+        Call<myResponse> uploadResponse = RI.AddCompanyRequest(NewCompanyDataModel.getMultipartBody(), logoMultipartBodyPart);
+        uploadResponse.enqueue(new Callback<myResponse>() {
+            @Override
+            public void onResponse(Call<myResponse> call, retrofit2.Response<myResponse> response) {
+                Log.d(ThisTAG, "I Am Bayram: " + response.toString());
+                Log.d(ThisTAG, "onResponse data " + response.body().getData());
+            }
+            @Override
+            public void onFailure(Call<myResponse> call, Throwable t) {
+                Log.d(ThisTAG, "I Am Not Bayram: " + t.toString());
+            }
+        });
+    }
+
+    //**********************************************************************************************
+    //FILL NEW COMPANY DATA MODEL CLASS FIELDS FOR SEND
+    private void MakeModel(){
+
+        SharedPreferences user_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
+        UIDStr = user_pref.getString(Constants.USER_MODEL_ID, "0");
+        titleStr = titleETxt.getText().toString();
+        managerStr = managerETxt.getText().toString();
+        phoneStr = phoneETxt.getText().toString();
+        addressStr = addressETxt.getText().toString();
+
+        String DateTime = java.text.DateFormat.getDateTimeInstance().format(new Date());
+        NewCompanyDataModel = new CompanyModel( "",
+                titleStr,
+                managerStr,
+                phoneStr,
+                addressStr,
+                childCompanyTypeIDStr,
+                UIDStr,
+                "1",
+                selectedFileStr,
+                DateTime);
+    }
+//**********************************************************************************************
+
+
 }
