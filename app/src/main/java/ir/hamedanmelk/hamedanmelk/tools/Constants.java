@@ -259,6 +259,21 @@ public class Constants {
     public static final String ADD_COMPANY_MANAGER = "Manager";
     public static final String ADD_COMPANY_LOGO = "Logo";
 
+
+    ///////////////////Add Office//////////////////////////////
+    public static final String ADD_OFFICE_TITLE = "Title";
+    public static final String ADD_OFFICE_MANAGER = "Manager";
+    public static final String ADD_OFFICE_ADDRESS ="Address";
+    public static final String ADD_OFFICE_LOGO = "Logo";
+    public static final String ADD_OFFICE_FAX = "Fax";
+    public static final String ADD_OFFICE_NO="No";
+    public static final String ADD_OFFICE_PHONE="Phone";
+    public static final String ADD_OFFICE_PROVINCE_ID="ProvinceID";
+    public static final String ADD_OFFICE_CITY="CityID";
+    public static final String ADD_OFFICE_AREA_ID="AreaID";
+    public static final String ADD_OFFICE_DISTRICID="DistrictID";
+    public static final String ADD_OFFICE_UID = "UID";
+
     public static final String[] COMPANY_FIELDS ={"id","Title","Manager","Phone","Address","company_type_id","user_id","Disabled","Logo","created_at"};
     public static final String COMPANY_ID= "id";
     public static final String COMPANY_TITLE = "Title";

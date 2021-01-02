@@ -481,6 +481,32 @@ public void InsertDistrict(ContentValues cv){
         return districtModels;
     }
 
+    public ArrayList<DistrictModel> GetDistrictsByAreaID(String id){
+        DistrictModel districtModel=null;
+        ArrayList<DistrictModel>districtModels = new ArrayList<>();
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor;
+        try {
+            cursor = database.rawQuery("SELECT * FROM "+DISTRICT_TABLE_NAME+" WHERE area_id = "+id, null);
+            if (cursor==null) return null;
+            int counter = 0;
+            cursor.moveToFirst();
+            do {
+                districtModel = new DistrictModel(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2));
+                districtModels.add(districtModel);
+                counter++;
+            }while (cursor.moveToNext());
+            cursor.close();
+        }catch (Exception e){
+            Log.d(TAG, "GetDistrictByID: "+e.toString());
+        }
+        database.close();
+        return districtModels;
+    }
+
     public DistrictModel GetDistrictByID(String id){
         DistrictModel districtModel=null;
         SQLiteDatabase database = this.getReadableDatabase();
@@ -488,12 +514,11 @@ public void InsertDistrict(ContentValues cv){
         try {
             cursor = database.rawQuery("SELECT * FROM "+DISTRICT_TABLE_NAME+" WHERE id = "+id, null);
             if (cursor==null) return null;
-
             cursor.moveToFirst();
-            districtModel = new DistrictModel(
-                    cursor.getString(0),
-                    cursor.getString(1),
-                    cursor.getString(2));
+                districtModel = new DistrictModel(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2));
             cursor.close();
         }catch (Exception e){
             Log.d(TAG, "GetDistrictByID: "+e.toString());
@@ -501,6 +526,7 @@ public void InsertDistrict(ContentValues cv){
         database.close();
         return districtModel;
     }
+
 
     public void DeleteDistrict(){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -521,26 +547,32 @@ public void InsertDistrict(ContentValues cv){
         db.close();
     }
 
-    public CityModel GetCityByID(String id){
+    public ArrayList<CityModel> GetCitiesByProvinceID(String id){
         CityModel cityModel=null;
+        ArrayList <CityModel>cityModels = new ArrayList<>();
         SQLiteDatabase database = this.getReadableDatabase();
         Cursor cursor;
         try {
-            cursor = database.rawQuery("SELECT * FROM "+CITIES_TABLE_NAME+" WHERE id = "+id, null);
+            cursor = database.rawQuery("SELECT * FROM "+CITIES_TABLE_NAME+" WHERE province_id = "+id, null);
             if (cursor==null) return null;
+            int counter = 0;
 
             cursor.moveToFirst();
-            Log.d(TAG, "GetCITYByID: "+cursor.toString());
-            cityModel = new CityModel(
-                    cursor.getString(0),
-                    cursor.getString(1),
-                    cursor.getString(2));
+            do {
+                cityModel = new CityModel(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2));
+                cityModels.add(cityModel);
+                counter++;
+            }while (cursor.moveToNext());
             cursor.close();
         }catch (Exception e){
             Log.d(TAG, "GetCityByID: "+e.toString());
         }
+
         database.close();
-        return cityModel;
+        return cityModels;
     }
 
     public ArrayList<CityModel> GetCitiesList(){
@@ -582,26 +614,29 @@ public void InsertDistrict(ContentValues cv){
         db.close();
     }
 
-    public AreaModel GetAreaByID(String id){
+    public ArrayList<AreaModel> GetAreasByCityID(String id){
         AreaModel areaModel=null;
+        ArrayList<AreaModel> areaModels = new ArrayList<>();
         SQLiteDatabase database = this.getReadableDatabase();
         Cursor cursor;
         try {
-            cursor = database.rawQuery("SELECT * FROM "+AREAS_TABLE_NAME+" WHERE id = "+id, null);
+            cursor = database.rawQuery("SELECT * FROM "+AREAS_TABLE_NAME+" WHERE city_id = "+id, null);
             if (cursor==null) return null;
 
             cursor.moveToFirst();
-            Log.d(TAG, "GetAreaByID: "+cursor.toString());
-             areaModel= new AreaModel(
-                    cursor.getString(0),
-                    cursor.getString(1),
-                    cursor.getString(2));
+            do {
+                areaModel= new AreaModel(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2));
+                areaModels.add(areaModel);
+            }while (cursor.moveToNext());
             cursor.close();
         }catch (Exception e){
             Log.d(TAG, "GetAreaByID: "+e.toString());
         }
         database.close();
-        return areaModel;
+        return areaModels;
     }
 
     public ArrayList<AreaModel> GetAreaList(){

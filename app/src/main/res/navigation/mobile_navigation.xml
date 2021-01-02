@@ -201,5 +201,9 @@
         android:id="@+id/newLandParticipationFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.newland.NewLandParticipationFragment"
         android:label="@string/new_land_participation" />
+    <fragment
+        android:id="@+id/newOfficeFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.office.NewOfficeFragment"
+        android:label="@string/vocabulary_submit_office" />
 
 </navigation>

@@ -28,7 +28,7 @@ public class myResponse implements RetrofitInterface{
     }
 
     @Override
-    public Call<myResponse> UploadNewLand(MultipartBody.Part[] images, HashMap<String, RequestBody> newLandModel) {
+    public Call<myResponse> UploadNewLand(MultipartBody.Part[] Parts,MultipartBody.Part images[] ) {
 //        public Call<myResponse> UploadNewLand(@Body NewLandModel newLandModel, @PartMap HashMap<String, File> Images) {
 
             return null;
@@ -36,6 +36,11 @@ public class myResponse implements RetrofitInterface{
 
     @Override
     public Call<myResponse> AddCompanyRequest(MultipartBody.Part[] Parts, MultipartBody.Part images) {
+        return null;
+    }
+
+    @Override
+    public Call<myResponse> AddOfficeRequest(MultipartBody.Part[] Parts, MultipartBody.Part images) {
         return null;
     }
 

@@ -95,10 +95,17 @@
     <string name="loading_message">دریافت اطلاعات…</string>
     <string name="username_input_error_msg">لطفا نام کاربری را وارد نمایید</string>
     <string name="password_input_error_msg">لطفا گذرواژه خود را وارد نمایید</string>
+    <string name="title_input_error_msg">لطفا عنوان را وارد کنید</string>
+    <string name="success_office_msg">اطلاعات دفتر اسناد رسمی ثبت شد و در انتظار تایید است</string>
+    <string name="success_company_msg">اطلاعات شرکت ثبت شد و در انتظار تایید است</string>
+    <string name="success_lawyer_msg">اطلاعات وکیل ثبت شد و در انتظار تایید است</string>
+
+
     <string name="firstname_input_error_msg">لطفا نام را وارد نمایید</string>
     <string name="lastname_input_error_msg">لطفا نام خانوادگی را وارد نمایید</string>
     <string name="gendertype_input_error_msg">لطفا جنسیت را انتخاب نمایید</string>
     <string name="phone_input_error_msg">لطفا شماره همراه را وارد نمایید</string>
+    <string name="photo_input_error_msg">لطفا عکس را انتخاب کنید</string>
     <string name="duplicate_username_error_msg">کاربری تلفن همراه مورد نظر، در سیستم قبلا ایجاد شده است</string>
     <string name="register_public_user_sucess_msg">نام کاربری و رمز عبور ارسال شد</string>
 
@@ -161,6 +168,7 @@
     <string name="vocabulary_manager">با مدیریت</string>
     <string name="vocabulary_office_manager">نام سردفتر</string>
     <string name="vocabulary_submit_company">ثبت شرکت</string>
+    <string name="vocabulary_submit_office">دفتر اسناد رسمی</string>
     <string name="vocabulary_select_image">انتخاب عکس</string>
     <string name="vocabulary_remove_image">حذف عکس</string>
     <string name="vocabulary_land_state"> نوع آگهی</string>

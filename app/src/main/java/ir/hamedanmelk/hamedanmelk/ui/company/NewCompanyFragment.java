@@ -80,7 +80,6 @@ public class NewCompanyFragment extends Fragment {
     String   addressStr;
     String   managerStr;
     String   phoneStr;
-    String   logoStr;
     String   subCompanyId;
     String   selectedFileStr;
     Uri      selectedFileUri;

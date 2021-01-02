@@ -56,7 +56,6 @@ public class OfficesRecyclerViewAdapter extends RecyclerView.Adapter<OfficesRecy
     public void onBindViewHolder(final ViewHolder holder,final int position) {
         MYSQlDBHelper qlDBHelper = new MYSQlDBHelper(activity.getApplicationContext());
         final OfficeModel officeModel = officeModels.get(position);
-        CityModel cityModel = qlDBHelper.GetCityByID(officeModel.getDistrict_id());
         holder.titleTxt.setText(officeModel.getTitle());
         holder.managerTxt.setText(officeModel.getManager());
         holder.addressTxt.setText(officeModel.getAddress());

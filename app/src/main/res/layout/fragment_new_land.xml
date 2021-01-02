@@ -77,6 +77,14 @@
                 android:text="@string/new_land_company"
                 android:textAlignment="center"
                 android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+            <Button
+                android:id="@+id/newLandFragmentOfficeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/vocabulary_submit_office"
+                android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
         </LinearLayout>
     </LinearLayout>
 

@@ -14,11 +14,15 @@ import retrofit2.http.PartMap;
 public interface RetrofitInterface {
     @Multipart
     @POST( "/AppRequests/RegisterLand")
-    Call<myResponse> UploadNewLand(@Part MultipartBody.Part[] images, @PartMap HashMap<String, RequestBody> newLandModel);
+    Call<myResponse> UploadNewLand(@Part MultipartBody.Part[] Parts,@Part MultipartBody.Part images[]);
 //   Call<myResponse> UploadNewLand(@Body NewLandModel newLandModel, @PartMap HashMap<String, File> Images);
 
     @Multipart
     @POST( "/AppRequests/CompanyAdd")
     Call<myResponse> AddCompanyRequest(@Part MultipartBody.Part[] Parts, @Part MultipartBody.Part images);
+
+    @Multipart
+    @POST( "/AppRequests/OfficeAdd")
+    Call<myResponse> AddOfficeRequest(@Part MultipartBody.Part[] Parts, @Part MultipartBody.Part images);
 
 }
