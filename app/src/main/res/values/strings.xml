@@ -96,9 +96,15 @@
     <string name="username_input_error_msg">لطفا نام کاربری را وارد نمایید</string>
     <string name="password_input_error_msg">لطفا گذرواژه خود را وارد نمایید</string>
     <string name="title_input_error_msg">لطفا عنوان را وارد کنید</string>
+    <string name="address_input_error_msg">لطفا آدرس را وارد کنید</string>
+    <string name="manager_input_error_msg">لطفا نام مدیر را وارد کنید</string>
+
+
+
     <string name="success_office_msg">اطلاعات دفتر اسناد رسمی ثبت شد و در انتظار تایید است</string>
     <string name="success_company_msg">اطلاعات شرکت ثبت شد و در انتظار تایید است</string>
     <string name="success_lawyer_msg">اطلاعات وکیل ثبت شد و در انتظار تایید است</string>
+    <string name="fail_msg">هنگام ارسال خطایی رخ داد</string>
 
 
     <string name="firstname_input_error_msg">لطفا نام را وارد نمایید</string>

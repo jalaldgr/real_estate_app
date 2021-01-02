@@ -19,6 +19,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -81,7 +83,7 @@ public class NewCompanyFragment extends Fragment {
     String   managerStr;
     String   phoneStr;
     String   subCompanyId;
-    String   selectedFileStr;
+    String   selectedFileStr="";
     Uri      selectedFileUri;
     Spinner  parentCompanySpnr;
     Spinner  subCompanySpnr ;
@@ -90,7 +92,11 @@ public class NewCompanyFragment extends Fragment {
     EditText addressETxt;
     EditText phoneETxt ;
     Button   submitBtn ;
+    Button  addPhotoBtn;
+    ImageView clearImg;
     ImageView logoImg;
+    LinearLayout imageLyt;
+
     HashMap<String, String> requestBodyTextFields = new HashMap<>();
     HashMap<String, String> requestBodyImageFields = new HashMap<>();
     ArrayList<CompanyTypeModel> parentCompanyModels ;
@@ -129,6 +135,9 @@ public class NewCompanyFragment extends Fragment {
         phoneETxt = (EditText)view.findViewById(R.id.NewCompanyFragmentPhoneEtxt);
         submitBtn =(Button)view.findViewById(R.id.NewCompanyFragmentSubmitBtn);
         logoImg = (ImageView)view.findViewById(R.id.NewCompanyFragmentLogoImg);
+        clearImg = (ImageView)view.findViewById(R.id.NewCompanyFragmentClearImg);
+        addPhotoBtn = (Button)view.findViewById(R.id.NewCompanyFragmentAddPhotoBtn);
+        imageLyt = (LinearLayout)view.findViewById(R.id.NewCompanyFragmentImageLyt);
 
 //////////////////////Select parent Company////////////////////////////////
         parentCompanyModels =dbHelper.GetParentCompanyTypes();
@@ -190,6 +199,32 @@ public class NewCompanyFragment extends Fragment {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (TextUtils.isEmpty(titleETxt.getText().toString())) {
+                    titleETxt.setError(getResources().getString(R.string.title_input_error_msg));
+                    titleETxt.requestFocus();
+                    return;
+                }
+                if (TextUtils.isEmpty(addressETxt.getText().toString())) {
+                    addressETxt.setError(getResources().getString(R.string.address_input_error_msg));
+                    addressETxt.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(managerETxt.getText().toString())) {
+                    managerETxt.setError(getResources().getString(R.string.manager_input_error_msg));
+                    managerETxt.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(phoneETxt.getText().toString())) {
+                    phoneETxt.setError(getResources().getString(R.string.phone_input_error_msg));
+                    phoneETxt.requestFocus();
+                    return;
+                }
+                if(selectedFileStr.isEmpty()){
+                    Toast.makeText(getContext(),getResources().getString(R.string.photo_input_error_msg),Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 MakeModel();
                 //AddCompanyRequest(getContext());
                 try {
@@ -197,6 +232,21 @@ public class NewCompanyFragment extends Fragment {
                 } catch (JSONException e) {
                     Log.d("ThisTAG JSONException", "I Am Not Bayram JSONException : " + e.toString());
                 }
+            }
+        });
+
+        addPhotoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startGallery();
+            }
+        });
+        clearImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageLyt.setVisibility(View.GONE);
+                addPhotoBtn.setVisibility(View.VISIBLE);
+                selectedFileStr="";
             }
         });
         return view;
@@ -224,6 +274,8 @@ public class NewCompanyFragment extends Fragment {
                     e.printStackTrace();
                 }
                 logoImg.setImageBitmap(bitmapImage);
+                addPhotoBtn.setVisibility(View.GONE);
+                imageLyt.setVisibility(View.VISIBLE);
             }
         }
         //Uri returnUri;
@@ -269,84 +321,19 @@ public class NewCompanyFragment extends Fragment {
         return false;
     }
 
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-//                //Write your logic here
-////                selectedFilePath=null;
-////                selectedimage=null;
-////                this.finish();
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-
-
-
-    public void AddCompanyRequest (final Context context) {
-
-        class AddCompanyRequestAsync extends AsyncTask<Void, Void, List<String>> {
-            private final ProgressDialog dialog = new ProgressDialog(getContext());
-            final File imageFile = new File(selectedFileStr);
-            String requestUrl = Urls.getBaseURL() + Urls.getCompanyAdd();
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();;
-                this.dialog.setMessage(getResources().getString(R.string.loading_message));
-                this.dialog.setIndeterminate(true);
-                this.dialog.setCanceledOnTouchOutside(false);
-                this.dialog.show();
-            }
-
-            @Override
-            protected void onPostExecute(List<String> s) {
-
-                super.onPostExecute(s);
-                if (this.dialog.isShowing()) this.dialog.dismiss();
-                final NavController controller = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
-
-                try {
-                    JSONObject requestJsonObject = new JSONObject(s.get(0));
-                    if (requestJsonObject.getInt("State") > 0) {
-
-                        if(requestJsonObject.getString(Constants.JSON_RESPONSE_DATA).contains("Success")) {
-                            Toast.makeText(getContext(), "آگهی با موفقیت ثبت شد", Toast.LENGTH_LONG).show();
-                            controller.navigate(R.id.navigation_home);
-                        }
-                    }
-                } catch (JSONException jsonException) {
-                    jsonException.printStackTrace();
-                }
-            }
-
-            @Override
-            protected List<String> doInBackground(Void... voids) {
-                try {
-                    MultipartUtility multipart = new MultipartUtility(requestUrl, "UTF-8");
-                    multipart.addFormField(Constants.ADD_COMPANY_UID, UIDStr);
-                    multipart.addFormField(Constants.ADD_COMPANY_TITLE, titleStr);
-                    multipart.addFormField(Constants.ADD_COMPANY_MANAGER, managerStr);
-                    multipart.addFormField(Constants.ADD_COMPANY_ADDRESS, addressStr);
-                    multipart.addFormField(Constants.COMPANY_ADD_PHONE, phoneStr);
-                    multipart.addFormField(Constants.ADD_COMPANY_SUB_COMPANY_TYPE_ID, childCompanyTypeIDStr);
-                    multipart.addFilePart(Constants.ADD_COMPANY_LOGO, imageFile.getAbsoluteFile());
-                    List<String> responseList = multipart.finish();
-                    for (String item : responseList) {
-                        Log.d(TAG, "Upload Files Response:::" + item);
-                    }
-                    return responseList;
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return Arrays.asList(e.toString());
-                }
-            }
-
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //Write your logic here
+//                selectedFilePath=null;
+//                selectedimage=null;
+//                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        AddCompanyRequestAsync addCompanyRequestAsync = new AddCompanyRequestAsync();
-        addCompanyRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
+
 
     //**********************************************************************************************
     //UP;OAD NEW COMPANY BY RETROFIT
@@ -377,12 +364,18 @@ public class NewCompanyFragment extends Fragment {
         uploadResponse.enqueue(new Callback<myResponse>() {
             @Override
             public void onResponse(Call<myResponse> call, retrofit2.Response<myResponse> response) {
-                Log.d(ThisTAG, "I Am Bayram: " + response.toString());
-                Log.d(ThisTAG, "onResponse data " + response.body().getData());
+                if(response.body().getData().contains("Success")){
+                    Toast.makeText(getContext(),getResources().getString(R.string.success_company_msg),Toast.LENGTH_LONG).show();
+                    NavController controller = Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
+                    controller.navigate(R.id.navigation_home);
+                }
+                else {
+                    Toast.makeText(getContext(),getResources().getString(R.string.fail_msg),Toast.LENGTH_LONG).show();
+                }
             }
             @Override
             public void onFailure(Call<myResponse> call, Throwable t) {
-                Log.d(ThisTAG, "I Am Not Bayram: " + t.toString());
+                Toast.makeText(getContext(),getResources().getString(R.string.fail_msg),Toast.LENGTH_LONG).show();
             }
         });
     }
