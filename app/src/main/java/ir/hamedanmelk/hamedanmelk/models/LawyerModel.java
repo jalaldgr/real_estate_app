@@ -1,5 +1,8 @@
 package ir.hamedanmelk.hamedanmelk.models;
 
+import ir.hamedanmelk.hamedanmelk.tools.Constants;
+import okhttp3.MultipartBody;
+
 public class LawyerModel {
     private String  id;
     private String  FullName;
@@ -84,4 +87,26 @@ public class LawyerModel {
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
+
+
+    public MultipartBody.Part[] getMultipartBody(){
+        MultipartBody.Part[] muParts = new MultipartBody.Part[10];
+        int i = 0;
+
+        if (FullName !=null){
+            muParts[i] = MultipartBody.Part.createFormData("FullName", FullName);i++;
+        }
+        if (Description !=null){
+            muParts[i] = MultipartBody.Part.createFormData("Description", Description);i++;
+        }
+        if (Phone !=null){
+            muParts[i] = MultipartBody.Part.createFormData("Phone", Phone);i++;
+        }
+        if (user_id !=null){
+            muParts[i] = MultipartBody.Part.createFormData("UID", user_id);i++;
+        }
+
+        return muParts;
+    }
+
 }

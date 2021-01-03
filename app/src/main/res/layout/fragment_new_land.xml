@@ -69,6 +69,14 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/newLandFragmentLawyerBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/new_land_lawyer"
+                android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+            <Button
                 android:id="@+id/newLandFragmentCompanyBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,14 +86,22 @@
                 android:textAlignment="center"
                 android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
             <Button
                 android:id="@+id/newLandFragmentOfficeBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:text="@string/vocabulary_submit_office"
                 android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
         </LinearLayout>
+
     </LinearLayout>
 
 

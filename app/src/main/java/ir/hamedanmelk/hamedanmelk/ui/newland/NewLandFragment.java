@@ -24,6 +24,8 @@ public class NewLandFragment extends Fragment  {
     Button rentBtn;
     Button participationBtn;
     Button companyBtn;
+    Button officeBtn;
+    Button lawyerBtn;
 
     public NewLandFragment() {
         // Required empty public constructor
@@ -57,6 +59,8 @@ public class NewLandFragment extends Fragment  {
         rentBtn = (Button)view.findViewById(R.id.NewLandFragmentRentBtn);
         participationBtn = (Button)view.findViewById(R.id.NewLandFragmentParticipationBtn);
         companyBtn = (Button)view.findViewById(R.id.newLandFragmentCompanyBtn);
+        officeBtn = (Button)view.findViewById(R.id.newLandFragmentOfficeBtn);
+        lawyerBtn = (Button)view.findViewById(R.id.newLandFragmentLawyerBtn);
 
         saleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +94,19 @@ public class NewLandFragment extends Fragment  {
             @Override
             public void onClick(View view) {
                 controller.navigate(R.id.newCompanyFragment);
+            }
+        });
+        officeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controller.navigate(R.id.newOfficeFragment);
+            }
+        });
+
+        lawyerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controller.navigate(R.id.newLawyerFragment);
             }
         });
         return view;

@@ -118,7 +118,7 @@
         tools:layout="@layout/fragment_links" />
     <fragment
         android:id="@+id/lawInstiuteFragment"
-        android:name="ir.hamedanmelk.hamedanmelk.ui.category.LawyersFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.lawyer.LawyersFragment"
         android:label="@string/law_instiute_category"
         tools:layout="@layout/fragment_lawyers" />
     <fragment
@@ -205,5 +205,14 @@
         android:id="@+id/newOfficeFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.office.NewOfficeFragment"
         android:label="@string/vocabulary_submit_office" />
+    <fragment
+        android:id="@+id/officesFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.office.OfficesFragment"
+        android:label="OfficesFragment" />
+    <fragment
+        android:id="@+id/newLawyerFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.lawyer.NewLawyerFragment"
+        android:label="@string/new_land_lawyer"
+        tools:layout="@layout/fragment_new_lawyer" />
 
 </navigation>

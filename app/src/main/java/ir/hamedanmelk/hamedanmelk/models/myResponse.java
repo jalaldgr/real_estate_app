@@ -44,5 +44,10 @@ public class myResponse implements RetrofitInterface{
         return null;
     }
 
+    @Override
+    public Call<myResponse> AddLawyerRequest(MultipartBody.Part[] Parts, MultipartBody.Part images) {
+        return null;
+    }
+
 
 }

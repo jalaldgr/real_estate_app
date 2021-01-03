@@ -25,4 +25,8 @@ public interface RetrofitInterface {
     @POST( "/AppRequests/OfficeAdd")
     Call<myResponse> AddOfficeRequest(@Part MultipartBody.Part[] Parts, @Part MultipartBody.Part images);
 
+    @Multipart
+    @POST( "/AppRequests/LawyerAdd")
+    Call<myResponse> AddLawyerRequest(@Part MultipartBody.Part[] Parts, @Part MultipartBody.Part images);
+
 }

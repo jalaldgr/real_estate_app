@@ -1,4 +1,4 @@
-package ir.hamedanmelk.hamedanmelk.ui.category;
+package ir.hamedanmelk.hamedanmelk.ui.lawyer;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -22,7 +22,6 @@ import java.util.HashMap;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.LawyerModel;
-import ir.hamedanmelk.hamedanmelk.recyclers.LawyersRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;

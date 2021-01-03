@@ -13,7 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import ir.hamedanmelk.hamedanmelk.R;
-import ir.hamedanmelk.hamedanmelk.ui.category.LawyersFragment;
+import ir.hamedanmelk.hamedanmelk.ui.lawyer.LawyersFragment;
 import ir.hamedanmelk.hamedanmelk.ui.office.OfficesFragment;
 
 /**
