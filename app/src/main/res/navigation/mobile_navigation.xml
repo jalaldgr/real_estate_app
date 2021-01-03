@@ -214,5 +214,9 @@
         android:name="ir.hamedanmelk.hamedanmelk.ui.lawyer.NewLawyerFragment"
         android:label="@string/new_land_lawyer"
         tools:layout="@layout/fragment_new_lawyer" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.category.NewsFragment"
+        android:label="@string/news_category" />
 
 </navigation>
