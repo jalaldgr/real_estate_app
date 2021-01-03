@@ -19,6 +19,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -67,10 +69,12 @@ public class AgenciesRecyclerViewAdapter extends RecyclerView.Adapter<AgenciesRe
         holder.mobileTxt.setText(agencyModel.getMobile());
         holder.managerTxt.setText(agencyModel.getManager());
         if(agencyModel.getUserImage()!="null"){
-            new DownloadImage(holder.avatarImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+"/"+agencyModel.getUserImage());
+//            new DownloadImage(holder.avatarImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,Urls.getBaseURL()+"/"+agencyModel.getUserImage());
+            Glide.with(activity).load(Urls.getBaseURL()+"/"+agencyModel.getUserImage()).into(holder.avatarImg);
         }
         if(agencyModel.getLogo() != "null") {
-            new DownloadImage(holder.thumbnailImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Urls.getBaseURL() + "/" + agencyModel.getLogo());
+//            new DownloadImage(holder.thumbnailImg).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Urls.getBaseURL() + "/" + agencyModel.getLogo());
+            Glide.with(activity).load(Urls.getBaseURL() + "/" + agencyModel.getLogo()).into(holder.thumbnailImg);
         }
         holder.phoneTxt.setOnClickListener(new View.OnClickListener() {
             @Override
