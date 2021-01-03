@@ -61,6 +61,13 @@ public class HomeFragment extends Fragment {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -68,72 +75,72 @@ public class HomeFragment extends Fragment {
         final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
         dbHelper = new MYSQlDBHelper(getContext());
 //        TotalLandRequest(getContext());
-        salebtn = (Button)root.findViewById(R.id.HomeFragmentSaleButton);
-        rentbtn=(Button)root.findViewById(R.id.HomeFragmentRentButton);
-        assignmentbtn=(Button)root.findViewById(R.id.HomeFragmentAssignmentButton);
-        resalebtn=(Button)root.findViewById(R.id.HomeFragmentResaleButton);
+//        salebtn = (Button)root.findViewById(R.id.HomeFragmentSaleButton);
+//        rentbtn=(Button)root.findViewById(R.id.HomeFragmentRentButton);
+//        assignmentbtn=(Button)root.findViewById(R.id.HomeFragmentAssignmentButton);
+//        resalebtn=(Button)root.findViewById(R.id.HomeFragmentResaleButton);
 //        exchangebtn=(Button)root.findViewById(R.id.HomeFragmentExchangeButton);
-        agentbtn=(Button)root.findViewById(R.id.HomeFragmentAgentButton);
-        servicesbtn=(Button)root.findViewById(R.id.HomeFragmentServicesButton);
-        lawinstiutebtn=(Button)root.findViewById(R.id.HomeFragmentLawInstiuteButton);
-        inquirybtn=(Button)root.findViewById(R.id.HomeFragmentInquiryButton);
+//        agentbtn=(Button)root.findViewById(R.id.HomeFragmentAgentButton);
+//        servicesbtn=(Button)root.findViewById(R.id.HomeFragmentServicesButton);
+//        lawinstiutebtn=(Button)root.findViewById(R.id.HomeFragmentLawInstiuteButton);
+//        inquirybtn=(Button)root.findViewById(R.id.HomeFragmentInquiryButton);
         featuredTxt = (TextView)root.findViewById(R.id.HomeFragmentFeaturedTxt);
 //        morebtn=(Button)root.findViewById(R.id.HomeFragmentMoreButton);
 
-        salebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.navigate(R.id.saleFragment);
-            }
-        });
-        rentbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.navigate(R.id.rentFragment);
-            }
-        });
-        assignmentbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.navigate(R.id.assingmentFragment);
-            }
-        });
-        resalebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.navigate(R.id.presaleFragment);
-            }
-        });
+//        salebtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                controller.navigate(R.id.saleFragment);
+//            }
+//        });
+//        rentbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                controller.navigate(R.id.rentFragment);
+//            }
+//        });
+//        assignmentbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                controller.navigate(R.id.assingmentFragment);
+//            }
+//        });
+//        resalebtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                controller.navigate(R.id.presaleFragment);
+//            }
+//        });
 //        exchangebtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //                controller.navigate(R.id.exchangeFragment);
 //            }
 //        });
-        agentbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.navigate(R.id.agentFragment);
-            }
-        });
-        servicesbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.navigate(R.id.servicesFragment);
-            }
-        });
-        lawinstiutebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.navigate(R.id.tablayoutLawyersOfficesFragment);
-            }
-        });
-        inquirybtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.navigate(R.id.linksFragment);
-            }
-        });
+//        agentbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                controller.navigate(R.id.agentFragment);
+//            }
+//        });
+//        servicesbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                controller.navigate(R.id.servicesFragment);
+//            }
+//        });
+//        lawinstiutebtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                controller.navigate(R.id.tablayoutLawyersOfficesFragment);
+//            }
+//        });
+//        inquirybtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                controller.navigate(R.id.linksFragment);
+//            }
+//        });
 //        morebtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

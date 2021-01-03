@@ -3,11 +3,13 @@
     <string name="title_home">خانه</string>
     <string name="title_dashboard">ثبت ملک جدید</string>
     <string name="new_land_sale">فروش</string>
+    <string name="category_sale">خرید و فروش</string>
+    <string name="category_company">خدمات ساختمانی</string>
     <string name="new_land_rent">اجاره</string>
     <string name="new_land_participation">مشارکت</string>
     <string name="new_land_pre_sale">پیش فروش</string>
     <string name="new_land_company">ثبت شرکت</string>
-    <string name="new_land_lawyer">ثبت وکیل</string>
+    <string name="new_land_lawyer">وکلای حقوقی</string>
 
     <string name="title_aboutus">صفحه شخصی</string>
     <string name="title_personalpage">صفحه شخصی</string>
@@ -21,7 +23,7 @@
     <string name="title_register_agency_user">ثبت نام مشاور املاک</string>
     <string name="title_chat">چت</string>
     <string name="all_featured">تمام آگهی های ویژه</string>
-    <string name="title_office_lawyers">موسسات حقوقی</string>
+    <string name="title_office_lawyers">وکلای حقوقی</string>
 
     <string name="my_hamedan_melk_register_company_summary">ثبت شرکت و معرفی خدمات</string>
     <string name="my_hamedan_melk_register_company">ثبت شرکت</string>
@@ -83,8 +85,8 @@
     <string name="assingment_category">مشارکت</string>
     <string name="presale_category">پیش فروش</string>
     <string name="agent_category">مشاورین املاک</string>
-    <string name="services_category">خدمات ساختمانی</string>
-    <string name="law_instiute_category">موسسه حقوقی</string>
+    <string name="services_category">سرویس و خدمات</string>
+    <string name="law_instiute_category">وکلای حقوقی</string>
     <string name="inquiry_category">سرویس و خدمات</string>
     <string name="more_category">سرویس و خدمات</string>
     <string name="exchange_category">قابل معاوضه</string>
@@ -100,7 +102,6 @@
     <string name="title_input_error_msg">لطفا عنوان را وارد کنید</string>
     <string name="address_input_error_msg">لطفا آدرس را وارد کنید</string>
     <string name="manager_input_error_msg">لطفا نام مدیر را وارد کنید</string>
-
 
 
     <string name="success_office_msg">اطلاعات دفتر اسناد رسمی ثبت شد و در انتظار تایید است</string>
@@ -289,7 +290,7 @@
     </array>
 
 
-<!--    Gallery Picker-->
+    <!--    Gallery Picker-->
     <string name="album_view">انتخاب آلبوم</string>
     <string name="image_view">برای انتخاب عکس ضربه بزنید</string>
 
@@ -305,7 +306,6 @@
     <string name="permission_ok">انتخاب</string>
     <string name="permission_settings">تنضیمات</string>
     <string name="permission_package">بسته</string>
-
 
 
 </resources>

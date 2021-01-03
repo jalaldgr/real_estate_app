@@ -109,7 +109,7 @@
     <fragment
         android:id="@+id/servicesFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.company.ServicesFragment"
-        android:label="@string/services_category"
+        android:label="@string/category_company"
         tools:layout="@layout/fragment_services" />
     <fragment
         android:id="@+id/linksFragment"
@@ -155,7 +155,7 @@
         android:id="@+id/companyFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.company.CompanyFragment"
         android:label="@string/title_companies"
-        tools:layout="@layout/fragment_company" />
+        tools:layout="@layout/fragment_services" />
     <fragment
         android:id="@+id/userFavoritesFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.UserFavoritesFragment"
@@ -208,7 +208,7 @@
     <fragment
         android:id="@+id/officesFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.office.OfficesFragment"
-        android:label="OfficesFragment" />
+        android:label="@string/vocabulary_submit_office" />
     <fragment
         android:id="@+id/newLawyerFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.lawyer.NewLawyerFragment"
@@ -218,5 +218,10 @@
         android:id="@+id/newsFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.category.NewsFragment"
         android:label="@string/news_category" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.home.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" />
 
 </navigation>
