@@ -176,12 +176,11 @@ public class NewOfficeFragment extends Fragment {
         provinceAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, provinceTitles);
         provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         provinceSpnr.setAdapter(provinceAdapter);
-        provinceSpnr.setSelection(provinceAdapter.getCount()-1);
         provinceSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 cityModels = dbHelper.GetCitiesByProvinceID(provinceIDs.get(i));
-
+                cityIDs.clear();cityTitles.clear();
                 for(CityModel item : cityModels){
                     cityTitles.add(item.getTitle());
                     cityIDs.add(item.getId());
@@ -199,7 +198,7 @@ public class NewOfficeFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 cityStr = cityIDs.get(i);
                 areaModels = dbHelper.GetAreasByCityID(cityIDs.get(i));
-
+                areaIDs.clear();areaTitles.clear();
                 for(AreaModel item : areaModels){
                     areaTitles.add(item.getTitle());
                     areaIDs.add(item.getId());
@@ -216,7 +215,7 @@ public class NewOfficeFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 areaStr = areaIDs.get(i);
-
+                districtTitles.clear();districtIDs.clear();
                 districtModels = dbHelper.GetDistrictsByAreaID(areaIDs.get(i));
                 for(DistrictModel item : districtModels){
                     districtTitles.add(item.getTitle());
