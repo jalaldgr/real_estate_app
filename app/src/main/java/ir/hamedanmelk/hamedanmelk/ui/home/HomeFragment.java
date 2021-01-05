@@ -9,16 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,7 +34,6 @@ import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
-import ir.hamedanmelk.hamedanmelk.tools.ViewPagerAdapter;
 import ir.hamedanmelk.hamedanmelk.models.LandModel;
 
 public class HomeFragment extends Fragment {
@@ -45,28 +44,8 @@ public class HomeFragment extends Fragment {
     ArrayList<LandModel> landModels;
     ArrayList<LandModel> featuredLandModels;
     MYSQlDBHelper dbHelper;
-    Button salebtn;
-    Button rentbtn;
-    Button assignmentbtn;
-    Button resalebtn;
-    Button agentbtn;
-    Button servicesbtn;
-    Button lawinstiutebtn;
-    Button inquirybtn;
     TextView featuredTxt;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-
-    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -74,79 +53,8 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
         dbHelper = new MYSQlDBHelper(getContext());
-//        TotalLandRequest(getContext());
-//        salebtn = (Button)root.findViewById(R.id.HomeFragmentSaleButton);
-//        rentbtn=(Button)root.findViewById(R.id.HomeFragmentRentButton);
-//        assignmentbtn=(Button)root.findViewById(R.id.HomeFragmentAssignmentButton);
-//        resalebtn=(Button)root.findViewById(R.id.HomeFragmentResaleButton);
-//        exchangebtn=(Button)root.findViewById(R.id.HomeFragmentExchangeButton);
-//        agentbtn=(Button)root.findViewById(R.id.HomeFragmentAgentButton);
-//        servicesbtn=(Button)root.findViewById(R.id.HomeFragmentServicesButton);
-//        lawinstiutebtn=(Button)root.findViewById(R.id.HomeFragmentLawInstiuteButton);
-//        inquirybtn=(Button)root.findViewById(R.id.HomeFragmentInquiryButton);
         featuredTxt = (TextView)root.findViewById(R.id.HomeFragmentFeaturedTxt);
-//        morebtn=(Button)root.findViewById(R.id.HomeFragmentMoreButton);
 
-//        salebtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                controller.navigate(R.id.saleFragment);
-//            }
-//        });
-//        rentbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                controller.navigate(R.id.rentFragment);
-//            }
-//        });
-//        assignmentbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                controller.navigate(R.id.assingmentFragment);
-//            }
-//        });
-//        resalebtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                controller.navigate(R.id.presaleFragment);
-//            }
-//        });
-//        exchangebtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                controller.navigate(R.id.exchangeFragment);
-//            }
-//        });
-//        agentbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                controller.navigate(R.id.agentFragment);
-//            }
-//        });
-//        servicesbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                controller.navigate(R.id.servicesFragment);
-//            }
-//        });
-//        lawinstiutebtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                controller.navigate(R.id.tablayoutLawyersOfficesFragment);
-//            }
-//        });
-//        inquirybtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                controller.navigate(R.id.linksFragment);
-//            }
-//        });
-//        morebtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                controller.navigate(R.id.moreFragment);
-//            }
-//        });
         featuredTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,20 +70,12 @@ public class HomeFragment extends Fragment {
         RecyclerView.LayoutManager VRLaymngr = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL,false);
         HorizantalrecyclerView.setLayoutManager(laymngr);
         VerticalrecyclerView.setLayoutManager(VRLaymngr);
-
         landModels = dbHelper.GetAllLands();
         featuredLandModels = dbHelper.GetAllFeatured20Lands();
         Log.d(TAG, "onCreateView: "+landModels.size());
         HorizantalrecyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
         VerticalrecyclerView.setAdapter(new HomeVerticalRecyclerViewAdapter(featuredLandModels,getActivity()));
         HorizantalrecyclerView.setNestedScrollingEnabled(false);
-
-//
-//        ViewPager viewPager;
-////        viewPager = (ViewPager) root.findViewById(R.id.viewpager);
-//        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getContext());
-//        viewPager.setAdapter(viewPagerAdapter);
-
         return root;
     }
 
