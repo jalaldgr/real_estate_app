@@ -801,10 +801,7 @@ public class NewLandModel {
             muParts[i] = MultipartBody.Part.createFormData("Phone", Phone);
             i++;
         }
-        if( Equipment !=null ){
-            muParts[i] = MultipartBody.Part.createFormData("Equipment",String.valueOf(Equipment));
-            i++;
-        }
+
         if( Equipment !=null ){
             for (int ii=0; ii<Equipment.size();ii++){
                 muParts[i] = MultipartBody.Part.createFormData("Equipment["+ii+"]", Equipment.get(ii));

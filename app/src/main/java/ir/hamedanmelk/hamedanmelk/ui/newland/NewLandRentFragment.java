@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -89,28 +90,31 @@ import ir.hamedanmelk.hamedanmelk.models.micro.ProvinceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.RentalPreferenceModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.UseTypeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.VoucherModel;
+import ir.hamedanmelk.hamedanmelk.models.myResponse;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView;
 import ir.hamedanmelk.hamedanmelk.tools.FilePath;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
+import ir.hamedanmelk.hamedanmelk.tools.RetrofitInterface;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import saman.zamani.persiandate.PersianDate;
 
-public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback, DatePickerDialog.OnDateSetListener{
-    private RequestQueue myRequestQueue;
-    private JsonObjectRequest myJsonObjectRequest;
+public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback{
 
     public static final int PICK_IMAGES = 5;
     private static final String TAG = "NewLandRentFragment";
-    public String selectedImage="one";
     public List<String> selectedImages = new ArrayList<>();
     public List<String> selectedUseTypes = new ArrayList<>();
     public List<String> selectedEquipments = new ArrayList<>();
 
     NewLandModel requestNewModel= new NewLandModel();
 
-    String   selectedFileStr;
-    Uri      selectedFileUri;
     String   UID;
     EditText titleEtx;
     Spinner  buildingConditionSpnr;
@@ -118,7 +122,6 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
     Spinner landTypeSpnr;
     MultiSelectSpinner landUseTypeSpnr;
     Spinner voucherTypeSpnr;
-    EditText dongETxt;
     EditText buildingYearETxt;
     EditText spaceFoundationETxt;
     EditText mortgagePriceETxt;
@@ -138,7 +141,7 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
     Spinner landViewSpnr;
     MultiSelectSpinner  equipmentSpnr;
     Spinner floorCoveringSpnr;
-//    Spinner kitchenServicesSpnr;
+    Spinner kitchenServicesSpnr;
     Spinner directionSpnr;
     Spinner landStateSpnr;///////// Land State=> ads type
     Spinner rentalSpnr;
@@ -147,7 +150,6 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
     Spinner electricitySpnr;
     Spinner phoneSpnr;
     EditText descriptionETxt;
-    EditText deliveryDate;
     EditText voucherDate;
     MapView landMapView;
     ExpandableHeightGridView selectedImagesExpandableGrid;
@@ -157,6 +159,7 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
     PersianDate persianDate;
     PersianCalendar persianCalendar = new PersianCalendar();
     Button addPhotoBtn;
+    Button addMapBtn;
     Button   submitBtn;
 
     GoogleMap mgoogleMap;
@@ -231,11 +234,6 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
     List<String> landDirectionTypeIDs= new ArrayList<String>();
     ArrayAdapter<String> landDirectionAdapter ;
 
-    ArrayList<LandStateTypeModel> landStateTypeModels;
-    List<String> landStateTitles= new ArrayList<String>();
-    List<String> landStateIDs= new ArrayList<String>();
-    ArrayAdapter<String> landStateAdapter ;
-
     ArrayList<UseTypeModel> useTypeModels;
     List<String> useTypeTitles= new ArrayList<String>();
     List<String> useTypeIDs= new ArrayList<String>();
@@ -251,7 +249,7 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
     List<String> voucherIDs= new ArrayList<String>();
     ArrayAdapter<String> voucherAdapter ;
 
-
+    List<String> imagesStr = new ArrayList<>();
     MYSQlDBHelper dbHelper;
 
     public NewLandRentFragment() {
@@ -265,10 +263,16 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
         }
         dbHelper = new MYSQlDBHelper(getContext());
         SharedPreferences user_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), Context.MODE_PRIVATE);
+        SharedPreferences new_land_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.new_land_pref), Context.MODE_PRIVATE);
+        String lng = new_land_pref.getString(Constants.NEW_LAND_LONGITUDE,"34.798315");
+        String lat = new_land_pref.getString(Constants.NEW_LAND_LATITIUDE,"48.594898");
+        mapLatLng =new LatLng( Double.parseDouble(lat),Double.parseDouble(lng));
         UID =  user_pref.getString("id","0");
         requestNewModel.setLatitude(Double.toString(mapLatLng.latitude));
         requestNewModel.setLongitude(Double.toString(mapLatLng.longitude));
-
+        List<String>defaultUseTypeID=new ArrayList<>();
+        defaultUseTypeID.add("1");
+        requestNewModel.setUseTypeID(defaultUseTypeID);
     }
 
 
@@ -288,7 +292,7 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
         rentalSpnr = (Spinner)view.findViewById(R.id.NewLandRentFragmentRentalPreferenceSpnr);
         spaceFoundationETxt = (EditText) view.findViewById(R.id.NewLandRentFragmentFoundationSpaceTxt);
         mortgagePriceETxt = (EditText) view.findViewById(R.id.NewLandRentFragmentMortgagePriceTxt);
-        totalRentPrice = (EditText)view.findViewById(R.id.NewLandRentFragmentMortgagePriceTxt);
+        totalRentPrice = (EditText)view.findViewById(R.id.NewLandRentFragmentRentPriceTxt);
         whichFloorSpnr = (Spinner) view.findViewById(R.id.NewLandRentFragmentWichFloorSpnr);
         roomCountSpnr = (Spinner) view.findViewById(R.id.NewLandRentFragmentRoomCountSpnr);
         floorCountSpnr = (Spinner) view.findViewById(R.id.NewLandRentFragmentFloorCountSpnr);
@@ -301,7 +305,7 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
         landViewSpnr = (Spinner) view.findViewById(R.id.NewLandRentFragmentLandViewSpnr);
         equipmentSpnr = (MultiSelectSpinner) view.findViewById(R.id.NewLandRentFragmentEquipmentsSpnr);
         floorCoveringSpnr = (Spinner) view.findViewById(R.id.NewLandRentFragmentFloorCoveringSpnr);
-//        kitchenServicesSpnr = (Spinner) view.findViewById(R.id.NewLandRentFragmentKitchenServicesSpnr);
+        kitchenServicesSpnr = (Spinner) view.findViewById(R.id.NewLandRentFragmentKitchenServicesSpnr);
         directionSpnr = (Spinner) view.findViewById(R.id.NewLandRentFragmentDirectionSpnr);
         waterSpnr = (Spinner) view.findViewById(R.id.NewLandRentFragmentWaterSpnr);
         gasSpnr = (Spinner) view.findViewById(R.id.NewLandRentFragmentGasSpnr);
@@ -313,8 +317,8 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
         persianDate = new PersianDate();
         datePicker = new DatePickerDialog();
         datePicker.setMinDate(persianCalendar);
-        requestNewModel = new NewLandModel();
         addPhotoBtn = (Button)view.findViewById(R.id.NewLandRentFragmentAddPhotoBtn);
+        addMapBtn = (Button)view.findViewById(R.id.NewLandRentFragmentAddMapBtn);
         selectedImagesExpandableGrid = (ExpandableHeightGridView)view.findViewById(R.id.NewLandRentFragmentGalleryExpandableGrid);
         ///////////////////////Read inputs/////////////////////////////
 
@@ -438,6 +442,15 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
         provinceSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ////////////////////// City Spinner////////////////////////////////
+                cityModels = dbHelper.GetCitiesByProvinceID(provinceIDs.get(i));
+                cityTitles.clear();cityIDs.clear();
+                for(CityModel item : cityModels){
+                    cityTitles.add(item.getTitle());
+                    cityIDs.add(item.getId());
+                }
+                cityAdapter = new ArrayAdapter<String>(Objects.requireNonNull(getContext()), android.R.layout.simple_spinner_item, cityTitles);
+                citySpnr.setAdapter(cityAdapter);
                 requestNewModel.setProvinceID( provinceIDs.get(i));
             }
             @Override
@@ -445,20 +458,20 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
             }
         });
 
-
-        ////////////////////// City Spinner////////////////////////////////
-        cityModels = dbHelper.GetCitiesList();
-        for (CityModel Item : cityModels) {
-            cityTitles.add(Item.getTitle());
-            cityIDs.add(Item.getId());
-        }
-        cityAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, cityTitles);
-        cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        citySpnr.setAdapter(cityAdapter);
         citySpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ////////////////////// Area Spinner////////////////////////////////
                 requestNewModel.setCityID( cityIDs.get(i));
+                areaModels = dbHelper.GetAreasByCityID(cityIDs.get(i));
+                areaTitles.clear();areaIDs.clear();
+                for(AreaModel item : areaModels){
+                    areaTitles.add(item.getTitle());
+                    areaIDs.add(item.getId());
+                }
+                areaAdapter = new ArrayAdapter<String>(Objects.requireNonNull(getContext()), android.R.layout.simple_spinner_item, areaTitles);
+                areaSpnr.setAdapter(areaAdapter);
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -466,19 +479,20 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
         });
 
 
-        ////////////////////// Area Spinner////////////////////////////////
-        areaModels = dbHelper.GetAreaList();
-        for (AreaModel Item : areaModels) {
-            areaTitles.add(Item.getTitle());
-            areaIDs.add(Item.getId());
-        }
-        areaAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, areaTitles);
-        areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        areaSpnr.setAdapter(areaAdapter);
         areaSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 requestNewModel.setAreaID( areaIDs.get(i));
+                ////////////////////// District Spinner////////////////////////////////
+                districtModels = dbHelper.GetDistrictsByAreaID(areaIDs.get(i));
+                districtIDs.clear();districtTitles.clear();
+                for (DistrictModel Item : districtModels) {
+                    districtTitles.add(Item.getTitle());
+                    districtIDs.add(Item.getId());
+                }
+                districtAdapter = new ArrayAdapter<String>(Objects.requireNonNull(getContext()), android.R.layout.simple_spinner_item, districtTitles);
+                districtAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                districtSpnr.setAdapter(districtAdapter);
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -486,14 +500,6 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
         });
 
         ////////////////////// District Spinner////////////////////////////////
-        districtModels = dbHelper.GetDistrictList();
-        for (DistrictModel Item : districtModels) {
-            districtTitles.add(Item.getTitle());
-            districtIDs.add(Item.getId());
-        }
-        districtAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, districtTitles);
-        districtAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        districtSpnr.setAdapter(districtAdapter);
         districtSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -505,7 +511,8 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
         });
 
 
-        ////////////////////// District Spinner////////////////////////////////
+
+        ////////////////////// Floor Covering Spinner////////////////////////////////
         floorCoveringModels = dbHelper.GetFloorCoveringList();
         for (FloorCoveringModel Item : floorCoveringModels) {
             floorCoveringTitles.add(Item.getTitle());
@@ -533,16 +540,16 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
         }
         kitchenServiceAdapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_spinner_item, kitchenServiceTitles);
         kitchenServiceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        kitchenServicesSpnr.setAdapter(kitchenServiceAdapter);
-//        kitchenServicesSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                requestNewModel.setKitchenServiceID( kitchenServiceIDs.get(i));
-//            }
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//            }
-//        });
+        kitchenServicesSpnr.setAdapter(kitchenServiceAdapter);
+        kitchenServicesSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                requestNewModel.setKitchenServiceID( kitchenServiceIDs.get(i));
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
 
         ////////////////////// Province Spinner////////////////////////////////
@@ -650,12 +657,43 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
                 else
                 {
                     Toast.makeText(getContext(),getResources().getString(R.string.max_images_selected),Toast.LENGTH_LONG).show();
-                }            }
+                }
+            }
+        });
+
+        addMapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                NavController controller = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+                Bundle args = new Bundle();
+                args.putDouble("Latitude",mapLatLng.latitude);
+                args.putDouble("Longitude",mapLatLng.longitude);
+                controller.navigate(R.id.selectMapFragment,args);
+            }
         });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (TextUtils.isEmpty(titleEtx.getText().toString())) {
+                    titleEtx.setError(getResources().getString(R.string.title_input_error_msg));
+                    titleEtx.requestFocus();
+                    return;
+                }
+
+//                if (TextUtils.isEmpty(dongETxt.getText().toString())) {
+//                    dongETxt.setError(getResources().getString(R.string.dong_input_error_msg));
+//                    dongETxt.requestFocus();
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(deliveryDate.getText().toString())) {
+//                    deliveryDate.setError(getResources().getString(R.string.date_input_error_msg));
+//                    deliveryDate.requestFocus();
+//                    return;
+//                }
+
                 requestNewModel.setTitle(titleEtx.getText().toString());
                 requestNewModel.setMortgageTotalPrice(mortgagePriceETxt.getText().toString());
                 requestNewModel.setDescription(descriptionETxt.getText().toString());
@@ -673,10 +711,23 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
                 requestNewModel.setPhone(Long.toString(phoneSpnr.getSelectedItemId()));
                 requestNewModel.setLandStateID("2");
                 requestNewModel.setUID(UID);
+                requestNewModel.setWater(Long.toString(waterSpnr.getSelectedItemId()));
+                requestNewModel.setGas(Long.toString(gasSpnr.getSelectedItemId()));
+                requestNewModel.setElectricy(Long.toString(electricitySpnr.getSelectedItemId()));
+                requestNewModel.setPhone(Long.toString(phoneSpnr.getSelectedItemId()));
+                SelectedImageRecyclerViewAdapter imageRecyclerViewAdapter = null;
+                imageRecyclerViewAdapter = (SelectedImageRecyclerViewAdapter) selectedImagesExpandableGrid.getAdapter();
+                if(imageRecyclerViewAdapter!=null){
+                    List<ImageModel> selectedImageModels = imageRecyclerViewAdapter.imageModels;
+                    for (int i = 0; i < selectedImageModels.size(); i++) {
+                        imagesStr.add(selectedImageModels.get(i).getImageStrPath());
+                    }
+                    requestNewModel.setImageFile(imagesStr);
+                }
 
                 //                requestNewModel.setImageFiles(eqStr);
                 try {
-                    HomeFragmentPOSTRequest(getContext());
+                    RetrofitPost();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -741,78 +792,66 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
         mgoogleMap.getUiSettings().setAllGesturesEnabled(false);
         mgoogleMap.getUiSettings().setZoomControlsEnabled(true);
         mgoogleMap.getUiSettings().setZoomGesturesEnabled(true);
-
-        mgoogleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
-            @Override
-            public void onCameraMove() {
-                mapLatLng = mgoogleMap.getCameraPosition().target;
-                requestNewModel.setLatitude(Double.toString(mapLatLng.latitude));
-                requestNewModel.setLongitude(Double.toString(mapLatLng.longitude));
-            }
-        });
-
-    }
-
-    private void HomeFragmentPOSTRequest(Context Cntx) throws JSONException {
-
-        Map<String, String> postParam= new HashMap<String, String>();
-        Gson gson = new Gson();
-        JSONObject obj=null;
-        try {
-            String json = new Gson().toJson(requestNewModel);
-            Log.d(TAG, "HomeFragmentPOSTRequest Gson>>>: "+json);
-             obj = new JSONObject(json);
-        }catch (Exception e){
-            Log.d(TAG, "HomeFragmentPOSTRequest: "+e.toString());
-        }
-
-        final ProgressDialog progressDialog=new ProgressDialog(Cntx);
-        progressDialog.setMessage(getResources().getString(R.string.loading_message));
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
-        myRequestQueue = Volley.newRequestQueue(Cntx);
-        myJsonObjectRequest = new JsonObjectRequest(Request.Method.POST
-                , Urls.getBaseURL()+Urls.getRegisterLand(), obj,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        progressDialog.dismiss();
-                        Log.d(TAG, "onResponse: "+response.toString());
-                        try {
-                            if(response.getString(Constants.JSON_RESPONSE_DATA).contains("Success")) {
-                                Toast.makeText(getContext(), "آگهی با موفقیت ثبت شد", Toast.LENGTH_LONG).show();
-                                final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
-                                controller.navigate(R.id.navigation_home);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(),
-                                "Response ERRRRRor :" + error.toString(), Toast.LENGTH_LONG).show();
-                        if (progressDialog.isShowing())
-                            progressDialog.dismiss();
-                    }
-
-                }){
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                return headers;
-            }
-        };
-
-        myRequestQueue.add(myJsonObjectRequest);
     }
 
     @Override
-    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        Log.d(TAG, "onDateSet: ");
+    public void onResume() {
+        super.onResume();
+        SharedPreferences new_land_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.new_land_pref), Context.MODE_PRIVATE);
+        String lng = new_land_pref.getString(Constants.NEW_LAND_LONGITUDE,"34.798315");
+        String lat = new_land_pref.getString(Constants.NEW_LAND_LATITIUDE,"48.594898");
+        mapLatLng =new LatLng( Double.parseDouble(lat),Double.parseDouble(lng));
+        requestNewModel.setLatitude(lat);
+        requestNewModel.setLongitude(lng);
+        loadMap();
+
+    }
+
+
+    private void RetrofitPost() throws JSONException {
+        final String THISTAG = "NewPrtcption RetroPost";
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setMessage(getResources().getString(R.string.loading_message));
+        progressDialog.show();
+
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                Log.d(THISTAG, "log log: " + message);
+            }
+        });
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(logging);
+
+        final Retrofit myRetrofit = new Retrofit.Builder().baseUrl("https://hamedanmelk.ir")
+                .addConverterFactory(GsonConverterFactory.create()).client(httpClient.build()).build();
+
+        RetrofitInterface RI = myRetrofit.create(RetrofitInterface.class);
+        Call<myResponse> uploadResponse = RI.UploadNewLand(  requestNewModel.getmultipartBodyPart(),requestNewModel.getImagesHashMap());
+        uploadResponse.enqueue(new Callback<myResponse>() {
+
+            @Override
+            public void onResponse(Call<myResponse> call, retrofit2.Response<myResponse> response) {
+                if (progressDialog.isShowing())progressDialog.dismiss();
+                if(response.body().getData().contains("Success")){
+                    Toast.makeText(getContext(),getResources().getString(R.string.success_new_land),Toast.LENGTH_LONG).show();
+                    NavController controller = Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
+                    controller.navigate(R.id.navigation_home);
+                }
+                else {
+                    Toast.makeText(getContext(),getResources().getString(R.string.fail_msg),Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<myResponse> call, Throwable t) {
+                if (progressDialog.isShowing())progressDialog.dismiss();
+                Toast.makeText(getContext(),getResources().getString(R.string.fail_msg),Toast.LENGTH_LONG).show();
+            }
+        });
+
+
     }
 }

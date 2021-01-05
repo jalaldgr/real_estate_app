@@ -583,8 +583,11 @@
         </ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView>
         <Button
             android:id="@+id/NewLandParticipationFragmentSubmitBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/new_land_submit" />
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:text="@string/new_land_submit"
+            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
