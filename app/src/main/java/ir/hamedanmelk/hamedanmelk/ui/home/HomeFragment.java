@@ -1,19 +1,33 @@
 package ir.hamedanmelk.hamedanmelk.ui.home;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
+import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -26,8 +40,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.models.micro.AreaModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.CityModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.DistrictModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.LandStateTypeModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.HomeRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.recyclers.HomeVerticalRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
@@ -35,6 +54,7 @@ import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 import ir.hamedanmelk.hamedanmelk.models.LandModel;
+import ir.hamedanmelk.hamedanmelk.ui.MainActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -45,7 +65,40 @@ public class HomeFragment extends Fragment {
     ArrayList<LandModel> featuredLandModels;
     MYSQlDBHelper dbHelper;
     TextView featuredTxt;
+    CardView cardView;
+     Spinner cityFilterSpnr;
+     Spinner districtFilterSpnr;
+     Spinner landStateFilterSpnr;
+     Button submitFilterBtn;
+     Button clearFilterBtn;
 
+
+
+    ArrayList<CityModel> cityModels;
+    List<String> cityTitles= new ArrayList<String>();
+    List<String> cityIDs= new ArrayList<String>();
+    ArrayAdapter<String> cityAdapter ;
+
+    ArrayList<DistrictModel> districtModels = new ArrayList<>();
+    List<String> districtTitles= new ArrayList<String>();
+    List<String> districtIDs= new ArrayList<String>();
+    ArrayAdapter<String> districtAdapter ;
+
+    ArrayList<LandStateTypeModel> landStateTypeModels;
+    List<String> landStateTypeTitles= new ArrayList<String>();
+    List<String> landStateTypeIds= new ArrayList<String>();
+    ArrayAdapter<String> landStateAdapter ;
+
+    ArrayList<AreaModel>areaModels;
+
+    String searchCityStr="15";
+    String searchDistrictStr;
+    String searchLandStateStr;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -54,17 +107,24 @@ public class HomeFragment extends Fragment {
         final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
         dbHelper = new MYSQlDBHelper(getContext());
         featuredTxt = (TextView)root.findViewById(R.id.HomeFragmentFeaturedTxt);
+        WebView  bannerWebView=(WebView)root.findViewById(R.id.HomeFragmentWebView);
+        cityFilterSpnr = (Spinner)root.findViewById(R.id.ActionbarSearchFilterCitySpnr) ;
+        districtFilterSpnr =(Spinner)root.findViewById(R.id.ActionbarSearchFilterDistrictSpnr);
+        landStateFilterSpnr = (Spinner)root.findViewById(R.id.ActionbarSearchFilterLandStateSpnr);
+        submitFilterBtn = (Button)root.findViewById(R.id.ActionbarSearchFilterSubmitBtn);
+        clearFilterBtn = (Button)root.findViewById(R.id.ActionbarSearchFilterClearBtn);
 
-        featuredTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.navigate(R.id.featuredLandFragment);
+        bannerWebView.getSettings().setLoadWithOverviewMode(true);
+        bannerWebView.getSettings().setUseWideViewPort(true);
 
-            }
-        });
+        bannerWebView.loadUrl("file:///android_asset/webview/banner.html");
+
+
+
 
         HorizantalrecyclerView = (RecyclerView) root.findViewById(R.id.HomeFrgmntHrzntlRcyclVw);
         VerticalrecyclerView  = (RecyclerView) root.findViewById(R.id.HomeFrgmntVerticalRcyclVw);
+        cardView = (CardView)root.findViewById(R.id.HomeFragmentWebCardView);
         RecyclerView.LayoutManager laymngr =  new LinearLayoutManager(this.getContext());
         HorizantalrecyclerView.setLayoutManager(laymngr);
         RecyclerView.LayoutManager VRLaymngr = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL,false);
@@ -76,11 +136,117 @@ public class HomeFragment extends Fragment {
         HorizantalrecyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
         VerticalrecyclerView.setAdapter(new HomeVerticalRecyclerViewAdapter(featuredLandModels,getActivity()));
         HorizantalrecyclerView.setNestedScrollingEnabled(false);
+        featuredTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controller.navigate(R.id.featuredLandFragment);
+
+            }
+        });
+
+        cityModels = dbHelper.GetCitiesByProvinceID("2");
+        cityTitles.clear();cityIDs.clear();
+        for(CityModel item : cityModels){
+            cityTitles.add(item.getTitle());
+            cityIDs.add(item.getId());
+        }
+        cityAdapter = new ArrayAdapter<String>(Objects.requireNonNull(getContext()), android.R.layout.simple_spinner_item, cityTitles);
+        cityFilterSpnr.setAdapter(cityAdapter);
+        cityFilterSpnr.setSelection(8);
+        cityFilterSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                searchCityStr = cityIDs.get(i);
+
+//////////////////////////set district adapter //////////////////////////////////////
+                areaModels = dbHelper.GetAreasByCityID(searchCityStr);
+                ArrayList<DistrictModel> tempDistrictModels;
+
+                districtIDs.clear();districtTitles.clear();districtModels.clear();
+                for (AreaModel item:areaModels){
+                    tempDistrictModels =( dbHelper.GetDistrictsByAreaID(item.getId()));
+                    for (DistrictModel  itemByArea : tempDistrictModels){
+                        districtModels.add(itemByArea);
+                    }
+
+                }
+                for (DistrictModel Item : districtModels) {
+                    districtTitles.add(Item.getTitle());
+                    districtIDs.add(Item.getId());
+                }
+                districtAdapter = new ArrayAdapter<String>(Objects.requireNonNull(getContext()), android.R.layout.simple_spinner_item, districtTitles);
+                districtAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                districtFilterSpnr.setAdapter(districtAdapter);
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        ////////////////////// District Spinner////////////////////////////////
+        districtFilterSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                searchDistrictStr = districtIDs.get(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        landStateTypeModels = dbHelper.GetLandStateList();
+        for (LandStateTypeModel Item : landStateTypeModels) {
+            landStateTypeTitles.add(Item.getTitle());
+            landStateTypeIds.add(Item.getId());
+        }
+        landStateAdapter = new ArrayAdapter<String>(Objects.requireNonNull(getContext()), android.R.layout.simple_spinner_item, landStateTypeTitles);
+        landStateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        landStateFilterSpnr.setAdapter(landStateAdapter);
+        landStateFilterSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                searchLandStateStr = landStateTypeIds.get(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        submitFilterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SearchFilterRequest(getContext());
+
+            }
+        });
+
+        clearFilterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                landModels.clear();
+                featuredLandModels.clear();
+                landModels = dbHelper.GetAllLands();
+                featuredLandModels = dbHelper.GetAllFeatured20Lands();
+                HorizantalrecyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
+                VerticalrecyclerView.setAdapter(new HomeVerticalRecyclerViewAdapter(featuredLandModels,getActivity()));
+
+            }
+        });
+
         return root;
     }
 
-    public void TotalLandRequest(final Context context){
-        class TotalLandRequestAsync extends AsyncTask<Void ,Void, String> {
+
+
+    public void SearchFilterRequest(final Context context){
+        class SearchFilterRequestAsync extends AsyncTask<Void ,Void, String> {
             private final ProgressDialog progressDialog=new ProgressDialog(context);
             @Override
             protected void onPreExecute() {
@@ -88,22 +254,27 @@ public class HomeFragment extends Fragment {
                 progressDialog.setMessage(getResources().getString(R.string.loading_message));
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
+                featuredLandModels.clear();
+                landModels.clear();
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 if (progressDialog.isShowing())progressDialog.dismiss();
+                Log.d(TAG, "onPostExecute: "+s);
                 try {
                     JSONObject reader = new JSONObject(s);
-                    JSONObject ResponseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
-                    JSONArray LandList = new JSONArray(ResponseData.getString("data"));
+                    JSONArray LandList = new JSONArray(reader.getString(Constants.JSON_RESPONSE_DATA));
                     JSONObject LandItem;
                     JSONArray imagesArray;
+                    if (LandList.length()==0){
+                        Toast.makeText(getContext(),getResources().getString(R.string.search_filter_no_item),Toast.LENGTH_LONG).show();
+                    }
                     if (reader.getInt(Constants.JSON_RESPONSE_STATE)==1)
                     {
-                        ArrayList<LandModel> landtemp=new ArrayList<LandModel>();
-                        ArrayList<LandModel> featuredlandtemp=new ArrayList<LandModel>();
+                        ArrayList<LandModel> landTemp=new ArrayList<LandModel>();
+                        ArrayList<LandModel> featuredLandTemp=new ArrayList<LandModel>();
 
                         for(int i=0; i < LandList.length();i++)
                         {
@@ -111,42 +282,47 @@ public class HomeFragment extends Fragment {
                             imagesArray =new JSONArray( LandItem.getString(Constants.SALE_MODEL_IMAGES));
                             LandModel landModel = new LandModel(
                                     LandItem.getString(Constants.LAND_MODEL_ID),
-                                    LandItem.getString(Constants.LAND_MODEL_TOTAL_PRICE),
-                                    LandItem.getString(Constants.LAND_MODEL_TOTAL_MORTGAGE_PRICE),
-                                    LandItem.getString(Constants.LAND_MODEL_TOTAL_RENT_PRICE),
+                                        "",
+                                    "",
+                                    "",
                                     LandItem.getString(Constants.LAND_MODEL_TITLE),
-                                    LandItem.getString(Constants.LAND_MODEL_LAND_STATE_ID),
+                                    "",
                                     LandItem.getString(Constants.LAND_MODEL_CREATED_AT),
                                     LandItem.getString(Constants.LAND_MODEL_LAND_SITUATION_ID),
-                                    LandItem.getString(Constants.LAND_MODEL_VIEW),
+                                    "",
                                     imagesArray.get(0).toString(),
                                     LandItem.getString(Constants.LAND_MODEL_LANDSTATETITLE),
                                     LandItem.getString(Constants.USER_LAND_MODEL_DISTRICT_ID),
-                                    LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONTITLE),
-                                    LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONCOLOR),
+                                    "",
+                                        "",
                                     LandItem.getString(Constants.LAND_MODEL_FIRST_NAME),
                                     LandItem.getString(Constants.LAND_MODEL_LAST_NAME),
                                     LandItem.getString(Constants.LAND_MODEL_LAND_CASE_ID)
-
-
                             );
 
-                            landtemp.add(landModel);
+//                            LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONTITLE),
+//                            LandItem.getString(Constants.LAND_MODEL_VIEW),
+//                            LandItem.getString(Constants.LAND_MODEL_LAND_STATE_ID),
+//                            LandItem.getString(Constants.LAND_MODEL_TOTAL_PRICE),
+//                                    LandItem.getString(Constants.LAND_MODEL_TOTAL_MORTGAGE_PRICE),
+//                                    LandItem.getString(Constants.LAND_INFO_RENT_TOTAL_PRICE),
 
-                            if(Integer.parseInt(landModel.getLand_case_id())>1 && i<20   ){
-                                featuredlandtemp.add(landModel);
+                            landTemp.add(landModel);
+                            if(Integer.parseInt(landModel.getLand_case_id())>1){
+                                featuredLandTemp.add(landModel);
                             };
                         }
-                        landModels=landtemp;
-                        featuredLandModels = featuredlandtemp;
-//                        Log.d(TAG, "onPostExecute rentModels: "+landModels.toString());
-                        HorizantalrecyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
+                        landModels=landTemp;
+                        featuredLandModels=featuredLandTemp;
                         VerticalrecyclerView.setAdapter(new HomeVerticalRecyclerViewAdapter(featuredLandModels,getActivity()));
+                        HorizantalrecyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
 
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.d(TAG, "onPostExecute exception: "+e.toString());
+                    Toast.makeText(getContext(),getResources().getString(R.string.search_filter_no_item),Toast.LENGTH_LONG).show();
+
                 }
 
             }
@@ -156,11 +332,16 @@ public class HomeFragment extends Fragment {
                 HTTPRequestHandlre httpRequestHandlre = new HTTPRequestHandlre();
                 HashMap<String,String> params = new HashMap<>();
                 params.put(Constants.CONTENT_TYPE,Constants.APPLICATION_JSON);
-                return httpRequestHandlre.sendGetRequest(Urls.getBaseURL()+Urls.getTotalLands(),params);
+                params.put("CityID_way2",searchCityStr);
+                params.put("DistrictID_way2",searchDistrictStr);
+                params.put("LandStateID",searchLandStateStr);
+                Log.d(TAG, "doInBackground: "+params.toString());
+                return httpRequestHandlre.sendPostRequest(Urls.getBaseURL()+Urls.getSearchInAds(),params);
             }
         }
-        TotalLandRequestAsync totalRentRequestAsync = new TotalLandRequestAsync();
-        totalRentRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
+        SearchFilterRequestAsync searchFilterRequestAsync = new SearchFilterRequestAsync();
+        searchFilterRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
+
 
 }

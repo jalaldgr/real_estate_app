@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:backgroundTint="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="0dp"
+        android:background="#F2F2F2"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/ActionbarSearchFilterCitySpnr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/icons_color"
+            android:prompt="@android:string/no" />
+
+        <Spinner
+            android:id="@+id/ActionbarSearchFilterDistrictSpnr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/icons_color" />
+
+        <Spinner
+            android:id="@+id/ActionbarSearchFilterLandStateSpnr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/icons_color" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#F2F2F2"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/ActionbarSearchFilterSubmitBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:text="@string/search_filter_submit"
+            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+
+        <Button
+            android:id="@+id/ActionbarSearchFilterClearBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_baseline_clear_24"
+            android:text="@string/search_filter_clear"
+            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+    </LinearLayout>
+
+</LinearLayout>

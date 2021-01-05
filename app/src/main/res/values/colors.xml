@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#e03030</color>
+    <color name="colorPrimary">#ad0000</color>
     <color name="colorPrimaryDark">#757575</color>
     <color name="colorBorderAboutApp">#C51162</color>
 
@@ -17,7 +17,7 @@
     <color name="textview_lable">#CC505050</color>
     <color name="primary_black_text_color">#ED000000</color>
     <color name="edit_text_bottom_line">#3D000000</color>
-    <color name="icons_color">#e03030</color>
+    <color name="icons_color">#ad0000</color>
     <color name="icons_disable_color">#66000000</color>
 
     <color name="mdtp_accent_color">#e03030</color>

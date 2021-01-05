@@ -90,10 +90,12 @@ public class MainActivity extends AppCompatActivity {
                     ActionBar actionBar = getSupportActionBar();
                     actionBar.setDisplayHomeAsUpEnabled(false);
                     actionBar.setDisplayShowTitleEnabled(false);
+                    actionBar.hide();
                 } else {
                     ActionBar actionBar = getSupportActionBar();
                     actionBar.setDisplayHomeAsUpEnabled(true);
                     actionBar.setDisplayShowTitleEnabled(true);
+                    actionBar.show();
                 }
             }
         });

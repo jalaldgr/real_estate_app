@@ -42,7 +42,9 @@
     <string name="no_internet_error_description">لطفا اتصال اینترنت را چک نموده و دوباره امتحان کنید</string>
     <string name="no_internet_error_retry">امتحان دوباره</string>
     <string name="app_bar_search_title">جست و جو</string>
+    <string name="search_filter_clear">پاک کن</string>
     <string name="app_bar_cities_list">همدان</string>
+    <string name="search_filter_no_item">آگهی با مشخصات مورد نظر یافت نشد</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
@@ -106,6 +108,7 @@
     <string name="date_hint">انتخاب تاریخ</string>
     <string name="spinner_error_msg">انتخاب این فیلد الزامی است</string>
     <string name="address_input_error_msg">لطفا آدرس را وارد کنید</string>
+
     <string name="manager_input_error_msg">لطفا نام مدیر را وارد کنید</string>
     <string name="select_map">انتخاب محدوده</string>
     <string name="select_here">انتخاب این نقطه</string>
@@ -118,6 +121,7 @@
     <string name="search_filter_city">انتخاب شهر</string>
     <string name="search_filter_district">انتخاب محله</string>
     <string name="search_filter_land_state">انتخاب نوع درخواست</string>
+    <string name="search_filter_submit">جست و جو کن</string>
     <string name="firstname_input_error_msg">لطفا نام را وارد نمایید</string>
     <string name="lastname_input_error_msg">لطفا نام خانوادگی را وارد نمایید</string>
     <string name="gendertype_input_error_msg">لطفا جنسیت را انتخاب نمایید</string>
