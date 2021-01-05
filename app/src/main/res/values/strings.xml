@@ -100,16 +100,24 @@
     <string name="username_input_error_msg">لطفا نام کاربری را وارد نمایید</string>
     <string name="password_input_error_msg">لطفا گذرواژه خود را وارد نمایید</string>
     <string name="title_input_error_msg">لطفا عنوان را وارد کنید</string>
+    <string name="dong_input_error_msg">لطفا دانگ را وارد کنید</string>
+    <string name="price_input_error_msg">لطفا قیمت را انتخاب کنید</string>
+    <string name="date_input_error_msg">لطفا تاریخ را انتخاب کنید</string>
+    <string name="date_hint">انتخاب تاریخ</string>
+    <string name="spinner_error_msg">انتخاب این فیلد الزامی است</string>
     <string name="address_input_error_msg">لطفا آدرس را وارد کنید</string>
     <string name="manager_input_error_msg">لطفا نام مدیر را وارد کنید</string>
-
-
+    <string name="select_map">انتخاب محدوده</string>
+    <string name="select_here">انتخاب این نقطه</string>
     <string name="success_office_msg">اطلاعات دفتر اسناد رسمی ثبت شد و در انتظار تایید است</string>
     <string name="success_company_msg">اطلاعات شرکت ثبت شد و در انتظار تایید است</string>
     <string name="success_lawyer_msg">اطلاعات وکیل ثبت شد و در انتظار تایید است</string>
+    <string name="success_new_land">اطلاعات آگهی ثبت شد و در انتظار تایید قرار گرفت</string>
     <string name="fail_msg">هنگام ارسال خطایی رخ داد</string>
 
-
+    <string name="search_filter_city">انتخاب شهر</string>
+    <string name="search_filter_district">انتخاب محله</string>
+    <string name="search_filter_land_state">انتخاب نوع درخواست</string>
     <string name="firstname_input_error_msg">لطفا نام را وارد نمایید</string>
     <string name="lastname_input_error_msg">لطفا نام خانوادگی را وارد نمایید</string>
     <string name="gendertype_input_error_msg">لطفا جنسیت را انتخاب نمایید</string>
@@ -161,6 +169,7 @@
     <string name="authentication_password">Password</string>
     <!--        User model in Shared Preference-->
     <string name="user_shared_preference">user_model_pref</string>
+    <string name="new_land_pref">new_land_shared_prefrence</string>
     <string name="vocabulary_title">عنوان</string>
     <string name="vocabulary_district">محله</string>
     <string name="vocabulary_total_price">قیمت</string>

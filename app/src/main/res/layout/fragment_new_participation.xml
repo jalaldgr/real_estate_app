@@ -545,6 +545,14 @@
                 android:id="@+id/mapView"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" />
+
+            <Button
+                android:id="@+id/NewLandParticipationFragmentAddMapBtn"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:text="@string/select_map"
+                android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
         </FrameLayout>
 
 

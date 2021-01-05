@@ -14,7 +14,7 @@ import retrofit2.http.PartMap;
 public interface RetrofitInterface {
     @Multipart
     @POST( "/AppRequests/RegisterLand")
-    Call<myResponse> UploadNewLand(@Part MultipartBody.Part[] Parts,@Part MultipartBody.Part images[]);
+    Call<myResponse> UploadNewLand(@Part MultipartBody.Part[] Parts,@Part MultipartBody.Part[] images);
 //   Call<myResponse> UploadNewLand(@Body NewLandModel newLandModel, @PartMap HashMap<String, File> Images);
 
     @Multipart

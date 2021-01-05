@@ -18,6 +18,8 @@ import java.util.Objects;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class NewLandFragment extends Fragment  {
     Button saleBtn;
     Button preSaleBtn;
@@ -36,6 +38,11 @@ public class NewLandFragment extends Fragment  {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
+        SharedPreferences.Editor editor = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.new_land_pref), MODE_PRIVATE).edit();
+        editor.putString(Constants.NEW_LAND_LATITIUDE,Double.toString(Constants.MAP_MEYDAN_LAT));
+        editor.putString(Constants.NEW_LAND_LONGITUDE,Double.toString(Constants.MAP_MEYDAN_LNG));
+        editor.apply();
+        editor.commit();
 
     }
 

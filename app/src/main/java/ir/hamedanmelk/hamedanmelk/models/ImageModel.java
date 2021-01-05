@@ -4,6 +4,8 @@ package ir.hamedanmelk.hamedanmelk.models;
 
 import android.net.Uri;
 
+import java.util.List;
+
 public class ImageModel {
 
     Uri imageUri;
@@ -18,6 +20,10 @@ public class ImageModel {
 
     public void setImageUri(Uri imageUri) {
         this.imageUri = imageUri;
+    }
+
+    public String getImageStrPath(){
+        return imageUri.getPath();
     }
 }
 

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,7 +30,7 @@ import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
  */
 public class SelectedImageRecyclerViewAdapter extends BaseAdapter {
 
-    private final List<ImageModel> imageModels;
+    List<ImageModel> imageModels=new ArrayList<>();
     Activity activity;
     private static final String TAG = "imageRecycler";
     MYSQlDBHelper dbHelper;
