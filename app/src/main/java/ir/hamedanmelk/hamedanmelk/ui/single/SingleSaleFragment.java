@@ -21,6 +21,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -198,6 +200,12 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
         mySliderLayout.setCustomIndicator(myIndicator);
         mySliderLayout.setCustomAnimation(new DescriptionAnimation());
 
+        FragmentManager childFragMan = getChildFragmentManager();
+        FragmentTransaction childFragTrans = childFragMan.beginTransaction();
+        GetLandEnergyFragment fragB = new GetLandEnergyFragment ();
+        fragB.landID = landId;
+        childFragTrans.add(R.id.SingleSaleEnergyFragment, fragB);
+        childFragTrans.commit();
 
         if(qlDBHelper.isBookmarkedByLandID(landId)){
             bookmarkChckbx.setChecked(true);

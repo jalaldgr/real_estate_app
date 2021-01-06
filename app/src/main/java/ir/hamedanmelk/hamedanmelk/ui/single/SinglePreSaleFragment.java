@@ -22,6 +22,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
@@ -186,6 +188,13 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
         myIndicator.setGravity(0x11);
         mySliderLayout.setCustomIndicator(myIndicator);
         mySliderLayout.setCustomAnimation(new DescriptionAnimation());
+
+        FragmentManager childFragMan = getChildFragmentManager();
+        FragmentTransaction childFragTrans = childFragMan.beginTransaction();
+        GetLandEnergyFragment fragB = new GetLandEnergyFragment ();
+        fragB.landID = landId;
+        childFragTrans.add(R.id.SinglePreSaleEnergyFragment, fragB);
+        childFragTrans.commit();
 
 //                        mySliderLayout.setDuration(3000);
 //                        mySliderLayout.addOnPageChangeListener((ViewPagerEx.OnPageChangeListener) this);

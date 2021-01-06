@@ -586,7 +586,19 @@
                 tools:listitem="@layout/singles_land_equipments_items" />
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="4dp">
 
+            <fragment
+                android:id="@+id/SingleParticipationEnergyFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="ir.hamedanmelk.hamedanmelk.ui.single.GetLandEnergyFragment">
+            </fragment>
+        </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
