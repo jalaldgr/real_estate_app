@@ -40,6 +40,16 @@ public class MainActivity extends AppCompatActivity {
     MYSQlDBHelper dbHelper;
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -54,26 +64,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        GetProvinceRequest(getApplicationContext());
-        GetDistrictRequest(getApplicationContext());
-        GetCompanyTypesRequest(getApplicationContext());
-        GetCitiesRequest(getApplicationContext());
-        GetAreasRequest(getApplicationContext());
-        GetLandTypeRequest(getApplicationContext());
-        GetBuildingConditionsRequest(getApplicationContext());
-        GetLandStatesRequest(getApplicationContext());
-        GetRentalPreferenceRequest(getApplicationContext());
-        GetDensityTypesRequest(getApplicationContext());
-        GetFloorCoveringsRequest(getApplicationContext());
-        GetKitchenServicesRequest(getApplicationContext());
-        GetLandCaseRequest(getApplicationContext());
-        GetLoanTypesRequest(getApplicationContext());
-        GetLandSituationsRequest(getApplicationContext());
-        GetLandViewsRequest(getApplicationContext());
-        GetLandDirectionsRequest(getApplicationContext());
-        GetUseTypeRequest(getApplicationContext());
-        GetEquipmentRequest(getApplicationContext());
-        GetVoucherRequest(getApplicationContext());
+
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
@@ -109,16 +100,26 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-    }
+        //get all lands and save to database.
+        //to can restore in home fragment
+        GetProvinceRequest(getApplicationContext());
+        GetCompanyTypesRequest(getApplicationContext());
+        GetLandTypeRequest(getApplicationContext());
+        GetBuildingConditionsRequest(getApplicationContext());
+        GetRentalPreferenceRequest(getApplicationContext());
+        GetDensityTypesRequest(getApplicationContext());
+        GetFloorCoveringsRequest(getApplicationContext());
+        GetKitchenServicesRequest(getApplicationContext());
+        GetLandCaseRequest(getApplicationContext());
+        GetLoanTypesRequest(getApplicationContext());
+        GetLandSituationsRequest(getApplicationContext());
+        GetLandViewsRequest(getApplicationContext());
+        GetLandDirectionsRequest(getApplicationContext());
+        GetUseTypeRequest(getApplicationContext());
+        GetEquipmentRequest(getApplicationContext());
+        GetVoucherRequest(getApplicationContext());
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                super.onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+
     }
 
 //    @Override
@@ -133,6 +134,10 @@ public class MainActivity extends AppCompatActivity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
+
+
+
+    // get micro data requests
     public void GetProvinceRequest(Context context) {
 
         class GetProvinceRequestAsync extends AsyncTask<Void, Void, String> {
@@ -169,120 +174,6 @@ public class MainActivity extends AppCompatActivity {
         }
         GetProvinceRequestAsync getProvinceRequestAsync = new GetProvinceRequestAsync();
         getProvinceRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
-    }
-
-    public void GetDistrictRequest(Context context) {
-
-        class GetDistrictRequestAsync extends AsyncTask<Void, Void, String> {
-            @Override
-            protected String doInBackground(Void... voids) {
-                HTTPRequestHandlre requestHandler = new HTTPRequestHandlre();
-                HashMap<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                return requestHandler.sendGetRequest(Urls.getBaseURL() + Urls.getGetDistricts(), params);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                try {
-                    JSONObject rawResult = new JSONObject(s);
-                    if (rawResult.getInt("State") > 0) {
-                        JSONArray dataResult = rawResult.getJSONArray("Data");
-                        String[] modelFields = Constants.DISTRICT_MODEL_FIELDS;
-                        dbHelper.DeleteDistrict();
-                        for (int i = 0; i < dataResult.length(); i++) {
-                            JSONObject rowItem = dataResult.getJSONObject(i);
-                            ContentValues itemCV = new ContentValues();
-                            for (String columnItem : modelFields) {
-                                itemCV.put(columnItem, rowItem.getString(columnItem));
-                            }
-                            dbHelper.InsertDistrict(itemCV);
-                        }
-                    }
-                } catch (JSONException e) {
-                    Log.d(TAG, "onPostExecute: " + e.toString());
-                }
-            }
-        }
-        GetDistrictRequestAsync getDistrictRequestAsync = new GetDistrictRequestAsync();
-        getDistrictRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
-    }
-
-    public void GetCitiesRequest(Context context) {
-
-        class GetCitiesRequestAsync extends AsyncTask<Void, Void, String> {
-            @Override
-            protected String doInBackground(Void... voids) {
-                HTTPRequestHandlre requestHandler = new HTTPRequestHandlre();
-                HashMap<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                return requestHandler.sendGetRequest(Urls.getBaseURL() + Urls.getGetCities(), params);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                try {
-                    JSONObject rawResult = new JSONObject(s);
-                    if (rawResult.getInt("State") > 0) {
-                        JSONArray dataResult = rawResult.getJSONArray("Data");
-                        String[] modelFields = Constants.CITIES_MODEL_FIELDS;
-                        dbHelper.DeleteCities();
-                        for (int i = 0; i < dataResult.length(); i++) {
-                            JSONObject rowItem = dataResult.getJSONObject(i);
-                            ContentValues itemCV = new ContentValues();
-                            for (String columnItem : modelFields) {
-                                itemCV.put(columnItem, rowItem.getString(columnItem));
-                            }
-                            dbHelper.InsertCity(itemCV);
-                        }
-                    }
-                } catch (JSONException e) {
-                    Log.d(TAG, "onPostExecute cities: " + e.toString());
-                }
-            }
-        }
-        GetCitiesRequestAsync getCitiesRequestAsync = new GetCitiesRequestAsync();
-        getCitiesRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
-    }
-
-    public void GetAreasRequest(Context context) {
-
-        class GetAreasRequestAsync extends AsyncTask<Void, Void, String> {
-            @Override
-            protected String doInBackground(Void... voids) {
-                HTTPRequestHandlre requestHandler = new HTTPRequestHandlre();
-                HashMap<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                return requestHandler.sendGetRequest(Urls.getBaseURL() + Urls.getGetAreas(), params);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                try {
-                    JSONObject rawResult = new JSONObject(s);
-                    if (rawResult.getInt("State") > 0) {
-                        JSONArray dataResult = rawResult.getJSONArray("Data");
-                        String[] modelFields = Constants.AREAS_MODEL_FIELDS;
-                        dbHelper.DeleteAreas();
-                        for (int i = 0; i < dataResult.length(); i++) {
-                            JSONObject rowItem = dataResult.getJSONObject(i);
-                            ContentValues itemCV = new ContentValues();
-                            for (String columnItem : modelFields) {
-                                itemCV.put(columnItem, rowItem.getString(columnItem));
-                            }
-                            dbHelper.InsertArea(itemCV);
-                        }
-                    }
-                } catch (JSONException e) {
-                    Log.d(TAG, "onPostExecuteArea: " + e.toString());
-                }
-            }
-        }
-        GetAreasRequestAsync getAreasRequestAsync = new GetAreasRequestAsync();
-        getAreasRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     public void GetLandTypeRequest(Context context) {
@@ -361,43 +252,6 @@ public class MainActivity extends AppCompatActivity {
         getBuildingConditionsRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
-    public void GetLandStatesRequest(Context context) {
-
-        class GetLandStateRequestAsync extends AsyncTask<Void, Void, String> {
-            @Override
-            protected String doInBackground(Void... voids) {
-                HTTPRequestHandlre requestHandler = new HTTPRequestHandlre();
-                HashMap<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                return requestHandler.sendGetRequest(Urls.getBaseURL() + Urls.getGetLandStates(), params);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                try {
-                    JSONObject rawResult = new JSONObject(s);
-                    if (rawResult.getInt("State") > 0) {
-                        JSONArray dataResult = rawResult.getJSONArray("Data");
-                        String[] modelFields = Constants.LAND_STATES_MODEL_FIELDS;
-                        dbHelper.DeleteLandStates();
-                        for (int i = 0; i < dataResult.length(); i++) {
-                            JSONObject rowItem = dataResult.getJSONObject(i);
-                            ContentValues itemCV = new ContentValues();
-                            for (String columnItem : modelFields) {
-                                itemCV.put(columnItem, rowItem.getString(columnItem));
-                            }
-                            dbHelper.InsertLandState(itemCV);
-                        }
-                    }
-                } catch (JSONException e) {
-                    Log.d(TAG, "onPostExecuteLandState: " + e.toString());
-                }
-            }
-        }
-        GetLandStateRequestAsync getLandStateRequestAsync = new GetLandStateRequestAsync();
-        getLandStateRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
-    }
 
     public void GetRentalPreferenceRequest(Context context) {
 
@@ -784,7 +638,6 @@ public class MainActivity extends AppCompatActivity {
         getcompanyTypesRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
-
     public void GetUseTypeRequest(Context context) {
 
         class GetUseTypeRequestAsync extends AsyncTask<Void, Void, String> {
@@ -893,11 +746,14 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     Log.d(TAG, "onPostExecute Equipments: " + e.toString());
                 }
+
+
             }
         }
         GetVoucherRequestAsync getVoucherRequestAsync = new GetVoucherRequestAsync();
         getVoucherRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
+
 
 
 

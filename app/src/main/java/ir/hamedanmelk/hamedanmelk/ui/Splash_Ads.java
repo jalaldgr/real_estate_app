@@ -32,8 +32,9 @@ import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 
 public class Splash_Ads extends AppCompatActivity {
-    Boolean clicked;
     static final String TAG = "SplashAds";
+    MYSQlDBHelper dbHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +42,19 @@ public class Splash_Ads extends AppCompatActivity {
         setContentView(R.layout.activity_splash__ads);
         ActionBar actionBar=getSupportActionBar();
         actionBar.hide();
-        clicked=false;
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.SplashAdsMainLeanerLayout);
-        TotalLandRequest(getApplicationContext());
+        dbHelper = new MYSQlDBHelper(getApplicationContext());
 
-        new Handler().postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                Intent i =new Intent(Splash_Ads.this, MainActivity.class);
-                startActivity(i);
-                finish();
-            }
-        },750);
+
+        //Get all lands
+        TotalLandRequest(getApplicationContext());
+        //Get required goods for Search Filter
+        GetLandStatesRequest(getApplicationContext());
+        GetDistrictRequest(getApplicationContext());
+        GetCitiesRequest(getApplicationContext());
+        GetAreasRequest(getApplicationContext());
+
+
 
     }
 
@@ -125,6 +127,163 @@ public class Splash_Ads extends AppCompatActivity {
         totalRentRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
+    public void GetLandStatesRequest(Context context) {
 
+        class GetLandStateRequestAsync extends AsyncTask<Void, Void, String> {
+            @Override
+            protected String doInBackground(Void... voids) {
+                HTTPRequestHandlre requestHandler = new HTTPRequestHandlre();
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                return requestHandler.sendGetRequest(Urls.getBaseURL() + Urls.getGetLandStates(), params);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try {
+                    JSONObject rawResult = new JSONObject(s);
+                    if (rawResult.getInt("State") > 0) {
+                        JSONArray dataResult = rawResult.getJSONArray("Data");
+                        String[] modelFields = Constants.LAND_STATES_MODEL_FIELDS;
+                        dbHelper.DeleteLandStates();
+                        for (int i = 0; i < dataResult.length(); i++) {
+                            JSONObject rowItem = dataResult.getJSONObject(i);
+                            ContentValues itemCV = new ContentValues();
+                            for (String columnItem : modelFields) {
+                                itemCV.put(columnItem, rowItem.getString(columnItem));
+                            }
+                            dbHelper.InsertLandState(itemCV);
+                        }
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "onPostExecuteLandState: " + e.toString());
+                }
+            }
+        }
+        GetLandStateRequestAsync getLandStateRequestAsync = new GetLandStateRequestAsync();
+        getLandStateRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
+    }
+
+
+    public void GetDistrictRequest(Context context) {
+
+        class GetDistrictRequestAsync extends AsyncTask<Void, Void, String> {
+            @Override
+            protected String doInBackground(Void... voids) {
+                HTTPRequestHandlre requestHandler = new HTTPRequestHandlre();
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                return requestHandler.sendGetRequest(Urls.getBaseURL() + Urls.getGetDistricts(), params);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try {
+                    JSONObject rawResult = new JSONObject(s);
+                    if (rawResult.getInt("State") > 0) {
+                        JSONArray dataResult = rawResult.getJSONArray("Data");
+                        String[] modelFields = Constants.DISTRICT_MODEL_FIELDS;
+                        dbHelper.DeleteDistrict();
+                        for (int i = 0; i < dataResult.length(); i++) {
+                            JSONObject rowItem = dataResult.getJSONObject(i);
+                            ContentValues itemCV = new ContentValues();
+                            for (String columnItem : modelFields) {
+                                itemCV.put(columnItem, rowItem.getString(columnItem));
+                            }
+                            dbHelper.InsertDistrict(itemCV);
+                        }
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "onPostExecute: " + e.toString());
+                }
+            }
+        }
+        GetDistrictRequestAsync getDistrictRequestAsync = new GetDistrictRequestAsync();
+        getDistrictRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
+    }
+
+    public void GetCitiesRequest(Context context) {
+
+        class GetCitiesRequestAsync extends AsyncTask<Void, Void, String> {
+            @Override
+            protected String doInBackground(Void... voids) {
+                HTTPRequestHandlre requestHandler = new HTTPRequestHandlre();
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                return requestHandler.sendGetRequest(Urls.getBaseURL() + Urls.getGetCities(), params);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try {
+                    JSONObject rawResult = new JSONObject(s);
+                    if (rawResult.getInt("State") > 0) {
+                        JSONArray dataResult = rawResult.getJSONArray("Data");
+                        String[] modelFields = Constants.CITIES_MODEL_FIELDS;
+                        dbHelper.DeleteCities();
+                        for (int i = 0; i < dataResult.length(); i++) {
+                            JSONObject rowItem = dataResult.getJSONObject(i);
+                            ContentValues itemCV = new ContentValues();
+                            for (String columnItem : modelFields) {
+                                itemCV.put(columnItem, rowItem.getString(columnItem));
+                            }
+                            dbHelper.InsertCity(itemCV);
+                        }
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "onPostExecute cities: " + e.toString());
+                }
+            }
+        }
+        GetCitiesRequestAsync getCitiesRequestAsync = new GetCitiesRequestAsync();
+        getCitiesRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
+    }
+
+    public void GetAreasRequest(Context context) {
+
+        class GetAreasRequestAsync extends AsyncTask<Void, Void, String> {
+            @Override
+            protected String doInBackground(Void... voids) {
+                HTTPRequestHandlre requestHandler = new HTTPRequestHandlre();
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                return requestHandler.sendGetRequest(Urls.getBaseURL() + Urls.getGetAreas(), params);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try {
+                    JSONObject rawResult = new JSONObject(s);
+                    if (rawResult.getInt("State") > 0) {
+                        JSONArray dataResult = rawResult.getJSONArray("Data");
+                        String[] modelFields = Constants.AREAS_MODEL_FIELDS;
+                        dbHelper.DeleteAreas();
+                        for (int i = 0; i < dataResult.length(); i++) {
+                            JSONObject rowItem = dataResult.getJSONObject(i);
+                            ContentValues itemCV = new ContentValues();
+                            for (String columnItem : modelFields) {
+                                itemCV.put(columnItem, rowItem.getString(columnItem));
+                            }
+                            dbHelper.InsertArea(itemCV);
+                        }
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "onPostExecuteArea: " + e.toString());
+                }
+
+                //All Async Finished Here
+                Intent i =new Intent(Splash_Ads.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        }
+        GetAreasRequestAsync getAreasRequestAsync = new GetAreasRequestAsync();
+        getAreasRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
+    }
+    //All Async Finished GetAreasRequestAsync and start next activity
 
 }
