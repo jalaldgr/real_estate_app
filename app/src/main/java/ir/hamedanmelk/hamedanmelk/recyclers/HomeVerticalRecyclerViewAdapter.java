@@ -62,6 +62,7 @@ public class HomeVerticalRecyclerViewAdapter extends RecyclerView.Adapter<HomeVe
 //        new DownloadImage(holder.thumbnailImg).execute(Urls.getBaseURL()+landModel.getImages());
         DistrictModel districtModel = dbHelper.GetDistrictByID(landModel.getDistrict_id());
         holder.districtTxt.setText(districtModel.getTitle());
+        holder.landStateTitleTxt.setText(landModels.get(position).getLandStateTitle());
         switch (landModels.get(position).getLand_state_id()) {
             case "1" :
                 //holder.totalSaleLayout.setVisibility(View.VISIBLE);
@@ -108,6 +109,7 @@ public class HomeVerticalRecyclerViewAdapter extends RecyclerView.Adapter<HomeVe
         public final ImageView thumbnailImg;
         public final TextView districtTxt;
         public final LinearLayout mainLinearLayout;
+        public final TextView landStateTitleTxt;
 
         public ViewHolder(View view) {
             super(view);
@@ -115,6 +117,7 @@ public class HomeVerticalRecyclerViewAdapter extends RecyclerView.Adapter<HomeVe
             thumbnailImg = (ImageView)view.findViewById(R.id.HomeFragmentVerticalThumbnailImg);
             districtTxt = (TextView)view.findViewById(R.id.HomeFragmentVerticalDistrictTxt);
             mainLinearLayout = (LinearLayout)view.findViewById(R.id.HomeFragmentVerticalMainLinearLayout);
+            landStateTitleTxt = (TextView)view.findViewById(R.id.HomeFragmentVerLandStateTxt);
         }
 
     }

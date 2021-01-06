@@ -65,6 +65,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
 
         DistrictModel districtModel = dbHelper.GetDistrictByID(landModel.getDistrict_id());
         holder.districtTxt.setText(districtModel.getTitle());
+        holder.landStateTxt.setText(landModel.getLandStateTitle());
         switch (landModels.get(position).getLand_state_id()) {
             case "1" :
                 holder.totalSaleLayout.setVisibility(View.VISIBLE);
@@ -149,6 +150,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         public final LinearLayout totalRentLayout;
         public final TextView districtTxt;
         public final LinearLayout mainLinearLayout;
+        public final TextView landStateTxt;
 
         public ViewHolder(View view) {
             super(view);
@@ -162,6 +164,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             totalRentLayout     =(LinearLayout)view.findViewById(R.id.HomeFragmentTotalRentPriceLayout);
             districtTxt         = (TextView)view.findViewById(R.id.HomeFragmentDistrictTxt);
             mainLinearLayout = (LinearLayout)view.findViewById(R.id.HomeFragmentMainLinearLayout);
+            landStateTxt = (TextView)view.findViewById(R.id.HomeFragmentLandStateTxt);
 
 
         }

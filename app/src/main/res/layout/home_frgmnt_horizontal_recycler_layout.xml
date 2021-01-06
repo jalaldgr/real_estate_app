@@ -161,6 +161,14 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/HomeFragmentLandStateTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/vocabulary_land_state"
+                android:textStyle="bold|italic" />
+
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
