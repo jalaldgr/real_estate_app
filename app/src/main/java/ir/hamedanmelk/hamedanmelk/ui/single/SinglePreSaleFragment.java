@@ -58,6 +58,7 @@ import ir.hamedanmelk.hamedanmelk.models.micro.VoucherModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.LandEquipmentsAdapter;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
+import ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
@@ -112,7 +113,7 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
     EditText descriptionTxt;
     CardView descCardView;
     ImageView userAvatarImg;
-    GridView equipmentsGridView;
+    ExpandableHeightGridView equipmentsGridView;
     ViewPager viewPager;
     CheckBox bookmarkChckbx;
     TextView startChatTxt;
@@ -174,7 +175,7 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
         descriptionTxt = (EditText)view.findViewById(R.id.SinglePreSaleDescriptionTxt);
         descCardView = (CardView)view.findViewById(R.id.SinglePreSaleDescriptionCardView);
         userAvatarImg = (ImageView)view.findViewById(R.id.SinglePreSaleUserAvatarImg);
-        equipmentsGridView = (GridView)view.findViewById(R.id.SinglePreSaleLandEquipmentsGridView);
+        equipmentsGridView = (ExpandableHeightGridView) view.findViewById(R.id.SinglePreSaleLandEquipmentsGridView);
         bookmarkChckbx = (CheckBox)view.findViewById(R.id.SinglePreSaleFragmentBookmarkChckbx);
         startChatTxt = (TextView) view.findViewById(R.id.SinglePreSaleStartChatTxt);
         shareTxt = (TextView) view.findViewById(R.id.SinglePreSaleShareTxt);
@@ -404,6 +405,7 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
                 }
                 LandEquipmentsAdapter equipmentsAdapter = new LandEquipmentsAdapter(equipmentModels,context, getActivity());
                 equipmentsGridView.setAdapter(equipmentsAdapter);
+                equipmentsGridView.setExpanded(true);
             }
 
             @Override
