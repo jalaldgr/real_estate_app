@@ -21,6 +21,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -190,8 +192,14 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
         mySliderLayout.setCustomIndicator(myIndicator);
         mySliderLayout.setCustomAnimation(new DescriptionAnimation());
 
-//                        mySliderLayout.setDuration(3000);
-//                        mySliderLayout.addOnPageChangeListener((ViewPagerEx.OnPageChangeListener) this);
+
+        FragmentManager childFragMan = getChildFragmentManager();
+        FragmentTransaction childFragTrans = childFragMan.beginTransaction();
+        GetLandEnergyFragment fragB = new GetLandEnergyFragment ();
+        fragB.landID = landId;
+        childFragTrans.add(R.id.SingleRentEnergyFragmnetFrg, fragB);
+        childFragTrans.commit();
+
 
 
         if(qlDBHelper.isBookmarkedByLandID(landId)){
@@ -229,6 +237,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                     args.putString(Constants.START_CHAT_UID, UID);
                     args.putString(Constants.START_CHAT_TO, landUserID);
                     controller.navigate(R.id.chatFragment, args);
+
                 }else
                 {
                     controller.navigate(R.id.userLogin);

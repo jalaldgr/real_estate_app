@@ -496,5 +496,12 @@ public class Constants {
     public static final String AGENCY_CREATE_AT ="created_at";
     public static final String AGENCY_USER_IMAGE ="UserImage";
 
+    public static final String ENERGY_LAND_ID = "land_id";
+    public static final String ENERGY_TYPE_ID="energy_type_id";
+    public static final String ENERGY_STATE_ID="energy_state_id";
+    public static final String ENERGY_TYPE_TITLE="EnergyTypeTitle";
+    public static final String ENERGY_STATE_TITLE="EnergyStateTitle";
+
+
 
 }
