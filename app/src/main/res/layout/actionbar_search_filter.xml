@@ -43,6 +43,16 @@
             android:layout_marginBottom="4dp"
             android:layout_weight="1"
             android:backgroundTint="@color/icons_color" />
+
+        <Button
+            android:id="@+id/ActionbarSearchFilterFilterBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_baseline_filter_alt_24"
+            android:text="@string/search_filter_filter"
+            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
     </LinearLayout>
 
     <LinearLayout
@@ -54,9 +64,19 @@
         android:background="#F2F2F2"
         android:orientation="horizontal">
 
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ActionBarSearchFilterInputTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autofillHints="جست و جو"
+            android:hint="@string/app_bar_search_title"
+            android:inputType="text" />
+
         <Button
-            android:id="@+id/ActionbarSearchFilterSubmitBtn"
-            android:layout_width="match_parent"
+            android:id="@+id/ActionbarSearchFilterSearchBtn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -64,16 +84,6 @@
             android:text="@string/search_filter_submit"
             android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
-
-        <Button
-            android:id="@+id/ActionbarSearchFilterClearBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:drawableLeft="@drawable/ic_baseline_clear_24"
-            android:text="@string/search_filter_clear"
-            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
     </LinearLayout>
 
 </LinearLayout>

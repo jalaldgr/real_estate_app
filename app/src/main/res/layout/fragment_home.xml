@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants"
     tools:context=".ui.home.HomeFragment">
 
 
@@ -43,9 +42,9 @@
                 android:id="@+id/fragment3"
                 android:name="ir.hamedanmelk.hamedanmelk.ui.home.CategoryFragment"
                 android:layout_width="match_parent"
-                android:layout_marginBottom="8dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_height="wrap_content" />
+                android:layout_marginBottom="8dp" />
 
 
             <LinearLayout
@@ -89,7 +88,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                android:layout_marginStart="@dimen/general_margin_start"
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/HomeFrgmntVerticalRcyclVw"
@@ -106,6 +104,7 @@
                 android:text="تازه ترین ها"
                 android:textSize="@dimen/title_text_size"
                 android:textStyle="bold" />
+
             <RelativeLayout
                 android:id="@+id/HomeFrgmntHrzntlRcyclRltvLyt"
                 android:layout_width="match_parent"

@@ -1,34 +1,25 @@
 package ir.hamedanmelk.hamedanmelk.ui.home;
 
-import android.app.ActionBar;
 import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.URLUtil;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -51,13 +42,11 @@ import ir.hamedanmelk.hamedanmelk.models.micro.DistrictModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandStateTypeModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.HomeRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.recyclers.HomeVerticalRecyclerViewAdapter;
-import ir.hamedanmelk.hamedanmelk.tools.CheckConnectivity;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
 import ir.hamedanmelk.hamedanmelk.models.LandModel;
-import ir.hamedanmelk.hamedanmelk.ui.MainActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -74,8 +63,8 @@ public class HomeFragment extends Fragment {
      Spinner districtFilterSpnr;
      Spinner landStateFilterSpnr;
      Button submitFilterBtn;
-     Button clearFilterBtn;
-
+     Button submitSearchBtn;
+     EditText searchTxt;
 
 
     ArrayList<CityModel> cityModels;
@@ -98,7 +87,7 @@ public class HomeFragment extends Fragment {
     String searchCityStr="15";
     String searchDistrictStr;
     String searchLandStateStr;
-
+    String searchStr;
 
 
 
@@ -113,13 +102,14 @@ public class HomeFragment extends Fragment {
         cityFilterSpnr = (Spinner)root.findViewById(R.id.ActionbarSearchFilterCitySpnr) ;
         districtFilterSpnr =(Spinner)root.findViewById(R.id.ActionbarSearchFilterDistrictSpnr);
         landStateFilterSpnr = (Spinner)root.findViewById(R.id.ActionbarSearchFilterLandStateSpnr);
-        submitFilterBtn = (Button)root.findViewById(R.id.ActionbarSearchFilterSubmitBtn);
-        clearFilterBtn = (Button)root.findViewById(R.id.ActionbarSearchFilterClearBtn);
+        submitFilterBtn = (Button)root.findViewById(R.id.ActionbarSearchFilterFilterBtn);
+        submitSearchBtn = (Button)root.findViewById(R.id.ActionbarSearchFilterSearchBtn);
         bannerWebView.getSettings().setLoadWithOverviewMode(true);
         bannerWebView.getSettings().setUseWideViewPort(true);
         HorizantalrecyclerView = (RecyclerView) root.findViewById(R.id.HomeFrgmntHrzntlRcyclVw);
         VerticalrecyclerView  = (RecyclerView) root.findViewById(R.id.HomeFrgmntVerticalRcyclVw);
         cardView = (CardView)root.findViewById(R.id.HomeFragmentWebCardView);
+        searchTxt = (EditText)root.findViewById(R.id.ActionBarSearchFilterInputTxt);
         RecyclerView.LayoutManager laymngr =  new LinearLayoutManager(this.getContext());
         HorizantalrecyclerView.setLayoutManager(laymngr);
         RecyclerView.LayoutManager VRLaymngr = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL,false);
@@ -220,18 +210,21 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        clearFilterBtn.setOnClickListener(new View.OnClickListener() {
+        submitSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                landModels.clear();
-                featuredLandModels.clear();
-                landModels = dbHelper.GetAllLands();
-                featuredLandModels = dbHelper.GetAllFeatured20Lands();
-                HorizantalrecyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
-                VerticalrecyclerView.setAdapter(new HomeVerticalRecyclerViewAdapter(featuredLandModels,getActivity()));
+                if(searchTxt.getText().length()>3){
 
+                    searchStr = searchTxt.getText().toString();
+                    SearchRequest(getContext());
+                }
+                else
+                {
+                    searchTxt.setError(getResources().getString(R.string.search_min_length_error));
+                }
             }
         });
+
 
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
@@ -343,6 +336,103 @@ public class HomeFragment extends Fragment {
         }
         SearchFilterRequestAsync searchFilterRequestAsync = new SearchFilterRequestAsync();
         searchFilterRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
+    }
+
+    public void SearchRequest(final Context context){
+        class SearchRequestAsync extends AsyncTask<Void ,Void, String> {
+            private final ProgressDialog progressDialog=new ProgressDialog(context);
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog.setMessage(getResources().getString(R.string.loading_message));
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.show();
+                featuredLandModels.clear();
+                landModels.clear();
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                if (progressDialog.isShowing())progressDialog.dismiss();
+                Log.d(TAG, "onPostExecute: "+s);
+                try {
+                    JSONObject reader = new JSONObject(s);
+                    JSONArray LandList = new JSONArray(reader.getString(Constants.JSON_RESPONSE_DATA));
+                    JSONObject LandItem;
+                    JSONArray imagesArray;
+                    if (LandList.length()==0){
+                        Toast.makeText(getContext(),getResources().getString(R.string.search_filter_no_item),Toast.LENGTH_LONG).show();
+                    }
+                    if (reader.getInt(Constants.JSON_RESPONSE_STATE)==1)
+                    {
+                        ArrayList<LandModel> landTemp=new ArrayList<LandModel>();
+                        ArrayList<LandModel> featuredLandTemp=new ArrayList<LandModel>();
+
+                        for(int i=0; i < LandList.length();i++)
+                        {
+                            LandItem = LandList.getJSONObject(i);
+                            imagesArray =new JSONArray( LandItem.getString(Constants.SALE_MODEL_IMAGES));
+                            LandModel landModel = new LandModel(
+                                    LandItem.getString(Constants.LAND_MODEL_ID),
+                                    "",
+                                    "",
+                                    "",
+                                    LandItem.getString(Constants.LAND_MODEL_TITLE),
+                                    "",
+                                    LandItem.getString(Constants.LAND_MODEL_CREATED_AT),
+                                    LandItem.getString(Constants.LAND_MODEL_LAND_SITUATION_ID),
+                                    "",
+                                    imagesArray.get(0).toString(),
+                                    LandItem.getString(Constants.LAND_MODEL_LANDSTATETITLE),
+                                    LandItem.getString(Constants.USER_LAND_MODEL_DISTRICT_ID),
+                                    "",
+                                    "",
+                                    LandItem.getString(Constants.LAND_MODEL_FIRST_NAME),
+                                    LandItem.getString(Constants.LAND_MODEL_LAST_NAME),
+                                    LandItem.getString(Constants.LAND_MODEL_LAND_CASE_ID)
+                            );
+
+//                            LandItem.getString(Constants.LAND_MODEL_LANDSITUATIONTITLE),
+//                            LandItem.getString(Constants.LAND_MODEL_VIEW),
+//                            LandItem.getString(Constants.LAND_MODEL_LAND_STATE_ID),
+//                            LandItem.getString(Constants.LAND_MODEL_TOTAL_PRICE),
+//                                    LandItem.getString(Constants.LAND_MODEL_TOTAL_MORTGAGE_PRICE),
+//                                    LandItem.getString(Constants.LAND_INFO_RENT_TOTAL_PRICE),
+
+                            landTemp.add(landModel);
+                            if(Integer.parseInt(landModel.getLand_case_id())>1){
+                                featuredLandTemp.add(landModel);
+                            };
+                        }
+                        landModels=landTemp;
+                        featuredLandModels=featuredLandTemp;
+                        VerticalrecyclerView.setAdapter(new HomeVerticalRecyclerViewAdapter(featuredLandModels,getActivity()));
+                        HorizantalrecyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.d(TAG, "onPostExecute exception: "+e.toString());
+                    Toast.makeText(getContext(),getResources().getString(R.string.search_filter_no_item),Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                HTTPRequestHandlre httpRequestHandlre = new HTTPRequestHandlre();
+                HashMap<String,String> params = new HashMap<>();
+                params.put(Constants.CONTENT_TYPE,Constants.APPLICATION_JSON);
+                params.put("Text",searchStr);
+
+                Log.d(TAG, "doInBackground: "+params.toString());
+                return httpRequestHandlre.sendPostRequest(Urls.getBaseURL()+Urls.getSearchInAdsWithText(),params);
+            }
+        }
+        SearchRequestAsync searchRequestAsync = new SearchRequestAsync();
+        searchRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
 

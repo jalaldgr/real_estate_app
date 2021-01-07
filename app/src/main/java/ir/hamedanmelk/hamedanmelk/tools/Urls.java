@@ -48,7 +48,12 @@ public class Urls {
     private static final String GetVouchers                             = "/AppRequests/GetVouchers";
     private static final String GetEquipments                           = "/AppRequests/GetEquipments";
     private static final String SearchInAds                             = "/AppRequests/SearchInAds";
-    private static final String GetLandEnergy                             = "/AppRequests/GetLandEnergy";
+    private static final String GetLandEnergy                           = "/AppRequests/GetLandEnergy";
+    private static final String SearchInAdsWithText                     = "/AppRequests/SearchInAdsWithText";
+
+    public static String getSearchInAdsWithText() {
+        return SearchInAdsWithText;
+    }
 
     public static String getGetLandEnergy() {
         return GetLandEnergy;
