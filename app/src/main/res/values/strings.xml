@@ -38,8 +38,8 @@
     <string name="my_hamedan_melk_recent_posts_summary">لیست آگهی های املاک من</string>
     <string name="my_hamedan_melk_aboutus_summary">درباره همدان ملک، قوانین و پشتیبانی، اطلاعات اپلیکیشن</string>
     <string name="my_hamedan_melk_app_info_version">ورژن</string>
-    <string name="no_internet_error_title">اینترنت وصل نیست</string>
-    <string name="no_internet_error_description">لطفا اتصال اینترنت را چک نموده و دوباره امتحان کنید</string>
+    <string name="no_internet_error_title"> اینترنت وصل نیست</string>
+    <string name="no_internet_error_description">لطفا اتصال اینترنت را چک کرده و دوباره امتحان کنید</string>
     <string name="no_internet_error_retry">امتحان دوباره</string>
     <string name="app_bar_search_title">جست و جو</string>
     <string name="search_filter_clear">پاک کن</string>

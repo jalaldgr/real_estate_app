@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -49,6 +51,7 @@ import ir.hamedanmelk.hamedanmelk.models.micro.DistrictModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandStateTypeModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.HomeRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.recyclers.HomeVerticalRecyclerViewAdapter;
+import ir.hamedanmelk.hamedanmelk.tools.CheckConnectivity;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
@@ -64,6 +67,7 @@ public class HomeFragment extends Fragment {
     ArrayList<LandModel> landModels;
     ArrayList<LandModel> featuredLandModels;
     MYSQlDBHelper dbHelper;
+     WebView  bannerWebView;
     TextView featuredTxt;
     CardView cardView;
      Spinner cityFilterSpnr;
@@ -95,10 +99,8 @@ public class HomeFragment extends Fragment {
     String searchDistrictStr;
     String searchLandStateStr;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -107,21 +109,14 @@ public class HomeFragment extends Fragment {
         final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
         dbHelper = new MYSQlDBHelper(getContext());
         featuredTxt = (TextView)root.findViewById(R.id.HomeFragmentFeaturedTxt);
-        WebView  bannerWebView=(WebView)root.findViewById(R.id.HomeFragmentWebView);
+        bannerWebView=(WebView)root.findViewById(R.id.HomeFragmentWebView);
         cityFilterSpnr = (Spinner)root.findViewById(R.id.ActionbarSearchFilterCitySpnr) ;
         districtFilterSpnr =(Spinner)root.findViewById(R.id.ActionbarSearchFilterDistrictSpnr);
         landStateFilterSpnr = (Spinner)root.findViewById(R.id.ActionbarSearchFilterLandStateSpnr);
         submitFilterBtn = (Button)root.findViewById(R.id.ActionbarSearchFilterSubmitBtn);
         clearFilterBtn = (Button)root.findViewById(R.id.ActionbarSearchFilterClearBtn);
-
         bannerWebView.getSettings().setLoadWithOverviewMode(true);
         bannerWebView.getSettings().setUseWideViewPort(true);
-
-        bannerWebView.loadUrl("file:///android_asset/webview/banner.html");
-
-
-
-
         HorizantalrecyclerView = (RecyclerView) root.findViewById(R.id.HomeFrgmntHrzntlRcyclVw);
         VerticalrecyclerView  = (RecyclerView) root.findViewById(R.id.HomeFrgmntVerticalRcyclVw);
         cardView = (CardView)root.findViewById(R.id.HomeFragmentWebCardView);
@@ -132,14 +127,12 @@ public class HomeFragment extends Fragment {
         VerticalrecyclerView.setLayoutManager(VRLaymngr);
         landModels = dbHelper.GetAllLands();
         featuredLandModels = dbHelper.GetAllFeatured20Lands();
-        Log.d(TAG, "onCreateView: "+landModels.size());
-        HorizantalrecyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
-        VerticalrecyclerView.setAdapter(new HomeVerticalRecyclerViewAdapter(featuredLandModels,getActivity()));
         HorizantalrecyclerView.setNestedScrollingEnabled(false);
         featuredTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.navigate(R.id.featuredLandFragment);
+
+                    controller.navigate(R.id.featuredLandFragment);
 
             }
         });
@@ -240,9 +233,18 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                bannerWebView.loadUrl("file:///android_asset/webview/banner.html");
+                HorizantalrecyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
+                VerticalrecyclerView.setAdapter(new HomeVerticalRecyclerViewAdapter(featuredLandModels,getActivity()));
+            }
+        }, 170);
+
         return root;
     }
-
 
 
     public void SearchFilterRequest(final Context context){
@@ -342,6 +344,8 @@ public class HomeFragment extends Fragment {
         SearchFilterRequestAsync searchFilterRequestAsync = new SearchFilterRequestAsync();
         searchFilterRequestAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
+
+
 
 
 }
