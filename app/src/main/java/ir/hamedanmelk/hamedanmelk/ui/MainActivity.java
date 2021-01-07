@@ -33,7 +33,6 @@ import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -128,12 +127,6 @@ public class MainActivity extends AppCompatActivity {
 //        inflater.inflate(R.menu.options_menu, menu);
 //        return true;
 //    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
-
 
 
 
