@@ -39,10 +39,9 @@ public class Splash_Ads extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash__ads);
+        setContentView(R.layout.fragment_app_info_fullscreen);
         ActionBar actionBar=getSupportActionBar();
         actionBar.hide();
-        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.SplashAdsMainLeanerLayout);
         dbHelper = new MYSQlDBHelper(getApplicationContext());
 
 
