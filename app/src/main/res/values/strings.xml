@@ -5,8 +5,8 @@
     <string name="new_land_sale">فروش</string>
     <string name="category_sale">خرید و فروش</string>
     <string name="category_company">خدمات ساختمانی</string>
-    <string name="new_land_rent">اجاره</string>
-    <string name="new_land_participation">مشارکت</string>
+    <string name="new_land_rent">رهن و اجاره</string>
+    <string name="new_land_participation">مشارکت در ساخت</string>
     <string name="new_land_pre_sale">پیش فروش</string>
     <string name="new_land_company">ثبت شرکت</string>
     <string name="new_land_lawyer">وکلای حقوقی</string>
@@ -84,8 +84,8 @@
 
     <!--    categories-->
     <string name="sale_category">خرید و فروش</string>
-    <string name="rent_category">اجاره</string>
-    <string name="assingment_category">مشارکت</string>
+    <string name="rent_category">رهن و اجاره</string>
+    <string name="assingment_category">مشارکت در ساخت</string>
     <string name="presale_category">پیش فروش</string>
     <string name="agent_category">مشاورین املاک</string>
     <string name="services_category">سرویس و خدمات</string>
@@ -123,7 +123,7 @@
     <string name="search_filter_district">انتخاب محله</string>
     <string name="search_filter_land_state">انتخاب نوع درخواست</string>
     <string name="search_filter_submit">جستو جو</string>
-    <string name="search_filter_filter">فیلتر</string>
+    <string name="search_filter_filter"></string>
     <string name="firstname_input_error_msg">لطفا نام را وارد نمایید</string>
     <string name="lastname_input_error_msg">لطفا نام خانوادگی را وارد نمایید</string>
     <string name="gendertype_input_error_msg">لطفا جنسیت را انتخاب نمایید</string>
@@ -142,7 +142,7 @@
     <string name="land_info_floor">طبقه</string>
     <string name="land_info_space_price">قیمت هر متر</string>
     <string name="land_info_total_price">قیمت کل</string>
-    <string name="land_info_description">توضیحات</string>
+    <string name="land_info_description">توضیحات تکمیلی</string>
     <string name="land_info_pre_pay">پیش پرداخت</string>
     <string name="land_info_mortgage">قیمت رهن</string>
     <string name="land_info_rent_total_price">اجاره</string>
@@ -291,7 +291,6 @@
 
 
     <array name="new_land_unit_in_floor">
-        <item>صفر</item>
         <item>یک</item>
         <item>دوم</item>
         <item>سه</item>

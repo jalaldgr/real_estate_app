@@ -451,7 +451,7 @@
                             android:gravity="center_horizontal|center_vertical"
                             android:text="@string/land_info_units_in_floor"
                             android:textColor="@color/primary_black_text_color"
-                            android:textSize="@dimen/smal_text_size"></TextView>
+                            android:textSize="@dimen/smal_text_size"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -607,7 +607,7 @@
                 android:layout_marginTop="@dimen/general_margin_top"
                 android:layout_marginEnd="@dimen/general_margin_end"
                 android:gravity="right"
-                android:hint="توضیحات تکمیلی"
+                android:hint="@string/land_info_description"
                 android:layoutDirection="rtl"
                 android:textColorHint="@color/textview_lable"
                 android:textDirection="rtl"
@@ -619,8 +619,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:backgroundTint="@color/edit_text_bottom_line"
-                    android:editable="false"
                     android:ems="10"
                     android:enabled="false"
                     android:gravity="start|top"

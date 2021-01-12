@@ -44,15 +44,12 @@
             android:layout_weight="1"
             android:backgroundTint="@color/icons_color" />
 
-        <Button
-            android:id="@+id/ActionbarSearchFilterFilterBtn"
-            android:layout_width="match_parent"
+
+        <ImageButton
+            android:id="@+id/ActionbarSearchFilterFilterImgBtn"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:drawableLeft="@drawable/ic_baseline_filter_alt_24"
-            android:text="@string/search_filter_filter"
-            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+            app:srcCompat="@drawable/ic_baseline_filter_alt_24" />
     </LinearLayout>
 
     <LinearLayout

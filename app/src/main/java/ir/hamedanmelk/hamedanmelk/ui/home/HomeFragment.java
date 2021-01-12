@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,7 +63,7 @@ public class HomeFragment extends Fragment {
      Spinner cityFilterSpnr;
      Spinner districtFilterSpnr;
      Spinner landStateFilterSpnr;
-     Button submitFilterBtn;
+     ImageButton submitFilterBtn;
      Button submitSearchBtn;
      EditText searchTxt;
 
@@ -102,7 +103,7 @@ public class HomeFragment extends Fragment {
         cityFilterSpnr = (Spinner)root.findViewById(R.id.ActionbarSearchFilterCitySpnr) ;
         districtFilterSpnr =(Spinner)root.findViewById(R.id.ActionbarSearchFilterDistrictSpnr);
         landStateFilterSpnr = (Spinner)root.findViewById(R.id.ActionbarSearchFilterLandStateSpnr);
-        submitFilterBtn = (Button)root.findViewById(R.id.ActionbarSearchFilterFilterBtn);
+        submitFilterBtn = (ImageButton)root.findViewById(R.id.ActionbarSearchFilterFilterImgBtn);
         submitSearchBtn = (Button)root.findViewById(R.id.ActionbarSearchFilterSearchBtn);
         bannerWebView.getSettings().setLoadWithOverviewMode(true);
         bannerWebView.getSettings().setUseWideViewPort(true);
