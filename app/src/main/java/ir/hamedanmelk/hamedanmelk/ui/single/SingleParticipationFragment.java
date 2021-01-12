@@ -192,6 +192,7 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
         mySliderLayout = (SliderLayout)view.findViewById(R.id.single_participation_slider);
         myIndicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
         mySliderLayout.setPresetTransformer(SliderLayout.Transformer.Tablet);
+        mySliderLayout.stopAutoCycle();
         mySliderLayout.setPresetIndicator(Center_Bottom);
         myIndicator.setGravity(0x11);
         mySliderLayout.setCustomIndicator(myIndicator);

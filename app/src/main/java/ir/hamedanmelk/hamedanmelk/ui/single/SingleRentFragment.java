@@ -186,6 +186,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
         mobileTxt = (TextView) view.findViewById(R.id.SingleRentMobileTxt);
         mySliderLayout = (SliderLayout)view.findViewById(R.id.single_rent_slider);
         myIndicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
+        mySliderLayout.stopAutoCycle();
         mySliderLayout.setPresetTransformer(SliderLayout.Transformer.Tablet);
         mySliderLayout.setPresetIndicator(Center_Bottom);
         myIndicator.setGravity(0x11);

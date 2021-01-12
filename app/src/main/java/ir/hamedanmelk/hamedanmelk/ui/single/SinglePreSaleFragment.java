@@ -183,13 +183,13 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
 
         mySliderLayout = (SliderLayout)view.findViewById(R.id.single_PreSale_slider);
         myIndicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
+        mySliderLayout.stopAutoCycle();
         mySliderLayout.setPresetTransformer(SliderLayout.Transformer.Tablet);
 
         mySliderLayout.setPresetIndicator(Center_Bottom);
         myIndicator.setGravity(0x11);
         mySliderLayout.setCustomIndicator(myIndicator);
         mySliderLayout.setCustomAnimation(new DescriptionAnimation());
-
         FragmentManager childFragMan = getChildFragmentManager();
         FragmentTransaction childFragTrans = childFragMan.beginTransaction();
         GetLandEnergyFragment fragB = new GetLandEnergyFragment ();

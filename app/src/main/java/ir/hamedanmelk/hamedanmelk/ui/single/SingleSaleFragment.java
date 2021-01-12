@@ -194,9 +194,8 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
         mySliderLayout = (SliderLayout)view.findViewById(R.id.single_sale_slider);
         myIndicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
         mySliderLayout.setPresetTransformer(SliderLayout.Transformer.Tablet);
-
+        mySliderLayout.stopAutoCycle();
         mySliderLayout.setPresetIndicator(Center_Bottom);
-        myIndicator.setGravity(0x11);
         mySliderLayout.setCustomIndicator(myIndicator);
         mySliderLayout.setCustomAnimation(new DescriptionAnimation());
 
