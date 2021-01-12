@@ -549,6 +549,7 @@
                     android:layout_marginTop="@dimen/general_margin_top"
                     android:layout_marginEnd="@dimen/general_margin_end"
                     android:gravity="right"
+                    android:visibility="gone"
                     android:hint="@string/land_info_address"
                     android:layoutDirection="rtl"
                     android:textColorHint="@color/textview_lable"

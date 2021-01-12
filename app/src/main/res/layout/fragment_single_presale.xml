@@ -660,6 +660,7 @@
                     android:layoutDirection="rtl"
                     android:textColorHint="@color/textview_lable"
                     android:textDirection="rtl"
+                    android:visibility="gone"
                     app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
 
                     <com.google.android.material.textfield.TextInputEditText
