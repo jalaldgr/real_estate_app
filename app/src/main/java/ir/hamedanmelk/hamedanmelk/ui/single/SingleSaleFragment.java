@@ -52,6 +52,7 @@ import java.util.Objects;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.LandDirectionModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LoanTypeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.VoucherModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.LandEquipmentsAdapter;
@@ -98,6 +99,7 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
     TextView saleTotalPriceTxt;
     TextView debtTotalProceTxt;
     TextView loanTypeTxt;
+    TextView landDirectionTxt;
     TextView landCaseTxt;
     TextView voucherTypeTxt;
     TextView userDescriptionTxt ;
@@ -164,6 +166,7 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
         saleTotalPriceTxt  =(TextView)view.findViewById(R.id.SingleSaleTotalPriceTxt);
         debtTotalProceTxt = (TextView)view.findViewById(R.id.SingleLoanTotalPriceTxt);
         loanTypeTxt = (TextView)view.findViewById(R.id.SingleLoanTypeTxt);
+        landDirectionTxt = (TextView)view.findViewById(R.id.SingleSaleLandDirectionTxt);
 //        districtTxt =(TextView)view.findViewById(R.id.SingleSaleDistrictTxt);
         addressTxt = (TextView)view.findViewById(R.id.SingleSaleAddressTxt);
         provinceTxt = (TextView)view.findViewById(R.id.SingleSaleProvinceTxt);
@@ -314,6 +317,10 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
                         roomCountTxt.setText(responseData.getString(Constants.LAND_INFO_ROOM_COUNT));
                         titleTxt.setText(responseData.getString(Constants.LAND_INFO_TITLe));
                         landTypeTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_TYPE_TITLE));
+                        LandDirectionModel landDirectionModel = qlDBHelper.GetLandDirectionByID(
+                                responseData.getString(Constants.LAND_INFO_DIRECTION_ID)
+                        );
+                        landDirectionTxt.setText(landDirectionModel.getTitle());
                         floorCountTxt.setText(responseData.getString(Constants.LAND_INFO_FLOOR_COUNT));
                         spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE));
                         if(Long.parseLong(responseData.getString(Constants.LAND_INFO_SALE_TOTAL_PRICE))>0) {

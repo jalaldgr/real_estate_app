@@ -265,12 +265,44 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical|end"
+                        android:layout_marginStart="@dimen/general_margin_start"
+                        android:layout_marginEnd="@dimen/general_margin_end"
                         android:text="@string/new_land_rental_preference"
                         android:textColor="@color/primary_black_text_color"
                         android:textSize="@dimen/smal_text_size" />
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/textView1d3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/new_land_direction"
+                        android:textColor="@color/textview_lable"
+                        android:textSize="@dimen/smal_text_size" />
+
+                    <TextView
+                        android:id="@+id/SingleRentLandDirectionTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|end"
+                        android:layout_marginStart="@dimen/general_margin_start"
+                        android:layout_marginEnd="@dimen/general_margin_end"
+                        android:text="@string/new_land_direction"
+                        android:textColor="@color/primary_black_text_color"
+                        android:textSize="@dimen/smal_text_size" />
+
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

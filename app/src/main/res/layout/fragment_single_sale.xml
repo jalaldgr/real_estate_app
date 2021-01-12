@@ -272,6 +272,40 @@
                         android:textSize="@dimen/smal_text_size" />
                 </LinearLayout>
 
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/textViefw22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/new_land_direction"
+                        android:textColor="@color/textview_lable"
+                        android:textSize="@dimen/smal_text_size" />
+
+                    <TextView
+                        android:id="@+id/SingleSaleLandDirectionTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/general_margin_start"
+                        android:layout_marginEnd="@dimen/general_margin_end"
+                        android:backgroundTint="@color/edit_text_bottom_line"
+                        android:gravity="end"
+                        android:text="@string/new_land_direction"
+                        android:textColor="@color/primary_black_text_color"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/smal_text_size" />
+                </LinearLayout>
+
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

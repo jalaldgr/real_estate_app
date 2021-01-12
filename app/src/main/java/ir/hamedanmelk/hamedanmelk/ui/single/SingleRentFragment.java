@@ -52,6 +52,7 @@ import java.util.Objects;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.EquipmentModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
+import ir.hamedanmelk.hamedanmelk.models.micro.LandDirectionModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.RentalPreferenceModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.GalleryRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.recyclers.LandEquipmentsAdapter;
@@ -94,6 +95,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
     TextView roomCountTxt;
     TextView rental_Preference;
     TextView landTypeTxt ;
+    TextView landDirectionTxt;
     TextView buildingYearTxt;
     TextView floorCountTxt ;
     TextView unitInFloor;
@@ -156,6 +158,7 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
         qlDBHelper = new MYSQlDBHelper(getContext());
         titleTxt = (TextView)view.findViewById(R.id.SingleRentTitleTxt);
         landTypeTxt = (TextView)view.findViewById(R.id.SingleRentLandTypeTxt);
+        landDirectionTxt = (TextView)view.findViewById(R.id.SingleRentLandDirectionTxt);
         roomCountTxt = (TextView)view.findViewById(R.id.SingleRentRoomCountTxt);
         rental_Preference = (TextView)view.findViewById(R.id.SingleRentRentalPreferenceTxt);
         spaceFoundationTxt = (TextView)view.findViewById(R.id.SingleRentFoundationSpaceTxt);
@@ -315,6 +318,10 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                         buildingYearTxt.setText(responseData.getString(Constants.LAND_INFO_BUILDING_YEAR));
                         titleTxt.setText(responseData.getString(Constants.LAND_INFO_TITLe));
                         landTypeTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_TYPE_TITLE));
+                        LandDirectionModel landDirectionModel = qlDBHelper.GetLandDirectionByID(
+                                responseData.getString(Constants.LAND_INFO_DIRECTION_ID)
+                        );
+                        landDirectionTxt.setText(landDirectionModel.getTitle());
                         floorCountTxt.setText(responseData.getString(Constants.LAND_INFO_FLOOR_COUNT));
                         unitInFloor.setText(responseData.getString(Constants.LAND_INFO_UNIT_IN_FLOOR));
                         RentalPreferenceModel rentalPreferenceModel = qlDBHelper.GetRentalRantalByID(responseData.getString(Constants.LAND_INFO_RENTAL_PREFERENCE_ID));
