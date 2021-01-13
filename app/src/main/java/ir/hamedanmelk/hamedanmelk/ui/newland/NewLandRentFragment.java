@@ -682,17 +682,32 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
                     titleEtx.requestFocus();
                     return;
                 }
+                if (TextUtils.isEmpty(spaceFoundationETxt.getText().toString())) {
+                    spaceFoundationETxt.setError(getResources().getString(R.string.foundation_space_input_error_msg));
+                    spaceFoundationETxt.requestFocus();
+                    return;
+                }
+                if (TextUtils.isEmpty(buildingYearETxt.getText().toString())) {
+                    buildingYearETxt.setError(getResources().getString(R.string.building_year_input_error_msg));
+                    buildingYearETxt.requestFocus();
+                    return;
+                }
+                if (TextUtils.isEmpty(mortgagePriceETxt.getText().toString())) {
+                    mortgagePriceETxt.setError(getResources().getString(R.string.mortgage_input_error_msg));
+                    mortgagePriceETxt.requestFocus();
+                    return;
+                }
+                if (TextUtils.isEmpty(totalRentPrice.getText().toString())) {
+                    totalRentPrice.setError(getResources().getString(R.string.rent_price_input_error_msg));
+                    totalRentPrice.requestFocus();
+                    return;
+                }
+                if (TextUtils.isEmpty(addressETxt.getText().toString())) {
+                    addressETxt.setError(getResources().getString(R.string.address_input_error_msg));
+                    addressETxt.requestFocus();
+                    return;
+                }
 
-//                if (TextUtils.isEmpty(dongETxt.getText().toString())) {
-//                    dongETxt.setError(getResources().getString(R.string.dong_input_error_msg));
-//                    dongETxt.requestFocus();
-//                    return;
-//                }
-//                if (TextUtils.isEmpty(deliveryDate.getText().toString())) {
-//                    deliveryDate.setError(getResources().getString(R.string.date_input_error_msg));
-//                    deliveryDate.requestFocus();
-//                    return;
-//                }
 
                 requestNewModel.setTitle(titleEtx.getText().toString());
                 requestNewModel.setMortgageTotalPrice(mortgagePriceETxt.getText().toString());

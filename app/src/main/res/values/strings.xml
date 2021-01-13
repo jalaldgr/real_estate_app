@@ -106,9 +106,20 @@
     <string name="username_input_error_msg">لطفا نام کاربری را وارد نمایید</string>
     <string name="password_input_error_msg">لطفا گذرواژه خود را وارد نمایید</string>
     <string name="title_input_error_msg">لطفا عنوان را وارد کنید</string>
+    <string name="required_field_msg">تکمیل این فیلد لازم است</string>
+    <string name="required_spinner_select">انتخاب فیلد الزامی است</string>
     <string name="dong_input_error_msg">لطفا دانگ را وارد کنید</string>
-    <string name="price_input_error_msg">لطفا قیمت را انتخاب کنید</string>
+    <string name="price_input_error_msg">لطفا قیمت را وارد کنید</string>
+    <string name="pre_pay_input_error_msg">لطفا پیش پرداخت را وارد کنید</string>
+    <string name="loan_price_input_error_msg">لطفا مبلغ وام را وارد کنید</string>
+    <string name="mortgage_input_error_msg">لطفا قیمت رهن را وارد کنید</string>
+    <string name="rent_price_input_error_msg">لطفا مبلغ اجاره را وارد کنید</string>
+
     <string name="date_input_error_msg">لطفا تاریخ را انتخاب کنید</string>
+    <string name="foundation_space_input_error_msg">لطفا متراژ را وارد کنید</string>
+    <string name="building_year_input_error_msg">لطفا سال ساخت را وارد کنید</string>
+    <string name="description_input_error_msg">لطفا توضیحات را وارد کنید</string>
+
     <string name="date_hint">انتخاب تاریخ</string>
     <string name="spinner_error_msg">انتخاب این فیلد الزامی است</string>
     <string name="address_input_error_msg">لطفا آدرس را وارد کنید</string>

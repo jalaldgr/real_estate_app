@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -85,21 +87,21 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
     NewLandModel requestNewModel= new NewLandModel();
     String   UID;
     EditText titleEtx;
+    EditText spaceFoundationETxt;
     Spinner landCaseSpnr;
     Spinner landTypeSpnr;
     MultiSelectSpinner landUseTypeSpnr;
-    EditText spaceFoundationETxt;
     Spinner provinceSpnr;
     Spinner citySpnr;
     Spinner areaSpnr;
     Spinner districtSpnr;
-    EditText addressETxt;
     Spinner directionSpnr;
     Spinner buildingConditionSpnr;
     Spinner waterSpnr;
     Spinner gasSpnr;
     Spinner electricitySpnr;
     Spinner phoneSpnr;
+    EditText addressETxt;
     EditText descriptionETxt;
     MultiSelectSpinner  equipmentSpnr;
     ExpandableHeightGridView selectedImagesExpandableGrid;
@@ -113,6 +115,31 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
     Button   submitBtn;
     GoogleMap mgoogleMap;
     LatLng mapLatLng;
+
+    boolean firstSelectionProvinceSpinner=false;
+    boolean firstSelectionCitySpinner=false;
+    boolean firstSelectionAreaSpinner=false;
+    boolean firstSelectionDistrictSpinner=false;
+    boolean firstSelectionDirectionSpinner=false;
+    boolean firstSelectionBuildingConditionSpinner=false;
+    boolean firstSelectionWaterSpinner=false;
+    boolean firstSelectionGasSpinner=false;
+    boolean firstSelectionElectricitySpinner=false;
+    boolean firstSelectionPhoneSpinner=false;
+    boolean firstSelectionLandTypeSpinner=false;
+    boolean firstSelectionLandCaseSpinner=false;
+    boolean selectedProvinceSpinner=false;
+    boolean selectedCitySpinner=false;
+    boolean selectedAreaSpinner=false;
+    boolean selectedDistrictSpinner=false;
+    boolean selectedDirectionSpinner=false;
+    boolean selectedBuildingConditionSpinner=false;
+    boolean selectedWaterSpinner=false;
+    boolean selectedGasSpinner=false;
+    boolean selectedElectricitySpinner=false;
+    boolean selectedPhoneSpinner=false;
+    boolean selectedLandTypeSpinner=false;
+
 
     ArrayList<BuildingConditionModel> buildingConditionModels;
     List<String> buildingConditionTitles = new ArrayList<String>();
@@ -242,6 +269,9 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 requestNewModel.setBuildingConditionID( buildingConditionIDs.get(i));
+                if (firstSelectionBuildingConditionSpinner)selectedBuildingConditionSpinner=true;
+                firstSelectionBuildingConditionSpinner=true;
+                Log.d(TAG, "onItemSelected: "+selectedBuildingConditionSpinner);
             }
 
             @Override
@@ -265,6 +295,8 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 requestNewModel.setLandCaseID(landCaseIDs.get(i));
+                if(firstSelectionLandCaseSpinner)firstSelectionLandCaseSpinner=true;
+                firstSelectionLandCaseSpinner=true;
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -285,6 +317,8 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 requestNewModel.setLandTypeID(landTypeIDs.get(i));
+                if(firstSelectionLandTypeSpinner)selectedLandTypeSpinner=true;
+                firstSelectionLandTypeSpinner=true;
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -313,6 +347,8 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
                 cityAdapter = new ArrayAdapter<String>(Objects.requireNonNull(getContext()), android.R.layout.simple_spinner_item, cityTitles);
                 citySpnr.setAdapter(cityAdapter);
                 requestNewModel.setProvinceID( provinceIDs.get(i));
+                if(firstSelectionProvinceSpinner)selectedProvinceSpinner=true;
+                firstSelectionProvinceSpinner=true;
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -323,6 +359,8 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 requestNewModel.setCityID( cityIDs.get(i));
+                if(firstSelectionCitySpinner)selectedCitySpinner=true;
+                firstSelectionCitySpinner=true;
                 ////////////////////// Area Spinner////////////////////////////////
                 areaModels = dbHelper.GetAreasByCityID(cityIDs.get(i));
                 areaTitles.clear();areaIDs.clear();
@@ -343,6 +381,8 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 requestNewModel.setAreaID( areaIDs.get(i));
+                if(firstSelectionAreaSpinner)selectedAreaSpinner=true;
+                firstSelectionAreaSpinner=true;
                 ////////////////////// District Spinner////////////////////////////////
                 districtModels = dbHelper.GetDistrictsByAreaID(areaIDs.get(i));
                 districtIDs.clear();districtTitles.clear();
@@ -364,6 +404,8 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 requestNewModel.setDistrictID( districtIDs.get(i));
+                if(firstSelectionDistrictSpinner)selectedDistrictSpinner=true;
+                selectedDistrictSpinner=true;
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -386,9 +428,55 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 requestNewModel.setDirectionID( landDirectionTypeIDs.get(i));
+                if(firstSelectionDirectionSpinner)selectedDirectionSpinner=true;
+                selectedDirectionSpinner=true;
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        /////////////////////////////water gas eletricy phone spinner///////////////////////////////
+        waterSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(firstSelectionWaterSpinner)selectedWaterSpinner=true;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        gasSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(firstSelectionGasSpinner)selectedGasSpinner=true;
+                firstSelectionGasSpinner=true;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        electricitySpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(firstSelectionElectricitySpinner)selectedElectricitySpinner=true;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        phoneSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(firstSelectionPhoneSpinner)selectedPhoneSpinner=true;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
@@ -468,6 +556,98 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
                     titleEtx.requestFocus();
                     return;
                 }
+                if (TextUtils.isEmpty(spaceFoundationETxt.getText().toString())) {
+                    spaceFoundationETxt.setError(getResources().getString(R.string.foundation_space_input_error_msg));
+                    spaceFoundationETxt.requestFocus();
+                    return;
+                }
+                if (TextUtils.isEmpty(addressETxt.getText().toString())) {
+                    addressETxt.setError(getResources().getString(R.string.address_input_error_msg));
+                    addressETxt.requestFocus();
+                    return;
+                }
+                
+
+//                if(!selectedProvinceSpinner){
+//                    provinceSpnr.setFocusableInTouchMode(true);
+//                    provinceSpnr.requestFocus();
+//                    TextView errorText = (TextView)provinceSpnr.getSelectedView();
+//                    errorText.setTextColor(Color.RED);
+//                    errorText.setText(getResources().getString(R.string.required_spinner_select));
+//                }
+//                if(!selectedCitySpinner){
+//                    citySpnr.setFocusableInTouchMode(true);
+//                    citySpnr.requestFocus();
+//                    TextView errorText = (TextView)citySpnr.getSelectedView();
+//                    errorText.setTextColor(Color.RED);
+//                    errorText.setText(getResources().getString(R.string.required_spinner_select));
+//                }
+//                if(!selectedAreaSpinner){
+//                    areaSpnr.setFocusableInTouchMode(true);
+//                    areaSpnr.requestFocus();
+//                    TextView errorText = (TextView)areaSpnr.getSelectedView();
+//                    errorText.setTextColor(Color.RED);
+//                    errorText.setText(getResources().getString(R.string.required_spinner_select));
+//                }
+//
+//                if(!selectedDistrictSpinner){
+//                    districtSpnr.setFocusableInTouchMode(true);
+//                    directionSpnr.requestFocus();
+//                    TextView errorText = (TextView)districtSpnr.getSelectedView();
+//                    errorText.setTextColor(Color.RED);
+//                    errorText.setText(getResources().getString(R.string.required_spinner_select));
+//                }
+//
+//                if(!selectedDirectionSpinner){
+//                    directionSpnr.setFocusableInTouchMode(true);
+//                    directionSpnr.requestFocus();
+//                    TextView errorText = (TextView)directionSpnr.getSelectedView();
+//                    errorText.setTextColor(Color.RED);
+//                    errorText.setText(getResources().getString(R.string.required_spinner_select));
+//                }
+//
+//                if(!selectedBuildingConditionSpinner){
+//                    buildingConditionSpnr.setFocusableInTouchMode(true);
+//                    buildingConditionSpnr.requestFocus();
+//                    TextView errorText = (TextView)buildingConditionSpnr.getSelectedView();
+//                    errorText.setTextColor(Color.RED);
+//                    errorText.setText(getResources().getString(R.string.required_spinner_select));
+//                }
+//
+//
+//                if(!selectedWaterSpinner){
+//                    waterSpnr.setFocusableInTouchMode(true);
+//                    waterSpnr.requestFocus();
+//                    TextView errorText = (TextView)waterSpnr.getSelectedView();
+//                    errorText.setTextColor(Color.RED);
+//                    errorText.setText(getResources().getString(R.string.required_spinner_select));
+//                }
+//
+//                if(!selectedGasSpinner){
+//                    gasSpnr.setFocusableInTouchMode(true);
+//                    gasSpnr.requestFocus();
+//                    TextView errorText = (TextView)gasSpnr.getSelectedView();
+//                    errorText.setTextColor(Color.RED);
+//                    errorText.setText(getResources().getString(R.string.required_spinner_select));
+//                }
+//
+//                if(!selectedElectricitySpinner){
+//                    electricitySpnr.setFocusableInTouchMode(true);
+//                    electricitySpnr.requestFocus();
+//                    TextView errorText = (TextView)electricitySpnr.getSelectedView();
+//                    errorText.setTextColor(Color.RED);
+//                    errorText.setText(getResources().getString(R.string.required_spinner_select));
+//                }
+//
+//                if(!selectedPhoneSpinner){
+//                    phoneSpnr.setFocusableInTouchMode(true);
+//                    phoneSpnr.requestFocus();
+//                    TextView errorText = (TextView)phoneSpnr.getSelectedView();
+//                    errorText.setTextColor(Color.RED);
+//                    errorText.setText(getResources().getString(R.string.required_spinner_select));
+//                }
+
+
 
                 requestNewModel.setTitle(titleEtx.getText().toString());
                 requestNewModel.setDescription(descriptionETxt.getText().toString());

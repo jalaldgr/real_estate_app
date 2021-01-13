@@ -718,6 +718,33 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
                     deliveryDate.requestFocus();
                     return;
                 }
+                if (TextUtils.isEmpty(spaceFoundationETxt.getText().toString())) {
+                    spaceFoundationETxt.setError(getResources().getString(R.string.foundation_space_input_error_msg));
+                    spaceFoundationETxt.requestFocus();
+                    return;
+                }
+                if (TextUtils.isEmpty(buildingYearETxt.getText().toString())) {
+                    buildingYearETxt.setError(getResources().getString(R.string.building_year_input_error_msg));
+                    buildingYearETxt.requestFocus();
+                    return;
+                }
+                if (TextUtils.isEmpty(debtTotalPriceETxt.getText().toString())) {
+                    debtTotalPriceETxt.setError(getResources().getString(R.string.loan_price_input_error_msg));
+                    debtTotalPriceETxt.requestFocus();
+                    return;
+                }
+                if (TextUtils.isEmpty(prePayPrice.getText().toString())) {
+                    prePayPrice.setError(getResources().getString(R.string.pre_pay_input_error_msg));
+                    prePayPrice.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(addressETxt.getText().toString())) {
+                    addressETxt.setError(getResources().getString(R.string.address_input_error_msg));
+                    addressETxt.requestFocus();
+                    return;
+                }
+
 
                 requestNewModel.setTitle(titleEtx.getText().toString());
                 requestNewModel.setPreDong(dongETxt.getText().toString());
