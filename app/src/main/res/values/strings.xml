@@ -46,6 +46,9 @@
     <string name="app_bar_cities_list">همدان</string>
     <string name="search_min_length_error">لطفا حداقل چهار حرف وارد کنید</string>
     <string name="search_filter_no_item">آگهی با مشخصات مورد نظر یافت نشد</string>
+    <string name="alert_dialog_ok">تایید</string>
+    <string name="alert_dialog_cancel">انصراف</string>
+    <string name="alert_dialog_logout_message">خروج از حساب کاربری</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>

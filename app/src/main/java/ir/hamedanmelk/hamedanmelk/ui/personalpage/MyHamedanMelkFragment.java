@@ -1,6 +1,8 @@
 package ir.hamedanmelk.hamedanmelk.ui.personalpage;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -92,12 +94,25 @@ public class MyHamedanMelkFragment extends PreferenceFragmentCompat {
             loggedInPreference.setExitButtonClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SharedPreferences.Editor editor = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE).edit();
-                    editor.clear().apply();
-                    loggedInPreference.setVisible(false);
-                    user_favorites.setVisible(false);
-                    user_lands.setVisible(false);
-                    notLoggedInPreference.setVisible(true);
+                    AlertDialog.Builder adb = new AlertDialog.Builder(getContext(),R.style.AlertDialogCustom);
+                    adb.setTitle(getResources().getString(R.string.alert_dialog_logout_message));
+                    adb.setIcon(getResources().getDrawable(R.drawable.ic_baseline_exit_to_app_24));
+                    adb.setPositiveButton(getResources().getString(R.string.alert_dialog_ok), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences.Editor editor = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE).edit();
+                            editor.clear().apply();
+                            loggedInPreference.setVisible(false);
+                            user_favorites.setVisible(false);
+                            user_lands.setVisible(false);
+                            notLoggedInPreference.setVisible(true);
+                        }
+                    });
+                    adb.setNegativeButton(getResources().getString(R.string.alert_dialog_cancel), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    adb.show();
+
 
                 }
             });

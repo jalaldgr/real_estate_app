@@ -64,4 +64,10 @@
         <item name="android:theme">@style/Widget.MaterialComponents.CardView</item>
     </style>
 
+    //////////// custom alert dialog logout /////////////////////////
+    <style name="AlertDialogCustom" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:layoutDirection">rtl</item>
+    </style>
+
+
 </resources>
