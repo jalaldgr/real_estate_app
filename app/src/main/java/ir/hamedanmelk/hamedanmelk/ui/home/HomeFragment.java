@@ -16,6 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,7 +63,6 @@ public class HomeFragment extends Fragment {
     ArrayList<LandModel> landModels;
     ArrayList<LandModel> featuredLandModels;
     MYSQlDBHelper dbHelper;
-     WebView  bannerWebView;
     TextView featuredTxt;
     CardView cardView;
      Spinner cityFilterSpnr;
@@ -66,7 +71,7 @@ public class HomeFragment extends Fragment {
      ImageButton submitFilterBtn;
      Button submitSearchBtn;
      EditText searchTxt;
-
+     ImageView bannerImageView;
 
     ArrayList<CityModel> cityModels;
     List<String> cityTitles= new ArrayList<String>();
@@ -99,14 +104,13 @@ public class HomeFragment extends Fragment {
         final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
         dbHelper = new MYSQlDBHelper(getContext());
         featuredTxt = (TextView)root.findViewById(R.id.HomeFragmentFeaturedTxt);
-        bannerWebView=(WebView)root.findViewById(R.id.HomeFragmentWebView);
+        bannerImageView = (ImageView) root.findViewById(R.id.HomeFragmentGiffffffffffff);
         cityFilterSpnr = (Spinner)root.findViewById(R.id.ActionbarSearchFilterCitySpnr) ;
         districtFilterSpnr =(Spinner)root.findViewById(R.id.ActionbarSearchFilterDistrictSpnr);
         landStateFilterSpnr = (Spinner)root.findViewById(R.id.ActionbarSearchFilterLandStateSpnr);
         submitFilterBtn = (ImageButton)root.findViewById(R.id.ActionbarSearchFilterFilterImgBtn);
         submitSearchBtn = (Button)root.findViewById(R.id.ActionbarSearchFilterSearchBtn);
-        bannerWebView.getSettings().setLoadWithOverviewMode(true);
-        bannerWebView.getSettings().setUseWideViewPort(true);
+
         HorizantalrecyclerView = (RecyclerView) root.findViewById(R.id.HomeFrgmntHrzntlRcyclVw);
         VerticalrecyclerView  = (RecyclerView) root.findViewById(R.id.HomeFrgmntVerticalRcyclVw);
         cardView = (CardView)root.findViewById(R.id.HomeFragmentWebCardView);
@@ -225,15 +229,16 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-
-
+//        Glide.with(getContext()).load(R.drawable.banner_placeholder).into(bannerImageView);
+        Glide.with(getContext()).load("file:///android_asset/webview/banner_ad.gif").into(bannerImageView);
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                bannerWebView.loadUrl("file:///android_asset/webview/banner.html");
+//                bannerWebView.loadUrl("file:///android_asset/webview/banner.html");
                 HorizantalrecyclerView.setAdapter(new HomeRecyclerViewAdapter(landModels,getActivity()));
                 VerticalrecyclerView.setAdapter(new HomeVerticalRecyclerViewAdapter(featuredLandModels,getActivity()));
+
             }
         }, 170);
 
