@@ -100,6 +100,7 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
     TextView spaceFoundationTxt ;
     TextView unitInFloor;
     TextView preSaleTotalPriceTxt;
+    TextView preSaleSpacePrice;
     TextView landCaseTxt;
     TextView voucherTypeTxt;
     TextView landStateTxt;
@@ -162,6 +163,7 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
         spaceFoundationTxt = (TextView)view.findViewById(R.id.SinglePreSaleFoundationSpaceTxt);
         districtTxt =(TextView)view.findViewById(R.id.SinglePreSaleDistrictTxt);
         preSaleTotalPriceTxt = (TextView)view.findViewById(R.id.SinglePreSaleTotalPriceTxt);
+        preSaleSpacePrice = (TextView)view.findViewById(R.id.SinglePreSaleSpacePriceTxt);
         unitInFloor = (TextView)view.findViewById(R.id.SinglePreSaleUnitInfloorTxt);
         addressTxt = (TextView)view.findViewById(R.id.SinglePreSaleAddressTxt);
         provinceTxt = (TextView)view.findViewById(R.id.SinglePreSaleProvinceTxt);
@@ -324,6 +326,9 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
                         floorCountTxt.setText(responseData.getString(Constants.LAND_INFO_FLOOR_COUNT));
                         spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE)+ "  متر مربع");
                         preSaleTotalPriceTxt.setText(new DecimalFormat("###,###,###").format(Integer.parseInt(responseData.getString(Constants.LAND_INFO_SALE_TOTAL_PRICE)))+ "  تومان");
+                        if(Long.parseLong(responseData.getString(Constants.LAND_INFO_SPACE_PRICE))>0) {
+                            preSaleSpacePrice.setText(new DecimalFormat("###,###,###").format(Long.parseLong(responseData.getString(Constants.LAND_INFO_SPACE_PRICE)))+" تومان");
+                        }
                         LandCaseTypeModel landCaseTypeModel = qlDBHelper.GetLandCaseTypeByID(responseData.getString(Constants.LAND_INFO_LAND_CASE_ID));
                         landCaseTxt.setText(landCaseTypeModel.getTitle());
                         VoucherModel voucherModel = qlDBHelper.GetVoucherByID(responseData.getString(Constants.LAND_INFO_VOUCHER_TYPE_ID));

@@ -97,6 +97,7 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
     TextView floorCountTxt ;
     TextView spaceFoundationTxt;
     TextView saleTotalPriceTxt;
+    TextView saleSpacePriceTxt;
     TextView debtTotalProceTxt;
     TextView loanTypeTxt;
     TextView landDirectionTxt;
@@ -164,6 +165,7 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
         roomCountTxt = (TextView)view.findViewById(R.id.SingleSaleRoomCountTxt);
         spaceFoundationTxt = (TextView)view.findViewById(R.id.SingleSaleFoundationSpaceTxt);
         saleTotalPriceTxt  =(TextView)view.findViewById(R.id.SingleSaleTotalPriceTxt);
+        saleSpacePriceTxt = (TextView)view.findViewById(R.id.SingleSaleSpacePriceTxt);
         debtTotalProceTxt = (TextView)view.findViewById(R.id.SingleLoanTotalPriceTxt);
         loanTypeTxt = (TextView)view.findViewById(R.id.SingleLoanTypeTxt);
         landDirectionTxt = (TextView)view.findViewById(R.id.SingleSaleLandDirectionTxt);
@@ -325,6 +327,9 @@ public class SingleSaleFragment extends Fragment implements OnMapReadyCallback {
                         spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE));
                         if(Long.parseLong(responseData.getString(Constants.LAND_INFO_SALE_TOTAL_PRICE))>0) {
                             saleTotalPriceTxt.setText(new DecimalFormat("###,###,###").format(Long.parseLong(responseData.getString(Constants.LAND_INFO_SALE_TOTAL_PRICE)))+" تومان");
+                        }
+                        if(Long.parseLong(responseData.getString(Constants.LAND_INFO_SPACE_PRICE))>0) {
+                            saleTotalPriceTxt.setText(new DecimalFormat("###,###,###").format(Long.parseLong(responseData.getString(Constants.LAND_INFO_SPACE_PRICE)))+" تومان");
                         }
                         if(Long.parseLong(responseData.getString(Constants.LAND_INFO_DEBT_TOTAL_PRICE))>0) {
                             debtTotalProceTxt.setText(new DecimalFormat("###,###,###").format(Long.parseLong(responseData.getString(Constants.LAND_INFO_DEBT_TOTAL_PRICE)))+" تومان");
