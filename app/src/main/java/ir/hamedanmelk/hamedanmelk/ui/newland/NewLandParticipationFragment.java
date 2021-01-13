@@ -319,20 +319,25 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
             }
         });
 
-
-        ////////////////////// City Spinner////////////////////////////////
         citySpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 requestNewModel.setCityID( cityIDs.get(i));
                 ////////////////////// Area Spinner////////////////////////////////
-
-
+                areaModels = dbHelper.GetAreasByCityID(cityIDs.get(i));
+                areaTitles.clear();areaIDs.clear();
+                for(AreaModel item : areaModels){
+                    areaTitles.add(item.getTitle());
+                    areaIDs.add(item.getId());
+                }
+                areaAdapter = new ArrayAdapter<String>(Objects.requireNonNull(getContext()), android.R.layout.simple_spinner_item, areaTitles);
+                areaSpnr.setAdapter(areaAdapter);
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
 
         areaSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -354,7 +359,7 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
             }
         });
 
-
+        ////////////////////// District Spinner////////////////////////////////
         districtSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
