@@ -1,6 +1,5 @@
-package ir.hamedanmelk.hamedanmelk;
+package ir.hamedanmelk.hamedanmelk.ui.newland;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -21,10 +20,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 
-import java.io.BufferedInputStream;
-import java.security.spec.MGF1ParameterSpec;
 import java.util.Objects;
 
+import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 
 import static android.content.Context.MODE_PRIVATE;
