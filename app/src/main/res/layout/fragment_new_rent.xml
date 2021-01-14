@@ -15,6 +15,30 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/NewLandRentFragmentAddPhotoBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:drawableTop="@drawable/ic_baseline_add_photo_alternate_48"
+            android:padding="8dp"
+            android:text="@string/new_land_add_photo"
+            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+        <ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView
+            android:id="@+id/NewLandRentFragmentGalleryExpandableGrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:numColumns="3"
+            android:scrollbars="none"
+            tools:listitem="@layout/selected_image_gallery">
+        </ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/NewLandRentFragmentTitleLayout"
             android:layout_width="match_parent"
@@ -848,31 +872,7 @@
         </FrameLayout>
 
 
-        <Button
-            android:id="@+id/NewLandRentFragmentAddPhotoBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:drawableTop="@drawable/ic_baseline_add_photo_alternate_48"
-            android:padding="8dp"
-            android:text="@string/new_land_add_photo"
-            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
-        <ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView
-            android:id="@+id/NewLandRentFragmentGalleryExpandableGrid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:numColumns="3"
-            android:scrollbars="none"
-            tools:listitem="@layout/selected_image_gallery">
-
-
-        </ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView>
 
         <Button
             android:id="@+id/NewLandRentFragmentSubmitBtn"
