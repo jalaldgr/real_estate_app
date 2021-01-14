@@ -1,6 +1,7 @@
 package ir.hamedanmelk.hamedanmelk.ui.newland;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.text.NoCopySpan;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,8 +50,25 @@ public class SelectedImageRecyclerViewAdapter extends BaseAdapter {
         }
         final ImageView  galleryItemImg = (ImageView)view.findViewById(R.id.GalleryAdapterImg);
         ImageView clearImage = (ImageView) view.findViewById(R.id.GalleryAdapterClearImg);
+        TextView featuredTxt = (TextView)view.findViewById(R.id.GalleryAdapterFeaturedTxt);
         Glide.with(activity).load(imageModels.get(position).getImageUri()).into(galleryItemImg);
 
+        if(position==0){
+            featuredTxt.setText(activity.getResources().getString(R.string.vocabulary_featured_image));
+            Drawable img = activity.getResources().getDrawable(R.drawable.ic_baseline_featured_video_24);
+            img.setBounds(0, 0, 60, 60);
+            featuredTxt.setCompoundDrawables(img, null, null, null);
+        }
+        featuredTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImageModel temp = imageModels.get(position);
+                imageModels.remove(position);
+                imageModels.add(0,temp);
+                notifyDataSetChanged();
+
+            }
+        });
         clearImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

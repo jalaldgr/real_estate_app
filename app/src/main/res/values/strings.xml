@@ -229,6 +229,9 @@
     <string name="vocabulary_base_floor">همکف</string>
     <string name="vocabulary_yes">بله</string>
     <string name="vocabulary_no_o_yes">خیر</string>
+    <string name="vocabulary_featured_image">عکس شاخص</string>
+    <string name="vocabulary_select_featured_image">انتخاب</string>
+
 
     <string name="new_land_use_types">نوع کاربری</string>
     <string name="new_land_is_exchange">قابل معاوضه</string>
