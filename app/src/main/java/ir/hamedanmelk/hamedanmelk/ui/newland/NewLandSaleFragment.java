@@ -20,8 +20,11 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -109,6 +112,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import saman.zamani.persiandate.PersianDate;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 public class NewLandSaleFragment extends Fragment  implements OnMapReadyCallback, DatePickerDialog.OnDateSetListener{
 
     public static final int PICK_IMAGES = 5;
@@ -154,7 +159,7 @@ public class NewLandSaleFragment extends Fragment  implements OnMapReadyCallback
     EditText descriptionETxt;
     MapView landMapView;
     ExpandableHeightGridView selectedImagesExpandableGrid;
-
+    LinearLayout mainlinearLayout;
     DatePickerDialog datePicker;
     Date grgDate;
     PersianDate persianDate;
@@ -322,10 +327,17 @@ public class NewLandSaleFragment extends Fragment  implements OnMapReadyCallback
         persianDate = new PersianDate();
         datePicker = new DatePickerDialog();
         datePicker.setMinDate(persianCalendar);
-
+        mainlinearLayout = (LinearLayout)view.findViewById(R.id.NewSalemainLaouyt) ;
         ///////////////////////Read inputs/////////////////////////////
 
-
+        mainlinearLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                return false;
+            }
+        });
 ///////////////////////////Load map//////////////////////////////////////////////
         loadMap();
 

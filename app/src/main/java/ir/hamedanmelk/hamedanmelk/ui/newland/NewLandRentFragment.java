@@ -18,8 +18,10 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -105,6 +107,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import saman.zamani.persiandate.PersianDate;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback{
 
     public static final int PICK_IMAGES = 5;
@@ -161,7 +165,7 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
     Button addPhotoBtn;
     Button addMapBtn;
     Button   submitBtn;
-
+    LinearLayout mainlinearlayout;
     GoogleMap mgoogleMap;
     private Marker mapMarker;
     private LatLng mapLatLng = new LatLng(Constants.MAP_MEYDAN_LAT,Constants.MAP_MEYDAN_LNG);
@@ -320,12 +324,20 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
         addPhotoBtn = (Button)view.findViewById(R.id.NewLandRentFragmentAddPhotoBtn);
         addMapBtn = (Button)view.findViewById(R.id.NewLandRentFragmentAddMapBtn);
         selectedImagesExpandableGrid = (ExpandableHeightGridView)view.findViewById(R.id.NewLandRentFragmentGalleryExpandableGrid);
+        mainlinearlayout = (LinearLayout)view.findViewById(R.id.NewRentmainLaouyt);
         ///////////////////////Read inputs/////////////////////////////
 
 
 ///////////////////////////Load map//////////////////////////////////////////////
         loadMap();
-
+        mainlinearlayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                return false;
+            }
+        });
 ////////////////////// Building Conditions Spinner////////////////////////////////
         buildingConditionModels = dbHelper.GetBuildingConditionsList();
         for (BuildingConditionModel Item : buildingConditionModels) {

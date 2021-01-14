@@ -10,6 +10,7 @@
 
 
     <LinearLayout
+        android:id="@+id/NewPreSalemainLaouyt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -677,8 +678,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/NewLandPreSaleFragmentDeliveryDateETxt"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                         />
+                        android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </LinearLayout>
@@ -942,8 +942,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            android:layout_margin="8dp"
-            >
+            android:layout_margin="8dp">
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/mapView"
@@ -975,12 +974,12 @@
             android:id="@+id/NewLandPreSaleFragmentGalleryExpandableGrid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_margin="8dp"
             android:numColumns="3"
             android:scrollbars="none"
-            android:layout_gravity="center"
             tools:listitem="@layout/selected_image_gallery">
 
 

@@ -10,6 +10,7 @@
 
 
     <LinearLayout
+        android:id="@+id/NewSalemainLaouyt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -107,12 +108,12 @@
                     android:layout_height="match_parent"
                     android:hint="@string/land_info_foundation_space">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/NewLandSaleFragmentFoundationSpaceTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/NewLandSaleFragmentFoundationSpaceTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -319,21 +320,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_weight="0.5"
-                android:orientation="vertical"
-                android:layout_marginLeft="8dp">
+                android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/vocabulary_building_year">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/NewLandSaleFragmentBuildingYearTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/NewLandSaleFragmentBuildingYearTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -350,10 +351,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_weight="0.5"
-                android:orientation="vertical"
-                android:layout_marginLeft="8dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -382,10 +383,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_weight="0.5"
-                android:orientation="vertical"
-                android:layout_marginLeft="8dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -405,10 +406,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_weight="0.5"
-                android:orientation="vertical"
-                android:layout_marginLeft="8dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -477,11 +478,11 @@
                     android:layout_height="match_parent"
                     android:hint="@string/new_land_loan_total_price">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/NewLandSaleFragmentDebtTotalPriceTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/NewLandSaleFragmentDebtTotalPriceTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -545,11 +546,11 @@
                     android:layout_height="match_parent"
                     android:hint="@string/vocabulary_total_price">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/NewLandSaleFragmentTotalPriceTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/NewLandSaleFragmentTotalPriceTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </LinearLayout>
@@ -575,11 +576,11 @@
                     android:layout_height="match_parent"
                     android:hint="@string/vocabulary_dong">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/NewLandSaleFragmentDongTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/NewLandSaleFragmentDongTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 

@@ -9,6 +9,7 @@
     tools:context=".ui.lawyer.NewLawyerFragment">
 
     <LinearLayout
+        android:id="@+id/NewLawyermainLaouyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
@@ -44,11 +45,9 @@
                 android:id="@+id/NewLawyerFragmentPhoneEtxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/land_info_phone" />
+                android:hint="@string/land_info_phone"
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
         <Button

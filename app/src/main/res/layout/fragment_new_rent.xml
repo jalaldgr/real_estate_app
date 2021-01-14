@@ -10,6 +10,7 @@
 
 
     <LinearLayout
+        android:id="@+id/NewRentmainLaouyt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -370,39 +371,41 @@
             </LinearLayout>
 
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
-            android:layout_weight="0.5"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/vocabulary_equipment"
-                android:textColor="@color/textview_lable"
-                android:textSize="@dimen/smal_text_size" />
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
 
-            <io.apptik.widget.multiselectspinner.MultiSelectSpinner
-                android:id="@+id/NewLandRentFragmentEquipmentsSpnr"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vocabulary_equipment"
+                    android:textColor="@color/textview_lable"
+                    android:textSize="@dimen/smal_text_size" />
+
+                <io.apptik.widget.multiselectspinner.MultiSelectSpinner
+                    android:id="@+id/NewLandRentFragmentEquipmentsSpnr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary" />
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -810,8 +813,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/NewLandRentFragmentAddressTxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                 />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -824,8 +826,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/NewLandRentFragmentDescriptionTxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                 />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <FrameLayout
@@ -835,8 +836,7 @@
             <com.google.android.gms.maps.MapView
                 android:id="@+id/mapView"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                />
+                android:layout_height="fill_parent" />
 
             <Button
                 android:id="@+id/NewLandRentFragmentAddMapBtn"
@@ -863,16 +863,17 @@
             android:id="@+id/NewLandRentFragmentGalleryExpandableGrid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_margin="8dp"
             android:numColumns="3"
             android:scrollbars="none"
-            android:layout_gravity="center"
             tools:listitem="@layout/selected_image_gallery">
 
 
         </ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView>
+
         <Button
             android:id="@+id/NewLandRentFragmentSubmitBtn"
             android:layout_width="match_parent"
@@ -880,8 +881,7 @@
             android:layout_gravity="center"
             android:layout_margin="8dp"
             android:text="@string/new_land_submit"
-            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton"
-             />
+            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
 

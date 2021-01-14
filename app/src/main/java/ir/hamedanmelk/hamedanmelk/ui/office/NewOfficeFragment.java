@@ -21,8 +21,10 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -76,6 +78,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Url;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 public class NewOfficeFragment extends Fragment {
 
     private static final String TAG ="NewCompanyFragment";
@@ -112,6 +116,8 @@ public class NewOfficeFragment extends Fragment {
     Button  addPhotoBtn;
     ImageView clearImg;
     ImageView logoImg;
+    LinearLayout mainlinearLayout;
+
     ArrayList<ProvinceModel> provinceModels ;
     List<String> provinceTitles= new ArrayList<String>();
     List<String> provinceIDs= new ArrayList<String>();
@@ -166,6 +172,16 @@ public class NewOfficeFragment extends Fragment {
         addPhotoBtn = (Button)view.findViewById(R.id.NewofficeFragmentAddPhotoBtn);
         clearImg = (ImageView)view.findViewById(R.id.NewofficeFragmentClearImg);
         imageLyt = (LinearLayout)view.findViewById(R.id.NewofficeFragmentImageLyt);
+        mainlinearLayout = (LinearLayout)view.findViewById(R.id.NewOfficemainLaouyt);
+
+        mainlinearLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                return false;
+            }
+        });
 //////////////////////Select parent Company////////////////////////////////
         provinceModels =dbHelper.GetProvincesList();
         for(ProvinceModel item : provinceModels){

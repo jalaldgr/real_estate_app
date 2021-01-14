@@ -1,6 +1,7 @@
 package ir.hamedanmelk.hamedanmelk.ui.newland;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -12,12 +13,15 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,6 +81,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import saman.zamani.persiandate.PersianDate;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 public class NewLandParticipationFragment extends Fragment  implements OnMapReadyCallback, DatePickerDialog.OnDateSetListener{
 //    private RequestQueue myRequestQueue;
 //    private JsonObjectRequest myJsonObjectRequest;
@@ -115,7 +121,7 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
     Button   submitBtn;
     GoogleMap mgoogleMap;
     LatLng mapLatLng;
-
+    LinearLayout mainlinearLayout;
     boolean firstSelectionProvinceSpinner=false;
     boolean firstSelectionCitySpinner=false;
     boolean firstSelectionAreaSpinner=false;
@@ -252,10 +258,19 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
         selectedImagesExpandableGrid = (ExpandableHeightGridView)view.findViewById(R.id.NewLandParticipationFragmentGalleryExpandableGrid);
         addPhotoBtn = (Button)view.findViewById(R.id.NewLandParticipationFragmentAddPhotoBtn);
         addMapBtn= (Button)view.findViewById(R.id.NewLandParticipationFragmentAddMapBtn);
-
+        mainlinearLayout = (LinearLayout)view.findViewById(R.id.NewParticipationmainLaouyt);
 ///////////////////////////Load map//////////////////////////////////////////////
         loadMap();
 
+        mainlinearLayout.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                return false;
+            }
+        });
 ////////////////////// Building Conditions Spinner////////////////////////////////
         buildingConditionModels = dbHelper.GetBuildingConditionsList();
         for (BuildingConditionModel Item : buildingConditionModels) {

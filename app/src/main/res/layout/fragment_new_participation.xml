@@ -10,6 +10,7 @@
 
 
     <LinearLayout
+        android:id="@+id/NewParticipationmainLaouyt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -48,11 +49,11 @@
                     android:layout_height="match_parent"
                     android:hint="@string/land_info_foundation_space">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/NewLandParticipationFragmentFoundationSpaceTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/NewLandParticipationFragmentFoundationSpaceTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -515,8 +516,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/NewLandParticipationFragmentAddressTxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                 />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -531,8 +531,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/NewLandParticipationFragmentDescriptionTxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                 />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <FrameLayout
@@ -571,16 +570,17 @@
             android:id="@+id/NewLandParticipationFragmentGalleryExpandableGrid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_margin="8dp"
             android:numColumns="3"
             android:scrollbars="none"
-            android:layout_gravity="center"
             tools:listitem="@layout/selected_image_gallery">
 
 
         </ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView>
+
         <Button
             android:id="@+id/NewLandParticipationFragmentSubmitBtn"
             android:layout_width="match_parent"

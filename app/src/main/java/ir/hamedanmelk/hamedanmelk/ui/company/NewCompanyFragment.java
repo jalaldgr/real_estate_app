@@ -25,8 +25,10 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -70,6 +72,8 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 public class NewCompanyFragment extends Fragment {
 
     private static final String TAG ="NewCompanyFragment";
@@ -96,6 +100,7 @@ public class NewCompanyFragment extends Fragment {
     ImageView clearImg;
     ImageView logoImg;
     LinearLayout imageLyt;
+    LinearLayout mainlinearlayout;
 
     HashMap<String, String> requestBodyTextFields = new HashMap<>();
     HashMap<String, String> requestBodyImageFields = new HashMap<>();
@@ -138,7 +143,17 @@ public class NewCompanyFragment extends Fragment {
         clearImg = (ImageView)view.findViewById(R.id.NewCompanyFragmentClearImg);
         addPhotoBtn = (Button)view.findViewById(R.id.NewCompanyFragmentAddPhotoBtn);
         imageLyt = (LinearLayout)view.findViewById(R.id.NewCompanyFragmentImageLyt);
+        mainlinearlayout = (LinearLayout)view.findViewById(R.id.NewCompanymainLaouyt);
 
+
+        mainlinearlayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                return false;
+            }
+        });
 //////////////////////Select parent Company////////////////////////////////
         parentCompanyModels =dbHelper.GetParentCompanyTypes();
         for(CompanyTypeModel companyItem : parentCompanyModels){

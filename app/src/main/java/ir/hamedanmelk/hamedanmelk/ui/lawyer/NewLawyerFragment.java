@@ -12,8 +12,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -52,6 +54,8 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 public class NewLawyerFragment extends Fragment {
 
     private static final String TAG ="NewLawyerFragment";
@@ -73,6 +77,7 @@ public class NewLawyerFragment extends Fragment {
     ImageView clearImg;
     ImageView logoImg;
     LinearLayout imageLyt;
+    LinearLayout mainlinearLayout;
 
     public NewLawyerFragment() {
         // Required empty public constructor
@@ -101,7 +106,18 @@ public class NewLawyerFragment extends Fragment {
         clearImg = (ImageView)view.findViewById(R.id.NewLawyerFragmentClearImg);
         addPhotoBtn = (Button)view.findViewById(R.id.NewLawyerFragmentAddPhotoBtn);
         imageLyt = (LinearLayout)view.findViewById(R.id.NewLawyerFragmentImageLyt);
+        mainlinearLayout = (LinearLayout)view.findViewById(R.id.NewLawyermainLaouyt);
 
+
+
+        mainlinearLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                return false;
+            }
+        });
 //////////////////////Select parent Company////////////////////////////////
  /////////////////////////PickUp Image///////////////////////////////////
 
