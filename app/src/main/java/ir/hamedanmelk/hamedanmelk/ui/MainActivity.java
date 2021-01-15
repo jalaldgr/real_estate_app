@@ -80,13 +80,13 @@ public class MainActivity extends AppCompatActivity {
                     ActionBar actionBar = getSupportActionBar();
                     actionBar.setDisplayHomeAsUpEnabled(false);
                     actionBar.setDisplayShowTitleEnabled(false);
-                    actionBar.setShowHideAnimationEnabled(true);
+                    actionBar.setShowHideAnimationEnabled(false);
                     actionBar.hide();
                 } else {
                     ActionBar actionBar = getSupportActionBar();
                     actionBar.setDisplayHomeAsUpEnabled(true);
                     actionBar.setDisplayShowTitleEnabled(true);
-                    actionBar.setShowHideAnimationEnabled(true);
+                    actionBar.setShowHideAnimationEnabled(false);
                     actionBar.show();
                 }
             }
