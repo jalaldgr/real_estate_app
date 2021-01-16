@@ -514,12 +514,12 @@
             android:layout_margin="8dp"
             app:cardCornerRadius="4dp">
 
-            <fragment
+            <FrameLayout
                 android:id="@+id/SingleParticipationEnergyFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 class="ir.hamedanmelk.hamedanmelk.ui.single.GetLandEnergyFragment">
-            </fragment>
+            </FrameLayout>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
