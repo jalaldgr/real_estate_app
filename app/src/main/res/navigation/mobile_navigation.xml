@@ -234,5 +234,10 @@
         android:label="fragment_get_land_energy"
         tools:layout="@layout/fragment_get_land_energy">
     </fragment>
+    <fragment
+        android:id="@+id/proSearchFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.home.ProSearchFragment"
+        android:label="@string/pro_search_title"
+        tools:layout="@layout/fragment_pro_search" />
 
 </navigation>

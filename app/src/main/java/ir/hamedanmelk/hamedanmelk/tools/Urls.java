@@ -50,6 +50,11 @@ public class Urls {
     private static final String SearchInAds                             = "/AppRequests/SearchInAds";
     private static final String GetLandEnergy                           = "/AppRequests/GetLandEnergy";
     private static final String SearchInAdsWithText                     = "/AppRequests/SearchInAdsWithText";
+    private static final String ProSearch                               = "/AppRequests/ProSearch";
+
+    public static String getProSearch() {
+        return ProSearch;
+    }
 
     public static String getSearchInAdsWithText() {
         return SearchInAdsWithText;

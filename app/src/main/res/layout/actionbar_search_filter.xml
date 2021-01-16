@@ -69,7 +69,8 @@
             android:layout_weight="1"
             android:autofillHints="جست و جو"
             android:hint="@string/app_bar_search_title"
-            android:inputType="text" />
+            android:inputType="text"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/ActionbarSearchFilterSearchBtn"
@@ -79,6 +80,23 @@
             android:layout_weight="1"
             android:drawableLeft="@drawable/ic_search_black_24dp"
             android:text="@string/search_filter_submit"
+            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/ActionbarSearchFilterProSearchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/pro_search_title"
+            android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+        <Button
+            android:id="@+id/ActionbarSearchFilterClearBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/search_filter_clear"
             android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
     </LinearLayout>

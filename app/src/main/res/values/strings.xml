@@ -42,10 +42,12 @@
     <string name="no_internet_error_description">لطفا اتصال اینترنت را چک کرده و دوباره امتحان کنید</string>
     <string name="no_internet_error_retry">امتحان دوباره</string>
     <string name="app_bar_search_title">جست و جو در همه آگهی ها</string>
-    <string name="search_filter_clear">پاک کن</string>
+    <string name="search_filter_clear">حذف فیلتر</string>
     <string name="app_bar_cities_list">همدان</string>
     <string name="search_min_length_error">لطفا حداقل چهار حرف وارد کنید</string>
     <string name="search_filter_no_item">آگهی با مشخصات مورد نظر یافت نشد</string>
+    <string name="pro_filter_submit">اعمال</string>
+    <string name="pro_search_title">جستوجو پیشرفته</string>
     <string name="alert_dialog_ok">تایید</string>
     <string name="alert_dialog_cancel">انصراف</string>
     <string name="alert_dialog_logout_message">خروج از حساب کاربری</string>
@@ -190,6 +192,7 @@
     <!--        User model in Shared Preference-->
     <string name="user_shared_preference">user_model_pref</string>
     <string name="new_land_pref">new_land_shared_prefrence</string>
+    <string name="pro_filter_pref">pro_filter_pref</string>
     <string name="vocabulary_title">عنوان</string>
     <string name="vocabulary_district">محله</string>
     <string name="vocabulary_total_price">قیمت</string>
@@ -231,7 +234,8 @@
     <string name="vocabulary_no_o_yes">خیر</string>
     <string name="vocabulary_featured_image">عکس شاخص</string>
     <string name="vocabulary_select_featured_image">انتخاب</string>
-
+    <string name="vocabulary_from">از</string>
+    <string name="vocabulary_to">تا</string>
 
     <string name="new_land_use_types">نوع کاربری</string>
     <string name="new_land_is_exchange">قابل معاوضه</string>
