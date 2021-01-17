@@ -6,11 +6,15 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.Constraints;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 
 import org.json.JSONArray;
@@ -22,6 +26,7 @@ import java.util.HashMap;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.LinksModel;
+import ir.hamedanmelk.hamedanmelk.tools.CheckConnectivity;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
@@ -33,6 +38,8 @@ import ir.hamedanmelk.hamedanmelk.ui.category.LinksItemAdapter;
 public class LinksFragment extends Fragment {
 private static final String TAG = "LinksFragment";
 GridView linksGridView;
+    FrameLayout offlineLyt;
+    Button noInternetBtn;
     public LinksFragment() {
         // Required empty public constructor
     }
@@ -49,7 +56,24 @@ GridView linksGridView;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_links, container, false);
+        final CheckConnectivity checkConnectivity = new CheckConnectivity();
         linksGridView = (GridView)view.findViewById(R.id.LinksFragmentGridView);
+        offlineLyt = (FrameLayout)view.findViewById(R.id.links_listOfflineLyt);
+        noInternetBtn = (Button)view.findViewById(R.id.no_internet_fragment_button_retry);
+
+        if(!checkConnectivity.isNetworkAvailable(getActivity())){
+            offlineLyt.setVisibility(View.VISIBLE);
+        }
+        noInternetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkConnectivity.isNetworkAvailable(getActivity())) {
+                    offlineLyt.setVisibility(View.GONE);
+                    GetLinksRequest(getContext());
+                }
+
+            }
+        });
         GetLinksRequest(getContext());
         return view;
     }

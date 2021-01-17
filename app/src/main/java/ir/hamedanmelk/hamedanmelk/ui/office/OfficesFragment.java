@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +25,7 @@ import java.util.HashMap;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.CompanyModel;
 import ir.hamedanmelk.hamedanmelk.models.OfficeModel;
+import ir.hamedanmelk.hamedanmelk.tools.CheckConnectivity;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
@@ -45,7 +48,8 @@ public class OfficesFragment extends Fragment {
     private String areaID;
     private String districtID;
     RecyclerView recyclerView;
-
+    FrameLayout offlineLyt;
+    Button noInternetBtn;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -86,13 +90,27 @@ public class OfficesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_offices, container, false);
-        if(view instanceof RecyclerView){
-            Context context = getContext();
-            recyclerView = (RecyclerView)view.findViewById(R.id.list_Office);
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        }
-         GetOfficesRequest(getContext());
+        final CheckConnectivity checkConnectivity = new CheckConnectivity();
 
+        recyclerView = (RecyclerView)view.findViewById(R.id.list_Office);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        offlineLyt = (FrameLayout)view.findViewById(R.id.office_listOfflineLyt);
+        noInternetBtn = (Button)view.findViewById(R.id.no_internet_fragment_button_retry);
+
+        if(!checkConnectivity.isNetworkAvailable(getActivity())){
+            offlineLyt.setVisibility(View.VISIBLE);
+        }
+        noInternetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkConnectivity.isNetworkAvailable(getActivity())) {
+                    offlineLyt.setVisibility(View.GONE);
+                    GetOfficesRequest(getContext());
+                }
+
+            }
+        });
+        GetOfficesRequest(getContext());
         return view;
     }
 

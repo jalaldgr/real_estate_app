@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/rent_listOfflineLyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <include
+            layout="@layout/fragment_no_internet_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout><androidx.recyclerview.widget.RecyclerView
     android:id="@+id/FragmentRentlist"
     android:name="ir.hamedanmelk.hamedanmelk.ui.category.RentFragment"
     android:layout_width="match_parent"
@@ -9,3 +24,4 @@
     android:layout_marginBottom="60dp"
     tools:context=".ui.category.RentFragment"
     tools:listitem="@layout/fragment_rent_item" />
+</LinearLayout>

@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +28,7 @@ import ir.hamedanmelk.hamedanmelk.models.AssignmentModel;
 import ir.hamedanmelk.hamedanmelk.models.LandModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.HomeRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.recyclers.ParticipationRecyclerViewAdapter;
+import ir.hamedanmelk.hamedanmelk.tools.CheckConnectivity;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
@@ -46,6 +49,9 @@ public class ParticipationFragment extends Fragment {
     ArrayList<AssignmentModel> assignmentModels;
 
     RecyclerView recyclerView;
+    FrameLayout  offlineLyt;
+    Button noInternetBtn;
+
     private String mParam1;
     private String mParam2;
 
@@ -86,11 +92,26 @@ public class ParticipationFragment extends Fragment {
         // Inflate the layout for this fragment
         TotalAssignmentRequest(getContext());
         View view =  inflater.inflate(R.layout.fragment_participation, container, false);
-        if(view instanceof RecyclerView){
-            Context context = getContext();
-            recyclerView = (RecyclerView)view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        }
+        final CheckConnectivity checkConnectivity = new CheckConnectivity();
+
+            recyclerView = (RecyclerView)view.findViewById(R.id.ParticipationFragmentlist);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            offlineLyt = (FrameLayout)view.findViewById(R.id.ParticipationFragmentOffilneLyt);
+            noInternetBtn = (Button)view.findViewById(R.id.no_internet_fragment_button_retry);
+
+            if(!checkConnectivity.isNetworkAvailable(getActivity())){
+                offlineLyt.setVisibility(View.VISIBLE);
+            }
+            noInternetBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(checkConnectivity.isNetworkAvailable(getActivity())) {
+                        offlineLyt.setVisibility(View.GONE);
+                        TotalAssignmentRequest(getContext());
+                    }
+
+                }
+            });
         return view;
     }
 

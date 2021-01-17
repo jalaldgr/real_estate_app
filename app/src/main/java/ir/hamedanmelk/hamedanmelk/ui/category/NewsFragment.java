@@ -7,9 +7,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +25,7 @@ import java.util.HashMap;
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.LinksModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.NewsModel;
+import ir.hamedanmelk.hamedanmelk.tools.CheckConnectivity;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
@@ -31,6 +36,8 @@ import ir.hamedanmelk.hamedanmelk.tools.Urls;
 public class NewsFragment extends Fragment {
 private static final String TAG = "NewsFragment";
 GridView newsGridView;
+    FrameLayout offlineLyt;
+    Button noInternetBtn;
     public NewsFragment() {
         // Required empty public constructor
     }
@@ -49,6 +56,26 @@ GridView newsGridView;
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         newsGridView = (GridView)view.findViewById(R.id.NewsFragmentGridView);
         GetNewsRequest(getContext());
+
+        final CheckConnectivity checkConnectivity = new CheckConnectivity();
+
+        offlineLyt = (FrameLayout)view.findViewById(R.id.news_listOfflineLyt);
+        noInternetBtn = (Button)view.findViewById(R.id.no_internet_fragment_button_retry);
+
+        if(!checkConnectivity.isNetworkAvailable(getActivity())){
+            offlineLyt.setVisibility(View.VISIBLE);
+        }
+        noInternetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkConnectivity.isNetworkAvailable(getActivity())) {
+                    offlineLyt.setVisibility(View.GONE);
+                    GetNewsRequest(getContext());
+                }
+
+            }
+        });
+
         return view;
     }
 

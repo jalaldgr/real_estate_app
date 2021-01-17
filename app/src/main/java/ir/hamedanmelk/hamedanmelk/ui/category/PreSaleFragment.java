@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +28,7 @@ import ir.hamedanmelk.hamedanmelk.models.LandModel;
 import ir.hamedanmelk.hamedanmelk.models.PreSaleModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.HomeRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.recyclers.PreSaleRecyclerViewAdapter;
+import ir.hamedanmelk.hamedanmelk.tools.CheckConnectivity;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
@@ -45,6 +48,8 @@ public class PreSaleFragment extends Fragment {
     ArrayList<PreSaleModel> preSaleModels;
     ArrayList<LandModel> landModels;
     RecyclerView recyclerView;
+    FrameLayout offlineLyt;
+    Button noInternetBtn;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -86,10 +91,26 @@ public class PreSaleFragment extends Fragment {
         Context context=getContext();
         PreSaleRequest(context);
         View view = inflater.inflate(R.layout.fragment_presale, container, false);
-        if(view instanceof RecyclerView){
-            recyclerView = (RecyclerView)view;
+        final CheckConnectivity checkConnectivity = new CheckConnectivity();
+
+            recyclerView = (RecyclerView)view.findViewById(R.id.presale_list);
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        offlineLyt = (FrameLayout)view.findViewById(R.id.presale_listOfflineLyt);
+        noInternetBtn = (Button)view.findViewById(R.id.no_internet_fragment_button_retry);
+
+        if(!checkConnectivity.isNetworkAvailable(getActivity())){
+            offlineLyt.setVisibility(View.VISIBLE);
         }
+        noInternetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkConnectivity.isNetworkAvailable(getActivity())) {
+                    offlineLyt.setVisibility(View.GONE);
+                    PreSaleRequest(getContext());
+                }
+
+            }
+        });
         return view;
     }
     public void PreSaleRequest(final Context context){

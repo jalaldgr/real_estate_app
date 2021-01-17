@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -16,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -50,6 +52,7 @@ import ir.hamedanmelk.hamedanmelk.models.micro.DistrictModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandStateTypeModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.HomeRecyclerViewAdapter;
 import ir.hamedanmelk.hamedanmelk.recyclers.HomeVerticalRecyclerViewAdapter;
+import ir.hamedanmelk.hamedanmelk.tools.CheckConnectivity;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
@@ -75,7 +78,9 @@ public class HomeFragment extends Fragment {
      Button submitSearchBtn;
     Button submitProSearchBtn;
     Button clearFilterBtn;
-
+    LinearLayout mainLyt;
+    FrameLayout noInternetFrame;
+    Button noInternetBtn;
     EditText searchTxt;
      ImageView bannerImageView;
 
@@ -110,6 +115,7 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final NavController controller= Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
+        final CheckConnectivity checkConnectivity = new CheckConnectivity();
         dbHelper = new MYSQlDBHelper(getContext());
         editor = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.pro_filter_pref), MODE_PRIVATE).edit();
         pro_filter_pref = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.pro_filter_pref), Context.MODE_PRIVATE);
@@ -127,6 +133,9 @@ public class HomeFragment extends Fragment {
         VerticalrecyclerView  = (RecyclerView) root.findViewById(R.id.HomeFrgmntVerticalRcyclVw);
         cardView = (CardView)root.findViewById(R.id.HomeFragmentWebCardView);
         searchTxt = (EditText)root.findViewById(R.id.ActionBarSearchFilterInputTxt);
+        mainLyt = (LinearLayout)root.findViewById(R.id.HomeFragmentMainLyt);
+        noInternetFrame = (FrameLayout)root.findViewById(R.id.HomeFragmentNoInternetLyt);
+        noInternetBtn = (Button)root.findViewById(R.id.no_internet_fragment_button_retry);
         RecyclerView.LayoutManager laymngr =  new LinearLayoutManager(this.getContext());
         HorizantalrecyclerView.setLayoutManager(laymngr);
         RecyclerView.LayoutManager VRLaymngr = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL,false);
@@ -138,8 +147,11 @@ public class HomeFragment extends Fragment {
         featuredTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(!checkConnectivity.isNetworkAvailable(getActivity())){
+                    noInternetFrame.setVisibility(View.VISIBLE);
+                }else {
                     controller.navigate(R.id.featuredLandFragment);
+                }
             }
         });
 
@@ -229,14 +241,18 @@ public class HomeFragment extends Fragment {
         submitSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(searchTxt.getText().length()>3){
-
-                    searchStr = searchTxt.getText().toString();
-                    SearchRequest(getContext());
+                if(!checkConnectivity.isNetworkAvailable(getActivity())){
+                    noInternetFrame.setVisibility(View.VISIBLE);
                 }
-                else
-                {
-                    searchTxt.setError(getResources().getString(R.string.search_min_length_error));
+                else {
+
+
+                    if (searchTxt.getText().length() > 3) {
+                        searchStr = searchTxt.getText().toString();
+                        SearchRequest(getContext());
+                    } else {
+                        searchTxt.setError(getResources().getString(R.string.search_min_length_error));
+                    }
                 }
             }
         });
@@ -244,13 +260,21 @@ public class HomeFragment extends Fragment {
         submitProSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.navigate(R.id.proSearchFragment);
+                if(!checkConnectivity.isNetworkAvailable(getActivity())){
+                    noInternetFrame.setVisibility(View.VISIBLE);
+                }else {
+                    controller.navigate(R.id.proSearchFragment);
+                }
             }
         });
         clearFilterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.navigate(R.id.navigation_home);
+                if(!checkConnectivity.isNetworkAvailable(getActivity())){
+                    noInternetFrame.setVisibility(View.VISIBLE);
+                }else {
+                    controller.navigate(R.id.navigation_home);
+                }
             }
         });
 //        Glide.with(getContext()).load(R.drawable.banner_placeholder).into(bannerImageView);
@@ -270,6 +294,20 @@ public class HomeFragment extends Fragment {
         else {
             ProSearchFilterRequest();
         }
+
+        //////////check internet connectivity goods////////////////
+        if(!checkConnectivity.isNetworkAvailable(getActivity())){
+            noInternetFrame.setVisibility(View.VISIBLE);
+        }
+
+        noInternetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkConnectivity.isNetworkAvailable(getActivity())) {
+                    noInternetFrame.setVisibility(View.GONE);
+                }
+            }
+        });
 
         return root;
     }

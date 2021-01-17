@@ -7,12 +7,15 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 
 import org.json.JSONArray;
@@ -24,6 +27,7 @@ import java.util.HashMap;
 
 import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.models.micro.CompanyTypeModel;
+import ir.hamedanmelk.hamedanmelk.tools.CheckConnectivity;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
@@ -40,7 +44,8 @@ public class ServicesFragment extends Fragment {
     Button decorationBtn;
     Button structuralBtn;
     Button servicesBtn;
-    ActionBar actionBar ;
+    FrameLayout offlineLyt;
+    Button noInternetBtn;
 
     public ServicesFragment() {
         // Required empty public constructor
@@ -60,8 +65,28 @@ public class ServicesFragment extends Fragment {
         // Inflate the layout for this fragment
         Log.d(TAG, "onCreateView: enter");
         View view = inflater.inflate(R.layout.fragment_services, container, false);
+        final CheckConnectivity checkConnectivity = new CheckConnectivity();
 
         allServicesGridView = (GridView)view.findViewById(R.id.ServicesFragmentAllGridView);
+
+
+
+        offlineLyt = (FrameLayout)view.findViewById(R.id.services_listOfflineLyt);
+        noInternetBtn = (Button)view.findViewById(R.id.no_internet_fragment_button_retry);
+
+        if(!checkConnectivity.isNetworkAvailable(getActivity())){
+            offlineLyt.setVisibility(View.VISIBLE);
+        }
+        noInternetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkConnectivity.isNetworkAvailable(getActivity())) {
+                    offlineLyt.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
         buildingBtn = (Button)view.findViewById(R.id.ServicesFragmentBuildingBtn);
         decorationBtn=(Button)view.findViewById(R.id.ServicesFragmentDecorationBtn);
         structuralBtn=(Button)view.findViewById(R.id.ServicesFragmentStructurallBtn);
@@ -69,6 +94,9 @@ public class ServicesFragment extends Fragment {
         buildingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!checkConnectivity.isNetworkAvailable(getActivity())){
+                    offlineLyt.setVisibility(View.VISIBLE);
+                }
                 GetCompanyTypesRequest(getContext(),"10");
 //                actionBar.setTitle(getActivity().getResources().getString(R.string.construction_building));
             }
@@ -76,6 +104,9 @@ public class ServicesFragment extends Fragment {
         decorationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!checkConnectivity.isNetworkAvailable(getActivity())){
+                    offlineLyt.setVisibility(View.VISIBLE);
+                }
                 GetCompanyTypesRequest(getContext(),"12");
 //                actionBar.setTitle(getActivity().getResources().getString(R.string.construction_decoration));
 
@@ -84,6 +115,9 @@ public class ServicesFragment extends Fragment {
         structuralBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!checkConnectivity.isNetworkAvailable(getActivity())){
+                    offlineLyt.setVisibility(View.VISIBLE);
+                }
                 GetCompanyTypesRequest(getContext(),"11");
 //                actionBar.setTitle(getActivity().getResources().getString(R.string.construction_installation));
 
@@ -92,6 +126,9 @@ public class ServicesFragment extends Fragment {
         servicesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!checkConnectivity.isNetworkAvailable(getActivity())){
+                    offlineLyt.setVisibility(View.VISIBLE);
+                }
                 GetCompanyTypesRequest(getContext(),"50");
 //                actionBar.setTitle(getActivity().getResources().getString(R.string.construction_services));
             }
