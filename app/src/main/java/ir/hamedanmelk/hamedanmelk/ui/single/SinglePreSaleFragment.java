@@ -12,9 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,6 +59,7 @@ import ir.hamedanmelk.hamedanmelk.models.micro.LandCaseTypeModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.LandDirectionModel;
 import ir.hamedanmelk.hamedanmelk.models.micro.VoucherModel;
 import ir.hamedanmelk.hamedanmelk.recyclers.LandEquipmentsAdapter;
+import ir.hamedanmelk.hamedanmelk.tools.CheckConnectivity;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.DownloadImage;
 import ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView;
@@ -124,6 +127,10 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
     TextView mobileTxt;
     SliderLayout mySliderLayout;
     PagerIndicator myIndicator;
+
+    FrameLayout offlineLyt;
+    Button noInternetBtn;
+
     public SinglePreSaleFragment() {
         // Required empty public constructor
     }
@@ -176,7 +183,7 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
         deliveryDateTxt = (TextView)view.findViewById(R.id.SinglePreSaleDeliveryDateTxt);
         createAtTxt = (TextView)view.findViewById(R.id.SinglePreSaleCreatedAtTxt);
         userNameTxt = (TextView)view.findViewById(R.id.SinglePreSaleUserNameTxt);
-        userPhoneTxt = (TextView)view.findViewById(R.id.SinglePreSaleMobileTxt);
+        userPhoneTxt = (TextView)view.findViewById(R.id.SinglePreSalePhoneTxt);
         descriptionTxt = (EditText)view.findViewById(R.id.SinglePreSaleDescriptionTxt);
         descCardView = (CardView)view.findViewById(R.id.SinglePreSaleDescriptionCardView);
         userAvatarImg = (ImageView)view.findViewById(R.id.SinglePreSaleUserAvatarImg);
@@ -185,7 +192,6 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
         startChatTxt = (TextView) view.findViewById(R.id.SinglePreSaleStartChatTxt);
         shareTxt = (TextView) view.findViewById(R.id.SinglePreSaleShareTxt);
         mobileTxt = (TextView) view.findViewById(R .id.SinglePreSaleMobileTxt);
-
         mySliderLayout = (SliderLayout)view.findViewById(R.id.single_PreSale_slider);
         myIndicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
         mySliderLayout.stopAutoCycle();
@@ -195,6 +201,31 @@ public class SinglePreSaleFragment extends Fragment implements OnMapReadyCallbac
         myIndicator.setGravity(0x11);
         mySliderLayout.setCustomIndicator(myIndicator);
         mySliderLayout.setCustomAnimation(new DescriptionAnimation());
+
+        offlineLyt = (FrameLayout)view.findViewById(R.id.SinglePreSaleOfflineLyt);
+        noInternetBtn = (Button)view.findViewById(R.id.no_internet_fragment_button_retry);
+        final CheckConnectivity checkConnectivity = new CheckConnectivity();
+        if(!checkConnectivity.isNetworkAvailable(getActivity())){
+            offlineLyt.setVisibility(View.VISIBLE);
+        }
+        noInternetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkConnectivity.isNetworkAvailable(getActivity()))
+                {
+                    offlineLyt.setVisibility(View.GONE);
+                    GetLandInfoRequest(getContext());
+                    GetLandEquipmentsRequest(getContext(),landId);
+                    FragmentManager childFragMan = getChildFragmentManager();
+                    FragmentTransaction childFragTrans = childFragMan.beginTransaction();
+                    GetLandEnergyFragment fragB = new GetLandEnergyFragment ();
+                    fragB.landID = landId;
+                    childFragTrans.add(R.id.SinglePreSaleEnergyFragment, fragB);
+                    childFragTrans.commit();
+                }
+            }
+        });
+
         FragmentManager childFragMan = getChildFragmentManager();
         FragmentTransaction childFragTrans = childFragMan.beginTransaction();
         GetLandEnergyFragment fragB = new GetLandEnergyFragment ();

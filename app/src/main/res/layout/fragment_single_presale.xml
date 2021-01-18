@@ -1,969 +1,986 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="60dp"
-    tools:context=".ui.single.SinglePreSaleFragment">
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/SinglePreSaleOfflineLyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <include
+            layout="@layout/fragment_no_internet_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layoutDirection="rtl"
-        android:orientation="vertical"
-        android:descendantFocusability="blocksDescendants"
-        android:textDirection="rtl">
-
-        <com.daimajia.slider.library.SliderLayout
-            android:id="@+id/single_PreSale_slider"
-            android:layout_width="match_parent"
-            android:layout_height="332dp"
-            android:gravity="center|center_horizontal|fill_vertical" />
-
-        <com.daimajia.slider.library.Indicators.PagerIndicator
-            android:id="@+id/custom_indicator"
-            style="@style/AndroidImageSlider_Attractive_Rect_Blue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center" />
-
-
-        <CheckBox
-            android:id="@+id/SinglePreSaleFragmentBookmarkChckbx"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginStart="@dimen/general_margin_start"
-            android:layout_marginTop="-52dp"
-            android:layout_marginEnd="@dimen/general_margin_end"
-            android:background="@drawable/iic_baseline_favorite_disabled_border_on_36"
-            android:button="@null"
-            android:shadowColor="#FFFFFF" />
-
-
-        <TextView
-            android:id="@+id/SinglePreSaleTitleTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:padding="8dp"
-            android:text="@string/vocabulary_title"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+        android:layout_marginBottom="60dp"
+        tools:context=".ui.single.SinglePreSaleFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:descendantFocusability="blocksDescendants"
+            android:layoutDirection="rtl"
+            android:orientation="vertical"
+            android:textDirection="rtl">
 
-            <TextView
-                android:id="@+id/SinglePreSaleCreatedAtTxt"
+            <com.daimajia.slider.library.SliderLayout
+                android:id="@+id/single_PreSale_slider"
+                android:layout_width="match_parent"
+                android:layout_height="332dp"
+                android:gravity="center|center_horizontal|fill_vertical" />
+
+            <com.daimajia.slider.library.Indicators.PagerIndicator
+                android:id="@+id/custom_indicator"
+                style="@style/AndroidImageSlider_Attractive_Rect_Blue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAlignment="center" />
+
+
+            <CheckBox
+                android:id="@+id/SinglePreSaleFragmentBookmarkChckbx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:layout_marginStart="@dimen/general_margin_start"
+                android:layout_marginTop="-52dp"
                 android:layout_marginEnd="@dimen/general_margin_end"
-                android:text="@string/land_info_created_at"
-                android:textIsSelectable="false"
-                android:textSize="12sp" />
+                android:background="@drawable/iic_baseline_favorite_disabled_border_on_36"
+                android:button="@null"
+                android:shadowColor="#FFFFFF" />
+
 
             <TextView
-                android:id="@+id/SinglePreSaleLandStateTxt"
+                android:id="@+id/SinglePreSaleTitleTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/vocabulary_land_state" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/border_linear_layout"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+                android:layout_marginTop="20dp"
+                android:padding="8dp"
+                android:text="@string/vocabulary_title"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.33"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="match_parent"
+                    android:id="@+id/SinglePreSaleCreatedAtTxt"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center|center_horizontal|center_vertical"
-                    android:text="@string/land_info_foundation_space"
-                    android:textColor="@color/textview_lable"
-                    android:textSize="@dimen/smal_text_size" />
-
-                <TextView
-                    android:id="@+id/SinglePreSaleFoundationSpaceTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:text="@string/land_info_foundation_space"
-                    android:textColor="@color/primary_black_text_color"
+                    android:layout_marginStart="@dimen/general_margin_start"
+                    android:layout_marginEnd="@dimen/general_margin_end"
+                    android:text="@string/land_info_created_at"
                     android:textIsSelectable="false"
-                    android:textSize="@dimen/smal_text_size" />
+                    android:textSize="12sp" />
 
+                <TextView
+                    android:id="@+id/SinglePreSaleLandStateTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/vocabulary_land_state" />
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center|center_horizontal|center_vertical"
-                    android:text="@string/land_info_delivery_date"
-                    android:textColor="@color/textview_lable"
-                    android:textSize="@dimen/smal_text_size" />
-
-                <TextView
-                    android:id="@+id/SinglePreSaleDeliveryDateTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center|center_horizontal|center_vertical"
-                    android:text="@string/land_info_delivery_date"
-                    android:textColor="@color/primary_black_text_color"
-                    android:textSize="@dimen/smal_text_size" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.33"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center|center_horizontal|center_vertical"
-                    android:text="@string/land_info_room_count"
-                    android:textColor="@color/textview_lable"
-                    android:textSize="@dimen/smal_text_size" />
-
-                <TextView
-                    android:id="@+id/SinglePreSaleRoomCountTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center|center_horizontal|center_vertical"
-                    android:text="@string/land_info_room_count"
-                    android:textColor="@color/primary_black_text_color"
-                    android:textSize="@dimen/smal_text_size" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="4dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/textView18"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/land_info_total_price"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-
-                    <TextView
-                        android:id="@+id/SinglePreSaleTotalPriceTxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/general_margin_start"
-                        android:layout_marginEnd="@dimen/general_margin_end"
-                        android:backgroundTint="@color/edit_text_bottom_line"
-                        android:gravity="end"
-                        android:text="@string/vocabulary_deal"
-                        android:textColor="@color/primary_black_text_color"
-                        android:textIsSelectable="false"
-                        android:textSize="@dimen/smal_text_size" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/textViewc18"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/land_info_space_price"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-
-                    <TextView
-                        android:id="@+id/SinglePreSaleSpacePriceTxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/general_margin_start"
-                        android:layout_marginEnd="@dimen/general_margin_end"
-                        android:backgroundTint="@color/edit_text_bottom_line"
-                        android:gravity="end"
-                        android:text=" 0 "
-                        android:textColor="@color/primary_black_text_color"
-                        android:textIsSelectable="false"
-                        android:textSize="@dimen/smal_text_size" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/textView21"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/new_land_loan_total_price"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-
-                    <TextView
-                        android:id="@+id/SingleLoanTotalPriceTxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/general_margin_start"
-                        android:layout_marginEnd="@dimen/general_margin_end"
-                        android:backgroundTint="@color/edit_text_bottom_line"
-                        android:gravity="end"
-                        android:text="ندارد"
-                        android:textColor="@color/primary_black_text_color"
-                        android:textIsSelectable="false"
-                        android:textSize="@dimen/smal_text_size" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/textView22"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/new_land_loan_type"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-
-                    <TextView
-                        android:id="@+id/SingleLoanTypeTxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/general_margin_start"
-                        android:layout_marginEnd="@dimen/general_margin_end"
-                        android:backgroundTint="@color/edit_text_bottom_line"
-                        android:gravity="end"
-                        android:text="ندارد"
-                        android:textColor="@color/primary_black_text_color"
-                        android:textIsSelectable="false"
-                        android:textSize="@dimen/smal_text_size" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/textView252"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/new_land_direction"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-
-                    <TextView
-                        android:id="@+id/SinglePreSaleLandDirectionTxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/general_margin_start"
-                        android:layout_marginEnd="@dimen/general_margin_end"
-                        android:backgroundTint="@color/edit_text_bottom_line"
-                        android:gravity="end"
-                        android:text="@string/new_land_direction"
-                        android:textColor="@color/primary_black_text_color"
-                        android:textIsSelectable="false"
-                        android:textSize="@dimen/smal_text_size" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="horizontal"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.33"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView55"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:text="@string/land_info_land_type"
-                            android:textColor="@color/textview_lable"
-                            android:textSize="@dimen/smal_text_size" />
-
-                        <TextView
-                            android:id="@+id/SinglePreSaleLandTypeTxt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/general_margin_start"
-                            android:layout_marginEnd="@dimen/general_margin_end"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:text="@string/land_info_land_type"
-                            android:textColor="@color/primary_black_text_color"
-                            android:textSize="@dimen/smal_text_size" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.33"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView5"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:text="@string/new_land_land_case"
-                            android:textColor="@color/textview_lable"
-                            android:textSize="@dimen/smal_text_size" />
-
-                        <TextView
-                            android:id="@+id/SinglePreSaleLandCaseTxt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/general_margin_start"
-                            android:layout_marginEnd="@dimen/general_margin_end"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:text="@string/new_land_land_case"
-                            android:textColor="@color/primary_black_text_color"
-                            android:textSize="@dimen/smal_text_size" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.33"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:text="@string/new_land_voucher_type"
-                            android:textColor="@color/textview_lable"
-                            android:textSize="@dimen/smal_text_size" />
-
-                        <TextView
-                            android:id="@+id/SinglePreSaleVoucherTxt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/general_margin_start"
-                            android:layout_marginEnd="@dimen/general_margin_end"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:text="@string/new_land_voucher_type"
-                            android:textColor="@color/primary_black_text_color"
-                            android:textSize="@dimen/smal_text_size">
-
-                        </TextView>
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.33"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView31"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:text="@string/land_info_floor_count"
-                            android:textColor="@color/textview_lable"
-                            android:textSize="@dimen/smal_text_size" />
-
-                        <TextView
-                            android:id="@+id/SinglePreSaleFloorCountTxt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/general_margin_start"
-                            android:layout_marginEnd="@dimen/general_margin_end"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:text="@string/land_info_floor_count"
-                            android:textColor="@color/primary_black_text_color"
-                            android:textSize="@dimen/smal_text_size" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.33"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView12"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:text="@string/land_info_floor"
-                            android:textColor="@color/textview_lable"
-                            android:textSize="@dimen/smal_text_size" />
-
-                        <TextView
-                            android:id="@+id/SinglePreSaleFloorTxt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/general_margin_start"
-                            android:layout_marginEnd="@dimen/general_margin_end"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:text="@string/vocabulary_base_floor"
-                            android:textColor="@color/primary_black_text_color"
-                            android:textSize="@dimen/smal_text_size" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.33"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:text="@string/land_info_units_in_floor"
-                            android:textColor="@color/textview_lable"
-                            android:textSize="@dimen/smal_text_size" />
-
-                        <TextView
-                            android:id="@+id/SinglePreSaleUnitInfloorTxt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/general_margin_start"
-                            android:layout_marginEnd="@dimen/general_margin_end"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:text="@string/land_info_units_in_floor"
-                            android:textColor="@color/primary_black_text_color"
-                            android:textSize="@dimen/smal_text_size"></TextView>
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="4dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/border_linear_layout"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.25"
+                    android:layout_weight="0.33"
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/textView6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_water"
+                        android:gravity="center|center_horizontal|center_vertical"
+                        android:text="@string/land_info_foundation_space"
                         android:textColor="@color/textview_lable"
                         android:textSize="@dimen/smal_text_size" />
 
                     <TextView
-                        android:id="@+id/SinglePreSaleWaterTxt"
+                        android:id="@+id/SinglePreSaleFoundationSpaceTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_water"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="@string/land_info_foundation_space"
+                        android:textColor="@color/primary_black_text_color"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/smal_text_size" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.33"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|center_horizontal|center_vertical"
+                        android:text="@string/land_info_delivery_date"
                         android:textColor="@color/textview_lable"
+                        android:textSize="@dimen/smal_text_size" />
+
+                    <TextView
+                        android:id="@+id/SinglePreSaleDeliveryDateTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|center_horizontal|center_vertical"
+                        android:text="@string/land_info_delivery_date"
+                        android:textColor="@color/primary_black_text_color"
                         android:textSize="@dimen/smal_text_size" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.25"
+                    android:layout_weight="0.33"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView34"
+                        android:id="@+id/textView13"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_electricity"
+                        android:gravity="center|center_horizontal|center_vertical"
+                        android:text="@string/land_info_room_count"
                         android:textColor="@color/textview_lable"
                         android:textSize="@dimen/smal_text_size" />
 
                     <TextView
-                        android:id="@+id/SinglePreSaleElectricityTxt"
+                        android:id="@+id/SinglePreSaleRoomCountTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_electricity"
-                        android:textColor="@color/textview_lable"
+                        android:gravity="center|center_horizontal|center_vertical"
+                        android:text="@string/land_info_room_count"
+                        android:textColor="@color/primary_black_text_color"
                         android:textSize="@dimen/smal_text_size" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView36"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_gas"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-
-                    <TextView
-                        android:id="@+id/SinglePreSaleGasTxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_gas"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView38"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_phone"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-
-                    <TextView
-                        android:id="@+id/SinglePreSalePhoneTxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/new_land_phone"
-                        android:textColor="@color/textview_lable"
-                        android:textSize="@dimen/smal_text_size" />
-                </LinearLayout>
             </LinearLayout>
 
-            <ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView
-                android:id="@+id/SinglePreSaleLandEquipmentsGridView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:numColumns="4"
-                android:scrollbars="none"
-                tools:listitem="@layout/singles_land_equipments_items" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="4dp">
-
-            <FrameLayout
-                android:id="@+id/SinglePreSaleEnergyFragment"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                class="ir.hamedanmelk.hamedanmelk.ui.single.GetLandEnergyFragment">
-            </FrameLayout>
-        </androidx.cardview.widget.CardView>
+                android:layout_margin="8dp"
+                app:cardCornerRadius="4dp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/SinglePreSaleDescriptionCardView"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="4dp">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/SinglePreSaleDescriptionTxtInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/general_margin_start"
-                android:layout_marginTop="@dimen/general_margin_top"
-                android:layout_marginEnd="@dimen/general_margin_end"
-                android:gravity="right"
-                android:hint="@string/land_info_description"
-                android:layoutDirection="rtl"
-                android:textColorHint="@color/textview_lable"
-                android:textDirection="rtl"
-                app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/SinglePreSaleDescriptionTxt"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="4dp"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:gravity="start|top"
-                    android:inputType="textMultiLine"
-                    android:text=""
-                    android:textColor="@color/primary_black_text_color"
-                    android:textIsSelectable="false" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.cardview.widget.CardView>
+                    android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="4dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
 
-            <LinearLayout
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/land_info_total_price"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SinglePreSaleTotalPriceTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/general_margin_start"
+                            android:layout_marginEnd="@dimen/general_margin_end"
+                            android:backgroundTint="@color/edit_text_bottom_line"
+                            android:gravity="end"
+                            android:text="@string/vocabulary_deal"
+                            android:textColor="@color/primary_black_text_color"
+                            android:textIsSelectable="false"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/textViewc18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/land_info_space_price"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SinglePreSaleSpacePriceTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/general_margin_start"
+                            android:layout_marginEnd="@dimen/general_margin_end"
+                            android:backgroundTint="@color/edit_text_bottom_line"
+                            android:gravity="end"
+                            android:text=" 0 "
+                            android:textColor="@color/primary_black_text_color"
+                            android:textIsSelectable="false"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/textView21"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/new_land_loan_total_price"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SingleLoanTotalPriceTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/general_margin_start"
+                            android:layout_marginEnd="@dimen/general_margin_end"
+                            android:backgroundTint="@color/edit_text_bottom_line"
+                            android:gravity="end"
+                            android:text="ندارد"
+                            android:textColor="@color/primary_black_text_color"
+                            android:textIsSelectable="false"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/textView22"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/new_land_loan_type"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SingleLoanTypeTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/general_margin_start"
+                            android:layout_marginEnd="@dimen/general_margin_end"
+                            android:backgroundTint="@color/edit_text_bottom_line"
+                            android:gravity="end"
+                            android:text="ندارد"
+                            android:textColor="@color/primary_black_text_color"
+                            android:textIsSelectable="false"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/textView252"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/new_land_direction"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SinglePreSaleLandDirectionTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/general_margin_start"
+                            android:layout_marginEnd="@dimen/general_margin_end"
+                            android:backgroundTint="@color/edit_text_bottom_line"
+                            android:gravity="end"
+                            android:text="@string/new_land_direction"
+                            android:textColor="@color/primary_black_text_color"
+                            android:textIsSelectable="false"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.33"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView55"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:text="@string/land_info_land_type"
+                                android:textColor="@color/textview_lable"
+                                android:textSize="@dimen/smal_text_size" />
+
+                            <TextView
+                                android:id="@+id/SinglePreSaleLandTypeTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/general_margin_start"
+                                android:layout_marginEnd="@dimen/general_margin_end"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:text="@string/land_info_land_type"
+                                android:textColor="@color/primary_black_text_color"
+                                android:textSize="@dimen/smal_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.33"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView5"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:text="@string/new_land_land_case"
+                                android:textColor="@color/textview_lable"
+                                android:textSize="@dimen/smal_text_size" />
+
+                            <TextView
+                                android:id="@+id/SinglePreSaleLandCaseTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/general_margin_start"
+                                android:layout_marginEnd="@dimen/general_margin_end"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:text="@string/new_land_land_case"
+                                android:textColor="@color/primary_black_text_color"
+                                android:textSize="@dimen/smal_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.33"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:text="@string/new_land_voucher_type"
+                                android:textColor="@color/textview_lable"
+                                android:textSize="@dimen/smal_text_size" />
+
+                            <TextView
+                                android:id="@+id/SinglePreSaleVoucherTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/general_margin_start"
+                                android:layout_marginEnd="@dimen/general_margin_end"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:text="@string/new_land_voucher_type"
+                                android:textColor="@color/primary_black_text_color"
+                                android:textSize="@dimen/smal_text_size">
+
+                            </TextView>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.33"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView31"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:text="@string/land_info_floor_count"
+                                android:textColor="@color/textview_lable"
+                                android:textSize="@dimen/smal_text_size" />
+
+                            <TextView
+                                android:id="@+id/SinglePreSaleFloorCountTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/general_margin_start"
+                                android:layout_marginEnd="@dimen/general_margin_end"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:text="@string/land_info_floor_count"
+                                android:textColor="@color/primary_black_text_color"
+                                android:textSize="@dimen/smal_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.33"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView12"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:text="@string/land_info_floor"
+                                android:textColor="@color/textview_lable"
+                                android:textSize="@dimen/smal_text_size" />
+
+                            <TextView
+                                android:id="@+id/SinglePreSaleFloorTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/general_margin_start"
+                                android:layout_marginEnd="@dimen/general_margin_end"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:text="@string/vocabulary_base_floor"
+                                android:textColor="@color/primary_black_text_color"
+                                android:textSize="@dimen/smal_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.33"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:text="@string/land_info_units_in_floor"
+                                android:textColor="@color/textview_lable"
+                                android:textSize="@dimen/smal_text_size" />
+
+                            <TextView
+                                android:id="@+id/SinglePreSaleUnitInfloorTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/general_margin_start"
+                                android:layout_marginEnd="@dimen/general_margin_end"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:text="@string/land_info_units_in_floor"
+                                android:textColor="@color/primary_black_text_color"
+                                android:textSize="@dimen/smal_text_size"></TextView>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_margin="8dp"
+                app:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/new_land_water"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SinglePreSaleWaterTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/new_land_water"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView34"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/new_land_electricity"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SinglePreSaleElectricityTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/new_land_electricity"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView36"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/new_land_gas"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SinglePreSaleGasTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/new_land_gas"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView38"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/new_land_phone"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+
+                        <TextView
+                            android:id="@+id/SinglePreSalePhoneTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/new_land_phone"
+                            android:textColor="@color/textview_lable"
+                            android:textSize="@dimen/smal_text_size" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView
+                    android:id="@+id/SinglePreSaleLandEquipmentsGridView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:numColumns="4"
+                    android:scrollbars="none"
+                    tools:listitem="@layout/singles_land_equipments_items" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="4dp">
+
+                <FrameLayout
+                    android:id="@+id/SinglePreSaleEnergyFragment"
+                    class="ir.hamedanmelk.hamedanmelk.ui.single.GetLandEnergyFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></FrameLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/SinglePreSaleDescriptionCardView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="4dp">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/SinglePreSaleAddressTxtInputLayout"
+                    android:id="@+id/SinglePreSaleDescriptionTxtInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/general_margin_start"
                     android:layout_marginTop="@dimen/general_margin_top"
                     android:layout_marginEnd="@dimen/general_margin_end"
                     android:gravity="right"
-                    android:hint="@string/land_info_address"
+                    android:hint="@string/land_info_description"
                     android:layoutDirection="rtl"
                     android:textColorHint="@color/textview_lable"
                     android:textDirection="rtl"
-                    android:visibility="gone"
                     app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/SinglePreSaleAddressTxt"
+                        android:id="@+id/SinglePreSaleDescriptionTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/general_margin_start"
-                        android:layout_marginEnd="@dimen/general_margin_end"
-                        android:backgroundTint="@color/edit_text_bottom_line"
-                        android:editable="false"
-                        android:text="@string/land_info_address"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="4dp"
+                        android:ems="10"
+                        android:enabled="false"
+                        android:gravity="start|top"
+                        android:inputType="textMultiLine"
+                        android:text=""
+                        android:textColor="@color/primary_black_text_color"
                         android:textIsSelectable="false" />
                 </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.25"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView20"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/land_info_province"
-                            android:textColor="@color/textview_lable"
-                            android:textSize="@dimen/smal_text_size" />
-
-                        <TextView
-                            android:id="@+id/SinglePreSaleProvinceTxt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/land_info_province"
-                            android:textColor="@color/primary_black_text_color"
-                            android:textSize="@dimen/smal_text_size" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.25"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView28"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/land_info_city"
-                            android:textColor="@color/textview_lable"
-                            android:textSize="@dimen/smal_text_size" />
-
-                        <TextView
-                            android:id="@+id/SinglePreSaleCityTxt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/land_info_city"
-                            android:textColor="@color/primary_black_text_color"
-                            android:textSize="@dimen/smal_text_size" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.25"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView30"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/land_info_area"
-                            android:textColor="@color/textview_lable"
-                            android:textSize="@dimen/smal_text_size" />
-
-                        <TextView
-                            android:id="@+id/SinglePreSaleAreaTxt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/land_info_area"
-                            android:textColor="@color/primary_black_text_color"
-                            android:textSize="@dimen/smal_text_size" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.25"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView33"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/vocabulary_district"
-                            android:textColor="@color/textview_lable"
-                            android:textSize="@dimen/smal_text_size" />
-
-                        <TextView
-                            android:id="@+id/SinglePreSaleDistrictTxt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/vocabulary_district"
-                            android:textColor="@color/primary_black_text_color"
-                            android:textSize="@dimen/smal_text_size" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="240dp"
-                    android:elevation="8dp">
-
-                    <com.google.android.gms.maps.MapView
-                        android:id="@+id/SinglePreSaleMapView"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent" />
-                </FrameLayout>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-        <!--   End Address     -->
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="4dp">
-
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
-                    android:layout_gravity="center|center_horizontal|center_vertical"
-                    android:layout_marginStart="@dimen/general_margin_start"
-                    android:layout_marginTop="@dimen/general_margin_top"
-                    android:layout_marginEnd="@dimen/general_margin_end"
-                    android:elevation="64dp"
-                    app:cardCornerRadius="64dp"
-                    app:cardElevation="64dp"
-                    app:cardMaxElevation="64dp">
-
-                    <ImageView
-                        android:id="@+id/SinglePreSaleUserAvatarImg"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:adjustViewBounds="true"
-                        android:cropToPadding="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_action_camera" />
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:id="@+id/SinglePreSaleUserNameTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/general_margin_start"
-                    android:layout_marginTop="@dimen/general_margin_top"
-                    android:layout_marginEnd="@dimen/general_margin_end"
-                    android:backgroundTint="@color/edit_text_bottom_line"
-                    android:editable="false"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:gravity="center|center_horizontal|center_vertical"
-                    android:inputType="textMultiLine"
-                    android:text="@string/land_info_name"
-                    android:textColor="@color/primary_black_text_color"
-                    android:textIsSelectable="false"
-                    android:textSize="18sp" />
+                android:layout_margin="8dp"
+                app:cardCornerRadius="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:paddingStart="8dp"
-                    android:paddingTop="12dp"
-                    android:paddingEnd="8dp">
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/SinglePreSaleAddressTxtInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/general_margin_start"
+                        android:layout_marginTop="@dimen/general_margin_top"
+                        android:layout_marginEnd="@dimen/general_margin_end"
+                        android:gravity="right"
+                        android:hint="@string/land_info_address"
+                        android:layoutDirection="rtl"
+                        android:textColorHint="@color/textview_lable"
+                        android:textDirection="rtl"
+                        android:visibility="gone"
+                        app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/SinglePreSaleAddressTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/general_margin_start"
+                            android:layout_marginEnd="@dimen/general_margin_end"
+                            android:backgroundTint="@color/edit_text_bottom_line"
+                            android:editable="false"
+                            android:text="@string/land_info_address"
+                            android:textIsSelectable="false" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.25"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView20"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/land_info_province"
+                                android:textColor="@color/textview_lable"
+                                android:textSize="@dimen/smal_text_size" />
+
+                            <TextView
+                                android:id="@+id/SinglePreSaleProvinceTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/land_info_province"
+                                android:textColor="@color/primary_black_text_color"
+                                android:textSize="@dimen/smal_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.25"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView28"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/land_info_city"
+                                android:textColor="@color/textview_lable"
+                                android:textSize="@dimen/smal_text_size" />
+
+                            <TextView
+                                android:id="@+id/SinglePreSaleCityTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/land_info_city"
+                                android:textColor="@color/primary_black_text_color"
+                                android:textSize="@dimen/smal_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.25"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView30"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/land_info_area"
+                                android:textColor="@color/textview_lable"
+                                android:textSize="@dimen/smal_text_size" />
+
+                            <TextView
+                                android:id="@+id/SinglePreSaleAreaTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/land_info_area"
+                                android:textColor="@color/primary_black_text_color"
+                                android:textSize="@dimen/smal_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.25"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView33"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/vocabulary_district"
+                                android:textColor="@color/textview_lable"
+                                android:textSize="@dimen/smal_text_size" />
+
+                            <TextView
+                                android:id="@+id/SinglePreSaleDistrictTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/vocabulary_district"
+                                android:textColor="@color/primary_black_text_color"
+                                android:textSize="@dimen/smal_text_size" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp"
+                        android:elevation="8dp">
+
+                        <com.google.android.gms.maps.MapView
+                            android:id="@+id/SinglePreSaleMapView"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <!--   End Address     -->
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="128dp"
+                        android:layout_height="128dp"
+                        android:layout_gravity="center|center_horizontal|center_vertical"
+                        android:layout_marginStart="@dimen/general_margin_start"
+                        android:layout_marginTop="@dimen/general_margin_top"
+                        android:layout_marginEnd="@dimen/general_margin_end"
+                        android:elevation="64dp"
+                        app:cardCornerRadius="64dp"
+                        app:cardElevation="64dp"
+                        app:cardMaxElevation="64dp">
+
+                        <ImageView
+                            android:id="@+id/SinglePreSaleUserAvatarImg"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:cropToPadding="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_action_camera" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/SinglePreSaleUserNameTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/general_margin_start"
+                        android:layout_marginTop="@dimen/general_margin_top"
+                        android:layout_marginEnd="@dimen/general_margin_end"
+                        android:backgroundTint="@color/edit_text_bottom_line"
+                        android:editable="false"
+                        android:ems="10"
+                        android:enabled="false"
+                        android:gravity="center|center_horizontal|center_vertical"
+                        android:inputType="textMultiLine"
+                        android:text="@string/land_info_name"
+                        android:textColor="@color/primary_black_text_color"
+                        android:textIsSelectable="false"
+                        android:textSize="18sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:elevation="2dp"
                         android:orientation="horizontal"
-                        android:paddingBottom="4dp">
+                        android:paddingStart="8dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="8dp">
 
-                        <TextView
-                            android:id="@+id/SinglePreSaleStartChatTxt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.5"
-                            android:drawableBottom="@drawable/ic_baseline_chat_24"
-                            android:padding="4dp"
-                            android:text="@string/land_info_start_chat"
-                            android:textAlignment="center" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:elevation="2dp"
+                            android:orientation="horizontal"
+                            android:paddingBottom="4dp">
 
-                        <TextView
-                            android:id="@+id/SinglePreSaleMobileTxt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="3.5"
-                            android:drawableBottom="@drawable/ic_baseline_call_24"
-                            android:padding="4dp"
-                            android:text="@string/vocabulary_mobile"
-                            android:textAlignment="center" />
+                            <TextView
+                                android:id="@+id/SinglePreSaleStartChatTxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:drawableBottom="@drawable/ic_baseline_chat_24"
+                                android:padding="4dp"
+                                android:text="@string/land_info_start_chat"
+                                android:textAlignment="center" />
 
-                        <TextView
-                            android:id="@+id/SinglePreSaleShareTxt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.5"
-                            android:drawableBottom="@drawable/ic_baseline_share_24"
-                            android:padding="4dp"
-                            android:text="@string/vocabulary_share"
-                            android:textAlignment="center" />
+                            <TextView
+                                android:id="@+id/SinglePreSaleMobileTxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3.5"
+                                android:drawableBottom="@drawable/ic_baseline_call_24"
+                                android:padding="4dp"
+                                android:text="@string/vocabulary_mobile"
+                                android:textAlignment="center" />
+
+                            <TextView
+                                android:id="@+id/SinglePreSaleShareTxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:drawableBottom="@drawable/ic_baseline_share_24"
+                                android:padding="4dp"
+                                android:text="@string/vocabulary_share"
+                                android:textAlignment="center" />
+                        </LinearLayout>
                     </LinearLayout>
+
                 </LinearLayout>
 
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
 
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
-
+</LinearLayout>
