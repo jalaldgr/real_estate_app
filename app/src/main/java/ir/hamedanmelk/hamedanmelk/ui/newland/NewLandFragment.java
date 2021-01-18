@@ -12,10 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import java.util.Objects;
 
 import ir.hamedanmelk.hamedanmelk.R;
+import ir.hamedanmelk.hamedanmelk.tools.CheckConnectivity;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -28,7 +30,8 @@ public class NewLandFragment extends Fragment  {
     Button companyBtn;
     Button officeBtn;
     Button lawyerBtn;
-
+    Button noInternetBtn;
+    FrameLayout offlineLyt;
     public NewLandFragment() {
         // Required empty public constructor
     }
@@ -68,6 +71,20 @@ public class NewLandFragment extends Fragment  {
         companyBtn = (Button)view.findViewById(R.id.newLandFragmentCompanyBtn);
         officeBtn = (Button)view.findViewById(R.id.newLandFragmentOfficeBtn);
         lawyerBtn = (Button)view.findViewById(R.id.newLandFragmentLawyerBtn);
+
+        noInternetBtn = (Button)view.findViewById(R.id.no_internet_fragment_button_retry);
+        offlineLyt = (FrameLayout)view.findViewById(R.id.newLandOfflineLyt);
+
+        final CheckConnectivity checkConnectivity = new CheckConnectivity();
+        if(!checkConnectivity.isNetworkAvailable(getActivity())){
+            offlineLyt.setVisibility(View.VISIBLE);
+        }
+        noInternetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                offlineLyt.setVisibility(View.GONE);
+            }
+        });
 
         saleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
