@@ -33,6 +33,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -167,10 +168,11 @@ public class NewLandSaleFragment extends Fragment  implements OnMapReadyCallback
     Button addPhotoBtn;
     Button submitBtn;
     Button addMapBtn;
+    EditText onMapTxt;
 
     GoogleMap mgoogleMap;
     private LatLng mapLatLng;
-
+    boolean selectMapClicked = false;
     ArrayList<BuildingConditionModel> buildingConditionModels;
     List<String> buildingConditionTitles = new ArrayList<String>();
     List<String> buildingConditionIDs = new ArrayList<String>();
@@ -324,6 +326,7 @@ public class NewLandSaleFragment extends Fragment  implements OnMapReadyCallback
         selectedImagesExpandableGrid = (ExpandableHeightGridView)view.findViewById(R.id.NewLandSaleFragmentGalleryExpandableGrid);
         addPhotoBtn = (Button)view.findViewById(R.id.NewLandSaleFragmentAddPhotoBtn);
         addMapBtn = (Button)view.findViewById(R.id.NewLandSaleFragmentAddMapBtn);
+        onMapTxt = (EditText) view.findViewById(R.id.NewLandSaleFragmentOnMapTxt);
         persianDate = new PersianDate();
         datePicker = new DatePickerDialog();
         datePicker.setMinDate(persianCalendar);
@@ -677,7 +680,8 @@ public class NewLandSaleFragment extends Fragment  implements OnMapReadyCallback
 
 
 
-
+        if(selectMapClicked){onMapTxt.requestFocus();
+            }
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -787,6 +791,7 @@ public class NewLandSaleFragment extends Fragment  implements OnMapReadyCallback
                 args.putDouble("Latitude",mapLatLng.latitude);
                 args.putDouble("Longitude",mapLatLng.longitude);
                 controller.navigate(R.id.selectMapFragment,args);
+                selectMapClicked=true;
             }
         });
         return view;
@@ -861,6 +866,7 @@ public class NewLandSaleFragment extends Fragment  implements OnMapReadyCallback
         requestNewModel.setLatitude(lat);
         requestNewModel.setLongitude(lng);
         loadMap();
+
 
     }
 

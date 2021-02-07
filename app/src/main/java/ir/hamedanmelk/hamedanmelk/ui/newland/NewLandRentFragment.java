@@ -164,11 +164,15 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
     PersianCalendar persianCalendar = new PersianCalendar();
     Button addPhotoBtn;
     Button addMapBtn;
+    EditText onMapTxt;
+
     Button   submitBtn;
     LinearLayout mainlinearlayout;
     GoogleMap mgoogleMap;
     private Marker mapMarker;
     private LatLng mapLatLng = new LatLng(Constants.MAP_MEYDAN_LAT,Constants.MAP_MEYDAN_LNG);
+    boolean selectMapClicked = false;
+
     private boolean mapLoadedFLAG=false;
     List<ImageModel> imageModels = new ArrayList<>();
 
@@ -323,6 +327,8 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
         datePicker.setMinDate(persianCalendar);
         addPhotoBtn = (Button)view.findViewById(R.id.NewLandRentFragmentAddPhotoBtn);
         addMapBtn = (Button)view.findViewById(R.id.NewLandRentFragmentAddMapBtn);
+        onMapTxt = (EditText) view.findViewById(R.id.NewLandRentFragmentOnMapTxt);
+
         selectedImagesExpandableGrid = (ExpandableHeightGridView)view.findViewById(R.id.NewLandRentFragmentGalleryExpandableGrid);
         mainlinearlayout = (LinearLayout)view.findViewById(R.id.NewRentmainLaouyt);
         ///////////////////////Read inputs/////////////////////////////
@@ -682,8 +688,15 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
                 args.putDouble("Latitude",mapLatLng.latitude);
                 args.putDouble("Longitude",mapLatLng.longitude);
                 controller.navigate(R.id.selectMapFragment,args);
+                selectMapClicked=true;
+
             }
         });
+
+        if(selectMapClicked){onMapTxt.requestFocus();
+        }
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -577,7 +577,11 @@
                 android:text="@string/select_map"
                 android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
         </FrameLayout>
-
+        <EditText
+            android:id="@+id/NewLandParticipationFragmentOnMapTxt"
+            android:enabled="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <Button
             android:id="@+id/NewLandParticipationFragmentSubmitBtn"
             android:layout_width="match_parent"

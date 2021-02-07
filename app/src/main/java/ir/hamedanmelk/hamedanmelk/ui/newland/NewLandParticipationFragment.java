@@ -121,6 +121,9 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
     Button   submitBtn;
     GoogleMap mgoogleMap;
     LatLng mapLatLng;
+    boolean selectMapClicked = false;
+    EditText onMapTxt;
+
     LinearLayout mainlinearLayout;
     boolean firstSelectionProvinceSpinner=false;
     boolean firstSelectionCitySpinner=false;
@@ -258,6 +261,8 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
         selectedImagesExpandableGrid = (ExpandableHeightGridView)view.findViewById(R.id.NewLandParticipationFragmentGalleryExpandableGrid);
         addPhotoBtn = (Button)view.findViewById(R.id.NewLandParticipationFragmentAddPhotoBtn);
         addMapBtn= (Button)view.findViewById(R.id.NewLandParticipationFragmentAddMapBtn);
+        onMapTxt = (EditText) view.findViewById(R.id.NewLandParticipationFragmentOnMapTxt);
+
         mainlinearLayout = (LinearLayout)view.findViewById(R.id.NewParticipationmainLaouyt);
 ///////////////////////////Load map//////////////////////////////////////////////
         loadMap();
@@ -557,8 +562,16 @@ public class NewLandParticipationFragment extends Fragment  implements OnMapRead
                 args.putDouble("Latitude",mapLatLng.latitude);
                 args.putDouble("Longitude",mapLatLng.longitude);
                 controller.navigate(R.id.selectMapFragment,args);
+                selectMapClicked=true;
+
             }
         });
+
+
+        if(selectMapClicked){onMapTxt.requestFocus();
+        }
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

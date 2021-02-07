@@ -871,7 +871,11 @@
                 android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
         </FrameLayout>
 
-
+        <EditText
+            android:id="@+id/NewLandRentFragmentOnMapTxt"
+            android:layout_width="wrap_content"
+            android:enabled="false"
+            android:layout_height="wrap_content" />
 
 
         <Button

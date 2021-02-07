@@ -900,6 +900,9 @@
                 android:id="@+id/mapView"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" />
+
+
+
             <Button
                 android:id="@+id/NewLandSaleFragmentAddMapBtn"
                 android:layout_width="160dp"
@@ -908,7 +911,11 @@
                 android:text="@string/select_map"
                 android:theme="@style/Widget.MaterialComponents.Button.OutlinedButton" />
         </FrameLayout>
-
+        <EditText
+            android:id="@+id/NewLandSaleFragmentOnMapTxt"
+            android:layout_width="wrap_content"
+            android:enabled="false"
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/NewLandSaleFragmentSubmitBtn"

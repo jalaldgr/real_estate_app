@@ -153,6 +153,9 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
     Button   submitBtn;
     GoogleMap mgoogleMap;
     LatLng mapLatLng;
+    boolean selectMapClicked = false;
+    EditText onMapTxt;
+
     LinearLayout mainlinearLayout;
     ArrayList<BuildingConditionModel> buildingConditionModels;
     List<String> buildingConditionTitles = new ArrayList<String>();
@@ -310,6 +313,8 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
         selectedImagesExpandableGrid = (ExpandableHeightGridView) view.findViewById(R.id.NewLandPreSaleFragmentGalleryExpandableGrid);
         addPhotoBtn = (Button)view.findViewById(R.id.NewLandPreSaleFragmentAddPhotoBtn);
         addMapBtn = (Button)view.findViewById(R.id.NewLandPreSaleFragmentAddMapBtn);
+        onMapTxt = (EditText) view.findViewById(R.id.NewLandPreSaleFragmentOnMapTxt);
+
         mainlinearLayout = (LinearLayout)view.findViewById(R.id.NewPreSalemainLaouyt);
         persianDate = new PersianDate();
         datePicker = DatePickerDialog.newInstance(
@@ -701,8 +706,15 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
                 args.putDouble("Latitude",mapLatLng.latitude);
                 args.putDouble("Longitude",mapLatLng.longitude);
                 controller.navigate(R.id.selectMapFragment,args);
+                selectMapClicked=true;
+
             }
         });
+
+
+        if(selectMapClicked){onMapTxt.requestFocus();
+        }
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
