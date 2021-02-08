@@ -54,6 +54,7 @@
                 android:id="@+id/HomeFragmentVerticalTitleTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:text="@string/vocabulary_title"
                 android:textSize="16sp"
                 android:textStyle="normal" />
@@ -62,6 +63,7 @@
                 android:id="@+id/HomeFragmentVerticalDistrictTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:text="@string/vocabulary_district"
                 android:visibility="visible" />
 
@@ -69,6 +71,7 @@
                 android:id="@+id/HomeFragmentVerLandStateTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:text="@string/vocabulary_land_state"
                 android:textStyle="bold|italic" />
 

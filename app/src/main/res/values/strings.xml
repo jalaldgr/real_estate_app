@@ -2,7 +2,7 @@
     <string name="app_name">همدان ملک</string>
     <string name="title_home">خانه</string>
     <string name="title_dashboard">ثبت ملک جدید</string>
-    <string name="new_land_sale">فروش</string>
+    <string name="new_land_sale">خرید و فروش</string>
     <string name="category_sale">خرید و فروش</string>
     <string name="category_company">خدمات ساختمانی</string>
     <string name="new_land_rent">رهن و اجاره</string>
@@ -297,9 +297,9 @@
     </array>
 
     <array name="new_land_floor_count">
-        <item>صفر</item>
+        <item>همکف</item>
         <item>یک</item>
-        <item>دوم</item>
+        <item>دو</item>
         <item>سه</item>
         <item>چهار</item>
         <item>پنج</item>
