@@ -205,6 +205,9 @@
     <string name="vocabulary_building_year">سال ساخت</string>
     <string name="vocabulary_land_building_condition">وضعیت بنا</string>
     <string name="vocabulary_equipment">امکانات</string>
+    <string name="vocabulary_energy">امتیازها</string>
+    <string name="vocabulary_geo_info">مشخصات جغرافیایی</string>
+    <string name="vocabulary_agent_info">مشخصات مشاور</string>
     <string name="vocabulary_land_case_type">نوع کاربری</string>
     <string name="vocabulary_manager">با مدیریت</string>
     <string name="vocabulary_office_manager">نام سردفتر</string>
