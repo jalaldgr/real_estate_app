@@ -29,6 +29,7 @@ import ir.hamedanmelk.hamedanmelk.R;
 import ir.hamedanmelk.hamedanmelk.tools.Constants;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
+import ir.hamedanmelk.hamedanmelk.ui.MainActivity;
 import saman.zamani.persiandate.PersianDate;
 import saman.zamani.persiandate.PersianDateFormat;
 
@@ -151,6 +152,9 @@ public class SingleUserLandFragment extends Fragment {
                         JSONObject responseData = new JSONObject(reader.getString(Constants.JSON_RESPONSE_DATA));
                         JSONArray images = new JSONArray(responseData.getString(Constants.LAND_INFO_IMAGES));
                         titleTxt.setText(responseData.getString(Constants.LAND_INFO_TITLe));
+
+                        ((MainActivity) getActivity()).getSupportActionBar().setTitle(responseData.getString(Constants.LAND_INFO_TITLe));
+
                         districtTxt.setText(responseData.getString(Constants.LAND_INFO_DISTRICT_TITLE));
                         landTypeTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_TYPE_TITLE));
                         spaceFoundationTxt.setText(responseData.getString(Constants.LAND_INFO_FOUNDATION_SPACE) + "  متر مربع");

@@ -65,6 +65,7 @@ import ir.hamedanmelk.hamedanmelk.tools.ExpandableHeightGridView;
 import ir.hamedanmelk.hamedanmelk.tools.HTTPRequestHandlre;
 import ir.hamedanmelk.hamedanmelk.tools.MYSQlDBHelper;
 import ir.hamedanmelk.hamedanmelk.tools.Urls;
+import ir.hamedanmelk.hamedanmelk.ui.MainActivity;
 import saman.zamani.persiandate.PersianDate;
 import saman.zamani.persiandate.PersianDateFormat;
 
@@ -346,6 +347,9 @@ public class SingleParticipationFragment extends Fragment implements OnMapReadyC
                         buildingYearTxt.setText(responseData.getString(Constants.LAND_INFO_BUILDING_YEAR));
                         roomCountTxt.setText(responseData.getString(Constants.LAND_INFO_ROOM_COUNT));
                         titleTxt.setText(responseData.getString(Constants.LAND_INFO_TITLe));
+
+                        ((MainActivity) getActivity()).getSupportActionBar().setTitle(responseData.getString(Constants.LAND_INFO_TITLe));
+
                         landTypeTxt.setText(responseData.getString(Constants.LAND_INFO_LAND_TYPE_TITLE));
                         LandDirectionModel landDirectionModel = qlDBHelper.GetLandDirectionByID(
                                 responseData.getString(Constants.LAND_INFO_DIRECTION_ID)
