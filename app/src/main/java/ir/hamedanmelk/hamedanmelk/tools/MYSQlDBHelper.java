@@ -66,6 +66,8 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
     private static final String USE_TYPE_TABLE_NAME = "UseType";
     private static final String VOUCHER_TABLE_NAME = "Voucher";
     private static final String LAND_TABLE_NAME = "Land";
+    private static final String HISTORY_LAND_TABLE_NAME = "HistoryLand";
+
 
 
     private static final String PROVINCE_TABLE_COLUMN_ID="id";
@@ -379,6 +381,25 @@ public class MYSQlDBHelper extends SQLiteOpenHelper {
             + LAND_TABLE_COLUMN_DISTRICT_ID + " TEXT,"
             + LAND_TABLE_COLUMN_LAND_SITUATION_TITLE + " TEXT,"
             + LAND_TABLE_COLUMN_LAND_SITUATION_COLOR + " TEXT,"
+            + LAND_TABLE_COLUMN_FIRST_NAME + " TEXT,"
+            + LAND_TABLE_COLUMN_LAST_NAME + " TEXT,"
+            + LAND_TABLE_COLUMN_LAND_CASE_ID + " TEXT"
+            +")";
+
+
+    private static final String CREATE_HISTORY_LAND_TABLE="CREATE TABLE "+HISTORY_LAND_TABLE_NAME+"("
+            + LAND_TABLE_COLUMN_ID + " TEXT,"
+            + LAND_TABLE_COLUMN_SALE_TOTAL_PRICE + " TEXT,"
+            + LAND_TABLE_COLUMN_MORTGAGE_TOTAL_PRICE + " TEXT,"
+            + LAND_TABLE_COLUMN_RENT_TOTAL_PRICE + " TEXT,"
+            + LAND_TABLE_COLUMN_TITLE + " TEXT,"
+            + LAND_TABLE_COLUMN_LAND_STATE_ID + " TEXT,"
+            + LAND_TABLE_COLUMN_CREATED_AT + " TEXT,"
+            + LAND_TABLE_COLUMN_LAND_SITUATION_ID + " TEXT,"
+            + LAND_TABLE_COLUMN_VIEW + " TEXT,"
+            + LAND_TABLE_COLUMN_IMAGES + " TEXT,"
+            + LAND_TABLE_COLUMN_LAND_STATE_TITLE + " TEXT,"
+            + LAND_TABLE_COLUMN_DISTRICT_ID + " TEXT,"
             + LAND_TABLE_COLUMN_FIRST_NAME + " TEXT,"
             + LAND_TABLE_COLUMN_LAST_NAME + " TEXT,"
             + LAND_TABLE_COLUMN_LAND_CASE_ID + " TEXT"
@@ -2240,6 +2261,69 @@ public ArrayList<LawyerModel> GetLawyers() {
         return landModels;
     }
 
+
+    ///////////////////////// History Land Methods //////////////////////////////
+    public void InsertHistoryLand(ContentValues cv){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c;
+        try{
+            c = db.rawQuery("SELECT * FROM "+HISTORY_LAND_TABLE_NAME+" WHERE id = "+cv.get("id"),null);
+            if (c.getCount()==0)  db.insert(HISTORY_LAND_TABLE_NAME, null, cv);
+
+            c.close();
+        }catch (Exception e){
+            Log.d(TAG, "InsertHistoryLand: "+e.toString());
+        }
+        db.close();
+    }
+
+    public void DeleteHistoryLand(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+HISTORY_LAND_TABLE_NAME);
+        db.close();
+    }
+
+    public ArrayList<LandModel> GetAllHistoryLands() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<LandModel> landModels = new ArrayList<LandModel>();
+        LandModel landModel;
+        Cursor c;
+        try {
+            c = db.rawQuery("SELECT * FROM " + HISTORY_LAND_TABLE_NAME , null);
+            if (c == null)
+                return null;
+            int counter = 0;
+            c.moveToFirst();
+            do {
+                landModel = new LandModel(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        c.getString(8),
+                        c.getString(9),
+                        c.getString(10),
+                        c.getString(11),
+                        c.getString(12),
+                        c.getString(13),
+                        c.getString(14),
+                        c.getString(15),
+                        c.getString(16)
+                );
+                landModels.add(landModel);
+                counter++;
+            } while (c.moveToNext());
+            c.close();
+        } catch (Exception e) {
+            Log.d(TAG, "GetHistoryLands: "+e.toString());
+        }
+        db.close();
+        return landModels;
+    }
 //----------------------------------------------------------------------------------------------
 
     public MYSQlDBHelper( Context context) {
@@ -2280,6 +2364,9 @@ public ArrayList<LawyerModel> GetLawyers() {
         sqLiteDatabase.execSQL(CREATE_USE_TYPE_TABLE);
         sqLiteDatabase.execSQL(CREATE_VOUCHER_TABLE);
         sqLiteDatabase.execSQL(CREATE_LAND_TABLE);
+        sqLiteDatabase.execSQL(CREATE_HISTORY_LAND_TABLE);
+
+
 
     }
 
@@ -2310,6 +2397,8 @@ public ArrayList<LawyerModel> GetLawyers() {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+USE_TYPE_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+VOUCHER_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+LAND_TABLE_NAME );
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+HISTORY_LAND_TABLE_NAME );
+
 
 
 

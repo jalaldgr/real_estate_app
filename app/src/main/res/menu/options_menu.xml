@@ -5,25 +5,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/shearchactionmenu"
+        android:id="@+id/clear_history"
         android:gravity="center|center_horizontal|center_vertical"
         android:layoutDirection="rtl"
-        android:title="جستجو"
-        android:visibility="visible"
-        app:actionLayout="@layout/login_action_bar"
+        android:title="حذف همه"
         app:showAsAction="always"
-        tools:visibility="invisible" />
-    <item android:title="Item" />
-
-
-    <!--    <item-->
-<!--        app:actionLayout="@layout/search_action_bar"-->
-<!--        app:showAsAction="always"-->
-<!--        />-->
-
-<!--    <item android:id="@+id/cities_action_bar"-->
-<!--        app:actionLayout="@layout/cities_list_action_bar"-->
-<!--        app:showAsAction="always"-->
-<!--        />-->
+         />
 </menu>
 

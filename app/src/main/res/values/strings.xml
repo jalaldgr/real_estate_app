@@ -39,6 +39,7 @@
     <string name="my_hamedan_melk_bookmarks_summary">لیست املاک مورد علاقه </string>
     <string name="my_hamedan_melk_recent_posts_summary">لیست آگهی های املاک من</string>
     <string name="my_hamedan_melk_history_posts_summary">لیست آگهی هایی که اخیرا مشاهده نمونه اید.</string>
+    <string name="my_hamedan_clear_history">حذف بازدیدهای اخیر</string>
 
     <string name="my_hamedan_melk_aboutus_summary">درباره همدان ملک، قوانین و پشتیبانی، اطلاعات اپلیکیشن</string>
     <string name="my_hamedan_melk_app_info_version">ورژن</string>

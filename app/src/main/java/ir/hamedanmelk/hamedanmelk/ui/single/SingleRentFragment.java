@@ -1,6 +1,7 @@
 package ir.hamedanmelk.hamedanmelk.ui.single;
 
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -393,6 +394,23 @@ public class SingleRentFragment extends Fragment implements OnMapReadyCallback {
                             mySliderLayout.addSlider(t1);
                         }
 
+                        ContentValues itemCV = new ContentValues();
+                        itemCV.put(Constants.LAND_MODEL_ID,responseData.getString(Constants.LAND_MODEL_ID));
+                        itemCV.put(Constants.LAND_MODEL_TOTAL_PRICE,responseData.getString(Constants.LAND_MODEL_TOTAL_PRICE));
+                        itemCV.put(Constants.LAND_MODEL_TOTAL_MORTGAGE_PRICE,responseData.getString(Constants.LAND_MODEL_TOTAL_MORTGAGE_PRICE));
+                        itemCV.put(Constants.LAND_MODEL_TOTAL_RENT_PRICE,responseData.getString(Constants.LAND_MODEL_TOTAL_RENT_PRICE));
+                        itemCV.put(Constants.LAND_MODEL_TITLE,responseData.getString(Constants.LAND_MODEL_TITLE));
+                        itemCV.put(Constants.LAND_MODEL_LAND_STATE_ID,responseData.getString(Constants.LAND_MODEL_LAND_STATE_ID));
+                        itemCV.put(Constants.LAND_MODEL_CREATED_AT,responseData.getString(Constants.LAND_MODEL_CREATED_AT));
+                        itemCV.put(Constants.LAND_MODEL_LAND_SITUATION_ID,responseData.getString(Constants.LAND_MODEL_LAND_SITUATION_ID));
+                        itemCV.put("LView",responseData.getString(Constants.LAND_MODEL_VIEW));
+                        itemCV.put(Constants.LAND_MODEL_IMAGES,images.get(0).toString());
+                        itemCV.put(Constants.LAND_MODEL_LANDSTATETITLE,responseData.getString(Constants.LAND_MODEL_LANDSTATETITLE));
+                        itemCV.put(Constants.USER_LAND_MODEL_DISTRICT_ID,responseData.getString(Constants.USER_LAND_MODEL_DISTRICT_ID));
+                        itemCV.put(Constants.LAND_MODEL_FIRST_NAME,responseData.getString(Constants.LAND_MODEL_FIRST_NAME));
+                        itemCV.put(Constants.LAND_MODEL_LAST_NAME,responseData.getString(Constants.LAND_MODEL_LAST_NAME));
+                        itemCV.put(Constants.LAND_MODEL_LAND_CASE_ID,responseData.getString(Constants.LAND_MODEL_LAND_CASE_ID));
+                        qlDBHelper.InsertHistoryLand(itemCV);
 
                     }
 

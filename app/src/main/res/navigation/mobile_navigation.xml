@@ -235,5 +235,9 @@
         android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.ScrollingMyHamedanMelkFragment"
         android:label="@string/my_hamedan_melk_history_posts_title"
         tools:layout="@layout/fragment_scrolling_my_hamedan_melk" />
+    <fragment
+        android:id="@+id/userHistoryFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.UserHistoryFragment"
+        android:label="@string/my_hamedan_melk_history_posts_title" />
 
 </navigation>

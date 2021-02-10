@@ -72,6 +72,15 @@ public class MyHamedanMelkFragment extends PreferenceFragmentCompat {
                 return false;
             }
         });
+
+        history.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                controller.navigate(R.id.userHistoryFragment);
+                return false;
+            }
+        });
+
         share.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
