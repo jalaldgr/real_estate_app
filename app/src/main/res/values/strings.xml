@@ -158,7 +158,7 @@
     <string name="land_info_land_age">سن بنا</string>
     <string name="land_info_room_count">تعداد اتاق</string>
     <string name="land_info_floor_count">تعداد طبقات</string>
-    <string name="land_info_units_in_floor">تعداد واحد در طبقه</string>
+    <string name="land_info_units_in_floor">واحد در طبقه</string>
     <string name="land_info_foundation_space">متراژ</string>
     <string name="land_info_floor">طبقه</string>
     <string name="land_info_space_price">قیمت هر متر</string>
