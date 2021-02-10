@@ -25,6 +25,8 @@ public class MyHamedanMelkFragment extends PreferenceFragmentCompat {
     Preference about_preference;
     Preference user_favorites;
     Preference user_lands ;
+    Preference history ;
+
     Preference share;
 
     @Override
@@ -39,6 +41,7 @@ public class MyHamedanMelkFragment extends PreferenceFragmentCompat {
         about_preference= findPreference("myhamedanmelk_aboutus_items");
         user_favorites = findPreference("myhamedanmelk_user_favorites");
         user_lands     = findPreference("myhamedanmelk_user_lands");
+        history     = findPreference("myhamedanmelk_history");
         share   = findPreference("myhamedanmelk_share");
 
         if(user_pref.contains("id")) {

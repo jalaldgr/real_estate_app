@@ -230,5 +230,10 @@
         android:name="ir.hamedanmelk.hamedanmelk.ui.home.ProSearchFragment"
         android:label="@string/pro_search_title"
         tools:layout="@layout/fragment_pro_search" />
+    <fragment
+        android:id="@+id/scrollingMyHamedanMelkFragment"
+        android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.ScrollingMyHamedanMelkFragment"
+        android:label="@string/my_hamedan_melk_history_posts_title"
+        tools:layout="@layout/fragment_scrolling_my_hamedan_melk" />
 
 </navigation>

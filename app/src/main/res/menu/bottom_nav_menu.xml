@@ -12,7 +12,7 @@
         android:title="@string/title_createnewad" />
 
     <item
-        android:id="@+id/navigation_aboutus"
+        android:id="@+id/scrollingMyHamedanMelkFragment"
         android:icon="@drawable/ic_baseline_person_outline_24"
         android:title="@string/title_personalpage" />
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     >
 
         <ir.hamedanmelk.hamedanmelk.ui.personalpage.loggedInPreference
@@ -20,6 +21,11 @@
             android:summary="@string/my_hamedan_melk_recent_posts_summary"
             android:key="myhamedanmelk_user_lands"
             android:title="@string/my_hamedan_melk_recent_posts_title"></Preference>
+        <Preference
+            android:icon="@drawable/ic_history_red_24"
+            android:summary="@string/my_hamedan_melk_history_posts_summary"
+            android:key="myhamedanmelk_history"
+            android:title="@string/my_hamedan_melk_history_posts_title"></Preference>
 
         <Preference
             android:icon="@drawable/ic_help_outline_red_24"
