@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -51,6 +53,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.File;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,6 +62,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import io.apptik.widget.multiselectspinner.BaseMultiSelectSpinner;
@@ -716,6 +721,122 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
         }
 
 
+        totalPriceETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                totalPriceETxt.removeTextChangedListener(this);
+
+                try {
+                    String originalString = editable.toString();
+
+                    Long longval;
+                    if (originalString.contains(",")) {
+                        originalString = originalString.replaceAll(",", "");
+                    }
+                    longval = Long.parseLong(originalString);
+
+                    DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+                    formatter.applyPattern("#,###,###,###");
+                    String formattedString = formatter.format(longval);
+
+                    //setting text after format to EditText
+                    totalPriceETxt.setText(formattedString);
+                    totalPriceETxt.setSelection(totalPriceETxt.getText().length());
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+                }
+
+                totalPriceETxt.addTextChangedListener(this);
+            }
+        });
+        prePayPrice.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                prePayPrice.removeTextChangedListener(this);
+
+                try {
+                    String originalString = editable.toString();
+
+                    Long longval;
+                    if (originalString.contains(",")) {
+                        originalString = originalString.replaceAll(",", "");
+                    }
+                    longval = Long.parseLong(originalString);
+
+                    DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+                    formatter.applyPattern("#,###,###,###");
+                    String formattedString = formatter.format(longval);
+
+                    //setting text after format to EditText
+                    prePayPrice.setText(formattedString);
+                    prePayPrice.setSelection(prePayPrice.getText().length());
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+                }
+
+                prePayPrice.addTextChangedListener(this);
+            }
+        });
+        debtTotalPriceETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                debtTotalPriceETxt.removeTextChangedListener(this);
+
+                try {
+                    String originalString = editable.toString();
+
+                    Long longval;
+                    if (originalString.contains(",")) {
+                        originalString = originalString.replaceAll(",", "");
+                    }
+                    longval = Long.parseLong(originalString);
+
+                    DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+                    formatter.applyPattern("#,###,###,###");
+                    String formattedString = formatter.format(longval);
+
+                    //setting text after format to EditText
+                    debtTotalPriceETxt.setText(formattedString);
+                    debtTotalPriceETxt.setSelection(debtTotalPriceETxt.getText().length());
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+                }
+
+                debtTotalPriceETxt.addTextChangedListener(this);
+            }
+        });
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -773,12 +894,12 @@ public class NewLandPreSaleFragment extends Fragment  implements OnMapReadyCallb
 
                 requestNewModel.setTitle(titleEtx.getText().toString());
                 requestNewModel.setPreDong(dongETxt.getText().toString());
-                requestNewModel.setPreSaleTotalPrice(totalPriceETxt.getText().toString());
+                requestNewModel.setPreSaleTotalPrice(totalPriceETxt.getText().toString().replace(",",""));
                 requestNewModel.setDescription(descriptionETxt.getText().toString());
                 requestNewModel.setAddress(addressETxt.getText().toString());
                 requestNewModel.setBuildingYear(buildingYearETxt.getText().toString());
-                requestNewModel.setDebtTotalPrice(debtTotalPriceETxt.getText().toString());
-                requestNewModel.setPrePayPrice(prePayPrice.getText().toString());
+                requestNewModel.setDebtTotalPrice(debtTotalPriceETxt.getText().toString().replace(",",""));
+                requestNewModel.setPrePayPrice(prePayPrice.getText().toString().replace(",",""));
                 requestNewModel.setFoundationSpace(spaceFoundationETxt.getText().toString());
                 requestNewModel.setRoomCount(Long.toString(roomCountSpnr.getSelectedItemId()));
                 requestNewModel.setFloorCount(Long.toString(floorCountSpnr.getSelectedItemId()));

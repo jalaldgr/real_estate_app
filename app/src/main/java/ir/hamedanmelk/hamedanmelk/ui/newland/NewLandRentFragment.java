@@ -12,7 +12,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -63,10 +65,13 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -696,6 +701,84 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
         if(selectMapClicked){onMapTxt.requestFocus();
         }
 
+        totalRentPrice.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                totalRentPrice.removeTextChangedListener(this);
+
+                try {
+                    String originalString = editable.toString();
+
+                    Long longval;
+                    if (originalString.contains(",")) {
+                        originalString = originalString.replaceAll(",", "");
+                    }
+                    longval = Long.parseLong(originalString);
+
+                    DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+                    formatter.applyPattern("#,###,###,###");
+                    String formattedString = formatter.format(longval);
+
+                    //setting text after format to EditText
+                    totalRentPrice.setText(formattedString);
+                    totalRentPrice.setSelection(totalRentPrice.getText().length());
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+                }
+
+                totalRentPrice.addTextChangedListener(this);
+            }
+        });
+        mortgagePriceETxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                mortgagePriceETxt.removeTextChangedListener(this);
+
+                try {
+                    String originalString = editable.toString();
+
+                    Long longval;
+                    if (originalString.contains(",")) {
+                        originalString = originalString.replaceAll(",", "");
+                    }
+                    longval = Long.parseLong(originalString);
+
+                    DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+                    formatter.applyPattern("#,###,###,###");
+                    String formattedString = formatter.format(longval);
+
+                    //setting text after format to EditText
+                    mortgagePriceETxt.setText(formattedString);
+                    mortgagePriceETxt.setSelection(mortgagePriceETxt.getText().length());
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+                }
+
+                mortgagePriceETxt.addTextChangedListener(this);
+            }
+        });
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         submitBtn.setOnClickListener(new View.OnClickListener() {
@@ -735,11 +818,11 @@ public class NewLandRentFragment extends Fragment  implements OnMapReadyCallback
 
 
                 requestNewModel.setTitle(titleEtx.getText().toString());
-                requestNewModel.setMortgageTotalPrice(mortgagePriceETxt.getText().toString());
+                requestNewModel.setMortgageTotalPrice(mortgagePriceETxt.getText().toString().replace(",",""));
                 requestNewModel.setDescription(descriptionETxt.getText().toString());
                 requestNewModel.setAddress(addressETxt.getText().toString());
                 requestNewModel.setBuildingYear(buildingYearETxt.getText().toString());
-                requestNewModel.setRentTotalPrice(totalRentPrice.getText().toString());
+                requestNewModel.setRentTotalPrice(totalRentPrice.getText().toString().replace(",",""));
                 requestNewModel.setFoundationSpace(spaceFoundationETxt.getText().toString());
                 requestNewModel.setRoomCount(Long.toString(roomCountSpnr.getSelectedItemId()));
                 requestNewModel.setFloorCount(Long.toString(floorCountSpnr.getSelectedItemId()));
