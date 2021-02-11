@@ -85,10 +85,11 @@ public class FeaturedLandFragment extends Fragment {
         Context context=getContext();
         PreSaleRequest(context);
         View view = inflater.inflate(R.layout.fragment_featured, container, false);
-        if(view instanceof RecyclerView){
-            recyclerView = (RecyclerView)view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        }
+
+            recyclerView = (RecyclerView)view.findViewById(R.id.featured_list);
+            RecyclerView.LayoutManager laymngr =  new LinearLayoutManager(this.getContext());
+            recyclerView.setLayoutManager(laymngr);
+
         return view;
     }
     public void PreSaleRequest(final Context context){

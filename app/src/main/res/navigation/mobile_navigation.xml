@@ -233,7 +233,7 @@
     <fragment
         android:id="@+id/scrollingMyHamedanMelkFragment"
         android:name="ir.hamedanmelk.hamedanmelk.ui.personalpage.ScrollingMyHamedanMelkFragment"
-        android:label="@string/my_hamedan_melk_history_posts_title"
+        android:label="@string/title_personalpage"
         tools:layout="@layout/fragment_scrolling_my_hamedan_melk" />
     <fragment
         android:id="@+id/userHistoryFragment"

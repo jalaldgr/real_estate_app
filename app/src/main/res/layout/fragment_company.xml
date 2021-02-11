@@ -9,7 +9,8 @@
     <FrameLayout
         android:id="@+id/company_listOfflineLyt"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <include
             layout="@layout/fragment_no_internet_error"
