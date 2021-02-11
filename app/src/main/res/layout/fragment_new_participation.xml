@@ -57,8 +57,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -77,6 +78,7 @@
                         android:id="@+id/NewLandParticipationFragmentFoundationSpaceTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
@@ -87,11 +89,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="@string/new_land_use_types"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -100,6 +104,7 @@
                     android:id="@+id/NewLandParticipationFragmentLandUseTypeMltSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
@@ -108,7 +113,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -116,11 +123,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="@string/new_land_land_case"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -129,6 +138,7 @@
                     android:id="@+id/NewLandParticipationFragmentLandCaseSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary" />
 
             </LinearLayout>
@@ -139,11 +149,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="@string/land_info_land_type"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -152,6 +164,7 @@
                     android:id="@+id/NewLandParticipationFragmentLandTypeSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
         </LinearLayout>
@@ -159,11 +172,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
             android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -171,12 +182,14 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView37"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:text="@string/vocabulary_land_building_condition" />
 
@@ -184,6 +197,7 @@
                     android:id="@+id/NewLandParticipationFragmentBuildingConditionSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorPrimary" />
 
@@ -195,11 +209,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="@string/new_land_direction"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -208,6 +224,7 @@
                     android:id="@+id/NewLandParticipationFragmentDirectionSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
@@ -217,21 +234,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
             android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="@string/vocabulary_equipment"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -240,6 +258,7 @@
                     android:id="@+id/NewLandParticipationFragmentEquipmentsSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
         </LinearLayout>
@@ -307,11 +326,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
             android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -319,11 +336,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="@string/new_land_water"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -332,6 +351,7 @@
                     android:id="@+id/NewLandParticipationFragmentWaterSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:entries="@array/new_land_water_electricity" />
             </LinearLayout>
@@ -342,11 +362,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="@string/new_land_electricity"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -355,6 +377,7 @@
                     android:id="@+id/NewLandParticipationFragmentElectricitySpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:entries="@array/new_land_water_electricity" />
             </LinearLayout>
@@ -364,11 +387,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
             android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -376,11 +397,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="@string/new_land_gas"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -389,6 +412,7 @@
                     android:id="@+id/NewLandParticipationFragmentGasSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:entries="@array/new_land_water_electricity" />
             </LinearLayout>
@@ -399,11 +423,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="@string/land_info_phone"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -412,6 +438,7 @@
                     android:id="@+id/NewLandParticipationFragmentPhoneSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:entries="@array/new_land_water_electricity" />
             </LinearLayout>
@@ -421,11 +448,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
             android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -433,11 +458,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="@string/land_info_province"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -446,6 +473,7 @@
                     android:id="@+id/NewLandParticipationFragmentProvinceSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
@@ -455,11 +483,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="@string/land_info_city"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -468,6 +498,7 @@
                     android:id="@+id/NewLandParticipationFragmentCitySpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
@@ -476,12 +507,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
             android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -489,11 +517,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="@string/new_land_area"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -502,6 +532,7 @@
                     android:id="@+id/NewLandParticipationFragmentAreaSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
@@ -511,11 +542,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="@string/vocabulary_district"
                     android:textColor="@color/textview_lable"
                     android:textSize="@dimen/smal_text_size" />
@@ -524,6 +557,7 @@
                     android:id="@+id/NewLandParticipationFragmentDistrictSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 

@@ -97,18 +97,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:gravity="right"
                     android:text="@string/land_info_province" />
 
@@ -116,6 +122,7 @@
                     android:id="@+id/NewOfficeFragmentProvinceIDSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:fadingEdge="none"
                     android:spinnerMode="dropdown" />
@@ -124,13 +131,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:gravity="right"
                     android:text="@string/land_info_city" />
 
@@ -138,6 +149,7 @@
                     android:id="@+id/NewOfficeFragmentCitySpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:fadingEdge="none"
                     android:spinnerMode="dropdown" />
@@ -148,18 +160,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:gravity="right"
                     android:text="@string/land_info_area" />
 
@@ -167,6 +185,7 @@
                     android:id="@+id/NewOfficeFragmentAreaSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:fadingEdge="none"
                     android:spinnerMode="dropdown" />
@@ -175,13 +194,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
                 android:layout_weight="0.5"
+                android:background="@drawable/border_linear_layout_new_land"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:gravity="right"
                     android:text="@string/vocabulary_district" />
 
@@ -189,6 +212,7 @@
                     android:id="@+id/NewOfficeFragmentDistrictSpnr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:fadingEdge="none"
                     android:spinnerMode="dropdown" />
